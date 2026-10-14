@@ -37,16 +37,19 @@ A test prints `ok` or `FAIL` per check and exits 1 on any failure. It prints `SK
 
 | Test | Covers | Engines |
 |---|---|---|
+| `test_styles` | the served stylesheets write no colour outside a theme token (the newsroom's rule, held here since the files moved) | Node |
 | `test_meter` | the meter in a browser: depth, rating, decline, reload, below zero, the return page, personas, picks, export and restore, the share form, the persona links, phone width | all three |
 | `test_lists` | the reading-list parser in Node and the two pages in a browser: malformed input, limits, the make page, copy, phone width | all three |
 | `test_review` | the review's findings, pinned as the behaviour is today (R1 to R11, R14, R15, R17) | all three; R2 is held in Chromium |
 | `test_wire` | the wire pages reading the real vault: edition, lenses, sources, documents, what left the browser | all three (needs the vault host) |
+| `test_graphs` | the wire's graphs: the lenses' edges and the picture drawn from the real vault | all three (needs the vault host) |
 | `test_sync` | the activity vault's logic as pure functions, two devices' states | all three (Node) |
 | `test_search` | the index and the ranking in Node, the page in a browser | all three |
 | `test_vault` | the vendored library against the mock, the newsroom's layer, the sgit CLI round trip | Node + CLI |
 | `test_passkey` | the passkey lab with a virtual authenticator that has PRF | Chromium (CDP) |
 | `test_pane` | the pane: the account carried between three devices through the mock | Chromium (CDP) |
 | `test_notes` | the feedback loop end to end: notes, the lane, the CLI reading it, a second device | Chromium (CDP) |
+| `test_inbox` | the pane's inbox and send: a link held, a QR code decoded, a second device | Chromium (CDP) |
 | `test_ask` | ask: passages and messages in Node; the reader's key and the faked built-in model in a browser | Chromium |
 
 Chromium's clipboard permissions have no equivalent in Firefox and WebKit, so the three clipboard reads run in Chromium only; the rest of each test runs everywhere.

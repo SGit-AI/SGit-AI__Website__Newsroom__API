@@ -33,7 +33,8 @@ manifests, into `www/`, which is committed and which CI checks; the deploy publi
 - `tests/`: the newsroom's reader tests, moved here. They serve a checkout of the newsroom (`NEWSROOM=<path>`, or
   `.newsroom/`; CI checks out the ref in `tests/newsroom.json`) and route `https://api.newsroom.sgit.ai/v*/`
   to this tree (`tests/harness.mjs`), so the pages are the real pages and the code is the code under test.
-  `BROWSER=chromium|webkit|firefox`. `node tests/test_meter.mjs` and so on.
+  `BROWSER=chromium|webkit|firefox`. `node tests/test_meter.mjs` and so on. `test_styles.mjs` (Node only) holds the served
+  stylesheets to the newsroom's rule that no colour is written outside a theme token.
 - `map/before/<newsroom release>/`: the newsroom's map of everything a reader runs, and every file's raw hash, at the
   commit before each cut (`v0.12.10` for v0.1.0, `v0.12.50` for v0.2.0). `map/proof/<release>.json`: the move's proof, written by `tools/prove_move.py`.
 - `tools/api_map.py`: the map generator, moved from the newsroom; not yet re-pointed at this tree and a
