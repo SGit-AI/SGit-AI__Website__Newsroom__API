@@ -16,7 +16,7 @@ import path from 'path'
 import { execSync } from 'child_process'
 import { pathToFileURL } from 'url'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 let failed = 0
 const check = (ok, what) => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${what}`); if (!ok) failed++ }
@@ -93,7 +93,7 @@ const B = `http://127.0.0.1:${server.address().port}/`
 let browser
 browser = await launch()
 const errors = []
-const ctxB = await browser.newContext({ viewport: { width: 1280, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] }); await routeApi(ctxB)
+const ctxB = await browser.newContext({ viewport: { width: 1280, height: 900 }, permissions: CLIPBOARD }); await routeApi(ctxB)
 const pg = await ctxB.newPage()
 pg.on('pageerror', e => errors.push(e.message))
 pg.on('console', m => { if (m.type() === 'error' && !/404/.test(m.text())) errors.push(m.text()) })
@@ -189,7 +189,7 @@ try {
     // copy
     await pg.goto(B + `for/make.html#to=Steve&r=${a}`); await wait(1500)
     await pg.evaluate(() => [...document.querySelectorAll('.mk-side button')].find(b => b.textContent === 'Copy link').click()); await wait(400)
-    check((await pg.evaluate(() => navigator.clipboard.readText())) === `https://newsroom.sgit.ai/for/#to=Steve&r=${a}`, 'Copy link puts the link on the clipboard')
+    if (canReadClipboard) check((await pg.evaluate(() => navigator.clipboard.readText())) === `https://newsroom.sgit.ai/for/#to=Steve&r=${a}`, 'Copy link puts the link on the clipboard')
 
     // phones
     const mCtx = await routeApi(await browser.newContext({ viewport: { width: 390, height: 800 } })); const m = await mCtx.newPage()

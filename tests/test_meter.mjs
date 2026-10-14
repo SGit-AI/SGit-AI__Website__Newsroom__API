@@ -19,7 +19,7 @@ import path from 'path'
 import os from 'os'
 import { execSync } from 'child_process'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 let chromium
 try {
@@ -153,9 +153,9 @@ try {
     check(await sendState(), 'Send is disabled until the reader ticks the consent box')
     await pg.evaluate(() => document.querySelector('sg-meter[view=share]').shadowRoot.querySelector('input[name=consent]').click())
     check(!(await sendState()), 'ticking the consent box enables Send')
-    await ctx.grantPermissions(['clipboard-read', 'clipboard-write'])
+    await clipboard(ctx)
     await pg.evaluate(() => [...document.querySelector('sg-meter[view=share]').shadowRoot.querySelectorAll('button')].find(b => /Copy to clipboard/.test(b.textContent)).click()); await wait(600)
-    check((await pg.evaluate(() => navigator.clipboard.readText())) === preview, 'Copy puts exactly the preview on the clipboard')
+    if (canReadClipboard) check((await pg.evaluate(() => navigator.clipboard.readText())) === preview, 'Copy puts exactly the preview on the clipboard')
     // v1.4.0: the account page has no Pause and no Start again, and a stored paused flag is cleared
     await pg.evaluate(() => { const s = JSON.parse(localStorage.getItem('sgit.meter.v1')); s.paused = true; localStorage.setItem('sgit.meter.v1', JSON.stringify(s)) })
     await pg.goto(B + 'account/index.html'); await wait(1500)
@@ -197,9 +197,9 @@ try {
     check(/no persona called/.test(unknown) && !(await lstate()).personas.some(x => /nobody/.test(x.id)), 'an unknown persona is said so, and nothing is added')
     await lp.goto(B + 'persona/'); await lp.waitForTimeout(1500)
     check((await lp.evaluate(() => document.querySelector('sg-meter[view=landing]').shadowRoot.querySelectorAll('.preset').length)) === 5, 'the picker shows the five personas')
-    await ctx2.grantPermissions(['clipboard-read', 'clipboard-write'])
+    await clipboard(ctx2)
     await lp.evaluate(() => [...document.querySelector('sg-meter[view=landing]').shadowRoot.querySelectorAll('button')].find(b => /Copy link/.test(b.textContent)).click()); await lp.waitForTimeout(500)
-    check(/\/persona\/founder\/$/.test(await lp.evaluate(() => navigator.clipboard.readText())), 'Copy link copies the persona\'s address')
+    if (canReadClipboard) check(/\/persona\/founder\/$/.test(await lp.evaluate(() => navigator.clipboard.readText())), 'Copy link copies the persona\'s address')
     const links = JSON.parse(fs.readFileSync(path.join(ROOT, 'persona/links.json'), 'utf8')).personas
     const presets = JSON.parse(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').match(/id="sg-meter-config">(.*?)<\/script>/s)[1]).personas.presets
     check(links.length === presets.length && links.every(x => presets.some(q => q.id === x.id) && x.url.endsWith(`/persona/${x.id}/`) && fs.existsSync(path.join(ROOT, `persona/${x.id}/index.html`))), 'links.json lists every persona, each with a page')

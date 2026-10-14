@@ -23,7 +23,7 @@ import path from 'path'
 import { execSync } from 'child_process'
 import { startMock } from './vault-mock.mjs'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 needsChromium('the passkey lab (a virtual authenticator over CDP)')
 let chromium
@@ -45,7 +45,7 @@ let browser
 browser = await launch()
 let failed = 0
 const check = (ok, what) => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${what}`); if (!ok) failed++ }
-const ctx = await browser.newContext({ viewport: { width: 1200, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] }); await routeApi(ctx)
+const ctx = await browser.newContext({ viewport: { width: 1200, height: 900 }, permissions: CLIPBOARD }); await routeApi(ctx)
 const pg = await ctx.newPage()
 const errors = [], hosts = new Set()
 pg.on('pageerror', e => errors.push(e.message))

@@ -69,6 +69,12 @@ async function playwright() {
 
 export const engine = process.env.BROWSER || 'chromium'
 
+/** The clipboard: only Chromium grants clipboard-read and clipboard-write (Firefox and WebKit refuse the names), so a
+ *  test grants them there and reads the clipboard back there; elsewhere it checks what it can see on the page. */
+export const CLIPBOARD = engine === 'chromium' ? ['clipboard-read', 'clipboard-write'] : []
+export const canReadClipboard = engine === 'chromium'
+export async function clipboard(ctx) { if (canReadClipboard) await ctx.grantPermissions(CLIPBOARD) }
+
 /** A test that drives CDP (the virtual authenticator) runs in Chromium only; elsewhere it says so and passes. */
 export function needsChromium(why) {
     if (engine !== 'chromium') { console.log(`SKIP: ${why || 'this test'} needs Chromium; BROWSER=${engine}`); process.exit(0) }
