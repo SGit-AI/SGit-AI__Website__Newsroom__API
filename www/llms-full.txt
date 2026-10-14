@@ -1,6 +1,6 @@
 # SGit Newsroom API: the whole site in one fetch
 
-Generated with the site at v0.2.2 (reader-code release v0.2.0). Each section is a page; its address is given first.
+Generated with the site at v0.2.3 (reader-code release v0.2.0). Each section is a page; its address is given first.
 
 
 

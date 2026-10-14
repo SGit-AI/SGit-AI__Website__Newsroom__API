@@ -130,7 +130,10 @@ try {
     await pg.waitForFunction(() => { const e = document.querySelector('sg-meter[view=personas]'); return e && /^(ready|error)$/.test(e.getAttribute('data-state') || '') }, null, { timeout: 20000 }).catch(() => {})
     await wait(500)
     const r2 = await pg.evaluate(() => { const e = document.querySelector('sg-meter[view=personas]'); return { state: e.getAttribute('data-state'), text: e.shadowRoot.textContent.trim() } })
-    if (engine === 'chromium') pin('R2', r2.state === 'ready' && r2.text === '', 'a persona without on[] and off[] leaves the personas page blank')   // Chromium's behaviour; Firefox renders the page (issue 2)
+    // the finding is that the page is unusable: blank (Chromium, state ready and nothing drawn) or, depending on when the broken
+    // persona is reached, the element failed; CI run 13 saw the second. Firefox renders the page (issue 2).
+    const r2bad = r2.text === '' || r2.state === 'error'
+    if (engine === 'chromium') pin('R2', r2bad, `a persona without on[] and off[] leaves the personas page unusable (state ${r2.state}, ${r2.text === '' ? 'blank' : 'text: ' + r2.text.slice(0, 50)})`)
     else console.log(`note R2 in ${engine}: state ${r2.state}, the personas page ${r2.text === '' ? 'is blank' : 'renders'}`)
 } finally {
     await browser.close()

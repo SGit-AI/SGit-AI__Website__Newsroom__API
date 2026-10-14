@@ -2,7 +2,7 @@
 
 > For maintainers: the rules while the files are frozen, the version file, cutting a release directory and its manifest, the checks, the pull request with a person and an agent reviewer, the deploy, the tag and the live check, then the consumers.
 
-*api.newsroom.sgit.ai · v0.2.2 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/make-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.3 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/make-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
