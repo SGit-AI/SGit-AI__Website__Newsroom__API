@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# the newsroom checkout the tests run against (tests/harness.mjs), and node modules
+.newsroom/
+node_modules/

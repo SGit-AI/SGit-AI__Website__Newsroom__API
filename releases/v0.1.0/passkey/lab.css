@@ -1,0 +1,28 @@
+/* The passkey lab: cards, one per proof of concept, on the newsroom's own variables. */
+.poc { margin: 0 0 1.4rem; padding: 1.1rem 1.3rem 1.2rem; border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 12px 12px 0; background: var(--panel); }
+.poc[hidden] { display: none; }
+main.doc .poc h2 { margin: 0 0 .4rem; font-size: 1.25rem; }
+.poc .what { margin: 0 0 .8rem; color: #34363c; }
+.poc .acts { display: flex; flex-wrap: wrap; gap: .5rem .6rem; align-items: center; margin: .3rem 0 .8rem; }
+.poc input[type=text], .poc input[type=password], .poc select { font: inherit; font-size: .9rem; padding: .45rem .6rem; border: 1px solid var(--line2); border-radius: 8px; background: #fff; color: var(--fg); min-width: 14rem; }
+.poc input.wide { width: 100%; min-width: 0; }
+.btn { display: inline-block; font: inherit; font-size: .9rem; padding: .5rem .95rem; border: 1px solid var(--line2); border-radius: 8px; background: var(--panel); color: var(--fg); cursor: pointer; text-decoration: none; line-height: 1.2; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.btn.primary:hover { background: var(--accent-dk); }
+.btn.sm { padding: .25rem .55rem; font-size: .78rem; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.out { display: grid; gap: .35rem; }
+.kv { display: grid; grid-template-columns: minmax(10rem, 17rem) 1fr; gap: .2rem .9rem; padding: .35rem 0; border-top: 1px solid var(--line); font-size: .9rem; }
+.kv .k { color: var(--dim); }
+.kv .v { min-width: 0; overflow-wrap: anywhere; }
+.mono { font-family: var(--mono); font-size: .84rem; }
+.mono.big { font-size: 1.15rem; letter-spacing: .04em; }
+.ok { color: #0f6b4f; } .warn { color: var(--warm); } .bad { color: #b91c1c; } .dim { color: var(--dim); }
+.secret .btn { vertical-align: middle; }
+.ladder { margin: .6rem 0 0; padding: .8rem 1rem; border: 1px dashed var(--line2); border-radius: 10px; background: var(--panel2); font-size: .9rem; }
+.ladder ol { margin: .4rem 0 0 1.1rem; }
+.calls { list-style: none; margin: .8rem 0 0; padding: .6rem .8rem; max-height: 14rem; overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: #0d1117; color: #c9d1d9; font: .78rem/1.5 var(--mono); }
+.calls li.ok { color: #3fb950; } .calls li.warn { color: #d29922; }
+.note.lab { border-left-color: var(--warm); }
+@media (max-width: 640px) { .kv { grid-template-columns: 1fr; } .poc input[type=text], .poc input[type=password], .poc select { min-width: 0; width: 100%; } }

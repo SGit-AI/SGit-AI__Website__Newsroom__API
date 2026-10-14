@@ -1,0 +1,46 @@
+{
+ "what": "The move's proof: the newsroom serves the same bytes before and after, by hash.",
+ "release": "v0.1.0",
+ "before": "/tmp/claude-0/-home-user/3fb0801b-ff4b-59a3-a112-de5aa76dace1/scratchpad/before",
+ "after": "/home/user/SGit-AI__Website__Newsroom",
+ "files": {
+  "same": 60,
+  "changed_as_recorded": [
+   "assets/search/ask.js",
+   "assets/search/search.js",
+   "assets/vault-pane/vault-pane.js"
+  ],
+  "unexpected": []
+ },
+ "frozen": {
+  "same": 20,
+  "unexpected": []
+ },
+ "pages": {
+  "compared": 597,
+  "same": 593,
+  "differ": [
+   {
+    "page": "admin/versions.html",
+    "first_difference": "+    <tr id=\"v0.13.0\">"
+   },
+   {
+    "page": "engineering/index.html",
+    "first_difference": "-<h2 id=\"open\">Open <span class=\"dim\">(10: asked and not yet done, newest first)</span></h2><div class=\"tablewrap\"><table><thead><tr><th>Id</th><th>Kind</th><th>Priority</th><th>Title</th><th>Release</th><th>Status</th></tr></thead><tbody><"
+   },
+   {
+    "page": "passkey/index.html",
+    "first_difference": "-<p class=\"what\">The same derivation from a fixed, fake PRF output, compared value by value with what sgit&rsquo;s own Python produced (<a href='API/passkey/vectors.json'>vectors.json</a>, from <code>admin/build/passkey_vectors.py</code>). "
+   },
+   {
+    "page": "search/index.html",
+    "first_difference": "-  <p>Search on newsroom.sgit.ai runs in the reader's browser. The index is https://newsroom.sgit.ai/search/docs.json (one entry per page: u address, t title, k kind, n article number, d date, x teaser, tp topics, tg tags, g the article gra"
+   }
+  ],
+  "only_before": [],
+  "only_after": [
+   "engineering/issues/036.html",
+   "engineering/releases/v0.13.0.html"
+  ]
+ }
+}

@@ -1,0 +1,82 @@
+# Every commit, in under two minutes (the brief's acceptance 3): syntax, the release's manifest, a build that is the same
+# bytes twice, and the reader code in three browser engines against the newsroom's real pages (tests/harness.mjs).
+name: ci
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax of every script, test and tool
+        run: |
+          set -euo pipefail
+          for f in $(git ls-files '*.js' '*.mjs' | grep -v '^releases/'); do node --check "$f"; done
+          python3 -m py_compile tools/*.py
+      - name: The release matches its manifest, and the tree is the release
+        run: python3 tools/release.py check
+      - name: The build is the same bytes twice
+        run: |
+          set -euo pipefail
+          python3 tools/release.py cut --out /tmp/rb/a >/dev/null
+          python3 tools/release.py cut --out /tmp/rb/b >/dev/null
+          diff -r /tmp/rb/a /tmp/rb/b && echo "reproducible"
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, webkit, firefox]
+    steps:
+      - uses: actions/checkout@v4
+      - id: pin
+        name: Which newsroom the tests run against (tests/newsroom.json)
+        run: |
+          echo "repo=$(python3 -c 'import json;print(json.load(open("tests/newsroom.json"))["repository"])')" >> "$GITHUB_OUTPUT"
+          echo "ref=$(python3 -c 'import json;print(json.load(open("tests/newsroom.json"))["ref"])')" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.pin.outputs.repo }}
+          ref: ${{ steps.pin.outputs.ref }}
+          path: .newsroom
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.56.1-${{ matrix.engine }}-${{ runner.os }}
+      - name: Install Playwright's ${{ matrix.engine }}
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Install sgit-ai 0.21.0, for the vault test's CLI round trip and the notes test's lane
+        if: matrix.engine == 'chromium'
+        run: python3 -m pip install --quiet 'sgit-ai==0.21.0' && sgit --version
+      - name: The tests, in ${{ matrix.engine }}
+        env:
+          BROWSER: ${{ matrix.engine }}
+          NEWSROOM: ${{ github.workspace }}/.newsroom
+        run: |
+          set -euo pipefail
+          if [ "$BROWSER" = chromium ]; then
+            TESTS="test_meter test_lists test_review test_passkey test_wire test_vault test_sync test_pane test_notes test_search test_ask"
+          else
+            # the virtual authenticator (passkey, pane, notes) and the faked built-in model (ask) drive CDP: Chromium only
+            TESTS="test_meter test_lists test_review test_wire test_sync test_search"
+          fi
+          for t in $TESTS; do
+            echo "== $t ($BROWSER)"
+            node tests/$t.mjs | tee /tmp/$t.log
+            if grep -q '^SKIP' /tmp/$t.log; then echo "::error::$t skipped on the runner: $(grep -m1 '^SKIP' /tmp/$t.log)"; exit 1; fi
+          done

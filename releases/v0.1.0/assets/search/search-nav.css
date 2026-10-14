@@ -1,0 +1,5 @@
+/* the Search link in the nav, on every page */
+nav.site a.search-btn { font-size: .82rem; padding: .3rem .7rem; border: 1px solid var(--line2, #cfd2d8); border-radius: 999px; color: var(--fg, #1c1d21); background: var(--panel, #fff); text-decoration: none; white-space: nowrap; line-height: 1.2; }
+nav.site a.search-btn:hover { border-color: var(--accent, #0f6b4f); text-decoration: none; }
+nav.site a.search-btn::before { content: "\2315"; margin-right: .3em; display: inline-block; transform: scaleX(-1); }
+@media (max-width: 520px) { nav.site a.search-btn { font-size: 0; padding: .3rem .55rem; } nav.site a.search-btn::before { font-size: .9rem; margin: 0; } }

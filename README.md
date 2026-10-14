@@ -2,22 +2,49 @@
 
 A client-side API: the components, formats and contracts the browser runs on
 [newsroom.sgit.ai](https://newsroom.sgit.ai), with no server and nothing to deploy but files.
-Published at **api.newsroom.sgit.ai** (this repository's GitHub Pages site) at versioned paths that the
-newsroom and sgit.ai pin.
+Published at **api.newsroom.sgit.ai** (this repository's GitHub Pages site) as versioned releases,
+`https://api.newsroom.sgit.ai/<release>/<path>`, that the newsroom and sgit.ai pin.
 
-It owns SG Meter (the reading meter: balance, pay by depth, rating, personas, top-up, share), the
-reading-list link grammar, the persona link format, the `ids.json` article-number contract, subscribe and
-the encrypted share, the reader's vault layer, search and ask, the wire reader, and their tests. The
-content (the articles and everything generated from them) stays in
+It owns SG Meter (the reading meter: balance, pay by depth, rating, personas, top-up, share; v1.4.0 and the
+frozen v1.0.0 to v1.3.1), the component base, the reading-list link grammar and its pages' code, subscribe and
+the encrypted share, the reader's vault layer and the vault pane, search and ask, the wire reader, the vendored
+vault library (`SGraph-AI__App__Send` v0.2.3, never edited here), the passkey lab, and their tests. The `ids.json`
+article-number contract and the persona link format are this repository's formats; the data files are the
+newsroom's. The content (the articles and everything generated from them, and the pages themselves) stays in
 [SGit-AI__Website__Newsroom](https://github.com/SGit-AI/SGit-AI__Website__Newsroom).
 
-Nothing has moved yet. The plan is in `briefs/`:
+## The layout
 
-- [`briefs/2026-10-13__the-move-to-api-newsroom-sgit-ai.md`](briefs/2026-10-13__the-move-to-api-newsroom-sgit-ai.md):
-  the brief, refreshed at newsroom v0.12.10: the hosting model, what moves, the freeze, the first steps and
-  the decisions needed.
-- The original brief is the article
-  [Go slow to go fast](https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html);
-  the map it starts from is <https://newsroom.sgit.ai/newsroom-api/>.
+- The served files, at the paths they had in the newsroom: `assets/components/`, `assets/vault-pane/`,
+  `assets/search/`, `assets/vendor/sg-vault/`, `assets/subscribe.js`, `assets/newsroom-vault.js`, `assets/door.js`,
+  `for/`, `wire/`, `passkey/`. `tools/served.json` is the list; `tools/version.json` the release and its date.
+- `releases/<release>/`: each release as published, with `manifest.json` (every path, bytes, SHA-256; which files
+  differ from the newsroom's bytes and why). Never edited after it is on `main`. `python3 tools/release.py cut`
+  makes one from the tree; `check` recomputes every hash and fails when the tree is not the release it names;
+  `site --out DIR` assembles the Pages site. `tools/live_check.py` asks the live host for every hash after a deploy.
+- `tests/`: the newsroom's reader tests, moved here. They serve a checkout of the newsroom (`NEWSROOM=<path>`, or
+  `.newsroom/`; CI checks out the ref in `tests/newsroom.json`) and route `https://api.newsroom.sgit.ai/v*/`
+  to this tree (`tests/harness.mjs`), so the pages are the real pages and the code is the code under test.
+  `BROWSER=chromium|webkit|firefox`. `node tests/test_meter.mjs` and so on.
+- `map/before/v0.12.10/`: the newsroom's map of everything a reader runs, and every file's raw hash, at the
+  commit before the move. `map/proof/<release>.json`: the move's proof, written by `tools/prove_move.py`.
+- `tools/api_map.py`: the map generator, moved from the newsroom; not yet re-pointed at this tree and a
+  newsroom checkout (phase 0 maintenance, to run nightly here).
+- `briefs/`: the plan. `2026-10-13__the-move-to-api-newsroom-sgit-ai.md` is the brief refreshed at newsroom
+  v0.12.10; the original is the article
+  [Go slow to go fast](https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html).
+- `.github/workflows/ci.yml`: every commit: syntax, the manifest, the build twice, the tests in three engines.
+  `deploy-pages.yml`: `main` is the release branch: check, tag, publish, then the live check.
+
+## The move, in one paragraph
+
+Release v0.1.0 is phase 1 of the brief. 63 files left the newsroom at newsroom v0.13.0, unchanged apart from
+three that a host of their own forced to change, each by the lines that took the site root from the script's own
+address and now take it from the page (`vault-pane.js`, `search.js`, `ask.js`; recorded file by file in the
+manifest). The newsroom loads them from `https://api.newsroom.sgit.ai/v0.1.0/`, pinned in its
+`admin/build/api.json`; its gate checks every reference and the frozen meter copies it keeps. The proof that the
+live site serves the same bytes is `map/proof/v0.1.0.json`. The 18 findings of the review are issues 1 to 18.
+Until phase 4 is finished, the served files are frozen: a change is a new release, with a test that fails without
+it, and a reason in the pull request.
 
 Licence: Apache 2.0.

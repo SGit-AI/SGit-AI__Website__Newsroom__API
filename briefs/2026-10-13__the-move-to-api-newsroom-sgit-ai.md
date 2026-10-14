@@ -286,3 +286,36 @@ As the article asks, with the host added:
   `admin/build/sync_newsroom.py` (rules 11 and 12, `NORMALISE`), `admin/build/validate.js` (check 11)
 - The CORS check: `curl -sI https://newsroom.sgit.ai/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js`
   on 13 October 2026 returned `access-control-allow-origin: *`
+
+---
+
+## Addendum, 13 October, written with the move commit
+
+Dinis confirmed the decisions above (DNS set; identical paths; the re-scoped freeze; `ids.py` stays; release
+numbering from v0.1.0). Doing the move changed three things in this note, and found one.
+
+1. **The paths are identical under a versioned prefix**, `https://api.newsroom.sgit.ai/<release>/<path>`, not
+   bare under the host. Identical paths alone would have made `assets/vault-pane/vault-pane.js` and every other
+   unversioned file an unversioned URL, which rule 7 forbids and R16 warns about. One release directory per
+   release, never edited after it is published; the newsroom pins the release in one file; the normaliser's one
+   added rule sets the prefix aside. The meter's own component versions nest inside it unchanged.
+2. **Three files could not move unchanged.** `assets/vault-pane/vault-pane.js`, `assets/search/search.js` and
+   `assets/search/ask.js` located the site root from their own URL (`new URL('../../', import.meta.url)`), which
+   on another host is the API host: the pane's links to pages, the search's `docs.json` and `text.json`, and its
+   links would all have pointed at api.newsroom.sgit.ai. Each now takes the site root from the page
+   (`<html data-root>`, which every page carries) and keeps a second root, its own, for the code it loads. The
+   manifest records each with its before-hash and the reason; `tools/release.py` refuses any other difference
+   from the newsroom's bytes. Everything else, 60 files and the 20 frozen, hashes identical.
+3. **The proof covers every page, not only the 22.** `tools/prove_move.py` normalises all 597 pages of the
+   newsroom before and after: 593 identical; the four that differ are the release's own (the versions table,
+   the engineering board, the search page's count of documents, the passkey page's note on where the vectors
+   come from) and two pages are new (the card and the release). The report is `map/proof/v0.1.0.json`.
+4. **sgit.ai has already moved on.** Its v0.7.87 ("the newsroom has moved, phase one") puts a banner on every
+   newsroom page it still serves, between `<!--moved:start-->` and `<!--moved:end-->` for the import to cut out,
+   with a canonical URL pointing here, and says phase two deletes the pages. The next sync must cut that banner;
+   sgit.ai's pinning of this release (phase 1's last step) and the deletion of the sync's rule 11 wait on the
+   sgit.ai session.
+
+What the move commit contains, on both sides, is in each repository's README and in the newsroom's release note
+v0.13.0 and card 036. Order of merging: this repository's `main` first (Pages publishes `v0.1.0/`, and the
+`live` job proves every hash), then the newsroom's `dev`, whose pages load from that host.
