@@ -73,8 +73,9 @@ try {
     await pg.goto(B + `articles/${older.slug}.html`); await wait(1200)
     let s = await state()
     check(s && s.log[0].price === 5 && s.log[0].cost === 0.5, `opening an older article charges a tenth of 5p (${s && s.log[0].cost})`)
-    await scrollTo(0.5); await wait(900)
-    s = await state()
+    // WebKit measured no charge 900 ms after one scroll to half way (CI runs 2 and 9), so the scroll is re-issued and the
+    // charge polled for, up to 3 s
+    for (let i = 0; i < 10; i++) { await scrollTo(0.5); await wait(300); s = await state(); if (s.log[0].cost > 0.5) break }
     check(s.log[0].cost > 0.5 && s.log[0].cost < 5, `half way down costs part of the price (${s.log[0].cost}p)`)
     // images load lazily and lengthen the page, so the end is reached the way a reader reaches it:
     // keep scrolling until the page stops growing
