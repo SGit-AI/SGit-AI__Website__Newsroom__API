@@ -98,7 +98,7 @@ def page_html(rel, meta, body, *, md_twin):
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
   <a class="brand" href="{up}index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
-  <a class="ver" href="{up}releases/" title="This site is {esc(SITE_VERSION)}; the reader code it serves is release {esc(RELEASE)}">{esc(SITE_VERSION)}</a>
+  <a class="ver" href="{up}versions/" title="This site is {esc(SITE_VERSION)}; the reader code it serves is release {esc(RELEASE)}. Every version, in a line">{esc(SITE_VERSION)}</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav">{nav}</nav>
   <div class="tools"><div class="theme-pick"></div><a class="gh" href="{GITHUB}" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
@@ -112,7 +112,7 @@ def page_html(rel, meta, body, *, md_twin):
 </aside>
 </main>
 <footer class="foot"><div class="cols">
-  <div><h4>The API</h4><a href="{up}for-developers/">Quick start</a><a href="{up}docs/">Reference</a><a href="{up}how-to/">How-to guides</a><a href="{up}releases/">Releases</a><a href="{up}{RELEASE}/manifest.json">Current manifest</a></div>
+  <div><h4>The API</h4><a href="{up}for-developers/">Quick start</a><a href="{up}docs/">Reference</a><a href="{up}how-to/">How-to guides</a><a href="{up}releases/">Releases</a><a href="{up}versions/">Versions</a><a href="{up}{RELEASE}/manifest.json">Current manifest</a></div>
   <div><h4>The case</h4><a href="{up}for-publishers/">For publishers and editors</a><a href="{up}for-evaluators/">For evaluators</a><a href="{up}adopt/">Adopt it</a><a href="{up}articles/">The articles behind it</a></div>
   <div><h4>The work</h4><a href="{up}review/">The map and the review</a><a href="{up}review/proof/">The proof of the move</a><a href="{GITHUB}/issues">Issues</a><a href="{GITHUB}">Source</a><a href="{up}agents/">For agents</a></div>
   <div><h4>Live</h4><a href="{NEWSROOM}/">newsroom.sgit.ai</a><a href="{NEWSROOM}/meter/">SG Meter, documented</a><a href="{NEWSROOM}/newsroom-api/">The reader API map</a><a href="{up}about/">About, licence, contact</a></div>
@@ -372,6 +372,24 @@ CURATED = [
 ]
 
 
+VERSIONS = json.loads((DATA / "versions.json").read_text(encoding="utf-8"))
+
+
+def versions_page():
+    vs = VERSIONS["versions"]
+    if vs[0]["version"] != SITE_VERSION:
+        sys.exit(f"site: site/data/versions.json's newest entry is {vs[0]['version']}; tools/version.json says {SITE_VERSION}: add the line for this version")
+    parts = ["<h1>Versions</h1>\n<p class=\"lead\">Every change that lands on <code>dev</code> is a version, in small increments, and the deploy tags it. "
+             f"This site is <b>{esc(SITE_VERSION)}</b>; the reader code it serves is release <b>{esc(RELEASE)}</b>, what the consuming sites pin. "
+             "A version with a release of its own is a cut of the reader code; the others change the site, the tests or the tools and leave the served files as they were. "
+             "<a href=\"../releases/\">The releases</a> have their manifests; <a href=\"../releases.json\">releases.json</a> and this page's <a href=\"versions.json\">versions.json</a> are the machine-readable forms.</p>\n"]
+    rows = [[f"<a id=\"{esc(v['version'])}\" href=\"{GITHUB}/releases/tag/{esc(v['version'])}\"><code>{esc(v['version'])}</code></a>", esc(v["date"]),
+             f"<a href=\"../releases/#{esc(v['release'])}\">{esc(v['release'])}</a>" + (" <span class=\"dim\">(cut)</span>" if v["release"] == v["version"] else ""), esc(v["line"])] for v in vs]
+    parts.append(table(["Version", "Date", "Reader code", "What changed"], rows))
+    md = "\n".join(f"- **{v['version']}** ({v['date']}, reader code {v['release']}): {v['line']}" for v in vs)
+    return "\n".join(parts), md
+
+
 def articles_page():
     parts = ["<h1>The articles behind it</h1>\n<p class=\"lead\">Everything here was designed in public first, as an article on <a href=\"https://newsroom.sgit.ai/\">newsroom.sgit.ai</a>, "
              "then built, then written about again when it went live. Read them in this order and you have the case, the design and the engineering; each is numbered, so a "
@@ -406,6 +424,9 @@ def build(out):
     out.mkdir(parents=True)
     assets = ROOT / "site/assets"
     shutil.copytree(assets, out / "assets")
+    # the data the review and the proof pages link to is published with them: map/before/<newsroom release>/ and map/proof/
+    for d in ("map/before", "map/proof"):
+        shutil.copytree(ROOT / d, out / d)
     written = []     # (rel, title, description, md_text)
 
     def emit(rel, meta, body_html, md_body):
@@ -436,6 +457,7 @@ def build(out):
                                    "description": "The map of the reader code as a layered graph: the site, the pages, the views, the files, the contracts and the findings anchored to them."}, map_page),
         ("review/proof/index.html", {"title": "The proof of the move", "section": "Review", "crumbs": [("Review", "review/")],
                                      "description": "The live site serves the same bytes before and after the move, by hash: every file, the frozen copies, and every page once normalised."}, proof_page),
+        ("versions/index.html", {"title": "Versions", "section": "Releases", "crumbs": [("Releases", "releases/")], "description": "Every version of this repository that landed on dev, newest first, with the reader-code release each one serves and what changed, in a line."}, versions_page),
         ("releases/index.html", {"title": "Releases", "section": "Releases", "description": "Every release of the reader code served from api.newsroom.sgit.ai, its date, its notes, its manifest of paths and hashes, and the files that differ from the newsroom's bytes and why."}, releases_page),
         ("articles/index.html", {"title": "The articles behind it", "section": "Articles", "description": "The newsroom.sgit.ai articles that designed, built and reviewed this API, curated for publishers, for the reader's own newsroom, and for the engineering."}, articles_page),
     ]:
@@ -444,6 +466,7 @@ def build(out):
 
     # machine-readable
     write(out / "review/map/graph.json", json.dumps(map_graph_json(), indent=1, ensure_ascii=False) + "\n")
+    write(out / "versions/versions.json", json.dumps(VERSIONS, indent=1, ensure_ascii=False) + "\n")
     rels = [{"release": m["release"], "date": m["date"], "files": m["counts"]["files"], "bytes": m["counts"]["bytes"], "manifest": f"{SITE}/{m['release']}/manifest.json"} for m in MANIFESTS]
     write(out / "releases.json", json.dumps({"what": "The releases of the newsroom's reader code served from this host. A consuming site pins one; nothing here is edited after it is published.",
                                              "host": SITE, "current": RELEASE, "version": SITE_VERSION, "releases": rels}, indent=1) + "\n")

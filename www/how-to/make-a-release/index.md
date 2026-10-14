@@ -2,7 +2,7 @@
 
 > For maintainers: the rules while the files are frozen, the version file, cutting a release directory and its manifest, the checks, the pull request with a person and an agent reviewer, the deploy, the tag and the live check, then the consumers.
 
-*api.newsroom.sgit.ai · v0.2.3 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/make-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.4 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/make-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -31,7 +31,10 @@ $EDITOR tools/version.json          # {"version": "v0.2.3", "release": "v0.2.3",
 python3 tools/release.py cut        # (served files changed) releases/v0.2.3/<every served file> and manifest.json
 python3 tools/release.py check      # every release matches its manifest; the tree is the release; the two numbers obey their rule
 python3 site/build.py               # the site: the version in the bar, the release on /releases/
+python3 site/check.py               # the site's gate: references, canonical, chrome, sitemap, llms, no key shapes
 ```
+
+Add the version's line to `site/data/versions.json` (newest first); the build refuses a version without one, and `/versions/` shows them all.
 
 `cut` refuses to write over an existing release directory, refuses a release that is not the repository's version, and refuses a file that differs from the newsroom's bytes unless `CHANGED_FROM_NEWSROOM` records why. Write a release's note at `site/releases/v0.2.3.md`.
 

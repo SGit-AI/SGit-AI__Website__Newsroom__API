@@ -21,6 +21,12 @@ review with the map as a graph, the proof, the releases, the articles behind it,
 `site/build.py` from `site/pages/` (markdown or HTML fragments with front matter), `site/data/articles.json`, the map and the
 manifests, into `www/`, which is committed and which CI checks; the deploy publishes it at the root beside the releases.
 
+It wears the newsroom's five themes (`site/assets/themes.css` and `themes.js` are the newsroom's own files, unchanged) and is
+held to the newsroom's bar by `tests/test_site.mjs`: every token in every theme, no literal colour, 4.5:1 everywhere, one row
+from 1280 up. `site/check.py` is its gate before publishing, the newsroom's validate.js for these pages: every reference
+resolves, canonical and chrome on every page, the sitemap and the llms files agree with the tree, no key shapes.
+`site/data/versions.json` is the line per version that `/versions/` shows; a version without its line does not build.
+
 ## The layout
 
 - The served files, at the paths they had in the newsroom: `assets/components/`, `assets/vault-pane/`,

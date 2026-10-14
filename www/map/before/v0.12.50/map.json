@@ -1,0 +1,2383 @@
+{
+ "labs": [
+  {
+   "path": "passkey/lab.js",
+   "what": "The passkey lab: WebAuthn with PRF, the door derivation, sgit's key derivation, and real vaults through assets/newsroom-vault.js",
+   "lines": 345,
+   "sha256": "08c47eae0b95943e10e919fc770ddd2c0c30b2fd7652a5199fb8b7961f92560a"
+  },
+  {
+   "path": "passkey/lab.css",
+   "what": "its styles",
+   "lines": 29,
+   "sha256": "ca352ad9cdc8631d01005bfd94b88b92a646c030a3324d249f77285e48a0b491"
+  },
+  {
+   "path": "passkey/vectors.json",
+   "what": "its test vectors, from sgit's Python",
+   "lines": 19,
+   "sha256": "d50a3642c131bbaa8b9858438138fc1dc78ae3249e9bab89c1b7541f95a447b8"
+  },
+  {
+   "path": "passkey/index.html",
+   "what": "the page",
+   "lines": 323,
+   "sha256": "6620cffd5731fd4b1499d6e509b1684586cfcf4ac6fadd83afc2eb7679e7f9e9"
+  }
+ ],
+ "what": "The map of everything a reader does on newsroom.sgit.ai, and the review of it: phase 0 of the move described in https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html. Written by admin/build/api_map.py on every build. The hashes are the 'before' for the move's rule that the live site serves the same bytes after it: scripts, styles and JSON raw; pages with the site chrome and version stamps normalised.",
+ "api_means": "client-side: components, formats and contracts the browser runs, with no server and nothing to deploy but files",
+ "release": "v0.12.50",
+ "date": "11 October 2026",
+ "source": {
+  "sgit_ai": "",
+  "commit": "4e00434",
+  "meter_here": "1.4.0",
+  "meter_on_sgit_ai": "1.3.1"
+ },
+ "counts": {
+  "reader_code_lines": 9903,
+  "reader_files": 62,
+  "pages": 29,
+  "views": 12,
+  "controls": 56,
+  "inputs": 11,
+  "outputs": 9,
+  "contracts": 14,
+  "findings": 18,
+  "tests": 491,
+  "frozen_files": 20,
+  "frozen_lines": 5697,
+  "pages_with_csp": 0
+ },
+ "files": [
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
+   "what": "SG Meter, the element: twelve views, the reader card, the share form, the graph",
+   "from": "this site, from sgit.ai's v1.3.1",
+   "lines": 817,
+   "bytes": 55643,
+   "sha256": "ba46eeca15d5d9b24feb71381c14a0b92bb5d8326492c310824cf8723c431abb",
+   "hosts": [],
+   "fetch": 2,
+   "storage": [],
+   "events": [
+    "sg:meter.changed"
+   ],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 2,
+   "crypto": true
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
+   "what": "SG Meter, the meter: prices, the charge, ratings, declining, credit, personas, picks, the share text",
+   "from": "this site, from sgit.ai's v1.3.1",
+   "lines": 513,
+   "bytes": 26602,
+   "sha256": "9986294b0fbc5a62b56f515eff22867ef59e75e0c63dc048dfda3fdd6dd0e5ba",
+   "hosts": [],
+   "fetch": 1,
+   "storage": [
+    "localStorage",
+    "sessionStorage"
+   ],
+   "events": [
+    "sg:meter.changed",
+    "sg:meter.charged",
+    "sg:meter.declined",
+    "sg:meter.persona",
+    "sg:meter.reset",
+    "sg:meter.restored",
+    "sg:meter.shared",
+    "sg:meter.toppedup"
+   ],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.css",
+   "what": "SG Meter styles, adopted into the shadow root",
+   "from": "this site, from sgit.ai's v1.3.1",
+   "lines": 192,
+   "bytes": 16491,
+   "sha256": "3f464b7d1df4e15ff45809fb155388df357809d79d87609ff0d44514b4438786",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.tpl",
+   "what": "SG Meter markup (one div)",
+   "from": "this site, from sgit.ai's v1.3.1",
+   "lines": 1,
+   "bytes": 56,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/components/base/v1/v1.0/v1.0.0/sg-component.js",
+   "what": "The component base: fetches the .tpl and .css beside a component and calls onReady()",
+   "from": "sgit.ai, verbatim",
+   "lines": 118,
+   "bytes": 4333,
+   "sha256": "e566a78ad98fbd184058eed2a6b435c2c386066a0743de5efdbd0ef99348e677",
+   "hosts": [],
+   "fetch": 1,
+   "storage": [],
+   "events": [
+    "sg-meter:error"
+   ],
+   "eval": 0,
+   "innerHTML": 2,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "for/reading-list.js",
+   "what": "A reading list in a link: parse, build, show, open as a persona",
+   "from": "this site",
+   "lines": 343,
+   "bytes": 20117,
+   "sha256": "5f8fa1378b99c24cdba945cd0bb965a56f03a04ce069a3ab56b3ec340881b1ee",
+   "hosts": [],
+   "fetch": 1,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "for/make.js",
+   "what": "The page that makes a reading list and previews it",
+   "from": "this site",
+   "lines": 254,
+   "bytes": 16205,
+   "sha256": "ec9abc1f40b5f5640103f4e7ab4280a8622d9d5aa683bc82079609ccea413783",
+   "hosts": [],
+   "fetch": 1,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "for/for.css",
+   "what": "Styles for the two reading-list pages",
+   "from": "this site",
+   "lines": 109,
+   "bytes": 8123,
+   "sha256": "6ad9b2f9c39e99748a089d55670a1233983ff08cc5d02e53a9034adb9735a17d",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/subscribe.js",
+   "what": "The subscribe form: encrypts the address and posts it to the lane",
+   "from": "sgit.ai, verbatim",
+   "lines": 117,
+   "bytes": 7440,
+   "sha256": "fe2eec58c28f15e53fc57520bccb75e38276607821d8572b0fdfd1e0417c1c58",
+   "hosts": [],
+   "fetch": 2,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "wire/vault-reader.js",
+   "what": "Reads an sgit vault in the browser with a published read key: ref, commit, tree, blobs, decrypted with Web Crypto; the markdown renderer",
+   "from": "this site, vendored from sgit.ai's vault-docs.js",
+   "lines": 182,
+   "bytes": 11113,
+   "sha256": "332509b6be44538d7aab0305669673fa6907591ff621dee1b2605849c89afbfb",
+   "hosts": [],
+   "fetch": 1,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "wire/graphs.js",
+   "what": "The wires' graphs: a provenance strip per story, stories per day by beat, the threads on a date axis, the entities stories share, a sources tally, a story-by-persona matrix; SVG from the bundle, text nodes only, colours as theme tokens",
+   "from": "this site",
+   "lines": 356,
+   "bytes": 32479,
+   "sha256": "22f48fcb1185389f8c477b382f422b42e7916bc2f1920598049f490cca3490e1",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "admin/build/infographics.py",
+   "what": "One card per story and one hero per edition through dev.tools.sgraph.ai, with a cost ledger per edition and per wire; the key from the environment only, a dry run without it",
+   "from": "this site",
+   "lines": 617,
+   "bytes": 36281,
+   "sha256": "b92e5cf4a6dba62f01baa6551b179fc7e7f0baa879cb9fe2b5cf9c4e3495c561",
+   "hosts": [
+    "dev.tools.sgraph.ai",
+    "openrouter.ai"
+   ],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "wire/wire.js",
+   "what": "The wires: the edition with its lens, release notes and corrections, a map or a stack when the vault has one, the sources, the documents, drawn from the vault as text; one code for every wire",
+   "from": "this site",
+   "lines": 519,
+   "bytes": 50728,
+   "sha256": "372f85ab8ffd75beb8eaec31aa64884dcaff8286b961a353cc7cf0bfdd3dc1c7",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [
+    "localStorage",
+    "sessionStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 1,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "wire/wire.css",
+   "what": "Styles for the wire pages",
+   "from": "this site",
+   "lines": 176,
+   "bytes": 17244,
+   "sha256": "f61bc914b5303dced5b03e16a81c7bca33e534bd88eb5a049718e1a7b094d3d7",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "wire/subscribe.js",
+   "what": "Subscribe to one wire alone: the newsletter's envelope and lane (assets/subscribe.js, unedited), with X-SGit-List naming the wire",
+   "from": "this site",
+   "lines": 103,
+   "bytes": 6862,
+   "sha256": "e08913d389ede55fb0787cba7752920c28b43735ff767795e11ac43224c5a12b",
+   "hosts": [],
+   "fetch": 2,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "admin/build/wire-reach.json",
+   "what": "The organisation routes this site found for each wire's reach page, under the published contact rules: page, date, hash, role addresses",
+   "from": "this site",
+   "lines": 109,
+   "bytes": 4650,
+   "sha256": "380f4d81d3f129e22a8cf065683f9b00123bdc00b719b1c45812008c05756e15",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "admin/build/wire-vault.json",
+   "what": "The Industry Wire's vault: endpoint, vault id, the public read key (the only kind of key on this site)",
+   "from": "this site",
+   "lines": 14,
+   "bytes": 1312,
+   "sha256": "c8c84bea5a65df09436fdffd813e0ded4c0654644564da11403bb23ed28d5475",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "admin/build/wire-vault.owasp.json",
+   "what": "The OWASP Wire's vault (wire/owasp/): the same contract, its own public read key",
+   "from": "this site",
+   "lines": 17,
+   "bytes": 1760,
+   "sha256": "d584c029352338f26eaa496cda1c4ca62c38f932efe54c366d2d8869387ea1fd",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "admin/build/wire-vault.aws.json",
+   "what": "The AWS Wire's vault (wire/aws/): the same contract, its own public read key",
+   "from": "this site",
+   "lines": 17,
+   "bytes": 1907,
+   "sha256": "3c0448d6e39bfeeacdfe41ddf7805a6e2023751c2ecdc9e71d9df9bc86be78f0",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "admin/build/wire-vault.portugal.json",
+   "what": "The Portugal Wire's vault (wire/portugal/): the same contract, its own public read key; the bundle is bilingual",
+   "from": "this site",
+   "lines": 17,
+   "bytes": 1892,
+   "sha256": "752b9fbb38c9015ddcc3e5efcb629538730d93f1e4a8623cc1cf31fd56042ded",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "wire/snapshot.json",
+   "what": "The Industry Wire as it was in the vault at the last release: headlines, primary links, corrections, the latest release note; the fallback and the agents' index",
+   "from": "this site, generated",
+   "lines": 717,
+   "bytes": 30076,
+   "sha256": "550abde85cacfb45826086e2e9157c9a019deae3da2e25891256d01ff4106e57",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "wire/owasp/snapshot.json",
+   "what": "The OWASP Wire at the last release, the same shape",
+   "from": "this site, generated",
+   "lines": 284,
+   "bytes": 10550,
+   "sha256": "c43c1a032d41eeb3fd72492b0216cf79c5ec317bc894583361e193ee2bbe33a3",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "wire/aws/snapshot.json",
+   "what": "The AWS Wire at the last release, the same shape, with the stack's deadlines",
+   "from": "this site, generated",
+   "lines": 936,
+   "bytes": 37933,
+   "sha256": "22ae5c7762267e7eb2f95eb55252d4ca074e13c5f395765255c517d5e2a9df17",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "wire/portugal/snapshot.json",
+   "what": "The Portugal Wire at the last release, the same shape, with each headline in Portuguese too",
+   "from": "this site, generated",
+   "lines": 507,
+   "bytes": 26120,
+   "sha256": "bc2a72f92b49d3971ed47ad4f09c85b7aa7155bcf51b88131f024294729cc119",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vault-ui-embed.js",
+   "what": "The study page: embeds the vault browser from dev.vault.sgraph.ai and hands it a read key",
+   "from": "sgit.ai, verbatim",
+   "lines": 126,
+   "bytes": 5704,
+   "sha256": "308af99563423f5e6e6d1bc32eed2436ebee9b97986e0ef272f03990819f6139",
+   "hosts": [
+    "dev.vault.sgraph.ai"
+   ],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 2,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/shots.js",
+   "what": "Figures: sets each image's address at runtime",
+   "from": "sgit.ai, verbatim",
+   "lines": 278,
+   "bytes": 13687,
+   "sha256": "6c03d07971ec6808629cbd2dfc3ed6282a0d8cf91d0a2a624001f5d427f9a930",
+   "hosts": [],
+   "fetch": 1,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/site.js",
+   "what": "Page behaviour: nav, copy buttons, reveal-on-scroll",
+   "from": "sgit.ai, verbatim",
+   "lines": 81,
+   "bytes": 3397,
+   "sha256": "0069c69190c8afc1047bded0e76b70578676bd3a6ccd66eb46817bc8fb89c6fe",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/nav.js",
+   "what": "Nav behaviour on the pages this site writes",
+   "from": "this site",
+   "lines": 42,
+   "bytes": 2043,
+   "sha256": "bf18958cd99e10b5a05d17887fb2862f490065d1933ea7269a1454e47035af41",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": ".well-known/sgit-subscribe.json",
+   "what": "The lane and the public key the share and the subscription are encrypted to and written into",
+   "from": "sgit.ai, verbatim",
+   "lines": 25,
+   "bytes": 2126,
+   "sha256": "1414b8bb22c50b86986c75021f26b1d7d5e1016aca09e83ef57bf94e08e389c6",
+   "hosts": [
+    "dev.send.sgraph.ai"
+   ],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "articles/ids.json",
+   "what": "A number for every article: the contract reading lists are built on",
+   "from": "this site, generated",
+   "lines": 1849,
+   "bytes": 71679,
+   "sha256": "8c9a8d6e4a1fdb648672ebffc8ebc168406b883d290d0bb21d230699933c194d",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "persona/links.json",
+   "what": "The persona links, for whoever writes to someone",
+   "from": "this site, generated",
+   "lines": 268,
+   "bytes": 13441,
+   "sha256": "9f97af6653bb6990a26efb8eef72ea21304a96e6f354aba19dbeb59d4841cd8e",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "articles/graphs.json",
+   "what": "The feed the picks and the graph read: every article with topics, tags and citations",
+   "from": "sgit.ai, imported",
+   "lines": 31261,
+   "bytes": 1329215,
+   "sha256": "cb8bdbf839d208fe0dafb19501641fff7c28f42252ec1dbc27fe590c46959a94",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/newsroom-vault.js",
+   "what": "The newsroom's vault module: create, open, read, write and publish through the vendored library; the door, master and reader vaults; unlock; add a door",
+   "from": "this site",
+   "lines": 255,
+   "bytes": 16265,
+   "sha256": "29003efa52c408b9d26e58ce86ecc897fda2439f739e803df7b9399a4520705e",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [
+    "localStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/door.js",
+   "what": "From a passkey's PRF bytes (or a recovery code) to a door vault's key: the article's derivation, shared by the lab and the pane",
+   "from": "this site",
+   "lines": 139,
+   "bytes": 8954,
+   "sha256": "740779876d19acebd24e493da9616d132a968f8885c013880f383c15d6ef4dff",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/vault-pane/vault-pane.js",
+   "what": "The vault pane on every page with the meter, in three tabs: this page (the notes, send to the newsroom, the lane's read key), the vault (enable with the passkey, create or join, update the vault, the table across devices, bring their activity here), the keys (every vault of the account)",
+   "from": "this site",
+   "lines": 784,
+   "bytes": 66189,
+   "sha256": "7176fa08921a26cfded65f5a8b3b20410c910b26b4e182e73edcee5991d88ef3",
+   "hosts": [
+    "dev.send.sgraph.ai",
+    "dev.vault.sgraph.ai"
+   ],
+   "fetch": 0,
+   "storage": [
+    "localStorage",
+    "sessionStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 1,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vault-pane/notes.js",
+   "what": "The reader's notes as records: one tap at a piece (done, read later, not for me, more like this, liked, wrong, fix this, idea) with words and the selected phrase, kept in localStorage sgit.notes.v1; keep, add words, remove, mark sent; the decision at a page",
+   "from": "this site",
+   "lines": 137,
+   "bytes": 8318,
+   "sha256": "21f583f801906d8b3b9bad289a31919e88be02344f4156afd5f04831c83e9198",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [
+    "localStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/search/search.js",
+   "what": "Search in the browser: the index from search/docs.json and search/text.json, BM25 over fields and paragraphs, phrases, numbers, prefixes, snippets; the search page",
+   "from": "this site",
+   "lines": 318,
+   "bytes": 19939,
+   "sha256": "a1602529e616f0be0f7688c6b7836a88c3a8e186d760088adf2517afa7632678",
+   "hosts": [],
+   "fetch": 2,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/search/search.css",
+   "what": "Styles for the search page",
+   "from": "this site",
+   "lines": 25,
+   "bytes": 3112,
+   "sha256": "1fcdffcfa53fc8d3f75a92009fce6cb12553d97f110087ca0784653190a12355",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/search/ask.js",
+   "what": "Ask: the top passages, numbered, given to Chrome's built-in model or to openrouter.ai with the reader's own key, answered with citations; the key in the tab unless kept",
+   "from": "this site; openrouter.ai, only with the reader's key",
+   "lines": 184,
+   "bytes": 14313,
+   "sha256": "ec50bb11017fe7fbbb513315e948020aaa005d14e2554cac15cf13ffedd62079",
+   "hosts": [
+    "openrouter.ai"
+   ],
+   "fetch": 1,
+   "storage": [
+    "localStorage",
+    "sessionStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/search/ask.css",
+   "what": "Styles for Ask on the search page",
+   "from": "this site",
+   "lines": 23,
+   "bytes": 2885,
+   "sha256": "9f8cd3cb95d659e87d4e249947a1fe92f4309cc2192c3b0f428b35440de34549",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vault-pane/inbox.js",
+   "what": "The inbox (049): the reader's RSA-OAEP key pair, the link (sgi1.<vault>.<token>.<key>), sgit's hybrid envelope, the append routes (configure, write, list, fetch, mark-processed), the drain, the QR code",
+   "from": "dev.send.sgraph.ai /api/vault/append/*",
+   "lines": 227,
+   "bytes": 15367,
+   "sha256": "0d31b92a8827d26a0ddd7e8f076315d6db4b48dfe719f28dafec100eb6bed59b",
+   "hosts": [
+    "dev.send.sgraph.ai"
+   ],
+   "fetch": 1,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/vault-pane/send.js",
+   "what": "The sending side of the inbox, for a browser with the link and no passkey: its own records as one device file, sealed and appended",
+   "from": "dev.send.sgraph.ai /api/vault/append/write",
+   "lines": 104,
+   "bytes": 8078,
+   "sha256": "ca0512a3474140277f57e70a696d597c0c3ed11c5f61d5228ca2ef4be302aecb",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [
+    "localStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/vendor/qrcode-generator/2.0.4/qrcode.mjs",
+   "what": "QR code generator (Kazuhiko Arase, MIT), vendored unchanged, for the inbox link",
+   "from": "this site",
+   "lines": 2237,
+   "bytes": 51907,
+   "sha256": "ea91d7118a5395289170da848b7c6758b996163bfbccf312591ab65a4911b7c0",
+   "hosts": [
+    "www.d-project.com",
+    "www.denso-wave.com",
+    "www.opensource.org"
+   ],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/search/search-nav.css",
+   "what": "The Search link in the nav, on every page",
+   "from": "this site",
+   "lines": 5,
+   "bytes": 666,
+   "sha256": "c750cab906e8d1592e3bd3fece94ff33945c833a7a78d3a7d9c7313d7dbe636f",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vault-pane/wire-state.js",
+   "what": "What this browser knows about the wire: stories seen and when, the visit, the lens chosen; and which of the vault's releases to show",
+   "from": "this site",
+   "lines": 78,
+   "bytes": 5432,
+   "sha256": "36e1d5bbbd300c622fadf48748d4485e1b7818f666733c90c9d5f9153dcaea35",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [
+    "localStorage",
+    "sessionStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vault-pane/pending.js",
+   "what": "What this browser holds that the reader vault does not yet: reads, top-ups, notes and stories seen since the last update",
+   "from": "this site",
+   "lines": 47,
+   "bytes": 2795,
+   "sha256": "4d4c30ec10e0ebe138ad337527a2605c908bba1f2767b3f8c1ef0fe39066469a",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [
+    "localStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vault-pane/reading.js",
+   "what": "What this browser knows about what it has read, from the meter's records: one page summed up (times, when, how far, cost, rating) and the reading history",
+   "from": "this site",
+   "lines": 41,
+   "bytes": 2194,
+   "sha256": "e8f2b778f2b2eec00aecdc1c532c488e0ebd0c36e08caf353b557b0e00845b79",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [
+    "localStorage"
+   ],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vault-pane/sync.js",
+   "what": "The activity vault's logic as pure functions: a device's file (reads, top-ups, personas, notes), the consolidated view, totals recomputed, merging into local state",
+   "from": "this site",
+   "lines": 199,
+   "bytes": 13017,
+   "sha256": "0a56700e5b9db9f567fb843366fbaad9ff950202abbe1804d4dcf04b8824a193",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vault-pane/vault-pane.css",
+   "what": "Styles for the pane, its tabs, the chips and the notes, and the page shift",
+   "from": "this site",
+   "lines": 110,
+   "bytes": 12039,
+   "sha256": "f25e2596761414c4495e3b2fc380d3cb055f86f33a8d6cdd17c3d34d8928f5b9",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vendor/sg-vault/local/sg-vault--create-with-id.js",
+   "what": "SGVault.createWithId: a vault at a derived id, a local patch pending upstream",
+   "from": "this site, pending upstream",
+   "lines": 99,
+   "bytes": 5127,
+   "sha256": "b668c4ab0062a3b385882fa593f7213f50f667c777d0614b5ba8abcb5721372e",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-send/sg-send-crypto.js",
+   "what": "AES-256-GCM and PBKDF2 over Web Crypto",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 151,
+   "bytes": 4927,
+   "sha256": "2c4af16bbaf4f43e7eb0f8298a9cd8338429f99c7bec20c5d7f4da96c88e39ce",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-send/sg-send.js",
+   "what": "The HTTP client: read, write, batch, presigned; x-sgraph-access-token",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 275,
+   "bytes": 12989,
+   "sha256": "9bc98e580f5fc1adbf8e2d273181e6afa3bd9a3813ea8a1bf24ddd07e1b8b41e",
+   "hosts": [],
+   "fetch": 4,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-crypto.js",
+   "what": "Key derivation: read key, write key, ref and index ids; key prefixes",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 302,
+   "bytes": 14862,
+   "sha256": "f8d31359204a9e333d27444ea2a37c1bb11bbc790d0cf4cfa95fe9f9282d6e66",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-object-store.js",
+   "what": "Content-addressed objects, the write batch, the block caches",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 290,
+   "bytes": 14057,
+   "sha256": "a45d7ad0f9dbd91677785c3128a8322d4209cb35ab5d815551dcbf1eceed9c9e",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-ref-manager.js",
+   "what": "Refs and the branch index; write-if-match",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 158,
+   "bytes": 8368,
+   "sha256": "5b8ea87ace83d59e8954511d9932bd3968020c57070375194c7427a083fb729f",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-commit.js",
+   "what": "Commits and trees, every field encrypted",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 175,
+   "bytes": 6645,
+   "sha256": "e686de3756eaeed185708a6ba96194429afb3067f145108e7580d876598dd9ce",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault.js",
+   "what": "SGVault: create, open, openReadOnly, the tree, the commit",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 566,
+   "bytes": 28054,
+   "sha256": "0108884f9b8d539e4c9457190326d64adc5a92c808803f0dab14b9e772b3ad26",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": true
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--file-ops.js",
+   "what": "addFile, updateFile, getFile, removeFile, renameFile, moveFile",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 157,
+   "bytes": 7212,
+   "sha256": "f114db89754638b5e4ade1dc3f5d4753ac672a4323c286e8c8ed0412760e6861",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--folder-ops.js",
+   "what": "Folders, lazy sub-trees",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 125,
+   "bytes": 5680,
+   "sha256": "10fea1377422c5368aead040500c28135fafcb918427901a74483e23e1b36d7f",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--sync.js",
+   "what": "push, pushIfMatch, pull, merge, ahead and behind",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 456,
+   "bytes": 20598,
+   "sha256": "b9f521e7b70ca66f6d1197378337f954deea4ed3468535ec3064149c7cf1fcc6",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--history.js",
+   "what": "History: commits, trees and files at a commit",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 89,
+   "bytes": 4142,
+   "sha256": "265b215e27216ad25e8fa7c83b47c8307b7990a0a3fb88254ee2149d2835dd2d",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--branches.js",
+   "what": "Branches from the index",
+   "from": "SGraph-AI__App__Send v0.2.3, vendored and unedited (VENDOR.md)",
+   "lines": 57,
+   "bytes": 2178,
+   "sha256": "bc1eec8bbc2326a73ec1809ed588d26f3fe7511bf24b52e47440c3d90526f3d1",
+   "hosts": [],
+   "fetch": 0,
+   "storage": [],
+   "events": [],
+   "eval": 0,
+   "innerHTML": 0,
+   "confirm": 0,
+   "crypto": false
+  }
+ ],
+ "pages": [
+  {
+   "path": "account/index.html",
+   "what": "the reading account",
+   "lines": 257,
+   "sha256": "bc2f591e3a4525429105327a371c1ce490160c5d7465944b08b97b4d452d03f4"
+  },
+  {
+   "path": "account/newsroom.html",
+   "what": "the reader's newsroom",
+   "lines": 252,
+   "sha256": "d51094542674dd01e916bfec91c4ace063bac9909a4f35f064bd9d4b52e38793"
+  },
+  {
+   "path": "account/personas.html",
+   "what": "the personas",
+   "lines": 252,
+   "sha256": "21ad4f65ea6c5ad0f7ad4f22dfc2d7a9dbf6334aaa4f3dba227e0cb25d0ff4af"
+  },
+  {
+   "path": "account/share.html",
+   "what": "send us your reading",
+   "lines": 254,
+   "sha256": "a21883ac53716f44b9d98f3979d842f5bcee83b157da16ea31a6c9f11481cde8"
+  },
+  {
+   "path": "account/top-up.html",
+   "what": "the top-up",
+   "lines": 252,
+   "sha256": "6a94fbab4eace27cbdd496ac9783adab1c4f2aa6ab2415745d8755ef458c13c2"
+  },
+  {
+   "path": "account/topped-up.html",
+   "what": "the page a payment returns to",
+   "lines": 251,
+   "sha256": "74dc5138c955974150931bb370fd4d873f4a156fba199666735dbc9cb00460da"
+  },
+  {
+   "path": "subscribe/index.html",
+   "what": "subscribe",
+   "lines": 272,
+   "sha256": "1251580b865830dddc208618a16fdaf43b05388f9e2fcc9df8014160c591ccf5"
+  },
+  {
+   "path": "persona/index.html",
+   "what": "the persona picker",
+   "lines": 235,
+   "sha256": "7c0c30a9ae0de576350fc7cb57912f062096773e89a5f3fb792ee4e5346b3156"
+  },
+  {
+   "path": "persona/founder/index.html",
+   "what": "a persona link",
+   "lines": 242,
+   "sha256": "043526965d23edb06f766e6abcf81a464c2c41eab578df7b2825beca5c6fe98e"
+  },
+  {
+   "path": "persona/journalist/index.html",
+   "what": "a persona link",
+   "lines": 242,
+   "sha256": "8c9acb523b68c36fff8e49e761e8ff302edd4389d4b92bff73ddb2842624628c"
+  },
+  {
+   "path": "persona/security/index.html",
+   "what": "a persona link",
+   "lines": 242,
+   "sha256": "2db575acd574852c2c6e9025ff713d52407d438ec94b711710631cb561616f21"
+  },
+  {
+   "path": "persona/builder/index.html",
+   "what": "a persona link",
+   "lines": 242,
+   "sha256": "fce8ebd416a924a80cf9d5a02ae9e8b81b8ddf16898220353ec381afda008f0c"
+  },
+  {
+   "path": "persona/board/index.html",
+   "what": "a persona link",
+   "lines": 242,
+   "sha256": "384885a41bf6abad4f1d50d9fb8e9a3a7579ad267c67c26af840989594ab94e0"
+  },
+  {
+   "path": "for/index.html",
+   "what": "a reading list",
+   "lines": 249,
+   "sha256": "cbd0376dd53283fe36c447573ddef4698612e2ffe26473dd34a54bec7dad8284"
+  },
+  {
+   "path": "for/make.html",
+   "what": "make a reading list",
+   "lines": 239,
+   "sha256": "2e61fd52d2b8fc982b8ce5f82d817059e5d2f26e8f7048027ad303ad12019b1e"
+  },
+  {
+   "path": "wire/index.html",
+   "what": "the Industry Wire's edition",
+   "lines": 260,
+   "sha256": "2fa0d1b27600146d88802648f5275199db25d5b9cff58fbb3671cdbfcab6c824"
+  },
+  {
+   "path": "wire/sources.html",
+   "what": "the wire's sources",
+   "lines": 240,
+   "sha256": "d40cd17d1c67184f57038027fc9282433900206ffc1fe0599ef93c88e681eb13"
+  },
+  {
+   "path": "wire/how.html",
+   "what": "how the wire is read, and its documents",
+   "lines": 244,
+   "sha256": "ed82c973b3e1634e1a635ee22bd6761fda305ce8b7f7cc1bf9c6506900220ec5"
+  },
+  {
+   "path": "wire/owasp/index.html",
+   "what": "the OWASP Wire's edition, with the projects graph",
+   "lines": 261,
+   "sha256": "c35eba5acc0e667f2fa45abdbbb0eafe203d5ac69669e445e4afe99842bfdf83"
+  },
+  {
+   "path": "wire/aws/index.html",
+   "what": "the AWS Wire's edition, with the stack and its deadlines",
+   "lines": 261,
+   "sha256": "0c180e155ae0397e8e45086023e0fa7e4c007802b8ba67f82c627a44b7bcf340"
+  },
+  {
+   "path": "wire/portugal/index.html",
+   "what": "the Portugal Wire's edition, in English and Portuguese, with the ecosystem map",
+   "lines": 261,
+   "sha256": "180cfe5c1e9353319688b17bbdc027747b5bbcd56f9577f1a68508f76d247ed2"
+  },
+  {
+   "path": "wire/days.html",
+   "what": "every wire day by day",
+   "lines": 241,
+   "sha256": "06599688215adb43d7a3d572ace460d4a7d7a2a267d431e451cdcc9320f2e85e"
+  },
+  {
+   "path": "wire/charter.html",
+   "what": "the charter of the wires",
+   "lines": 253,
+   "sha256": "d0bec146443372f7a594e80a7bbe0f685f60ac03a19c63ee55ab061e0a7b45fb"
+  },
+  {
+   "path": "wire/desk-brief.html",
+   "what": "the brief for the desks",
+   "lines": 259,
+   "sha256": "45930a885e1475f10ec2e88255b76d0e751d4638279b778cca985831a55e1e06"
+  },
+  {
+   "path": "wire/reach.html",
+   "what": "who should know, by organisation route",
+   "lines": 240,
+   "sha256": "29df8e1b40fec57491f054f3a597d6288ae2dbf2e5307c2963236e4c64ce64b9"
+  },
+  {
+   "path": "vault/index.html",
+   "what": "your vault: the reading account carried between devices, with the pane open",
+   "lines": 260,
+   "sha256": "247abd6d07b9200be247407c0d4474e6f565fc67da5dbe2da1aaee5ec0207e13"
+  },
+  {
+   "path": "meter/index.html",
+   "what": "SG Meter, documented",
+   "lines": 393,
+   "sha256": "55656dcab6bf28872c4133c9ea7e609b617606ad703aad883e30fe7d3cb58c70"
+  },
+  {
+   "path": "meter/security.html",
+   "what": "the meter's security model",
+   "lines": 278,
+   "sha256": "9fc8faaf1fc72627c3b858600b635089339c5c3df8fc359d76cd1879b5f4a9ca"
+  },
+  {
+   "path": "demos/vaults/newsroom-synthetic-users/index.html",
+   "what": "the synthetic-readers study, with the embedded vault",
+   "lines": 339,
+   "sha256": "e8d83c803a3e0e72922a77b9668bbf778b042f9241616a7e19fbc684b06154f2"
+  }
+ ],
+ "build": [
+  {
+   "path": "admin/build/ids.py",
+   "what": "assigns article numbers, writes articles/ids.json",
+   "lines": 156
+  },
+  {
+   "path": "admin/build/lists.py",
+   "what": "writes the two reading-list pages",
+   "lines": 103
+  },
+  {
+   "path": "admin/build/personas.py",
+   "what": "writes the persona pages and persona/links.json",
+   "lines": 160
+  },
+  {
+   "path": "admin/build/page.py",
+   "what": "the page template, with the meter block every page this site writes carries",
+   "lines": 115
+  },
+  {
+   "path": "admin/build/sync_newsroom.py",
+   "what": "the import: re-points the meter to v1.4.1, applies the text rules, prints the article number",
+   "lines": 711
+  },
+  {
+   "path": "admin/build/newsroom-meter.json",
+   "what": "the top-up link, applied on import",
+   "lines": 5
+  },
+  {
+   "path": "admin/build/newsroom-text.json",
+   "what": "the ten text rules, applied on import",
+   "lines": 167
+  },
+  {
+   "path": "admin/build/wire.py",
+   "what": "writes the three pages of every wire (wire/, wire/owasp/, wire/aws/) and, from a clone, each wire's snapshot.json",
+   "lines": 356
+  },
+  {
+   "path": "admin/build/vault_page.py",
+   "what": "writes the vault page",
+   "lines": 109
+  },
+  {
+   "path": "admin/build/lane.py",
+   "what": "the newsroom's end of the feedback loop: clones or pulls a reader's lane with its read key (from the environment, never a file) and prints the notes by page",
+   "lines": 147
+  },
+  {
+   "path": "admin/build/search_index.py",
+   "what": "writes search/docs.json, search/text.json and the search page from the published pages, the article graphs and versions, the wires' snapshots and the notes",
+   "lines": 356
+  },
+  {
+   "path": "admin/build/engineering.py",
+   "what": "renders /engineering/ from admin/engineering/: the board, one page per issue card, one per release, issues.json",
+   "lines": 203
+  },
+  {
+   "path": "admin/build/md.py",
+   "what": "the small markdown renderer the engineering pages use; escapes everything first",
+   "lines": 144
+  },
+  {
+   "path": "admin/build/chrome.py",
+   "what": "the nav and footer on every page, with the meter's balance and the Vault button and pane on pages that carry the meter",
+   "lines": 363
+  },
+  {
+   "path": "admin/build/validate.js",
+   "what": "the gate: checks 2d (live link), 5 (key tripwire), 11 (imports unedited), 12 (numbers hold)",
+   "lines": 493
+  }
+ ],
+ "tests": [
+  {
+   "path": "admin/build/test_meter.mjs",
+   "what": "the meter in Chromium",
+   "lines": 222,
+   "checks": 40
+  },
+  {
+   "path": "admin/build/test_lists.mjs",
+   "what": "the parser in Node and the list pages in Chromium",
+   "lines": 214,
+   "checks": 58
+  },
+  {
+   "path": "admin/build/test_review.mjs",
+   "what": "the review's findings, pinned as the behaviour is today",
+   "lines": 145,
+   "checks": 14
+  },
+  {
+   "path": "admin/build/test_passkey.mjs",
+   "what": "the passkey lab in Chromium, with a virtual authenticator that has PRF, against the mock of the vault API",
+   "lines": 159,
+   "checks": 33
+  },
+  {
+   "path": "admin/build/test_wire.mjs",
+   "what": "every wire's pages in Chromium, each reading its real vault",
+   "lines": 214,
+   "checks": 61
+  },
+  {
+   "path": "admin/build/test_vault.mjs",
+   "what": "real vaults in Node: the vendored library against the mock of the vault API, and the sgit CLI round trip",
+   "lines": 180,
+   "checks": 28
+  },
+  {
+   "path": "admin/build/test_sync.mjs",
+   "what": "the activity vault's logic in Node, with two devices' states",
+   "lines": 106,
+   "checks": 37
+  },
+  {
+   "path": "admin/build/test_pane.mjs",
+   "what": "the vault pane in Chromium: the reading account carried between two devices through the mock vault, and a third opened with the recovery code",
+   "lines": 159,
+   "checks": 28
+  },
+  {
+   "path": "admin/build/test_search.mjs",
+   "what": "search: the index and the ranking in Node, the page in Chromium",
+   "lines": 148,
+   "checks": 37
+  },
+  {
+   "path": "admin/build/test_ask.mjs",
+   "what": "ask: the passages and the messages in Node; no model, the reader's key (openrouter.ai answered by a route) and the built-in model (faked) in Chromium",
+   "lines": 175,
+   "checks": 32
+  },
+  {
+   "path": "admin/build/test_inbox.mjs",
+   "what": "the inbox: the link, the envelope, the refusals in Node; a browser with a passkey and one without, the QR code decoded, the drain and a new link, in Chromium against the mock with the append routes",
+   "lines": 236,
+   "checks": 46
+  },
+  {
+   "path": "admin/build/test_notes.mjs",
+   "what": "the feedback loop in Chromium: notes on an article and at a wire story, carried by the vault, sent to the lane, read by the sgit CLI and lane.py with the read key alone, brought into a second device",
+   "lines": 330,
+   "checks": 77
+  },
+  {
+   "path": "admin/build/vault-mock.mjs",
+   "what": "the mock of the vault API the two vault tests run against",
+   "lines": 207,
+   "checks": 0
+  }
+ ],
+ "ci_runs": [
+  "admin/build/test_meter.mjs",
+  "admin/build/test_lists.mjs",
+  "admin/build/test_review.mjs",
+  "admin/build/test_passkey.mjs",
+  "admin/build/test_wire.mjs",
+  "admin/build/test_vault.mjs",
+  "admin/build/test_sync.mjs",
+  "admin/build/test_pane.mjs",
+  "admin/build/test_search.mjs",
+  "admin/build/test_ask.mjs",
+  "admin/build/test_inbox.mjs",
+  "admin/build/test_notes.mjs"
+ ],
+ "loader": {
+  "lines": 17,
+  "sha256": "f114004ba2928d82754ef83afff66b889bed92db083064323e78440d488e1e91",
+  "pages_that_eval": 463
+ },
+ "frozen": [
+  {
+   "path": "assets/components/sg-meter/v1/v1.0/v1.0.0/sg-meter-core.js",
+   "lines": 266,
+   "sha256": "e7440dc3820a0180f80aa4f1722b7f3ede1dc760f31227ca32ea40283400a987"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.0/v1.0.0/sg-meter.css",
+   "lines": 62,
+   "sha256": "b0aef1442f4f4edbb836173070777d5b8e84528fa0980a8b73f30423a9aa1d0c"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.0/v1.0.0/sg-meter.js",
+   "lines": 307,
+   "sha256": "9ea95731fc2c15d53abffc00402682b5924bf0d017cac252a1626892c30b6787"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.0/v1.0.0/sg-meter.tpl",
+   "lines": 1,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.1/v1.1.0/sg-meter-core.js",
+   "lines": 385,
+   "sha256": "867db221b46ad540cea28b596e07272e2d4667195dac19daa8fd3bafa22946b6"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.1/v1.1.0/sg-meter.css",
+   "lines": 124,
+   "sha256": "051165ca8ec4c737737caee1c612f8f49f13b7af3e804b8f0bee3b1b8131d865"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.1/v1.1.0/sg-meter.js",
+   "lines": 549,
+   "sha256": "eb880df24888a900ef5de10c71e425e98525e604a6f91c01285ae44499252891"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.1/v1.1.0/sg-meter.tpl",
+   "lines": 1,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.2/v1.2.0/sg-meter-core.js",
+   "lines": 433,
+   "sha256": "541d9873f8bf52699e03fa66922ea42cc98b20c258f3bd790e172cf89a2575b8"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.2/v1.2.0/sg-meter.css",
+   "lines": 137,
+   "sha256": "9cca4711996312e1fd8426d42897b75437277c5210bd956f2a8306ad508c2437"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.2/v1.2.0/sg-meter.js",
+   "lines": 683,
+   "sha256": "38303a50cbdeb142217fb369e41cd6ebb1e0e9f49fa7aab2c10b34267bebb106"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.2/v1.2.0/sg-meter.tpl",
+   "lines": 1,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.0/sg-meter-core.js",
+   "lines": 481,
+   "sha256": "34b32beef6b6f781a8bc07b14f1d677c148c1d632be0a2de60eff2ee2382f568"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.0/sg-meter.css",
+   "lines": 175,
+   "sha256": "b56618dbfeee38047efba9d66289ebea40b496e9771abf50a215ceb4f2368297"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.0/sg-meter.js",
+   "lines": 714,
+   "sha256": "f26b2fec6f409f34bf91a341cda9acd424478f7dd0a790a4070c3d753b2eb350"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.0/sg-meter.tpl",
+   "lines": 1,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.1/sg-meter-core.js",
+   "lines": 481,
+   "sha256": "61c636b881ca7664afe9dda5fd13295f17691928e22664d8480efe55ad4f3d73"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.1/sg-meter.css",
+   "lines": 178,
+   "sha256": "192b7813a223f2e457381e9e97feea8921fb961a18c17eeede7284337f684859"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.1/sg-meter.js",
+   "lines": 717,
+   "sha256": "1f3b6f1bbc36cd66e1b2d3a49087a5b37e993a89933adfda648f1c997257bd38"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.1/sg-meter.tpl",
+   "lines": 1,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  }
+ ],
+ "views_on_pages": {
+  "account": 1,
+  "landing": 6,
+  "newsroom": 1,
+  "page": 606,
+  "personas": 1,
+  "share": 1,
+  "topped-up": 1,
+  "topup": 1
+ },
+ "controls": [
+  {
+   "view": "balance",
+   "where": "every page (the nav chip)",
+   "controls": [
+    {
+     "kind": "link",
+     "label": "the balance",
+     "does": "opens the account page"
+    }
+   ]
+  },
+  {
+   "view": "page",
+   "where": "every charged page, at the foot",
+   "controls": [
+    {
+     "kind": "link",
+     "label": "How paying for reading works here",
+     "does": "opens links.how"
+    },
+    {
+     "kind": "link",
+     "label": "Balance",
+     "does": "opens the account page"
+    },
+    {
+     "kind": "button",
+     "label": "+ Add to your reading list / ✓ In your reading list",
+     "does": "meter.curate(slug, 'on' | '')"
+    },
+    {
+     "kind": "5 buttons × 3",
+     "label": "How useful was this? · More like this? · Level of detail",
+     "does": "meter.rate(field, 1–5); usefulness re-prices the page"
+    },
+    {
+     "kind": "link",
+     "label": "Your newsroom",
+     "does": "opens links2.newsroom"
+    },
+    {
+     "kind": "button",
+     "label": "Something wrong with this page? Don’t charge me",
+     "does": "shows the four reasons"
+    },
+    {
+     "kind": "4 buttons",
+     "label": "the reasons",
+     "does": "meter.decline(reason): refunds the page"
+    }
+   ]
+  },
+  {
+   "view": "account",
+   "where": "account/index.html",
+   "controls": [
+    {
+     "kind": "link",
+     "label": "Top up £5.00",
+     "does": "navigates to the Stripe payment link (topup.link)"
+    },
+    {
+     "kind": "button",
+     "label": "Export as JSON",
+     "does": "downloads reading-account.json (the whole state)"
+    },
+    {
+     "kind": "links",
+     "label": "Your newsroom · Your personas · Send us your reading",
+     "does": "own pages"
+    },
+    {
+     "kind": "links",
+     "label": "one per history row",
+     "does": "the page read, from the log's own path"
+    },
+    {
+     "kind": "file input",
+     "label": "Restore from an export…",
+     "does": "confirm(), then meter.restore(text)"
+    }
+   ]
+  },
+  {
+   "view": "topup",
+   "where": "account/top-up.html",
+   "controls": [
+    {
+     "kind": "link",
+     "label": "Pay £5.00",
+     "does": "navigates to the Stripe payment link; with no link, the simulated cart"
+    }
+   ]
+  },
+  {
+   "view": "topped-up",
+   "where": "account/topped-up.html",
+   "controls": [
+    {
+     "kind": "on load",
+     "label": "?session_id=…",
+     "does": "meter.credit(amount, 'link', id), once per id, unverified"
+    },
+    {
+     "kind": "link",
+     "label": "Your account",
+     "does": ""
+    }
+   ]
+  },
+  {
+   "view": "picks",
+   "where": "the front page",
+   "controls": [
+    {
+     "kind": "links",
+     "label": "one per pick",
+     "does": "opens the article"
+    }
+   ]
+  },
+  {
+   "view": "newsroom",
+   "where": "account/newsroom.html, and under a persona banner",
+   "controls": [
+    {
+     "kind": "buttons",
+     "label": "the persona chips",
+     "does": "meter.setActive(id)"
+    },
+    {
+     "kind": "link",
+     "label": "+ Add or manage personas",
+     "does": "the personas page"
+    },
+    {
+     "kind": "link",
+     "label": "A newsroom designed for you",
+     "does": "the share page (not when compact)"
+    },
+    {
+     "kind": "2 buttons per pick",
+     "label": "Add to reading list · Not for this persona",
+     "does": "meter.curate(slug, 'on' | 'off', active)"
+    },
+    {
+     "kind": "button per kept / put-out article",
+     "label": "remove · bring back",
+     "does": "meter.curate(slug, '')"
+    },
+    {
+     "kind": "buttons",
+     "label": "Add this persona (per preset) · Add a blank persona",
+     "does": "meter.addPersona(preset | '')"
+    }
+   ]
+  },
+  {
+   "view": "personas",
+   "where": "account/personas.html",
+   "controls": [
+    {
+     "kind": "input + button per persona",
+     "label": "name · Rename",
+     "does": "meter.renamePersona(id, name)"
+    },
+    {
+     "kind": "button per persona",
+     "label": "Make active",
+     "does": "meter.setActive(id)"
+    },
+    {
+     "kind": "link per persona",
+     "label": "Open its newsroom",
+     "does": "setActive, then the newsroom page"
+    },
+    {
+     "kind": "button per persona",
+     "label": "Remove",
+     "does": "confirm(), then meter.removePersona(id)"
+    },
+    {
+     "kind": "buttons",
+     "label": "the preset cards",
+     "does": "meter.addPersona"
+    }
+   ]
+  },
+  {
+   "view": "graph",
+   "where": "account and newsroom pages",
+   "controls": [
+    {
+     "kind": "links",
+     "label": "one per article dot",
+     "does": "opens the article"
+    }
+   ]
+  },
+  {
+   "view": "link",
+   "where": "pages that carry it",
+   "controls": [
+    {
+     "kind": "link",
+     "label": "Your newsroom",
+     "does": ""
+    }
+   ]
+  },
+  {
+   "view": "landing",
+   "where": "persona/index.html and persona/<id>/",
+   "controls": [
+    {
+     "kind": "on load",
+     "label": "the persona named by the attribute or the #fragment",
+     "does": "meter.visit(id): added as a visitor, made active, nothing charged"
+    },
+    {
+     "kind": "buttons",
+     "label": "Keep this persona · Remove it",
+     "does": "meter.keepPersona(id) · meter.removePersona(id)"
+    },
+    {
+     "kind": "button",
+     "label": "Read as <name> again",
+     "does": "meter.visit(id) after a removal"
+    },
+    {
+     "kind": "links",
+     "label": "Your personas · Other personas",
+     "does": "own pages"
+    },
+    {
+     "kind": "per preset (the picker)",
+     "label": "Read as this persona · Copy link",
+     "does": "opens persona/<id>/ · clipboard"
+    }
+   ]
+  },
+  {
+   "view": "share",
+   "where": "account/share.html",
+   "controls": [
+    {
+     "kind": "button",
+     "label": "Copy to clipboard · Copy it instead",
+     "does": "clipboard; meter.noteShared('copied')"
+    },
+    {
+     "kind": "inputs",
+     "label": "name · email (required) · note · consent · newsletter · a hidden honeypot",
+     "does": "the form; nothing is sent without consent"
+    },
+    {
+     "kind": "submit",
+     "label": "Send it, encrypted",
+     "does": "fetch the contact file, verify the key's fingerprint, encrypt an .eml, POST to the lane"
+    }
+   ]
+  },
+  {
+   "view": "reading list (for/)",
+   "where": "for/index.html",
+   "controls": [
+    {
+     "kind": "on load",
+     "label": "the fields after the #",
+     "does": "parse(); visitList(): a visitor persona named for the two people, its articles as the reading list"
+    },
+    {
+     "kind": "link",
+     "label": "Start reading",
+     "does": "the first article"
+    },
+    {
+     "kind": "link",
+     "label": "Reply to <sender>",
+     "does": "mailto:, only when the link carries e="
+    },
+    {
+     "kind": "buttons",
+     "label": "Keep this list as a persona · Remove it · Add it again",
+     "does": "meter.keepPersona · meter.removePersona · visitList"
+    },
+    {
+     "kind": "links",
+     "label": "every article, every persona or collection to follow",
+     "does": "own pages"
+    }
+   ]
+  },
+  {
+   "view": "make a reading list",
+   "where": "for/make.html",
+   "controls": [
+    {
+     "kind": "inputs",
+     "label": "From · To · a note · your email",
+     "does": "validated as the recipient's page validates them"
+    },
+    {
+     "kind": "search and two selects",
+     "label": "title, topic or number · topic · persona",
+     "does": "filters the article list"
+    },
+    {
+     "kind": "2 buttons per article",
+     "label": "Read · Look",
+     "does": "puts the article in a group"
+    },
+    {
+     "kind": "per chosen article",
+     "label": "↑ · ↓ · To look / To read · Remove, and drag",
+     "does": "orders the list"
+    },
+    {
+     "kind": "checkboxes",
+     "label": "personas and collections to follow",
+     "does": ""
+    },
+    {
+     "kind": "button",
+     "label": "Copy link",
+     "does": "clipboard"
+    },
+    {
+     "kind": "link",
+     "label": "Open as the recipient",
+     "does": "for/#… in a new tab"
+    },
+    {
+     "kind": "input + button",
+     "label": "Edit an existing link · Load",
+     "does": "parse() into the form"
+    },
+    {
+     "kind": "button",
+     "label": "Clear the list",
+     "does": ""
+    }
+   ]
+  },
+  {
+   "view": "subscribe form",
+   "where": "subscribe/index.html",
+   "controls": [
+    {
+     "kind": "inputs",
+     "label": "email · name · consent · a hidden honeypot",
+     "does": ""
+    },
+    {
+     "kind": "submit",
+     "label": "Subscribe",
+     "does": "fetch the contact file, verify the fingerprint, encrypt an .eml, POST to the lane; on failure, a mailto: link with the same text"
+    }
+   ]
+  },
+  {
+   "view": "the study page",
+   "where": "demos/vaults/newsroom-synthetic-users/",
+   "controls": [
+    {
+     "kind": "on load",
+     "label": "two iframes from dev.vault.sgraph.ai",
+     "does": "the published read key is handed over postMessage; the vault is decrypted in the frame"
+    }
+   ]
+  },
+  {
+   "view": "article foot",
+   "where": "every article",
+   "controls": [
+    {
+     "kind": "link",
+     "label": "start a reading list with it",
+     "does": "for/make.html#r=<number>"
+    }
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "input": "Element attributes",
+   "what": "view · kind · date · topics · title · quiet · count · persona · compact",
+   "who": "the page's own markup (trusted: it is this site's build)",
+   "where": "sg-meter.js"
+  },
+  {
+   "input": "The page's config",
+   "what": "<script type=\"application/json\" id=\"sg-meter-config\">",
+   "who": "this site's build, written once per page; every key has a default",
+   "where": "sg-meter-core.js _config()"
+  },
+  {
+   "input": "The address: query",
+   "what": "?session_id= on account/topped-up.html",
+   "who": "whoever made the link; any value is credited once (accepted, documented)",
+   "where": "_toppedUp()"
+  },
+  {
+   "input": "The address: fragment",
+   "what": "#<persona id> on persona/; #from,to,r,s,f,n,e on for/ and for/make.html",
+   "who": "whoever made the link; validated field by field, the rest dropped and listed",
+   "where": "_named(), reading-list.js parse()"
+  },
+  {
+   "input": "The address: path",
+   "what": "location.pathname",
+   "who": "the charge is keyed on it; the slug is taken from it; the share records it",
+   "where": "open(), _page(), _send()"
+  },
+  {
+   "input": "Local storage",
+   "what": "sgit.meter.v1 (the state), sgit.meter.v1.seen (session: the charge per path)",
+   "who": "this browser, written by the meter; also by the reader, who may edit it (accepted)",
+   "where": "_read(), _seen()"
+  },
+  {
+   "input": "A file",
+   "what": "Restore from an export…",
+   "who": "whoever made the file; checked for balance:number and log:array only",
+   "where": "restore()"
+  },
+  {
+   "input": "Forms",
+   "what": "the share form, the subscribe form, the make page",
+   "who": "the reader; email checked by a loose pattern, names by a strict one",
+   "where": "_send(), subscribe.js, make.js"
+  },
+  {
+   "input": "The wires' vaults",
+   "what": "data/bundle.json (with wire, map or stack when the vault has them), data/deliveries.json, data/releases.json, docs/*.md, decrypted in the browser; one vault per wire",
+   "who": "whoever holds the vault's write key (the wire's agents); drawn as text, links only from http(s) values, markdown rendered by an escaping renderer; the vault's own HTML is not used",
+   "where": "wire/wire.js"
+  },
+  {
+   "input": "Own-origin data",
+   "what": "articles/graphs.json · articles/ids.json · .well-known/sgit-subscribe.json · sg-meter.tpl · sg-meter.css",
+   "who": "this site's build; the contact file's key is checked against its fingerprint",
+   "where": "feed(), openList(), _send()"
+  },
+  {
+   "input": "postMessage",
+   "what": "replies from the dev.vault.sgraph.ai frames",
+   "who": "origin-checked; drives a status line only",
+   "where": "vault-ui-embed.js"
+  }
+ ],
+ "state": [
+  {
+   "field": "v",
+   "holds": "3"
+  },
+  {
+   "field": "created",
+   "holds": "ISO time"
+  },
+  {
+   "field": "balance · spent · declined",
+   "holds": "pence, to 0.1p"
+  },
+  {
+   "field": "reads",
+   "holds": "pages opened"
+  },
+  {
+   "field": "paused",
+   "holds": "always false since v1.4.0"
+  },
+  {
+   "field": "log[]",
+   "holds": "≤ 500 entries: id, at, path, title, kind, topics, price, depth, cost, persona, autoKept?, rating{useful,more,detail,at}?, declined{reason,at,refunded}?"
+  },
+  {
+   "field": "topups[]",
+   "holds": "ref (≤ 40 chars), at, credit, source: link | simulated"
+  },
+  {
+   "field": "sessions[]",
+   "holds": "every payment reference credited, unbounded"
+  },
+  {
+   "field": "cart[]",
+   "holds": "the simulated cart (unused with a live link)"
+  },
+  {
+   "field": "active",
+   "holds": "the active persona's id"
+  },
+  {
+   "field": "personas[]",
+   "holds": "id, preset, name, created, on[], off[], visitor?, list? (a reading list's key), theme?"
+  },
+  {
+   "field": "shares[]",
+   "holds": "≤ 20: at, how, pages"
+  }
+ ],
+ "outputs": [
+  {
+   "channel": "GET, own origin",
+   "what": "every page, script, style, image and JSON",
+   "when": "whenever a page opens",
+   "who_sees": "GitHub Pages, which sees the request as any host does"
+  },
+  {
+   "channel": "POST https://dev.send.sgraph.ai/api/vault/append/write/y9j3nc60",
+   "what": "{append_token, payload}: an .eml encrypted in the browser to the lane's public key",
+   "when": "when the reader presses Send on the share page or Subscribe",
+   "who_sees": "the vault host; it sees ciphertext, a size and a time"
+  },
+  {
+   "channel": "Navigation to https://buy.stripe.com/…",
+   "what": "the reader leaves for Stripe's page and returns to /account/topped-up.html?session_id=…",
+   "when": "when the reader presses Top up / Pay",
+   "who_sees": "Stripe (card, email, name, postcode)"
+  },
+  {
+   "channel": "GET https://dev.send.sgraph.ai/api/vault/read/u9i9jp0l/…",
+   "what": "the ciphertext of the wire's vault: its head pointer, commit, tree and the files the page needs, decrypted in the browser with the published read key",
+   "when": "when a wire page opens, and when the reader asks for a new commit; the pointer at most every two minutes",
+   "who_sees": "the vault server; it sees the request and nothing of the reader"
+  },
+  {
+   "channel": "iframe https://dev.vault.sgraph.ai/?embed=1",
+   "what": "two frames; the published read key is posted to them",
+   "when": "on the study page only",
+   "who_sees": "the vault UI host"
+  },
+  {
+   "channel": "mailto:",
+   "what": "Reply to <sender> on a reading list; the subscribe fallback",
+   "when": "when pressed; the page sends nothing",
+   "who_sees": "the reader's mail client"
+  },
+  {
+   "channel": "A download",
+   "what": "reading-account.json: the whole state, payment references included",
+   "when": "Export as JSON",
+   "who_sees": "the reader's disk"
+  },
+  {
+   "channel": "The clipboard",
+   "what": "a link, or the share text",
+   "when": "Copy",
+   "who_sees": "the reader's clipboard"
+  },
+  {
+   "channel": "postMessage to the parent window",
+   "what": "{type:'sg-app-ready'} with targetOrigin *",
+   "when": "when a page is framed",
+   "who_sees": "whoever framed it"
+  }
+ ],
+ "contracts": [
+  {
+   "contract": "The meter config",
+   "shape": "storageKey, start, newDays, symbol, prices{article_new,article,issue,note,collection,page,free}, depth, minDepth, topup{amount,link}, packs, links{account,topup,how}, rating{price[5],more[5]}, autoKeep, picks{feed,base}, links2{newsroom,personas,share}, share{contact,form,site,max}, personas{presets[],names{}}, root",
+   "owner": "sg-meter-core.js DEFAULTS; written into every page by sgit.ai's build and re-pointed by the import"
+  },
+  {
+   "contract": "A charged page",
+   "shape": "<sg-meter view=\"page\" kind=\"article|issue|note|collection|page|free\" date=\"…\" topics=\"a b\" title=\"…\" [quiet]>: the price class comes from the page",
+   "owner": "sgit.ai's build for imported pages; page.py (kind=free, quiet) for this site's"
+  },
+  {
+   "contract": "A persona link",
+   "shape": "/persona/<id>/ and /persona/#<id>, id ∈ {founder, journalist, security, builder, board}",
+   "owner": "personas.py, persona/links.json"
+  },
+  {
+   "contract": "A reading list link",
+   "shape": "/for/#from=&to=&r=&s=&f=&n=&e=: names ≤ 40 chars of letters, spaces, hyphens, apostrophes; r,s article numbers, 1–50 in all; f persona ids or c:<collection>, ≤ 10; n ≤ 240 chars; e an address",
+   "owner": "for/reading-list.js LIMITS, parse(), build()"
+  },
+  {
+   "contract": "Article numbers",
+   "shape": "articles/ids.json: n and slug are the contract, assigned once in publication order, never changed or reused; every other field is display text",
+   "owner": "admin/build/ids.py; validate.js check 12"
+  },
+  {
+   "contract": "The return page",
+   "shape": "?session_id=<ref>: credited once per distinct value, never verified",
+   "owner": "_toppedUp(), credit()"
+  },
+  {
+   "contract": "The export",
+   "shape": "the state as JSON; restore accepts any file with balance:number and log:array",
+   "owner": "restore()"
+  },
+  {
+   "contract": "The share",
+   "shape": "a text summary then the same data as JSON {v:1, site, at, balance, spent, declined, reads, topups, active, personas, topics, cols, log}, as an .eml with X-SGit-Form, X-SGit-Reply-To, X-SGit-Name, X-SGit-Subscribe, X-SGit-Page",
+   "owner": "shareData(), _send()"
+  },
+  {
+   "contract": "The envelope",
+   "shape": "sgit hybrid envelope v2: {v:2, w, i, c} (RSA-OAEP-SHA256 wrapped AES-256-GCM key, iv, ciphertext), base64, then base64 again as the lane payload",
+   "owner": "envelope(), subscribe.js encrypt()"
+  },
+  {
+   "contract": "The contact file",
+   "shape": "sgit-subscribe/v1: recipient{address, fingerprint, encrypt}, inbox{vault, endpoint, encrypt_to, status, lane{name, append_token}}; the fingerprint is recomputed from the PEM before use",
+   "owner": ".well-known/sgit-subscribe.json"
+  },
+  {
+   "contract": "The wires' vaults",
+   "shape": "u9i9jp0l (the Industry Wire), eitf274v (OWASP), v202bla5 (AWS), p6twygul (Portugal) on dev.send.sgraph.ai, read keys published; data/bundle.json {beats, stories, sources, personas, brief; wire, map, stack when present}, data/deliveries.json, data/releases.json (wire-releases/v1, one entry per publish), docs/*.md; story fields, changes and status shown as written; everything in a vault is public, for ever",
+   "owner": "admin/build/wire-vault*.json; wire/how.html; each wire's agents own its content"
+  },
+  {
+   "contract": "Events",
+   "shape": "sg:meter.changed · charged · rated · declined · toppedup · reset · restored · persona · shared; sg-meter:error",
+   "owner": "sg-meter-core.js _emit(), sg-component.js failed()"
+  },
+  {
+   "contract": "A component",
+   "shape": "static jsUrl, get resourceName(), onReady(); a .tpl and a .css beside the .js; published at an immutable versioned path",
+   "owner": "sg-component.js"
+  },
+  {
+   "contract": "The import's rules",
+   "shape": "the meter path rewrite (v1.3.1 → v1.4.1), the top-up link, ten text rules, the article number line, the moved banner cut, the foot of every issue; each stops the import when its anchor moves",
+   "owner": "sync_newsroom.py items 9–15"
+  }
+ ],
+ "findings": [
+  {
+   "id": "R1",
+   "severity": "medium",
+   "area": "the meter's logic",
+   "finding": "Declining a page as “not relevant” leaves it in the persona's reading list. open() auto-keeps an article on first open; decline() refunds the charge but does not undo the auto-keep, so the article stays under “Its reading list” and profile() adds +5 for it while the decline subtracts 2: a page the reader rejected pulls its topics up.",
+   "evidence": "sg-meter-core.js open() [autoKeep], decline(); seen in a browser on 11 October",
+   "pinned_by": "test_review.mjs R1 (passes while the article stays in the list)",
+   "proposed": "decline() removes an autoKept entry from the active persona's on[]; a reader who added it by hand keeps it"
+  },
+  {
+   "id": "R2",
+   "severity": "low",
+   "area": "restore from a file",
+   "finding": "restore() checks that the file has a numeric balance and a log array and nothing else. A persona without on[] and off[] makes the personas and newsroom views throw and show nothing; a log entry's path is rendered as the history link's href as it is; a persona's theme is written into a style attribute as it is. The file is the reader's own, so the exposure is a file someone else sent them to restore.",
+   "evidence": "sg-meter-core.js restore(), _read(); sg-meter.js _account() history rows, _chip() style",
+   "pinned_by": "test_review.mjs R2 (the blank personas page); the href and theme cases are described, not pinned",
+   "proposed": "normalise on read: personas get arrays, paths must be same-origin paths, themes must be a hex colour; unknown fields dropped"
+  },
+  {
+   "id": "R3",
+   "severity": "low",
+   "area": "the return page",
+   "finding": "A malformed percent sequence in ?session_id= (for example %E0%A4%A) makes decodeURIComponent throw inside onReady, so the element fails with “did not load: URI malformed” instead of saying the reference is missing.",
+   "evidence": "sg-meter.js _toppedUp()",
+   "pinned_by": "test_review.mjs R3",
+   "proposed": "try/catch around the decode; treat an undecodable id as no id"
+  },
+  {
+   "id": "R4",
+   "severity": "medium",
+   "area": "data correctness",
+   "finding": "A reading share or a subscription sent from this site is labelled sgit.ai: the imported config has share.site = \"sgit.ai\" (so the text begins “My reading on sgit.ai”), subscribe.js writes From: site@sgit.ai, and the contact file says site: sgit.ai. The agent that drains the lane can tell the two sites apart only by the Sent from line.",
+   "evidence": "index.html sg-meter-config share.site; assets/subscribe.js eml(); .well-known/sgit-subscribe.json",
+   "pinned_by": "test_review.mjs R4",
+   "proposed": "a recorded meter rule for share.site (admin/build/newsroom-meter.json); subscribe.js and the contact file are verbatim imports and need this site's own copies, or a parameter, after the move"
+  },
+  {
+   "id": "R5",
+   "severity": "note",
+   "area": "operations",
+   "finding": "On the live site the lane for shares and subscriptions is on dev.send.sgraph.ai and the study page's vault frames come from dev.vault.sgraph.ai. Both hosts are named “dev”. Production reader data goes to them.",
+   "evidence": ".well-known/sgit-subscribe.json inbox.endpoint; assets/vault-ui-embed.js ORIGIN",
+   "pinned_by": "test_review.mjs R5 (records the hosts)",
+   "proposed": "a decision, not a code change: either these are the production hosts and say so, or the files point at production ones"
+  },
+  {
+   "id": "R6",
+   "severity": "low",
+   "area": "display",
+   "finding": "Money is kept to a tenth of a penny and shown to a penny. Balance and spent are each formatted on their own, so a half-penny state shows, from £5.00, a balance of £4.95 and £0.06 spent, which do not add up; the history shows 5.5p. A reader who checks the arithmetic finds a penny missing.",
+   "evidence": "sg-meter-core.js money(), r1(); seen with balance 494.5",
+   "pinned_by": "test_review.mjs R6",
+   "proposed": "one rounding rule for the pair (format spent as start − balance, or keep both to 0.1p on the account page)"
+  },
+  {
+   "id": "R7",
+   "severity": "question",
+   "area": "picks",
+   "finding": "picks() excludes every page in the log, whichever persona read it, while profile() is per persona. An article read as Morgan is never picked for Rowan.",
+   "evidence": "sg-meter-core.js picks()",
+   "pinned_by": "test_review.mjs R7 (records the behaviour)",
+   "proposed": "decide: per-persona exclusion, or keep and say so on the newsroom page"
+  },
+  {
+   "id": "R8",
+   "severity": "low",
+   "area": "robustness",
+   "finding": "feed() caches a failed fetch as null for the life of the page, so one transient failure leaves “The list of articles could not be loaded” on every view until a reload.",
+   "evidence": "sg-meter-core.js feed()",
+   "pinned_by": "test_review.mjs R8",
+   "proposed": "do not cache a failure; retry on the next call"
+  },
+  {
+   "id": "R9",
+   "severity": "medium",
+   "area": "the number contract",
+   "finding": "If sgit.ai renames an article (a new slug), ids.py marks the old number withdrawn and gives the article a new number. A reading list that named the old number then says the article is no longer published, although it is.",
+   "evidence": "admin/build/ids.py assign()",
+   "pinned_by": "described; a rename has not happened yet",
+   "proposed": "a renamed_to field on the old entry, followed by the list page; the gate requires it when a slug disappears and a new one appears in the same import"
+  },
+  {
+   "id": "R10",
+   "severity": "high for the move",
+   "area": "Content-Security-Policy",
+   "finding": "Every imported page loads assets/site.js, subscribe.js and shots.js by fetching the text and running it with (0, eval)(text) (the loader's bridge path), and the loader and the meter config are inline. A script-src policy without 'unsafe-eval' and without hashes breaks every page. frame-ancestors cannot be set in a meta tag at all, and GitHub Pages sets no headers, so framing (the Keep, Remove and Top up buttons under another site) is not prevented today.",
+   "evidence": "the loader IIFE on every imported page; subscribe/index.html",
+   "pinned_by": "test_review.mjs R10 (counts the pages that eval)",
+   "proposed": "load scripts with <script src> or import(); then a meta CSP for script-src and connect-src; frame-ancestors needs a host that sets headers"
+  },
+  {
+   "id": "R11",
+   "severity": "high per the brief",
+   "area": "the pipeline",
+   "finding": "The one workflow ran validate.js only; the browser tests (46 + 65 checks) never ran in CI.",
+   "evidence": ".github/workflows/deploy-pages.yml",
+   "pinned_by": "fixed in this release: a reader-tests job runs all three test files before the tag",
+   "proposed": "done; the move's pipeline adds WebKit and Firefox and a pre-production copy"
+  },
+  {
+   "id": "R12",
+   "severity": "note for the move",
+   "area": "two upstreams",
+   "finding": "The account pages, subscribe, the contact file and the component base are imported from sgit.ai on every sync and cannot be changed here except by a recorded rule, and verbatim files (scripts, JSON) cannot be changed by rule at all. R4 is the first consequence. The newsroom's meter is v1.4.0 while sgit.ai's is v1.3.1.",
+   "evidence": "sync_newsroom.py VERBATIM, MOVED_DIRS",
+   "pinned_by": "the brief's phase 1 removes it",
+   "proposed": "the move: both sites pin released files"
+  },
+  {
+   "id": "R13",
+   "severity": "note",
+   "area": "what leaves",
+   "finding": "The export includes the payment references (sessions, topups[].ref) that the share deliberately leaves out. A reader who sends their export instead of their share sends them.",
+   "evidence": "sg-meter.js _export(); shareData()",
+   "pinned_by": "described",
+   "proposed": "say so beside the button, or export without sessions"
+  },
+  {
+   "id": "R14",
+   "severity": "low",
+   "area": "bounds",
+   "finding": "sessions[] and topups[] grow without bound, and a payment reference is not checked for shape before it is stored.",
+   "evidence": "sg-meter-core.js credit()",
+   "pinned_by": "described",
+   "proposed": "cap both; keep references that look like cs_… only"
+  },
+  {
+   "id": "R15",
+   "severity": "low",
+   "area": "personas",
+   "finding": "persona(id) falls back to personas[0], which is “me” only when “me” is first; after a restore that puts another persona first, an unknown id resolves to that persona.",
+   "evidence": "sg-meter-core.js persona(), _read()",
+   "pinned_by": "described",
+   "proposed": "fall back to the persona with id me"
+  },
+  {
+   "id": "R16",
+   "severity": "process",
+   "area": "caching",
+   "finding": "Imported pages load the meter as sg-meter.js?v=<sgit.ai's release>, so the cache-buster never changes for a release of this site. That is fine while a published version is never edited in place, which is the rule; it is written here because v1.4.0 was edited in place while it was being built.",
+   "evidence": "the import's own_meter() keeps sgit.ai's ?v=",
+   "pinned_by": "described",
+   "proposed": "a change is a new version path, always"
+  },
+  {
+   "id": "R17",
+   "severity": "note",
+   "area": "reading lists",
+   "finding": "A list's persona is keyed by a 32-bit hash of the names and numbers, so two different lists can share one persona with probability about one in four billion per pair.",
+   "evidence": "for/reading-list.js listKey()",
+   "pinned_by": "described",
+   "proposed": "a longer hash, or the fragment itself as the key"
+  },
+  {
+   "id": "R18",
+   "severity": "note",
+   "area": "listeners",
+   "finding": "The landing view adds a window hashchange listener per element and never removes it, and re-renders on every meter change (the picker's “Copied” label resets).",
+   "evidence": "sg-meter.js _landing()",
+   "pinned_by": "described",
+   "proposed": "one listener, removed on disconnect"
+  }
+ ],
+ "accepted": [
+  {
+   "gap": "The return page credits any session id",
+   "why": "a static page cannot verify a payment; building the address by hand credits the reader's own screen",
+   "where": "meter/security.html"
+  },
+  {
+   "gap": "The reader can edit their own balance",
+   "why": "the state is in their storage; nothing is behind a wall",
+   "where": "meter/security.html, No server by design"
+  },
+  {
+   "gap": "The names in a reading list are whatever the link says",
+   "why": "there is no signature yet; a signed list is a later step on RFC 0001's keys",
+   "where": "for/index.html"
+  },
+  {
+   "gap": "A page is charged by the deepest point reached, and the reader card is at the foot",
+   "why": "reaching the card to rate a page is reading to the end",
+   "where": "going-live-with-the-reading-meter.html"
+  }
+ ]
+}

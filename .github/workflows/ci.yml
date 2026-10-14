@@ -46,6 +46,8 @@ jobs:
           diff -r /tmp/rb/a /tmp/rb/b && echo "reproducible"
       - name: The website in www/ is what site/build.py writes
         run: python3 site/build.py --check
+      - name: The website holds together (site/check.py)
+        run: python3 site/check.py
   tests:
     runs-on: ubuntu-latest
     timeout-minutes: 15
