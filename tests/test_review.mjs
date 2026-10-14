@@ -16,7 +16,7 @@ import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine } from './harness.mjs'
 const ROOT = SITE
 let failed = 0
 const pin = (id, still, what) => { console.log(`${still ? 'ok  ' : 'FAIL'} ${id}: ${what}${still ? '' : ' (the behaviour changed: fix the finding and this check together)'}`); if (!still) failed++ }
@@ -127,8 +127,10 @@ try {
     await pg.waitForFunction(() => { const e = document.querySelector('sg-meter[view=personas]'); return e && /^(ready|error)$/.test(e.getAttribute('data-state') || '') }, null, { timeout: 20000 }).catch(() => {})
     await wait(500)
     const r2 = await pg.evaluate(() => { const e = document.querySelector('sg-meter[view=personas]'); return { state: e.getAttribute('data-state'), text: e.shadowRoot.textContent.trim() } })
-    if (!(r2.state === 'ready' && r2.text === '')) console.log('R2 saw', JSON.stringify(r2).slice(0, 400))
-    pin('R2', r2.state === 'ready' && r2.text === '', 'a persona without on[] and off[] leaves the personas page blank')
+    // Chromium's behaviour, as the review recorded it. Firefox renders the page (seen in CI, 14 October): the finding differs
+    // by engine, so the pin holds Chromium to the recorded behaviour and reports what another engine does (issue 2).
+    if (engine === 'chromium') pin('R2', r2.state === 'ready' && r2.text === '', 'a persona without on[] and off[] leaves the personas page blank')
+    else console.log(`note R2 in ${engine}: state ${r2.state}, the personas page ${r2.text === '' ? 'is blank' : 'renders'} with a persona that has no arrays`)
 } finally {
     await browser.close()
     server.close()
