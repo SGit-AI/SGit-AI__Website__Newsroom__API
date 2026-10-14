@@ -42,4 +42,4 @@ An article number that never changes. A reading list that is a link. A persona t
 - The served files are frozen until phase 4 of [the brief](https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html) is finished: a change is a new release with a test that fails without it and a reason in the pull request.
 - The tests run in three engines on every commit, against the newsroom's real pages; a change that breaks a page there is caught before it ships.
 
-The brief that governs the work, and what changed when the move was done: [`briefs/`]({{github}}/tree/main/briefs) in the repository. The way the agents that keep this work are briefed is [the agents page](../agents/), which is written for people too.
+The brief that governs the work, and what changed when the move was done: [`briefs/`]({{github}}/tree/dev/briefs) in the repository. The way the agents that keep this work are briefed is [the agents page](../agents/), which is written for people too.

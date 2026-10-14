@@ -26,7 +26,7 @@
 <p class="crumb"><a href="../../index.html">Home</a> / <a href="../../how-to/">How-to</a> / Make a release</p>
 <p class="eyebrow">How-to, for maintainers</p>
 <h1 id="make-a-release">Make a release</h1>
-<blockquote>A release is a directory that is never changed after it is on <code>main</code>. The tree is always exactly the release the version file names, or the check fails.</blockquote>
+<blockquote>A release is a directory that is never changed after it is on <code>dev</code>, the default branch. The tree is always exactly the release the version file names, or the check fails.</blockquote>
 <h2 id="the-rules-while-the-files-are-frozen">The rules, while the files are frozen</h2>
 <p>Until phase 4 of <a href="https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html">the brief</a> is finished (the refactoring with every test passing, and the adversarial exercise), the served files change only as a new release, each change with a test that fails without it and a reason in the pull request. A fix to a finding is a deliberate change to the test that pinned it. A new reader feature is built here, as a new versioned file, never in the newsroom's tree.</p>
 <h2 id="1-change-and-test">1. Change, and test</h2>
@@ -40,7 +40,7 @@ python3 site/build.py               # the site: the release appears on /releases
 <h2 id="3-the-pull-request">3. The pull request</h2>
 <p>CI runs the syntax check, the manifest check, the build twice, the site check and the tests in three engines. A pull request needs one person and one agent reviewer; the agent's review is a required check. The description says what changed, which test fails without it, and why now.</p>
 <h2 id="4-merge-deploy-tag-check">4. Merge, deploy, tag, check</h2>
-<p>A push to <code>main</code> runs <code>deploy-pages.yml</code>: the checks again, a tag from the version file, the Pages deploy of <code>www/</code> and <code>releases/</code>, and then <code>tools/live_check.py</code>, which asks the live host for every file of the release and compares the hashes, retrying while Pages propagates. The release is live when that job is green, not before.</p>
+<p>A push to <code>dev</code> (the default branch, and the release branch) runs <code>deploy-pages.yml</code>: the checks again, a tag from the version file, the Pages deploy of <code>www/</code> and <code>releases/</code>, and then <code>tools/live_check.py</code>, which asks the live host for every file of the release and compares the hashes, retrying while Pages propagates. The release is live when that job is green, not before.</p>
 <h2 id="5-the-consumers">5. The consumers</h2>
 <p>Tell the newsroom (and sgit.ai, once it pins): <a href="../take-a-release/">taking a release</a>. The newsroom's release note names the API release it moved to.</p>
 <h2 id="what-never-happens">What never happens</h2>

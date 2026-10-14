@@ -8,7 +8,7 @@ agent: Making a release of the SGit Newsroom API: a change to a served file is a
 ---
 # Make a release
 
-> A release is a directory that is never changed after it is on `main`. The tree is always exactly the release the version file names, or the check fails.
+> A release is a directory that is never changed after it is on `dev`, the default branch. The tree is always exactly the release the version file names, or the check fails.
 
 ## The rules, while the files are frozen
 
@@ -35,7 +35,7 @@ CI runs the syntax check, the manifest check, the build twice, the site check an
 
 ## 4. Merge, deploy, tag, check
 
-A push to `main` runs `deploy-pages.yml`: the checks again, a tag from the version file, the Pages deploy of `www/` and `releases/`, and then `tools/live_check.py`, which asks the live host for every file of the release and compares the hashes, retrying while Pages propagates. The release is live when that job is green, not before.
+A push to `dev` (the default branch, and the release branch) runs `deploy-pages.yml`: the checks again, a tag from the version file, the Pages deploy of `www/` and `releases/`, and then `tools/live_check.py`, which asks the live host for every file of the release and compares the hashes, retrying while Pages propagates. The release is live when that job is green, not before.
 
 ## 5. The consumers
 

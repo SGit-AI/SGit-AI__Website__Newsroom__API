@@ -27,7 +27,7 @@ manifests, into `www/`, which is committed and which CI checks; the deploy publi
   `assets/search/`, `assets/vendor/sg-vault/`, `assets/vendor/qrcode-generator/`, `assets/subscribe.js`, `assets/newsroom-vault.js`, `assets/door.js`,
   `for/`, `wire/`, `passkey/`. `tools/served.json` is the list; `tools/version.json` the release and its date.
 - `releases/<release>/`: each release as published, with `manifest.json` (every path, bytes, SHA-256; which files
-  differ from the newsroom's bytes and why). Never edited after it is on `main`. `python3 tools/release.py cut`
+  differ from the newsroom's bytes and why). Never edited after it is on `dev`. `python3 tools/release.py cut`
   makes one from the tree; `check` recomputes every hash and fails when the tree is not the release it names;
   `site --out DIR` assembles the Pages site. `tools/live_check.py` asks the live host for every hash after a deploy.
 - `tests/`: the newsroom's reader tests, moved here. They serve a checkout of the newsroom (`NEWSROOM=<path>`, or
@@ -42,7 +42,7 @@ manifests, into `www/`, which is committed and which CI checks; the deploy publi
   v0.12.10; the original is the article
   [Go slow to go fast](https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html).
 - `.github/workflows/ci.yml`: every commit: syntax, the manifest, the build twice, the tests in three engines.
-  `deploy-pages.yml`: `main` is the release branch: check, tag, publish, then the live check.
+  `deploy-pages.yml`: `dev`, the default branch, is the release branch: check, tag, publish, then the live check.
 
 ## The move, in one paragraph
 

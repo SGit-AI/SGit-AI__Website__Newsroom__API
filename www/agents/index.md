@@ -18,9 +18,9 @@ The code a reader runs on newsroom.sgit.ai, released from this repository and se
 
 1. [`llms.txt`](../llms.txt): every page of this site with one line each; [`llms-full.txt`](../llms-full.txt) is the whole site in one fetch.
 2. [The current manifest](../{{release}}/manifest.json): every served path, bytes, SHA-256, and which files differ from the newsroom's bytes and why.
-3. [`briefs/`]({{github}}/tree/main/briefs): the plan, refreshed at newsroom v0.12.10, with the addendum written when the move was done. The original is [Go slow to go fast](https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html).
-4. [`map/before/`]({{github}}/tree/main/map/before): the map of everything a reader runs, as it was before the move; [the review](../review/) is read from it.
-5. [`tests/`]({{github}}/tree/main/tests): what is proved, and how the harness works.
+3. [`briefs/`]({{github}}/tree/dev/briefs): the plan, refreshed at newsroom v0.12.10, with the addendum written when the move was done. The original is [Go slow to go fast](https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html).
+4. [`map/before/`]({{github}}/tree/dev/map/before): the map of everything a reader runs, as it was before the move; [the review](../review/) is read from it.
+5. [`tests/`]({{github}}/tree/dev/tests): what is proved, and how the harness works.
 
 ## The rules
 

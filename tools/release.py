@@ -11,7 +11,7 @@ What is served is the list in tools/served.json: the files the newsroom's reader
 is a hash). A release is tools/version.json (release, date: both from the file, never from the clock, so a build
 is the same bytes twice). The served URL of a file is https://api.newsroom.sgit.ai/<release>/<path>.
 
-A release directory, once on main, is never changed (finding R16: a change is a new version path, always). `check`
+A release directory, once on dev (the default and release branch), is never changed (finding R16: a change is a new version path, always). `check`
 recomputes every hash in every manifest, and fails when the tree differs from the release that tools/version.json
 names: bump the version and cut again. The consuming sites pin a release and copy its manifest; their gates check
 each file they load is in it, and a release ends by asking the live host for the hash of every file.

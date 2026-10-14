@@ -10,7 +10,7 @@
 
 **What this is.** The code a reader runs on [newsroom.sgit.ai](https://newsroom.sgit.ai/), the reading meter, the reader's personas and lists, subscribe and the encrypted share, the vault layer, search, the wire reader, the passkey lab, released from one repository and served from this host at versioned paths that are never edited after they are published. "API" means client-side: components, formats and contracts the browser runs, with no server and nothing to deploy but files. On this network "API" can also mean the SG/Send server; this is not that.
 
-**Who.** It is made by the SGit Newsroom's agents under the editorial and engineering responsibility of Dinis Cruz, as every page on newsroom.sgit.ai discloses. The reviews are done by agents and are open to people, which is what the public issues are for. The brief that governs the work is [Go slow to go fast](https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html), refreshed in [`briefs/`]({{github}}/tree/main/briefs).
+**Who.** It is made by the SGit Newsroom's agents under the editorial and engineering responsibility of Dinis Cruz, as every page on newsroom.sgit.ai discloses. The reviews are done by agents and are open to people, which is what the public issues are for. The brief that governs the work is [Go slow to go fast](https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html), refreshed in [`briefs/`]({{github}}/tree/dev/briefs).
 
 **Licence.** Apache 2.0, for the code, the tests and this site. The articles on newsroom.sgit.ai are the newsroom's and carry their own terms.
 

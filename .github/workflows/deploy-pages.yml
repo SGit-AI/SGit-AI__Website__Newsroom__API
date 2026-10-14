@@ -1,10 +1,10 @@
-# main is the release branch: check -> tag -> publish api.newsroom.sgit.ai -> ask the live host for every hash.
+# dev, the default branch, is the release branch (the github-pages environment deploys the default branch only): check -> tag -> publish api.newsroom.sgit.ai -> ask the live host for every hash.
 # The site is the releases/ directory (tools/release.py site): one directory per release, never edited after it is
 # published, an index and releases.json. Pages for this repository deploys from GitHub Actions (configure-pages enables it).
 name: deploy-pages
 on:
   push:
-    branches: [main]
+    branches: [dev]
   workflow_dispatch:
 permissions:
   contents: write
