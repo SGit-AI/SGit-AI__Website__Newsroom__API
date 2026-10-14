@@ -167,7 +167,7 @@ venv.bak/
 .ropeproject
 
 # mkdocs/Zensical documentation
-/site
+# /site  (mkdocs convention; site/ here is this website's source and is committed)
 
 # mypy
 .mypy_cache/
