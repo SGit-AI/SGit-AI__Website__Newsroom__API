@@ -1,0 +1,168 @@
+/* api.newsroom.sgit.ai: the five themes, the same ones as newsroom.sgit.ai (its assets/themes/themes.css, card 036).
+
+   Layers A (the tokens: one block per theme, every token in every block, and print as Newsprint) and C (the picker drawn
+   by themes.js) are the newsroom's file, unchanged. Layer B, the newsroom's override map for the stylesheet it imports from
+   sgit.ai, is left out: this site has one stylesheet of its own (site.css) and it reads the tokens directly.
+
+   THE RULE, the same as there: a stylesheet on this site names a colour through a token defined here in all five themes.
+   The terminal palette (--term-*) is the one deliberate exception: code blocks are dark in every theme. tests/test_site.mjs
+   is the gate: every token in every theme, no literal colour in site.css, 4.5:1 in every theme, and the picker's behaviour.
+
+   Loaded on every page by site/build.py after site.css, so its rules win; themes.js runs before first paint and sets
+   data-theme on <html>: absent or unknown is Newsprint, a system set to dark with nothing stored is Night. */
+
+/* ---------- A. the tokens ---------- */
+
+/* Newsprint: warm off-white and teal, the look since v0.6.0. The default. */
+:root,
+:root[data-theme="newsprint"] {
+  --bg:#faf9f5; --panel:#ffffff; --panel2:#f2f0e9; --line:#e5e1d5; --line2:#d5d0c2;
+  --fg:#1c1d21; --dim:#5c5f66; --dim2:#8a8d94;
+  --head:#101114; --text:#34363c; --code-ink:#24343f;
+  --accent:#0f766e; --accent-dk:#115e59; --on-accent:#ffffff;
+  --yellow:#a16207; --warm:#b45309; --red:#b91c1c;
+  --tint:rgba(15,118,110,.07); --tint-line:rgba(15,118,110,.35); --tint-solid:#e6f4ee;
+  --mute-bg:#eef1f4; --input-bg:#ffffff; --mark:#fff1c2;
+  --warn-bg:#fff7e6; --warn-line:#f1d7a2; --warn-ink:#5c3d06;
+  --danger-bg:#fdecec; --danger-ink:#8a0a0a;
+  --info-bg:#e8eefc; --info-ink:#1d4ed8;
+  --nav-bg:rgba(250,249,245,.92);
+  --shadow:0 1px 2px rgba(28,29,33,.05),0 4px 14px rgba(28,29,33,.04);
+  --shadow-pop:0 6px 24px rgba(28,29,33,.13);
+  --swatch:#0f766e;
+  color-scheme:light;
+}
+
+/* Night: the dark mode that was asked for. Teal stays the accent, lifted two steps so it
+   holds 4.5:1 on the dark page; links take the lighter teal, because --accent-dk is the
+   LINK colour on this site and "dark" is the wrong direction on a dark page. */
+:root[data-theme="night"] {
+  --bg:#0f1115; --panel:#161a21; --panel2:#1c2129; --line:#2a303a; --line2:#3a4150;
+  --fg:#e6e8ec; --dim:#a3a9b5; --dim2:#7c8391;
+  --head:#f4f5f7; --text:#c9cdd4; --code-ink:#d5d9e0;
+  --accent:#2dd4bf; --accent-dk:#5eead4; --on-accent:#06211d;
+  --yellow:#e3b341; --warm:#f0a35a; --red:#ff7b72;
+  --tint:rgba(45,212,191,.10); --tint-line:rgba(45,212,191,.38); --tint-solid:#163a36;
+  --mute-bg:#242a34; --input-bg:#0f1115; --mark:#4a3c12;
+  --warn-bg:#2f2612; --warn-line:#5c4a1c; --warn-ink:#f1d7a2;
+  --danger-bg:#3a1a1a; --danger-ink:#ffb4ac;
+  --info-bg:#1b2740; --info-ink:#9fb8ff;
+  --nav-bg:rgba(15,17,21,.9);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.35);
+  --shadow-pop:0 6px 24px rgba(0,0,0,.55);
+  --swatch:#2dd4bf;
+  color-scheme:dark;
+}
+
+/* Paper: warm cream and terracotta. Newsprint with the lights down and the ink browner,
+   for reading long pieces. */
+:root[data-theme="paper"] {
+  --bg:#f7f1e6; --panel:#fffcf6; --panel2:#efe6d6; --line:#e2d6c0; --line2:#cfc0a4;
+  --fg:#221c15; --dim:#655849; --dim2:#8d7f6b;
+  --head:#1d1811; --text:#3d3328; --code-ink:#3b2b22;
+  --accent:#a8442a; --accent-dk:#8e3620; --on-accent:#fff7f2;
+  --yellow:#8a6a18; --warm:#9a5b12; --red:#96271a;
+  --tint:rgba(168,68,42,.08); --tint-line:rgba(168,68,42,.38); --tint-solid:#f6e3da;
+  --mute-bg:#ece3d3; --input-bg:#fffcf6; --mark:#f8e3a8;
+  --warn-bg:#f3ead2; --warn-line:#d9c48e; --warn-ink:#5c4711;
+  --danger-bg:#f6dcd7; --danger-ink:#7a1d12;
+  --info-bg:#e4e6ee; --info-ink:#2b3f8f;
+  --nav-bg:rgba(247,241,230,.92);
+  --shadow:0 1px 2px rgba(70,52,30,.07),0 4px 14px rgba(70,52,30,.06);
+  --shadow-pop:0 6px 24px rgba(70,52,30,.16);
+  --swatch:#a8442a;
+  color-scheme:light;
+}
+
+/* Blueprint: white and electric blue. The cool, high-contrast one. */
+:root[data-theme="blueprint"] {
+  --bg:#ffffff; --panel:#ffffff; --panel2:#f1f3f7; --line:#dde1e9; --line2:#c4cad6;
+  --fg:#101318; --dim:#596270; --dim2:#828c9c;
+  --head:#0b0e13; --text:#2f3744; --code-ink:#1f2a44;
+  --accent:#1b4dff; --accent-dk:#1540d6; --on-accent:#ffffff;
+  --yellow:#946a00; --warm:#b45309; --red:#c81e1e;
+  --tint:rgba(27,77,255,.07); --tint-line:rgba(27,77,255,.35); --tint-solid:#e8edff;
+  --mute-bg:#edeff3; --input-bg:#ffffff; --mark:#fff1a8;
+  --warn-bg:#fdf3e7; --warn-line:#f0cfa0; --warn-ink:#7a3d06;
+  --danger-bg:#fde8e8; --danger-ink:#8f1414;
+  --info-bg:#e8edff; --info-ink:#1540d6;
+  --nav-bg:rgba(255,255,255,.92);
+  --shadow:0 1px 2px rgba(16,19,24,.05),0 4px 14px rgba(16,19,24,.05);
+  --shadow-pop:0 6px 24px rgba(16,19,24,.14);
+  --swatch:#1b4dff;
+  color-scheme:light;
+}
+
+/* Ember: dark and amber. The second dark theme, warm where Night is cool. Amber is light
+   enough that the ink ON it must be dark, which is what --on-accent exists for. */
+:root[data-theme="ember"] {
+  --bg:#16130f; --panel:#1d1914; --panel2:#262019; --line:#352d24; --line2:#4a3f33;
+  --fg:#f1e9dc; --dim:#b3a692; --dim2:#8a7c68;
+  --head:#f7f1e7; --text:#d2c6b3; --code-ink:#e6dbc8;
+  --accent:#e0a22b; --accent-dk:#f0bb56; --on-accent:#231705;
+  --yellow:#e5c565; --warm:#ffb070; --red:#ff8a78;
+  --tint:rgba(224,162,43,.10); --tint-line:rgba(224,162,43,.4); --tint-solid:#3a2d12;
+  --mute-bg:#2e2720; --input-bg:#16130f; --mark:#5a4512;
+  --warn-bg:#2d3a2b; --warn-line:#4d6a48; --warn-ink:#cde0c9;
+  --danger-bg:#3d1f1a; --danger-ink:#ffb9ad;
+  --info-bg:#2b2a40; --info-ink:#b9b8ff;
+  --nav-bg:rgba(22,19,15,.9);
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 4px 14px rgba(0,0,0,.4);
+  --shadow-pop:0 6px 24px rgba(0,0,0,.6);
+  --swatch:#e0a22b;
+  color-scheme:dark;
+}
+
+/* Print is paper: every theme prints as Newsprint, and the two stylesheets' print rules
+   (white page, no bar) apply as they did. The block repeats the Newsprint tokens because a
+   selector cannot be told to use another block's values. */
+@media print{
+  :root[data-theme]{
+    --bg:#faf9f5; --panel:#ffffff; --panel2:#f2f0e9; --line:#e5e1d5; --line2:#d5d0c2;
+    --fg:#1c1d21; --dim:#5c5f66; --dim2:#8a8d94;
+    --head:#101114; --text:#34363c; --code-ink:#24343f;
+    --accent:#0f766e; --accent-dk:#115e59; --on-accent:#ffffff;
+    --yellow:#a16207; --warm:#b45309; --red:#b91c1c;
+    --tint:rgba(15,118,110,.07); --tint-line:rgba(15,118,110,.35); --tint-solid:#e6f4ee;
+    --mute-bg:#eef1f4; --input-bg:#ffffff; --mark:#fff1c2;
+    --warn-bg:#fff7e6; --warn-line:#f1d7a2; --warn-ink:#5c3d06;
+    --danger-bg:#fdecec; --danger-ink:#8a0a0a;
+    --info-bg:#e8eefc; --info-ink:#1d4ed8;
+    --nav-bg:rgba(250,249,245,.92);
+    --shadow:none; --shadow-pop:none;
+    color-scheme:light;
+  }
+}
+
+
+/* ---------- C. the picker ----------
+   A pill like Search and Vault beside it: the current theme's swatch and its name. The
+   menu lists the five, each with its own swatch, name and a word on what it is. Drawn by
+   themes.js; without it there is no control and the page is Newsprint, which is fine. */
+.theme-pick{position:relative;flex:none}
+.theme-pick > button{display:inline-flex;align-items:center;gap:.45rem;font:inherit;font-size:.82rem;
+  padding:.3rem .7rem;border:1px solid var(--line2);border-radius:999px;background:var(--panel);
+  color:var(--fg);cursor:pointer;line-height:1.2;white-space:nowrap}
+.theme-pick > button:hover,.theme-pick > button[aria-expanded="true"]{border-color:var(--accent)}
+.theme-pick .sw{display:inline-block;width:.62rem;height:.62rem;border-radius:50%;flex:none;
+  background:var(--sw,var(--accent));box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.theme-pick .caret{font-size:.55em;opacity:.55}
+.theme-pick ul{position:absolute;top:100%;right:0;margin:.4rem 0 0;padding:.4rem;min-width:14.5rem;
+  list-style:none;z-index:70;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  box-shadow:var(--shadow-pop)}
+.theme-pick ul[hidden]{display:none}
+.theme-pick li button{display:flex;align-items:center;gap:.6rem;width:100%;font:inherit;font-size:.86rem;
+  text-align:left;padding:.42rem .6rem;border:0;border-radius:6px;background:none;color:var(--fg);cursor:pointer}
+.theme-pick li button:hover,.theme-pick li button:focus-visible{background:var(--panel2);outline:none}
+.theme-pick li button[aria-current="true"]{color:var(--accent-dk);font-weight:600}
+.theme-pick li button .n{display:block;font-size:.74rem;font-weight:400;color:var(--dim)}
+.theme-pick li button:focus-visible{box-shadow:inset 0 0 0 2px var(--accent)}
+/* each entry's swatch is ITS theme's accent, not the active one, so the list reads as five
+   colours. The five literals here are the --swatch tokens above, repeated because a token
+   from another theme cannot be read without switching to it. */
+.theme-pick .sw-newsprint{--sw:#0f766e} .theme-pick .sw-night{--sw:#2dd4bf}
+.theme-pick .sw-paper{--sw:#a8442a} .theme-pick .sw-blueprint{--sw:#1b4dff} .theme-pick .sw-ember{--sw:#e0a22b}
+@media (max-width:520px){
+  .theme-pick > button{padding:.3rem .5rem}
+  .theme-pick > button .name,.theme-pick > button .caret{display:none}
+}

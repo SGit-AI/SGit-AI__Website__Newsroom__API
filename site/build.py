@@ -86,19 +86,22 @@ def page_html(rel, meta, body, *, md_twin):
 <link rel="alternate" type="text/markdown" href="{md_twin}" title="This page as markdown">
 <meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
 <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}">
-<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="{up}assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{up}assets/site.css">
+<link rel="stylesheet" href="{up}assets/themes.css">
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "WebPage", "name": title, "description": description, "url": canonical,
                                                   "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": SITE + "/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"})}</script>
 </head>
 <body>
+<script src="{up}assets/themes.js"></script>
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
   <a class="brand" href="{up}index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
   <a class="ver" href="{up}releases/" title="This site is {esc(SITE_VERSION)}; the reader code it serves is release {esc(RELEASE)}">{esc(SITE_VERSION)}</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
-  <nav id="nav" class="nav">{nav}<a class="gh" href="{GITHUB}">GitHub</a></nav>
+  <nav id="nav" class="nav">{nav}</nav>
+  <div class="tools"><div class="theme-pick"></div><a class="gh" href="{GITHUB}" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
 </div></header>
 <main id="main" class="doc{wide}">
 <p class="crumb"><a href="{up}index.html">Home</a> / {trail}{esc(title) if not meta.get("no_crumb_title") else ""}</p>

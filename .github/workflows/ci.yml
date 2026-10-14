@@ -86,10 +86,10 @@ jobs:
         run: |
           set -euo pipefail
           if [ "$BROWSER" = chromium ]; then
-            TESTS="test_styles test_meter test_lists test_review test_passkey test_wire test_graphs test_vault test_sync test_pane test_notes test_inbox test_search test_ask"
+            TESTS="test_styles test_site test_meter test_lists test_review test_passkey test_wire test_graphs test_vault test_sync test_pane test_notes test_inbox test_search test_ask"
           else
             # the virtual authenticator (passkey, pane, notes, inbox) and the faked built-in model (ask) drive CDP: Chromium only
-            TESTS="test_styles test_meter test_lists test_review test_wire test_graphs test_sync test_search"
+            TESTS="test_styles test_site test_meter test_lists test_review test_wire test_graphs test_sync test_search"
           fi
           for t in $TESTS; do
             echo "== $t ($BROWSER)"

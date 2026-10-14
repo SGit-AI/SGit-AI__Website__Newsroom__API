@@ -2,7 +2,7 @@
 
 > The grammar of a reading list in a link, field by field, with the limits the parser enforces, how a list opens as a visitor persona, and what is deliberately not in it.
 
-*api.newsroom.sgit.ai · v0.2.1 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/reading-list-link/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.2 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/reading-list-link/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

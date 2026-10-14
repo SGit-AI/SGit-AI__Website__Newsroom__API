@@ -38,6 +38,7 @@ A test prints `ok` or `FAIL` per check and exits 1 on any failure. It prints `SK
 | Test | Covers | Engines |
 |---|---|---|
 | `test_styles` | the served stylesheets write no colour outside a theme token (the newsroom's rule, held here since the files moved) | Node |
+| `test_site` | this website: the five themes' tokens, no literal colour in its stylesheet, the picker and its memory, 4.5:1 in every theme, the bar at ten widths | all three |
 | `test_meter` | the meter in a browser: depth, rating, decline, reload, below zero, the return page, personas, picks, export and restore, the share form, the persona links, phone width | all three |
 | `test_lists` | the reading-list parser in Node and the two pages in a browser: malformed input, limits, the make page, copy, phone width | all three |
 | `test_review` | the review's findings, pinned as the behaviour is today (R1 to R11, R14, R15, R17) | all three; R2 is held in Chromium |

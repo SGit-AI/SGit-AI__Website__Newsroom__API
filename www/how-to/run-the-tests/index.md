@@ -2,7 +2,7 @@
 
 > The eleven test files, what each covers, how the harness serves a newsroom checkout and routes this host to the working tree, the three engines, which tests need Chromium, and how to run them against your own pages.
 
-*api.newsroom.sgit.ai · v0.2.1 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/run-the-tests/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.2 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/run-the-tests/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -38,6 +38,7 @@ A test prints `ok` or `FAIL` per check and exits 1 on any failure. It prints `SK
 | Test | Covers | Engines |
 |---|---|---|
 | `test_styles` | the served stylesheets write no colour outside a theme token (the newsroom's rule, held here since the files moved) | Node |
+| `test_site` | this website: the five themes' tokens, no literal colour in its stylesheet, the picker and its memory, 4.5:1 in every theme, the bar at ten widths | all three |
 | `test_meter` | the meter in a browser: depth, rating, decline, reload, below zero, the return page, personas, picks, export and restore, the share form, the persona links, phone width | all three |
 | `test_lists` | the reading-list parser in Node and the two pages in a browser: malformed input, limits, the make page, copy, phone width | all three |
 | `test_review` | the review's findings, pinned as the behaviour is today (R1 to R11, R14, R15, R17) | all three; R2 is held in Chromium |

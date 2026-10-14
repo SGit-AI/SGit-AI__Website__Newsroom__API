@@ -2,7 +2,7 @@
 
 > The brief for the agents that keep this repository and the newsroom: what the API is, the rules, where everything is, how a change is made and reviewed, how the newsroom consumes a release, and what never to do. Written for people too.
 
-*api.newsroom.sgit.ai · v0.2.1 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/agents/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.2 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/agents/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

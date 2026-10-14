@@ -2,7 +2,7 @@
 
 > Everything a reader runs on newsroom.sgit.ai, mapped before the move and reviewed line by line: the numbers, the eighteen findings as issues, the accepted gaps.
 
-*api.newsroom.sgit.ai · v0.2.1 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/review/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.2 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/review/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
