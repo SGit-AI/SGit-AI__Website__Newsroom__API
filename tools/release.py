@@ -120,37 +120,21 @@ def check():
 
 
 def site(out):
+    """The Pages site: the website (www/, written by site/build.py) at the root, and one directory per release beside it."""
     out.mkdir(parents=True, exist_ok=True)
+    www = ROOT / "www"
+    if www.exists():
+        shutil.copytree(www, out, dirs_exist_ok=True)
     rels = []
     for d in sorted(RELEASES.glob("v*"), key=lambda p: [int(x) for x in p.name[1:].split(".")]):
         m = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
         shutil.copytree(d, out / d.name, dirs_exist_ok=True)
         rels.append({"release": m["release"], "date": m["date"], "files": m["counts"]["files"], "bytes": m["counts"]["bytes"],
                      "manifest": f"{HOST}/{m['release']}/manifest.json"})
-    index = {"what": "The releases of the newsroom's reader code served from this host. A consuming site pins one; nothing here is "
-                     "edited after it is published.", "host": HOST, "current": VERSION["release"], "releases": rels}
-    (out / "releases.json").write_text(json.dumps(index, indent=1) + "\n", encoding="utf-8")
-    rows = "\n".join(f'<tr><td><a href="{r["release"]}/manifest.json">{r["release"]}</a></td><td>{r["date"]}</td>'
-                     f'<td>{r["files"]}</td><td>{r["bytes"]:,}</td></tr>' for r in reversed(rels))
-    (out / "index.html").write_text(f"""<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>api.newsroom.sgit.ai</title>
-<style>body{{font-family:ui-sans-serif,system-ui,sans-serif;max-width:48rem;margin:3rem auto;padding:0 1rem;color:#1c1d21;line-height:1.5}}
-table{{border-collapse:collapse}}td,th{{text-align:left;padding:.3rem .8rem .3rem 0;border-bottom:1px solid #ddd}}code{{font-size:.95em}}</style></head>
-<body>
-<h1>api.newsroom.sgit.ai</h1>
-<p>The code a reader runs on <a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a>: the reading meter, the reading lists,
-subscribe, the vault layer, search, the wire reader, the vendored vault library and the passkey lab. A client-side API:
-components, formats and contracts the browser runs, with no server and nothing to deploy but files. Served at
-<code>{HOST}/&lt;release&gt;/&lt;path&gt;</code>, at the paths the files had in the newsroom; a release is never edited after it is published.
-Source and brief: <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">SGit-AI__Website__Newsroom__API</a>.
-The map of what a reader does: <a href="https://newsroom.sgit.ai/newsroom-api/">newsroom.sgit.ai/newsroom-api/</a>.</p>
-<table><thead><tr><th>Release</th><th>Date</th><th>Files</th><th>Bytes</th></tr></thead><tbody>
-{rows}
-</tbody></table>
-<p>Machine-readable: <a href="releases.json">releases.json</a>.</p>
-</body></html>
-""", encoding="utf-8")
+    if not (out / "releases.json").exists():      # the website writes it; without the website, a plain index
+        index = {"what": "The releases of the newsroom's reader code served from this host. A consuming site pins one; nothing here is "
+                         "edited after it is published.", "host": HOST, "current": VERSION["release"], "releases": rels}
+        (out / "releases.json").write_text(json.dumps(index, indent=1) + "\n", encoding="utf-8")
     shutil.copyfile(ROOT / "CNAME", out / "CNAME")
     (out / ".nojekyll").write_text("", encoding="utf-8")
     return rels

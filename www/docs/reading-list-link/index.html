@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The reading-list link · api.newsroom.sgit.ai</title>
+<meta name="description" content="The grammar of a reading list in a link, field by field, with the limits the parser enforces, how a list opens as a visitor persona, and what is deliberately not in it.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/docs/reading-list-link/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="The reading-list link"><meta property="og:description" content="The grammar of a reading list in a link, field by field, with the limits the parser enforces, how a list opens as a visitor persona, and what is deliberately not in it."><meta property="og:url" content="https://api.newsroom.sgit.ai/docs/reading-list-link/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "The reading-list link", "description": "The grammar of a reading list in a link, field by field, with the limits the parser enforces, how a list opens as a visitor persona, and what is deliberately not in it.", "url": "https://api.newsroom.sgit.ai/docs/reading-list-link/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/" class=here>Docs</a><a href="../../how-to/">How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../../index.html">Home</a> / <a href="../../docs/">Docs</a> / The reading-list link</p>
+<p class="eyebrow">Reference</p>
+<h1 id="the-reading-list-link">The reading-list link</h1>
+<blockquote>A reading list is a link. Everything the recipient sees is in the part after the <code>#</code>, which never reaches a server; nothing is stored anywhere but the link itself.</blockquote>
+<pre class="code" data-lang="text"><button class="copy" type="button" aria-label="Copy">Copy</button><code>https://newsroom.sgit.ai/for/#from=Dinis&amp;to=Steve&amp;r=65,60,62&amp;s=66&amp;f=founder&amp;n=Start%20with%2065</code></pre>
+<div class="tablewrap"><table><thead><tr><th>Field</th><th>What it is</th><th>Rules</th></tr></thead><tbody><tr><td><code>from</code></td><td>who made the list</td><td>up to 40 characters of letters, spaces, hyphens and apostrophes; anything else is dropped and listed under <i>Left out</i></td></tr><tr><td><code>to</code></td><td>who it is for</td><td>the same rules</td></tr><tr><td><code>r</code></td><td>articles to read, by number, in the order given</td><td>numbers that exist in <code>articles/ids.json</code></td></tr><tr><td><code>s</code></td><td>articles worth a look</td><td>the same; <code>r</code> and <code>s</code> together hold 1 to 50</td></tr><tr><td><code>f</code></td><td>personas or collections to start from</td><td>persona ids, or <code>c:&lt;collection&gt;</code>, up to 10</td></tr><tr><td><code>n</code></td><td>a note from the sender</td><td>up to 240 characters, shown as text</td></tr><tr><td><code>e</code></td><td>the sender's address, for a Reply button</td><td>an address; the page sends nothing itself</td></tr></tbody></table></div>
+<h2 id="what-opens">What opens</h2>
+<p>The page reads the fragment, looks each number up in <code>articles/ids.json</code>, and shows the list with titles, dates and teasers from the feed. Opening it adds a visitor persona named for the list ("Steve's list, from Dinis") through the meter's public calls, so the reader can keep it as a persona of their own or remove it; nothing is charged for opening a list. A list's persona is keyed by a hash of the names and numbers (<a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues/17">finding R17</a> notes the hash is 32 bits).</p>
+<h2 id="the-make-page">The make page</h2>
+<p><code>/for/make.html</code> builds a link from a form: search the articles, add up to 50, move them up and down, name the sender and the reader, write the note, copy the link. It reads its own link back through the recipient's parser, so what the preview shows is what the link opens. An existing link loads into the form for editing.</p>
+<h2 id="what-is-deliberately-not-in-it">What is deliberately not in it</h2>
+<ul><li><b>A signature.</b> The names are whatever the link says; a signed list is a later step on the newsroom's keys, and the page says so.</li><li><b>A server.</b> No list is stored anywhere; a link is the whole list.</li><li><b>Paying for someone else's reading.</b> Designed, not built.</li></ul>
+<h2 id="for-a-site-that-adopts-it">For a site that adopts it</h2>
+<p>Publish <code>articles/ids.json</code> with a stable <code>n</code> for every article (the newsroom's <code>admin/build/ids.py</code> assigns numbers once, in publication order, and its gate refuses a change) and import <code>for/reading-list.js</code> and <code>for/make.js</code> from this host on two pages; the newsroom's <code>for/index.html</code> and <code>for/make.html</code> are the worked examples. The parser's limits are in <code>LIMITS</code> at the top of <code>reading-list.js</code>; the tests that hold them are <code>tests/test_lists.mjs</code>.</p>
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> The reading-list link contract: /for/#from=&amp;to=&amp;r=&amp;s=&amp;f=&amp;n=&amp;e=; names up to 40 characters of letters, spaces, hyphens and apostrophes; r and s are article numbers (1 to 50 in all); f persona ids or c:&lt;collection&gt; (up to 10); n up to 240 characters; e an address; malformed fields are dropped and listed; the list opens as a visitor persona; no signature yet. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../../for-publishers/">For publishers and editors</a><a href="../../for-evaluators/">For evaluators</a><a href="../../adopt/">Adopt it</a><a href="../../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

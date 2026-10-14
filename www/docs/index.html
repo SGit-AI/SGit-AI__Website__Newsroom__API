@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference · api.newsroom.sgit.ai</title>
+<meta name="description" content="The reference for the SGit Newsroom API: the contracts, the reader&#x27;s state and every input and output, the components and what each file is, the hosting model, pinning and the manifest, the reading-list link grammar, events.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/docs/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="Reference"><meta property="og:description" content="The reference for the SGit Newsroom API: the contracts, the reader&#x27;s state and every input and output, the components and what each file is, the hosting model, pinning and the manifest, the reading-list link grammar, events."><meta property="og:url" content="https://api.newsroom.sgit.ai/docs/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Reference", "description": "The reference for the SGit Newsroom API: the contracts, the reader's state and every input and output, the components and what each file is, the hosting model, pinning and the manifest, the reading-list link grammar, events.", "url": "https://api.newsroom.sgit.ai/docs/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../for-publishers/">For publishers</a><a href="../for-developers/">For developers</a><a href="../for-evaluators/">For evaluators</a><a href="../docs/" class=here>Docs</a><a href="../how-to/">How-to</a><a href="../review/">Review</a><a href="../releases/">Releases</a><a href="../articles/">Articles</a><a href="../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../index.html">Home</a> / Reference</p>
+
+<h1 id="reference">Reference</h1>
+<blockquote>Everything here is read from a record: the map of what a reader runs (<code>map/before/&lt;release&gt;/map.json</code>), the release manifests, <code>tools/served.json</code>. A number on these pages is not typed; a contract changes only with a release.</blockquote>
+<h2 id="pages">Pages</h2>
+<ul><li><a href="contracts/"><b>The contracts</b></a>: the 14 formats other sites, pages and agents program against: the meter config, a charged page, persona links, the reading-list link, article numbers, the return page, the export, the share, the envelope, the contact file, the wire's vault, events, a component, the import's rules.</li><li><a href="state/"><b>State, inputs and outputs</b></a>: what <code>localStorage</code> holds under <code>sgit.meter.v1</code>, everything that comes in and who controls it, and every channel by which anything leaves the browser.</li><li><a href="components/"><b>The components</b></a>: the served files by group, what each is for, how they are versioned, and which are frozen.</li><li><a href="hosting/"><b>The hosting model</b></a>: <code>https://api.newsroom.sgit.ai/&lt;release&gt;/&lt;path&gt;</code>, never edited in place; CORS; the page's origin and <code>data-root</code>; pinning, the manifest and rollback; what a Content-Security-Policy must name.</li><li><a href="reading-list-link/"><b>The reading-list link</b></a>: the grammar of <code>/for/#…</code>, field by field, with the limits the parser enforces.</li></ul>
+<h2 id="the-element-in-brief">The element, in brief</h2>
+<p><code>&lt;sg-meter view="…"&gt;</code> is one custom element with twelve views; the page's charge is <code>view="page"</code> with a <code>kind</code> (<code>article_new</code> is derived from <code>date</code> and <code>newDays</code>, the rest are <code>article</code>, <code>issue</code>, <code>note</code>, <code>collection</code>, <code>page</code>, <code>free</code>), <code>date</code>, <code>topics</code>, <code>title</code>, and <code>quiet</code> for a page that charges nothing. The config is a JSON block with id <code>sg-meter-config</code>; every key has a default. The views, the attributes and a full config are on <a href="../for-developers/">the developer quick start</a>.</p>
+<h2 id="events">Events</h2>
+<p>The meter emits DOM events on <code>document</code> that a page or another component can listen to: <code>sg:meter.changed</code>, <code>sg:meter.charged</code>, <code>sg:meter.rated</code>, <code>sg:meter.declined</code>, <code>sg:meter.toppedup</code>, <code>sg:meter.reset</code>, <code>sg:meter.restored</code>, <code>sg:meter.persona</code>, <code>sg:meter.shared</code>; and <code>sg-meter:error</code> when the element fails, with <code>why</code>.</p>
+<h2 id="versions">Versions</h2>
+<p>The meter's own line is <code>v1.4.0</code>, served at <code>assets/components/sg-meter/v1/v1.4/v1.4.0/</code>; <code>v1.0.0</code> to <code>v1.3.1</code> are frozen and still served, so a page that pinned one keeps working. The API's releases (<code>v0.1.0</code> today) wrap all of it under a versioned prefix. <a href="../releases/">Releases</a>.</p>
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> The reference index of the SGit Newsroom API. Sub-pages: contracts (14, from the map), state/inputs/outputs, components (the served files by group), hosting (versioned prefix, CORS, data-root, pinning, manifest), the reading-list link grammar. The element&#x27;s attributes and views are on the developer quick start. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../for-developers/">Quick start</a><a href="../docs/">Reference</a><a href="../how-to/">How-to guides</a><a href="../releases/">Releases</a><a href="../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../for-publishers/">For publishers and editors</a><a href="../for-evaluators/">For evaluators</a><a href="../adopt/">Adopt it</a><a href="../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../review/">The map and the review</a><a href="../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

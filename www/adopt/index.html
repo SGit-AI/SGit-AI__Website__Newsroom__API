@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adopt it · api.newsroom.sgit.ai</title>
+<meta name="description" content="Three ways in: put the meter on your own pages today; run a newsroom like newsroom.sgit.ai; pilot it with the people who built it. What you need, what you keep, what you give, and why the formats matter more than any one site.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/adopt/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="Adopt it"><meta property="og:description" content="Three ways in: put the meter on your own pages today; run a newsroom like newsroom.sgit.ai; pilot it with the people who built it. What you need, what you keep, what you give, and why the formats matter more than any one site."><meta property="og:url" content="https://api.newsroom.sgit.ai/adopt/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Adopt it", "description": "Three ways in: put the meter on your own pages today; run a newsroom like newsroom.sgit.ai; pilot it with the people who built it. What you need, what you keep, what you give, and why the formats matter more than any one site.", "url": "https://api.newsroom.sgit.ai/adopt/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../for-publishers/">For publishers</a><a href="../for-developers/">For developers</a><a href="../for-evaluators/">For evaluators</a><a href="../docs/">Docs</a><a href="../how-to/">How-to</a><a href="../review/">Review</a><a href="../releases/">Releases</a><a href="../articles/">Articles</a><a href="../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../index.html">Home</a> / Adopt it</p>
+<p class="eyebrow">Open source, by design</p>
+<h1 id="adopt-it">Adopt it</h1>
+<blockquote>Nothing here needs permission. The code is Apache 2.0, the releases are directories of files with a manifest of hashes, and the live site that runs it is the reference, not the product. The aim is other newsrooms running the same reader, so that the formats, the article number, the list link, the share, the envelope, mean the same thing everywhere.</blockquote>
+<h2 id="three-ways-in">Three ways in</h2>
+<p><b>1. Put the meter on your pages.</b> A static site, a JSON config, a custom element, a pinned import from this host. Readers get a credit and a balance, pay by depth and after reading, and rate. Your site publishes two small data files. <a href="../how-to/add-the-meter/">Ten lines, explained</a>. This is the route for a section of an existing site.</p>
+<p><b>2. Run a newsroom like this one.</b> The newsroom's repository is public: the pages, the build, the sync, the gate, the engineering board. Fork it, point it at this host, change the words. The newsroom's own <a href="https://newsroom.sgit.ai/replicate/">replicate</a> page says what is packaged and what is not yet (the article generator; payments beyond a Payment Link).</p>
+<p><b>3. Pilot it with us.</b> For a publisher who wants to try the whole thing, meter, personas, lists, the vault, on a part of their site with their own payment link and lane, and to learn with us from what readers do. Write to <a href="mailto:agent@riskmandate.ai">agent@riskmandate.ai</a> (an agent reads first; a person answers) or <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">open an issue</a>.</p>
+<h2 id="what-you-need">What you need</h2>
+<ul><li>A static host for your pages (any; the newsroom uses GitHub Pages).</li><li>The article feed (<code>articles/graphs.json</code>) and the numbers file (<code>articles/ids.json</code>), written by your build. <a href="../docs/contracts/">The contracts</a>.</li><li>A Stripe Payment Link for the top-up, returning to your account page. Until it is set the site says so and nothing is charged.</li><li>Optionally a vault on an SG/Send host for the lane: shares, subscriptions and notes arrive there, encrypted to your key. <a href="../how-to/subscribe-lane/">Setting up the lane</a>.</li><li>One line that pins the release you load, and a copy of its manifest. <a href="../how-to/take-a-release/">Taking a release</a>.</li></ul>
+<h2 id="what-you-keep-what-you-give">What you keep, what you give</h2>
+<p>You keep your readers' trust in a concrete form: their data never reaches you unless they send it, and when they do it arrives encrypted to a key only you hold. You keep the money, through your own payment link. You keep the site you have.</p>
+<p>You give nothing to us. There is no account, no key, no telemetry, no call home: the only requests to this host are for the code, and a release never changes. If you prefer, copy a release to your own host; the manifest tells you whether you have the same bytes.</p>
+<h2 id="why-the-formats-matter-more-than-the-site">Why the formats matter more than the site</h2>
+<p>An article number that never changes. A reading list that is a link. A persona that is a name, a theme and a list of what was kept. A share that is an encrypted envelope to a published key. These are the parts that are worth agreeing on across newsrooms, because then a reader's habits are theirs and not a site's. The <a href="../docs/contracts/">contracts</a> are small on purpose, and changing one is a release with a note, never an edit in place.</p>
+<h2 id="contributing">Contributing</h2>
+<ul><li>Issues are the work: every finding of the review is one, and every change starts as one.</li><li>A pull request is reviewed by a person and an agent before it merges; the agent's review is a required check.</li><li>The served files are frozen until phase 4 of <a href="https://newsroom.sgit.ai/articles/explorer-to-villager-newsroom.html">the brief</a> is finished: a change is a new release with a test that fails without it and a reason in the pull request.</li><li>The tests run in three engines on every commit, against the newsroom's real pages; a change that breaks a page there is caught before it ships.</li></ul>
+<p>The brief that governs the work, and what changed when the move was done: <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/tree/main/briefs"><code>briefs/</code></a> in the repository. The way the agents that keep this work are briefed is <a href="../agents/">the agents page</a>, which is written for people too.</p>
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> How an organisation adopts the SGit Newsroom API: three routes (use the meter on existing pages, run a whole newsroom from the open-source repository, pilot with the team), the prerequisites, what the adopter keeps and never gives, the shared formats, the licence and how to contribute. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../for-developers/">Quick start</a><a href="../docs/">Reference</a><a href="../how-to/">How-to guides</a><a href="../releases/">Releases</a><a href="../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../for-publishers/">For publishers and editors</a><a href="../for-evaluators/">For evaluators</a><a href="../adopt/">Adopt it</a><a href="../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../review/">The map and the review</a><a href="../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

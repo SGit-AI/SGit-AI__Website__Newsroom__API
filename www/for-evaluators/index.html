@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For evaluators · api.newsroom.sgit.ai</title>
+<meta name="description" content="The architecture, the trust boundaries, what leaves the browser, the review&#x27;s findings as public issues, the release manifest, the proof of the move, the pipeline, and how to verify every claim yourself.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/for-evaluators/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="For evaluators"><meta property="og:description" content="The architecture, the trust boundaries, what leaves the browser, the review&#x27;s findings as public issues, the release manifest, the proof of the move, the pipeline, and how to verify every claim yourself."><meta property="og:url" content="https://api.newsroom.sgit.ai/for-evaluators/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "For evaluators", "description": "The architecture, the trust boundaries, what leaves the browser, the review's findings as public issues, the release manifest, the proof of the move, the pipeline, and how to verify every claim yourself.", "url": "https://api.newsroom.sgit.ai/for-evaluators/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../for-publishers/">For publishers</a><a href="../for-developers/">For developers</a><a href="../for-evaluators/" class=here>For evaluators</a><a href="../docs/">Docs</a><a href="../how-to/">How-to</a><a href="../review/">Review</a><a href="../releases/">Releases</a><a href="../articles/">Articles</a><a href="../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../index.html">Home</a> / For evaluators</p>
+<p class="eyebrow">Security, architecture, procurement</p>
+<h1>For evaluators</h1>
+<p class="lead">This page is for the person who has to say yes or no. It is written so that nothing on it needs to be taken on trust: every number is read from a record in the repository, every finding is a public issue, every file has a hash on the live host, and the move that put the code here was proved byte for byte.</p>
+
+<h2>The architecture in four sentences</h2>
+<p>There is no server of ours: the reader code is static files on a host that cannot run code, and the pages that use it are static too. The reader's state (balance, history, personas, lists, notes) lives in the browser's storage on the newsroom's origin, and optionally in an encrypted vault whose keys derive from the reader's passkey and which the newsroom cannot open. Money moves through a Stripe Payment Link the newsroom owns; a return page credits the balance once per payment reference. Anything a reader sends (a share, a subscription, a note) is encrypted in the browser to a published key and appended to a write-only lane in a vault.</p>
+
+<h2>Trust boundaries</h2>
+<div class="tablewrap"><table><thead><tr><th>Party</th><th>Sees</th><th>Cannot</th></tr></thead><tbody>
+<tr><td>The reader's browser</td><td>everything: the state is theirs, readable, exportable, editable</td><td>be stopped from editing their own balance (accepted; see the security model)</td></tr>
+<tr><td>The newsroom (static host)</td><td>page requests, as any host does</td><td>see a balance, a persona, a list or a note; verify a payment</td></tr>
+<tr><td>This host (static files)</td><td>requests for the code</td><td>run code, set headers, see any reader data</td></tr>
+<tr><td>Stripe</td><td>card, email, name, postcode, at payment</td><td>see what was read</td></tr>
+<tr><td>The vault host (SG/Send)</td><td>ciphertext, sizes, times</td><td>read a share, a note or an account; the keys are the reader's and the newsroom's</td></tr>
+<tr><td>The newsroom's agent, with the lane's read key</td><td>shares, subscriptions and notes, decrypted</td><td>write to the lane or to a reader's vault</td></tr>
+</tbody></table></div>
+
+<h2>What leaves the browser</h2>
+<p>Nine channels, each listed with what, when and who sees it, on <a href="../docs/state/">state, inputs and outputs</a>, read from the map. In short: the page's own origin for files; <code>POST</code> of an encrypted envelope to the lane when the reader presses Send; navigation to Stripe when they press Top up; <code>GET</code> of ciphertext from the wire's vault; a <code>postMessage</code> ready signal if a page is framed; the clipboard and a download at the reader's command. The tests record the hosts a page contacted and fail on any other.</p>
+
+<h2>The accepted gaps, written down</h2>
+<p>The security model on the newsroom (<a href="https://newsroom.sgit.ai/meter/security.html">meter/security.html</a>) accepts four things a server would prevent, because there is no server by design: the return page credits any session id; the reader can edit their own balance; the names in a reading list are whatever the link says; a page is charged by the deepest point reached. The review's job was to prove those are the only gaps.</p>
+
+<h2>The review: 18 findings, each a public issue</h2>
+<p>Before the code moved here it was mapped and reviewed line by line, the way <a href="https://newsroom.sgit.ai/articles/code-review-as-a-fractal-semantic-graph.html">a fractal semantic graph</a> is read: every file, every control a reader can click, type or pay, every input and output, every contract, then every function the findings name. The findings are <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">issues 1 to 18</a> in the repository, labelled by phase, area and severity. Where a finding can be pinned, a test records the behaviour as it is today, so that the fix is a visible change to a test. The three a security evaluator will want first:</p>
+<ul>
+<li><b>No Content-Security-Policy on any page</b> (<a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues/10">R10</a>, high). The pages' loader runs fetched scripts through <code>eval</code>, and GitHub Pages sets no headers, so <code>frame-ancestors</code> cannot be set. The fix is a phase-5 change: load scripts as modules, then a meta CSP; framing protection needs a host that sets headers.</li>
+<li><b>Payment references unbounded and unchecked</b> (<a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues/14">R14</a>, low) and <b>restore() trusts a file's fields</b> (<a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues/2">R2</a>, low): the exposure is a file someone sent the reader to restore.</li>
+<li><b>Production reader data goes to hosts named dev</b> (<a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues/5">R5</a>): a naming decision for the operator, listed so that nobody is surprised.</li>
+</ul>
+<p><a href="../review/">The full table</a>, with the test that pins each and the proposed change.</p>
+
+<h2>Supply chain</h2>
+<ul>
+<li><b>Third-party scripts on the reader pages: none.</b> The build fails if one appears (the brief's rule).</li>
+<li><b>One vendored library</b>, the vault library that runs the SG/Send host, pinned at a version and never edited here; its twelve files are hashed in <code>VENDOR.md</code> and the test checks them.</li>
+<li><b>Every release is a manifest</b> of paths, bytes and SHA-256; the live host is checked against it after every deploy (<code>tools/live_check.py</code>), because <a href="https://newsroom.sgit.ai/articles/green-does-not-mean-live.html">green does not mean live</a>.</li>
+<li><b>Nothing is edited in place.</b> A release directory, once published, is frozen; CI recomputes every hash in every manifest on every commit.</li>
+</ul>
+
+<h2>The proof of the move</h2>
+<p>This code lived in the newsroom's repository until 13 October 2026. Moving it to a host of its own was done as a pure refactoring, and proved: of 63 files, 60 hash exactly as they did before, and the three that differ do so by the lines that located the site root from the script's own address, each recorded in the manifest with its before-hash and the reason; of 597 pages on the newsroom, 593 normalise to what they were. <a href="../review/proof/">The proof</a>, with the report it was written from.</p>
+
+<h2>The pipeline</h2>
+<p>Every commit: syntax, the manifest, a build that is the same bytes twice, and the tests in Chromium, WebKit and Firefox against the newsroom's real pages, in about four minutes. Every push to <code>main</code>: a tag, the Pages deploy, and the live check. A pull request needs a person and an agent reviewer. <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/actions">The runs</a>.</p>
+
+<h2>Verify it yourself</h2>
+<pre class="code" data-lang="sh"><button class="copy" type="button" aria-label="Copy">Copy</button><code># every file of the current release, with its hash, from the live host
+python3 - &lt;&lt;'END'
+import json, hashlib, urllib.request
+host = "https://api.newsroom.sgit.ai/v0.1.0/"
+m = json.load(urllib.request.urlopen(host + "manifest.json"))
+for f in m["files"]:
+    b = urllib.request.urlopen(host + f["path"]).read()
+    print("ok " if hashlib.sha256(b).hexdigest() == f["sha256"] else "BAD", f["path"])
+END
+
+# the same, from the repository's own tool
+git clone https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API &amp;&amp; cd SGit-AI__Website__Newsroom__API &amp;&amp; python3 tools/live_check.py</code></pre>
+<p>The newsroom's gate does the equivalent on its side: every page must load the reader code from the pinned release, by a URL that is in the manifest, and never by a relative path. Its source is <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom">public</a> too.</p>
+
+<h2>Licence and provenance</h2>
+<p>Apache 2.0. The code was written by the newsroom's agents under Dinis Cruz's editorial and engineering responsibility, as every page on newsroom.sgit.ai discloses; the review was done by agents and is open to people, which is what the issues are for. <a href="../about/">About, licence, contact</a>.</p>
+
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> The page for security, architecture and procurement evaluators of the SGit Newsroom API: no server of ours, state on the page&#x27;s origin, every output channel listed, the accepted gaps in the security model, the eighteen review findings as issues, the manifest of hashes per release, the hash proof of the move, the CI in three engines, the supply chain (one vendored library, no third-party scripts), and the commands to verify it. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../for-developers/">Quick start</a><a href="../docs/">Reference</a><a href="../how-to/">How-to guides</a><a href="../releases/">Releases</a><a href="../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../for-publishers/">For publishers and editors</a><a href="../for-evaluators/">For evaluators</a><a href="../adopt/">Adopt it</a><a href="../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../review/">The map and the review</a><a href="../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

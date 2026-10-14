@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://api.newsroom.sgit.ai/sitemap.xml

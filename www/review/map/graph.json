@@ -1,0 +1,1571 @@
+{
+ "what": "The map of what a reader runs, as a layered graph (site, pages, views, files, contracts, findings); drawn by assets/site.js on /review/map/.",
+ "release": "v0.12.10",
+ "layers": [
+  "the site",
+  "the pages",
+  "the views",
+  "the files",
+  "the contracts",
+  "the findings"
+ ],
+ "nodes": [
+  {
+   "id": "site",
+   "layer": 0,
+   "label": "newsroom.sgit.ai",
+   "kind": "site"
+  },
+  {
+   "id": "page:account/index.html",
+   "layer": 1,
+   "label": "account/index.html",
+   "kind": "page",
+   "what": "the reading account"
+  },
+  {
+   "id": "page:account/newsroom.html",
+   "layer": 1,
+   "label": "account/newsroom.html",
+   "kind": "page",
+   "what": "the reader's newsroom"
+  },
+  {
+   "id": "page:account/personas.html",
+   "layer": 1,
+   "label": "account/personas.html",
+   "kind": "page",
+   "what": "the personas"
+  },
+  {
+   "id": "page:account/share.html",
+   "layer": 1,
+   "label": "account/share.html",
+   "kind": "page",
+   "what": "send us your reading"
+  },
+  {
+   "id": "page:account/top-up.html",
+   "layer": 1,
+   "label": "account/top-up.html",
+   "kind": "page",
+   "what": "the top-up"
+  },
+  {
+   "id": "page:account/topped-up.html",
+   "layer": 1,
+   "label": "account/topped-up.html",
+   "kind": "page",
+   "what": "the page a payment returns to"
+  },
+  {
+   "id": "page:subscribe/index.html",
+   "layer": 1,
+   "label": "subscribe/index.html",
+   "kind": "page",
+   "what": "subscribe"
+  },
+  {
+   "id": "page:persona/index.html",
+   "layer": 1,
+   "label": "persona/index.html",
+   "kind": "page",
+   "what": "the persona picker"
+  },
+  {
+   "id": "page:persona/founder/index.html",
+   "layer": 1,
+   "label": "persona/founder/index.html",
+   "kind": "page",
+   "what": "a persona link"
+  },
+  {
+   "id": "page:persona/journalist/index.html",
+   "layer": 1,
+   "label": "persona/journalist/index.html",
+   "kind": "page",
+   "what": "a persona link"
+  },
+  {
+   "id": "page:persona/security/index.html",
+   "layer": 1,
+   "label": "persona/security/index.html",
+   "kind": "page",
+   "what": "a persona link"
+  },
+  {
+   "id": "page:persona/builder/index.html",
+   "layer": 1,
+   "label": "persona/builder/index.html",
+   "kind": "page",
+   "what": "a persona link"
+  },
+  {
+   "id": "page:persona/board/index.html",
+   "layer": 1,
+   "label": "persona/board/index.html",
+   "kind": "page",
+   "what": "a persona link"
+  },
+  {
+   "id": "page:for/index.html",
+   "layer": 1,
+   "label": "for/index.html",
+   "kind": "page",
+   "what": "a reading list"
+  },
+  {
+   "id": "page:for/make.html",
+   "layer": 1,
+   "label": "for/make.html",
+   "kind": "page",
+   "what": "make a reading list"
+  },
+  {
+   "id": "page:wire/index.html",
+   "layer": 1,
+   "label": "wire/index.html",
+   "kind": "page",
+   "what": "the Industry Wire's edition"
+  },
+  {
+   "id": "page:wire/sources.html",
+   "layer": 1,
+   "label": "wire/sources.html",
+   "kind": "page",
+   "what": "the wire's sources"
+  },
+  {
+   "id": "page:wire/how.html",
+   "layer": 1,
+   "label": "wire/how.html",
+   "kind": "page",
+   "what": "how the wire is read, and its documents"
+  },
+  {
+   "id": "page:vault/index.html",
+   "layer": 1,
+   "label": "vault/index.html",
+   "kind": "page",
+   "what": "your vault: the reading account carried between devices, with the pane open"
+  },
+  {
+   "id": "page:meter/index.html",
+   "layer": 1,
+   "label": "meter/index.html",
+   "kind": "page",
+   "what": "SG Meter, documented"
+  },
+  {
+   "id": "page:meter/security.html",
+   "layer": 1,
+   "label": "meter/security.html",
+   "kind": "page",
+   "what": "the meter's security model"
+  },
+  {
+   "id": "page:demos/vaults/newsroom-synthetic-users/index.html",
+   "layer": 1,
+   "label": "demos/vaults/newsroom-synthetic-users/index.html",
+   "kind": "page",
+   "what": "the synthetic-readers study, with the embedded vault"
+  },
+  {
+   "id": "view:account",
+   "layer": 2,
+   "label": "view account",
+   "kind": "view",
+   "what": "the meter's account view, on 1 page(s)"
+  },
+  {
+   "id": "view:landing",
+   "layer": 2,
+   "label": "view landing",
+   "kind": "view",
+   "what": "the meter's landing view, on 6 page(s)"
+  },
+  {
+   "id": "view:newsroom",
+   "layer": 2,
+   "label": "view newsroom",
+   "kind": "view",
+   "what": "the meter's newsroom view, on 1 page(s)"
+  },
+  {
+   "id": "view:page",
+   "layer": 2,
+   "label": "view page",
+   "kind": "view",
+   "what": "the meter's page view, on 466 page(s)"
+  },
+  {
+   "id": "view:personas",
+   "layer": 2,
+   "label": "view personas",
+   "kind": "view",
+   "what": "the meter's personas view, on 1 page(s)"
+  },
+  {
+   "id": "view:share",
+   "layer": 2,
+   "label": "view share",
+   "kind": "view",
+   "what": "the meter's share view, on 1 page(s)"
+  },
+  {
+   "id": "view:topped-up",
+   "layer": 2,
+   "label": "view topped-up",
+   "kind": "view",
+   "what": "the meter's topped-up view, on 1 page(s)"
+  },
+  {
+   "id": "view:topup",
+   "layer": 2,
+   "label": "view topup",
+   "kind": "view",
+   "what": "the meter's topup view, on 1 page(s)"
+  },
+  {
+   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "layer": 3,
+   "label": "sg-meter.js",
+   "kind": "file",
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "lines": 815,
+   "what": "SG Meter, the element: twelve views, the reader card, the share form, the graph"
+  },
+  {
+   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "layer": 3,
+   "label": "sg-meter-core.js",
+   "kind": "file",
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "lines": 511,
+   "what": "SG Meter, the meter: prices, the charge, ratings, declining, credit, personas, picks, the share text"
+  },
+  {
+   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
+   "layer": 3,
+   "label": "sg-meter.css",
+   "kind": "file",
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
+   "lines": 188,
+   "what": "SG Meter styles, adopted into the shadow root"
+  },
+  {
+   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "layer": 3,
+   "label": "sg-meter.tpl",
+   "kind": "file",
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "lines": 1,
+   "what": "SG Meter markup (one div)"
+  },
+  {
+   "id": "file:assets/components/base/v1/v1.0/v1.0.0/sg-component.js",
+   "layer": 3,
+   "label": "sg-component.js",
+   "kind": "file",
+   "path": "assets/components/base/v1/v1.0/v1.0.0/sg-component.js",
+   "lines": 118,
+   "what": "The component base: fetches the .tpl and .css beside a component and calls onReady()"
+  },
+  {
+   "id": "file:for/reading-list.js",
+   "layer": 3,
+   "label": "reading-list.js",
+   "kind": "file",
+   "path": "for/reading-list.js",
+   "lines": 343,
+   "what": "A reading list in a link: parse, build, show, open as a persona"
+  },
+  {
+   "id": "file:for/make.js",
+   "layer": 3,
+   "label": "make.js",
+   "kind": "file",
+   "path": "for/make.js",
+   "lines": 254,
+   "what": "The page that makes a reading list and previews it"
+  },
+  {
+   "id": "file:for/for.css",
+   "layer": 3,
+   "label": "for.css",
+   "kind": "file",
+   "path": "for/for.css",
+   "lines": 109,
+   "what": "Styles for the two reading-list pages"
+  },
+  {
+   "id": "file:assets/subscribe.js",
+   "layer": 3,
+   "label": "subscribe.js",
+   "kind": "file",
+   "path": "assets/subscribe.js",
+   "lines": 117,
+   "what": "The subscribe form: encrypts the address and posts it to the lane"
+  },
+  {
+   "id": "file:wire/vault-reader.js",
+   "layer": 3,
+   "label": "vault-reader.js",
+   "kind": "file",
+   "path": "wire/vault-reader.js",
+   "lines": 182,
+   "what": "Reads an sgit vault in the browser with a published read key: ref, commit, tree, blobs, decrypted with Web Crypto; the markdown renderer"
+  },
+  {
+   "id": "file:wire/wire.js",
+   "layer": 3,
+   "label": "wire.js",
+   "kind": "file",
+   "path": "wire/wire.js",
+   "lines": 322,
+   "what": "The Industry Wire: the edition with its lens, the sources, the documents, drawn from the vault as text"
+  },
+  {
+   "id": "file:wire/wire.css",
+   "layer": 3,
+   "label": "wire.css",
+   "kind": "file",
+   "path": "wire/wire.css",
+   "lines": 108,
+   "what": "Styles for the wire pages"
+  },
+  {
+   "id": "file:admin/build/wire-vault.json",
+   "layer": 3,
+   "label": "wire-vault.json",
+   "kind": "file",
+   "path": "admin/build/wire-vault.json",
+   "lines": 14,
+   "what": "The wire's vault: endpoint, vault id, the public read key (the only key on this site)"
+  },
+  {
+   "id": "file:wire/snapshot.json",
+   "layer": 3,
+   "label": "snapshot.json",
+   "kind": "file",
+   "path": "wire/snapshot.json",
+   "lines": 412,
+   "what": "The wire as it was in the vault at the last release: headlines and primary links, the fallback and the agents' index"
+  },
+  {
+   "id": "file:assets/vault-ui-embed.js",
+   "layer": 3,
+   "label": "vault-ui-embed.js",
+   "kind": "file",
+   "path": "assets/vault-ui-embed.js",
+   "lines": 126,
+   "what": "The study page: embeds the vault browser from dev.vault.sgraph.ai and hands it a read key"
+  },
+  {
+   "id": "file:assets/shots.js",
+   "layer": 3,
+   "label": "shots.js",
+   "kind": "file",
+   "path": "assets/shots.js",
+   "lines": 278,
+   "what": "Figures: sets each image's address at runtime"
+  },
+  {
+   "id": "file:assets/site.js",
+   "layer": 3,
+   "label": "site.js",
+   "kind": "file",
+   "path": "assets/site.js",
+   "lines": 81,
+   "what": "Page behaviour: nav, copy buttons, reveal-on-scroll"
+  },
+  {
+   "id": "file:assets/nav.js",
+   "layer": 3,
+   "label": "nav.js",
+   "kind": "file",
+   "path": "assets/nav.js",
+   "lines": 42,
+   "what": "Nav behaviour on the pages this site writes"
+  },
+  {
+   "id": "file:.well-known/sgit-subscribe.json",
+   "layer": 3,
+   "label": "sgit-subscribe.json",
+   "kind": "file",
+   "path": ".well-known/sgit-subscribe.json",
+   "lines": 25,
+   "what": "The lane and the public key the share and the subscription are encrypted to and written into"
+  },
+  {
+   "id": "file:articles/ids.json",
+   "layer": 3,
+   "label": "ids.json",
+   "kind": "file",
+   "path": "articles/ids.json",
+   "lines": 1517,
+   "what": "A number for every article: the contract reading lists are built on"
+  },
+  {
+   "id": "file:persona/links.json",
+   "layer": 3,
+   "label": "links.json",
+   "kind": "file",
+   "path": "persona/links.json",
+   "lines": 268,
+   "what": "The persona links, for whoever writes to someone"
+  },
+  {
+   "id": "file:articles/graphs.json",
+   "layer": 3,
+   "label": "graphs.json",
+   "kind": "file",
+   "path": "articles/graphs.json",
+   "lines": 25208,
+   "what": "The feed the picks and the graph read: every article with topics, tags and citations"
+  },
+  {
+   "id": "file:assets/newsroom-vault.js",
+   "layer": 3,
+   "label": "newsroom-vault.js",
+   "kind": "file",
+   "path": "assets/newsroom-vault.js",
+   "lines": 245,
+   "what": "The newsroom's vault module: create, open, read, write and publish through the vendored library; the door, master and reader vaults; unlock; add a door"
+  },
+  {
+   "id": "file:assets/door.js",
+   "layer": 3,
+   "label": "door.js",
+   "kind": "file",
+   "path": "assets/door.js",
+   "lines": 139,
+   "what": "From a passkey's PRF bytes (or a recovery code) to a door vault's key: the article's derivation, shared by the lab and the pane"
+  },
+  {
+   "id": "file:assets/vault-pane/vault-pane.js",
+   "layer": 3,
+   "label": "vault-pane.js",
+   "kind": "file",
+   "path": "assets/vault-pane/vault-pane.js",
+   "lines": 658,
+   "what": "The vault pane on every page with the meter, in three tabs: this page (the notes, send to the newsroom, the lane's read key), the vault (enable with the passkey, create or join, update the vault, the table across devices, bring their activity here), the keys (every vault of the account)"
+  },
+  {
+   "id": "file:assets/vault-pane/notes.js",
+   "layer": 3,
+   "label": "notes.js",
+   "kind": "file",
+   "path": "assets/vault-pane/notes.js",
+   "lines": 137,
+   "what": "The reader's notes as records: one tap at a piece (done, read later, not for me, more like this, liked, wrong, fix this, idea) with words and the selected phrase, kept in localStorage sgit.notes.v1; keep, add words, remove, mark sent; the decision at a page"
+  },
+  {
+   "id": "file:assets/search/search.js",
+   "layer": 3,
+   "label": "search.js",
+   "kind": "file",
+   "path": "assets/search/search.js",
+   "lines": 318,
+   "what": "Search in the browser: the index from search/docs.json and search/text.json, BM25 over fields and paragraphs, phrases, numbers, prefixes, snippets; the search page"
+  },
+  {
+   "id": "file:assets/search/search.css",
+   "layer": 3,
+   "label": "search.css",
+   "kind": "file",
+   "path": "assets/search/search.css",
+   "lines": 25,
+   "what": "Styles for the search page"
+  },
+  {
+   "id": "file:assets/search/ask.js",
+   "layer": 3,
+   "label": "ask.js",
+   "kind": "file",
+   "path": "assets/search/ask.js",
+   "lines": 184,
+   "what": "Ask: the top passages, numbered, given to Chrome's built-in model or to openrouter.ai with the reader's own key, answered with citations; the key in the tab unless kept"
+  },
+  {
+   "id": "file:assets/search/ask.css",
+   "layer": 3,
+   "label": "ask.css",
+   "kind": "file",
+   "path": "assets/search/ask.css",
+   "lines": 23,
+   "what": "Styles for Ask on the search page"
+  },
+  {
+   "id": "file:assets/search/search-nav.css",
+   "layer": 3,
+   "label": "search-nav.css",
+   "kind": "file",
+   "path": "assets/search/search-nav.css",
+   "lines": 5,
+   "what": "The Search link in the nav, on every page"
+  },
+  {
+   "id": "file:assets/vault-pane/wire-state.js",
+   "layer": 3,
+   "label": "wire-state.js",
+   "kind": "file",
+   "path": "assets/vault-pane/wire-state.js",
+   "lines": 66,
+   "what": "What this browser knows about the wire: stories seen and when, the visit, the lens chosen; and which of the vault's releases to show"
+  },
+  {
+   "id": "file:assets/vault-pane/pending.js",
+   "layer": 3,
+   "label": "pending.js",
+   "kind": "file",
+   "path": "assets/vault-pane/pending.js",
+   "lines": 47,
+   "what": "What this browser holds that the reader vault does not yet: reads, top-ups, notes and stories seen since the last update"
+  },
+  {
+   "id": "file:assets/vault-pane/reading.js",
+   "layer": 3,
+   "label": "reading.js",
+   "kind": "file",
+   "path": "assets/vault-pane/reading.js",
+   "lines": 41,
+   "what": "What this browser knows about what it has read, from the meter's records: one page summed up (times, when, how far, cost, rating) and the reading history"
+  },
+  {
+   "id": "file:assets/vault-pane/sync.js",
+   "layer": 3,
+   "label": "sync.js",
+   "kind": "file",
+   "path": "assets/vault-pane/sync.js",
+   "lines": 175,
+   "what": "The activity vault's logic as pure functions: a device's file (reads, top-ups, personas, notes), the consolidated view, totals recomputed, merging into local state"
+  },
+  {
+   "id": "file:assets/vault-pane/vault-pane.css",
+   "layer": 3,
+   "label": "vault-pane.css",
+   "kind": "file",
+   "path": "assets/vault-pane/vault-pane.css",
+   "lines": 103,
+   "what": "Styles for the pane, its tabs, the chips and the notes, and the page shift"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/local/sg-vault--create-with-id.js",
+   "layer": 3,
+   "label": "sg-vault--create-with-id.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/local/sg-vault--create-with-id.js",
+   "lines": 99,
+   "what": "SGVault.createWithId: a vault at a derived id, a local patch pending upstream"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-send/sg-send-crypto.js",
+   "layer": 3,
+   "label": "sg-send-crypto.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-send/sg-send-crypto.js",
+   "lines": 151,
+   "what": "AES-256-GCM and PBKDF2 over Web Crypto"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-send/sg-send.js",
+   "layer": 3,
+   "label": "sg-send.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-send/sg-send.js",
+   "lines": 275,
+   "what": "The HTTP client: read, write, batch, presigned; x-sgraph-access-token"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-crypto.js",
+   "layer": 3,
+   "label": "sg-vault-crypto.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-crypto.js",
+   "lines": 302,
+   "what": "Key derivation: read key, write key, ref and index ids; key prefixes"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-object-store.js",
+   "layer": 3,
+   "label": "sg-vault-object-store.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-object-store.js",
+   "lines": 290,
+   "what": "Content-addressed objects, the write batch, the block caches"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-ref-manager.js",
+   "layer": 3,
+   "label": "sg-vault-ref-manager.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-ref-manager.js",
+   "lines": 158,
+   "what": "Refs and the branch index; write-if-match"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-commit.js",
+   "layer": 3,
+   "label": "sg-vault-commit.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-commit.js",
+   "lines": 175,
+   "what": "Commits and trees, every field encrypted"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault.js",
+   "layer": 3,
+   "label": "sg-vault.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault.js",
+   "lines": 566,
+   "what": "SGVault: create, open, openReadOnly, the tree, the commit"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--file-ops.js",
+   "layer": 3,
+   "label": "sg-vault--file-ops.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--file-ops.js",
+   "lines": 157,
+   "what": "addFile, updateFile, getFile, removeFile, renameFile, moveFile"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--folder-ops.js",
+   "layer": 3,
+   "label": "sg-vault--folder-ops.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--folder-ops.js",
+   "lines": 125,
+   "what": "Folders, lazy sub-trees"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--sync.js",
+   "layer": 3,
+   "label": "sg-vault--sync.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--sync.js",
+   "lines": 456,
+   "what": "push, pushIfMatch, pull, merge, ahead and behind"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--history.js",
+   "layer": 3,
+   "label": "sg-vault--history.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--history.js",
+   "lines": 89,
+   "what": "History: commits, trees and files at a commit"
+  },
+  {
+   "id": "file:assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--branches.js",
+   "layer": 3,
+   "label": "sg-vault--branches.js",
+   "kind": "file",
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--branches.js",
+   "lines": 57,
+   "what": "Branches from the index"
+  },
+  {
+   "id": "contract:The meter config",
+   "layer": 4,
+   "label": "The meter config",
+   "kind": "contract",
+   "shape": "storageKey, start, newDays, symbol, prices{article_new,article,issue,note,collection,page,free}, depth, minDepth, topup{amount,link}, packs, links{account,topup,how}, rating{price[5],more[5]}, autoKeep, picks{feed,base}, links2{newsroom,personas,share}, share{contact,form,site,max}, personas{presets[],names{}}, root",
+   "owner": "sg-meter-core.js DEFAULTS; written into every page by sgit.ai's build and re-pointed by the import"
+  },
+  {
+   "id": "contract:A charged page",
+   "layer": 4,
+   "label": "A charged page",
+   "kind": "contract",
+   "shape": "<sg-meter view=\"page\" kind=\"article|issue|note|collection|page|free\" date=\"…\" topics=\"a b\" title=\"…\" [quiet]>: the price class comes from the page",
+   "owner": "sgit.ai's build for imported pages; page.py (kind=free, quiet) for this site's"
+  },
+  {
+   "id": "contract:A persona link",
+   "layer": 4,
+   "label": "A persona link",
+   "kind": "contract",
+   "shape": "/persona/<id>/ and /persona/#<id>, id ∈ {founder, journalist, security, builder, board}",
+   "owner": "personas.py, persona/links.json"
+  },
+  {
+   "id": "contract:A reading list link",
+   "layer": 4,
+   "label": "A reading list link",
+   "kind": "contract",
+   "shape": "/for/#from=&to=&r=&s=&f=&n=&e=: names ≤ 40 chars of letters, spaces, hyphens, apostrophes; r,s article numbers, 1–50 in all; f persona ids or c:<collection>, ≤ 10; n ≤ 240 chars; e an address",
+   "owner": "for/reading-list.js LIMITS, parse(), build()"
+  },
+  {
+   "id": "contract:Article numbers",
+   "layer": 4,
+   "label": "Article numbers",
+   "kind": "contract",
+   "shape": "articles/ids.json: n and slug are the contract, assigned once in publication order, never changed or reused; every other field is display text",
+   "owner": "admin/build/ids.py; validate.js check 12"
+  },
+  {
+   "id": "contract:The return page",
+   "layer": 4,
+   "label": "The return page",
+   "kind": "contract",
+   "shape": "?session_id=<ref>: credited once per distinct value, never verified",
+   "owner": "_toppedUp(), credit()"
+  },
+  {
+   "id": "contract:The export",
+   "layer": 4,
+   "label": "The export",
+   "kind": "contract",
+   "shape": "the state as JSON; restore accepts any file with balance:number and log:array",
+   "owner": "restore()"
+  },
+  {
+   "id": "contract:The share",
+   "layer": 4,
+   "label": "The share",
+   "kind": "contract",
+   "shape": "a text summary then the same data as JSON {v:1, site, at, balance, spent, declined, reads, topups, active, personas, topics, cols, log}, as an .eml with X-SGit-Form, X-SGit-Reply-To, X-SGit-Name, X-SGit-Subscribe, X-SGit-Page",
+   "owner": "shareData(), _send()"
+  },
+  {
+   "id": "contract:The envelope",
+   "layer": 4,
+   "label": "The envelope",
+   "kind": "contract",
+   "shape": "sgit hybrid envelope v2: {v:2, w, i, c} (RSA-OAEP-SHA256 wrapped AES-256-GCM key, iv, ciphertext), base64, then base64 again as the lane payload",
+   "owner": "envelope(), subscribe.js encrypt()"
+  },
+  {
+   "id": "contract:The contact file",
+   "layer": 4,
+   "label": "The contact file",
+   "kind": "contract",
+   "shape": "sgit-subscribe/v1: recipient{address, fingerprint, encrypt}, inbox{vault, endpoint, encrypt_to, status, lane{name, append_token}}; the fingerprint is recomputed from the PEM before use",
+   "owner": ".well-known/sgit-subscribe.json"
+  },
+  {
+   "id": "contract:The wire's vault",
+   "layer": 4,
+   "label": "The wire's vault",
+   "kind": "contract",
+   "shape": "vault u9i9jp0l on dev.send.sgraph.ai, read key published; data/bundle.json {beats, stories, sources, personas, brief}, data/deliveries.json, docs/*.md; story fields and status shown as written; everything in the vault is public, for ever",
+   "owner": "admin/build/wire-vault.json; wire/how.html; the wire's agents own the content"
+  },
+  {
+   "id": "contract:Events",
+   "layer": 4,
+   "label": "Events",
+   "kind": "contract",
+   "shape": "sg:meter.changed · charged · rated · declined · toppedup · reset · restored · persona · shared; sg-meter:error",
+   "owner": "sg-meter-core.js _emit(), sg-component.js failed()"
+  },
+  {
+   "id": "contract:A component",
+   "layer": 4,
+   "label": "A component",
+   "kind": "contract",
+   "shape": "static jsUrl, get resourceName(), onReady(); a .tpl and a .css beside the .js; published at an immutable versioned path",
+   "owner": "sg-component.js"
+  },
+  {
+   "id": "contract:The import's rules",
+   "layer": 4,
+   "label": "The import's rules",
+   "kind": "contract",
+   "shape": "the meter path rewrite (v1.3.1 → v1.4.0), the top-up link, eight text rules, the article number line; each stops the import when its anchor moves",
+   "owner": "sync_newsroom.py items 9–12"
+  },
+  {
+   "id": "finding:R1",
+   "layer": 5,
+   "label": "R1",
+   "kind": "finding",
+   "severity": "medium",
+   "text": "Declining a page as “not relevant” leaves it in the persona's reading list. open() auto-keeps an article on first open; decline() refunds the charge but does not undo the auto-keep, so the article stays under “Its reading list” and profile() adds +5 for it while the decline subtracts 2: a page the reader rejected pulls its topics up.",
+   "issue": 1
+  },
+  {
+   "id": "finding:R2",
+   "layer": 5,
+   "label": "R2",
+   "kind": "finding",
+   "severity": "low",
+   "text": "restore() checks that the file has a numeric balance and a log array and nothing else. A persona without on[] and off[] makes the personas and newsroom views throw and show nothing; a log entry's path is rendered as the history link's href as it is; a persona's theme is written into a style attribute as it is. The file is the reader's own, so the exposure is a file someone else sent them to restore.",
+   "issue": 2
+  },
+  {
+   "id": "finding:R3",
+   "layer": 5,
+   "label": "R3",
+   "kind": "finding",
+   "severity": "low",
+   "text": "A malformed percent sequence in ?session_id= (for example %E0%A4%A) makes decodeURIComponent throw inside onReady, so the element fails with “did not load: URI malformed” instead of saying the reference is missing.",
+   "issue": 3
+  },
+  {
+   "id": "finding:R4",
+   "layer": 5,
+   "label": "R4",
+   "kind": "finding",
+   "severity": "medium",
+   "text": "A reading share or a subscription sent from this site is labelled sgit.ai: the imported config has share.site = \"sgit.ai\" (so the text begins “My reading on sgit.ai”), subscribe.js writes From: site@sgit.ai, and the contact file says site: sgit.ai. The agent that drains the lane can tell the two sites apart only by the Sent from line.",
+   "issue": 4
+  },
+  {
+   "id": "finding:R5",
+   "layer": 5,
+   "label": "R5",
+   "kind": "finding",
+   "severity": "note",
+   "text": "On the live site the lane for shares and subscriptions is on dev.send.sgraph.ai and the study page's vault frames come from dev.vault.sgraph.ai. Both hosts are named “dev”. Production reader data goes to them.",
+   "issue": 5
+  },
+  {
+   "id": "finding:R6",
+   "layer": 5,
+   "label": "R6",
+   "kind": "finding",
+   "severity": "low",
+   "text": "Money is kept to a tenth of a penny and shown to a penny. Balance and spent are each formatted on their own, so a half-penny state shows, from £5.00, a balance of £4.95 and £0.06 spent, which do not add up; the history shows 5.5p. A reader who checks the arithmetic finds a penny missing.",
+   "issue": 6
+  },
+  {
+   "id": "finding:R7",
+   "layer": 5,
+   "label": "R7",
+   "kind": "finding",
+   "severity": "question",
+   "text": "picks() excludes every page in the log, whichever persona read it, while profile() is per persona. An article read as Morgan is never picked for Rowan.",
+   "issue": 7
+  },
+  {
+   "id": "finding:R8",
+   "layer": 5,
+   "label": "R8",
+   "kind": "finding",
+   "severity": "low",
+   "text": "feed() caches a failed fetch as null for the life of the page, so one transient failure leaves “The list of articles could not be loaded” on every view until a reload.",
+   "issue": 8
+  },
+  {
+   "id": "finding:R9",
+   "layer": 5,
+   "label": "R9",
+   "kind": "finding",
+   "severity": "medium",
+   "text": "If sgit.ai renames an article (a new slug), ids.py marks the old number withdrawn and gives the article a new number. A reading list that named the old number then says the article is no longer published, although it is.",
+   "issue": 9
+  },
+  {
+   "id": "finding:R10",
+   "layer": 5,
+   "label": "R10",
+   "kind": "finding",
+   "severity": "high for the move",
+   "text": "Every imported page loads assets/site.js, subscribe.js and shots.js by fetching the text and running it with (0, eval)(text) (the loader's bridge path), and the loader and the meter config are inline. A script-src policy without 'unsafe-eval' and without hashes breaks every page. frame-ancestors cannot be set in a meta tag at all, and GitHub Pages sets no headers, so framing (the Keep, Remove and Top up buttons under another site) is not prevented today.",
+   "issue": 10
+  },
+  {
+   "id": "finding:R11",
+   "layer": 5,
+   "label": "R11",
+   "kind": "finding",
+   "severity": "high per the brief",
+   "text": "The one workflow ran validate.js only; the browser tests (46 + 65 checks) never ran in CI.",
+   "issue": 11
+  },
+  {
+   "id": "finding:R12",
+   "layer": 5,
+   "label": "R12",
+   "kind": "finding",
+   "severity": "note for the move",
+   "text": "The account pages, subscribe, the contact file and the component base are imported from sgit.ai on every sync and cannot be changed here except by a recorded rule, and verbatim files (scripts, JSON) cannot be changed by rule at all. R4 is the first consequence. The newsroom's meter is v1.4.0 while sgit.ai's is v1.3.1.",
+   "issue": 12
+  },
+  {
+   "id": "finding:R13",
+   "layer": 5,
+   "label": "R13",
+   "kind": "finding",
+   "severity": "note",
+   "text": "The export includes the payment references (sessions, topups[].ref) that the share deliberately leaves out. A reader who sends their export instead of their share sends them.",
+   "issue": 13
+  },
+  {
+   "id": "finding:R14",
+   "layer": 5,
+   "label": "R14",
+   "kind": "finding",
+   "severity": "low",
+   "text": "sessions[] and topups[] grow without bound, and a payment reference is not checked for shape before it is stored.",
+   "issue": 14
+  },
+  {
+   "id": "finding:R15",
+   "layer": 5,
+   "label": "R15",
+   "kind": "finding",
+   "severity": "low",
+   "text": "persona(id) falls back to personas[0], which is “me” only when “me” is first; after a restore that puts another persona first, an unknown id resolves to that persona.",
+   "issue": 15
+  },
+  {
+   "id": "finding:R16",
+   "layer": 5,
+   "label": "R16",
+   "kind": "finding",
+   "severity": "process",
+   "text": "Imported pages load the meter as sg-meter.js?v=<sgit.ai's release>, so the cache-buster never changes for a release of this site. That is fine while a published version is never edited in place, which is the rule; it is written here because v1.4.0 was edited in place while it was being built.",
+   "issue": 16
+  },
+  {
+   "id": "finding:R17",
+   "layer": 5,
+   "label": "R17",
+   "kind": "finding",
+   "severity": "note",
+   "text": "A list's persona is keyed by a 32-bit hash of the names and numbers, so two different lists can share one persona with probability about one in four billion per pair.",
+   "issue": 17
+  },
+  {
+   "id": "finding:R18",
+   "layer": 5,
+   "label": "R18",
+   "kind": "finding",
+   "severity": "note",
+   "text": "The landing view adds a window hashchange listener per element and never removes it, and re-renders on every meter change (the picker's “Copied” label resets).",
+   "issue": 18
+  }
+ ],
+ "edges": [
+  [
+   "site",
+   "page:account/index.html"
+  ],
+  [
+   "site",
+   "page:account/newsroom.html"
+  ],
+  [
+   "site",
+   "page:account/personas.html"
+  ],
+  [
+   "site",
+   "page:account/share.html"
+  ],
+  [
+   "site",
+   "page:account/top-up.html"
+  ],
+  [
+   "site",
+   "page:account/topped-up.html"
+  ],
+  [
+   "site",
+   "page:subscribe/index.html"
+  ],
+  [
+   "site",
+   "page:persona/index.html"
+  ],
+  [
+   "site",
+   "page:persona/founder/index.html"
+  ],
+  [
+   "site",
+   "page:persona/journalist/index.html"
+  ],
+  [
+   "site",
+   "page:persona/security/index.html"
+  ],
+  [
+   "site",
+   "page:persona/builder/index.html"
+  ],
+  [
+   "site",
+   "page:persona/board/index.html"
+  ],
+  [
+   "site",
+   "page:for/index.html"
+  ],
+  [
+   "site",
+   "page:for/make.html"
+  ],
+  [
+   "site",
+   "page:wire/index.html"
+  ],
+  [
+   "site",
+   "page:wire/sources.html"
+  ],
+  [
+   "site",
+   "page:wire/how.html"
+  ],
+  [
+   "site",
+   "page:vault/index.html"
+  ],
+  [
+   "site",
+   "page:meter/index.html"
+  ],
+  [
+   "site",
+   "page:meter/security.html"
+  ],
+  [
+   "site",
+   "page:demos/vaults/newsroom-synthetic-users/index.html"
+  ],
+  [
+   "view:account",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/index.html",
+   "view:account"
+  ],
+  [
+   "page:account/newsroom.html",
+   "view:account"
+  ],
+  [
+   "page:account/personas.html",
+   "view:account"
+  ],
+  [
+   "page:account/share.html",
+   "view:account"
+  ],
+  [
+   "page:account/top-up.html",
+   "view:account"
+  ],
+  [
+   "page:account/topped-up.html",
+   "view:account"
+  ],
+  [
+   "view:landing",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/personas.html",
+   "view:landing"
+  ],
+  [
+   "page:persona/index.html",
+   "view:landing"
+  ],
+  [
+   "page:persona/founder/index.html",
+   "view:landing"
+  ],
+  [
+   "page:persona/journalist/index.html",
+   "view:landing"
+  ],
+  [
+   "page:persona/security/index.html",
+   "view:landing"
+  ],
+  [
+   "page:persona/builder/index.html",
+   "view:landing"
+  ],
+  [
+   "page:persona/board/index.html",
+   "view:landing"
+  ],
+  [
+   "view:newsroom",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/newsroom.html",
+   "view:newsroom"
+  ],
+  [
+   "page:demos/vaults/newsroom-synthetic-users/index.html",
+   "view:newsroom"
+  ],
+  [
+   "view:page",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/index.html",
+   "view:page"
+  ],
+  [
+   "page:account/newsroom.html",
+   "view:page"
+  ],
+  [
+   "page:account/personas.html",
+   "view:page"
+  ],
+  [
+   "page:account/share.html",
+   "view:page"
+  ],
+  [
+   "page:account/top-up.html",
+   "view:page"
+  ],
+  [
+   "page:account/topped-up.html",
+   "view:page"
+  ],
+  [
+   "page:subscribe/index.html",
+   "view:page"
+  ],
+  [
+   "page:persona/index.html",
+   "view:page"
+  ],
+  [
+   "page:persona/founder/index.html",
+   "view:page"
+  ],
+  [
+   "page:persona/journalist/index.html",
+   "view:page"
+  ],
+  [
+   "page:persona/security/index.html",
+   "view:page"
+  ],
+  [
+   "page:persona/builder/index.html",
+   "view:page"
+  ],
+  [
+   "page:persona/board/index.html",
+   "view:page"
+  ],
+  [
+   "page:for/index.html",
+   "view:page"
+  ],
+  [
+   "page:for/make.html",
+   "view:page"
+  ],
+  [
+   "page:wire/index.html",
+   "view:page"
+  ],
+  [
+   "page:wire/sources.html",
+   "view:page"
+  ],
+  [
+   "page:wire/how.html",
+   "view:page"
+  ],
+  [
+   "page:vault/index.html",
+   "view:page"
+  ],
+  [
+   "page:meter/index.html",
+   "view:page"
+  ],
+  [
+   "page:meter/security.html",
+   "view:page"
+  ],
+  [
+   "page:demos/vaults/newsroom-synthetic-users/index.html",
+   "view:page"
+  ],
+  [
+   "view:personas",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/personas.html",
+   "view:personas"
+  ],
+  [
+   "view:share",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/share.html",
+   "view:share"
+  ],
+  [
+   "view:topped-up",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/topped-up.html",
+   "view:topped-up"
+  ],
+  [
+   "view:topup",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/top-up.html",
+   "view:topup"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "contract:The meter config"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "contract:The meter config"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
+   "contract:The meter config"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "contract:The meter config"
+  ],
+  [
+   "file:for/for.css",
+   "contract:A charged page"
+  ],
+  [
+   "file:assets/site.js",
+   "contract:A charged page"
+  ],
+  [
+   "file:persona/links.json",
+   "contract:A persona link"
+  ],
+  [
+   "file:for/reading-list.js",
+   "contract:A reading list link"
+  ],
+  [
+   "file:for/for.css",
+   "contract:A reading list link"
+  ],
+  [
+   "file:assets/vault-pane/reading.js",
+   "contract:A reading list link"
+  ],
+  [
+   "file:articles/ids.json",
+   "contract:Article numbers"
+  ],
+  [
+   "file:assets/subscribe.js",
+   "contract:The envelope"
+  ],
+  [
+   "file:assets/subscribe.js",
+   "contract:The contact file"
+  ],
+  [
+   "file:.well-known/sgit-subscribe.json",
+   "contract:The contact file"
+  ],
+  [
+   "file:wire/wire.js",
+   "contract:The wire's vault"
+  ],
+  [
+   "file:wire/wire.css",
+   "contract:The wire's vault"
+  ],
+  [
+   "file:admin/build/wire-vault.json",
+   "contract:The wire's vault"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "contract:Events"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "contract:Events"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
+   "contract:Events"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "contract:Events"
+  ],
+  [
+   "file:assets/components/base/v1/v1.0/v1.0.0/sg-component.js",
+   "contract:Events"
+  ],
+  [
+   "file:assets/components/base/v1/v1.0/v1.0.0/sg-component.js",
+   "contract:A component"
+  ],
+  [
+   "file:assets/vault-pane/sync.js",
+   "contract:The import's rules"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "finding:R1"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "finding:R2"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "finding:R2"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "finding:R3"
+  ],
+  [
+   "file:assets/subscribe.js",
+   "finding:R4"
+  ],
+  [
+   "file:.well-known/sgit-subscribe.json",
+   "finding:R4"
+  ],
+  [
+   "file:assets/subscribe.js",
+   "finding:R5"
+  ],
+  [
+   "file:assets/vault-ui-embed.js",
+   "finding:R5"
+  ],
+  [
+   "file:.well-known/sgit-subscribe.json",
+   "finding:R5"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "finding:R6"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "finding:R7"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "finding:R8"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "finding:R13"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "finding:R14"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "finding:R15"
+  ],
+  [
+   "file:for/reading-list.js",
+   "finding:R17"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "finding:R18"
+  ],
+  [
+   "page:account/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:account/newsroom.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/newsroom.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:account/personas.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/personas.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:account/share.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/share.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:account/top-up.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/top-up.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:account/topped-up.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:account/topped-up.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:subscribe/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:subscribe/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:persona/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:persona/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:persona/founder/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:persona/founder/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:persona/journalist/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:persona/journalist/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:persona/security/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:persona/security/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:persona/builder/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:persona/builder/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:persona/board/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:persona/board/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:for/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:for/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:for/make.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:for/make.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:wire/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:wire/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:wire/sources.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:wire/sources.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:wire/how.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:wire/how.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:vault/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:vault/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:meter/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:meter/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:meter/security.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:meter/security.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ],
+  [
+   "page:demos/vaults/newsroom-synthetic-users/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+  ],
+  [
+   "page:demos/vaults/newsroom-synthetic-users/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+  ]
+ ]
+}

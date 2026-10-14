@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make a reading-list link · api.newsroom.sgit.ai</title>
+<meta name="description" content="Send someone a set of articles as one link, by hand from the grammar or with the make page; what they see when they open it; how a site adds the two pages.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/how-to/reading-list-link/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="Make a reading-list link"><meta property="og:description" content="Send someone a set of articles as one link, by hand from the grammar or with the make page; what they see when they open it; how a site adds the two pages."><meta property="og:url" content="https://api.newsroom.sgit.ai/how-to/reading-list-link/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Make a reading-list link", "description": "Send someone a set of articles as one link, by hand from the grammar or with the make page; what they see when they open it; how a site adds the two pages.", "url": "https://api.newsroom.sgit.ai/how-to/reading-list-link/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/">Docs</a><a href="../../how-to/" class=here>How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../../index.html">Home</a> / <a href="../../how-to/">How-to</a> / Make a reading-list link</p>
+<p class="eyebrow">How-to</p>
+<h1 id="make-a-reading-list-link">Make a reading-list link</h1>
+<blockquote>A list is a link. Make it with the page, or type it.</blockquote>
+<h2 id="with-the-make-page">With the make page</h2>
+<p>Open <a href="https://newsroom.sgit.ai/for/make.html">newsroom.sgit.ai/for/make.html</a>. Search the articles, add up to fifty, move them up and down, mark some as <i>worth a look</i> rather than <i>to read</i>, name yourself and the reader, write a note, and copy the link. The preview shows the list exactly as the recipient will see it, because the page reads its own link back through the recipient's parser. Every article page also has a <i>start a reading list with it</i> link at its foot, which opens the make page with that article in it.</p>
+<h2 id="by-hand">By hand</h2>
+<pre class="code" data-lang="text"><button class="copy" type="button" aria-label="Copy">Copy</button><code>https://newsroom.sgit.ai/for/#from=Dinis&amp;to=Steve&amp;r=78,42,15&amp;s=66&amp;n=Read%2078%20first</code></pre>
+<p><code>r</code> is the articles to read, in order, by number; <code>s</code> is worth a look; <code>from</code> and <code>to</code> are names; <code>n</code> is a note. The numbers are in <a href="https://newsroom.sgit.ai/articles/ids.json"><code>articles/ids.json</code></a>, and each article prints its own (<i>Article No. 78</i>). The rules, field by field: <a href="../../docs/reading-list-link/">the reading-list link</a>.</p>
+<h2 id="what-the-recipient-sees">What the recipient sees</h2>
+<p>The list, with each article's title, date and teaser, in the order you gave; your note; a Reply button if you gave an address. Opening it adds a visitor persona named for the list, which they can keep or remove; nothing is charged for opening it. Anything malformed in the link is dropped and listed under <i>Left out</i>, so a mangled link still opens.</p>
+<h2 id="for-a-site">For a site</h2>
+<p>Two pages that import from this host, and a numbers file:</p>
+<ol><li>Publish <code>articles/ids.json</code> with a stable <code>n</code> per article (never changed or reused).</li><li><code>for/index.html</code>: <code>import { openList } from 'https://api.newsroom.sgit.ai/v0.1.0/for/reading-list.js'</code> and call <code>openList({ core, ids: '../articles/ids.json', root: '../', mount })</code> with <code>core</code> the meter core's URL on this host. Load <code>for/for.css</code> from this host too.</li><li><code>for/make.html</code>: the same with <code>makeList</code> from <code>for/make.js</code> and <code>site: 'https://your-site/for/'</code>, the address the links will carry.</li></ol>
+<p>The newsroom's <code>admin/build/lists.py</code> writes both pages; copy it or the pages it writes.</p>
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> How to make a reading-list link: with the newsroom&#x27;s make page (search, add up to 50 articles, order, name sender and reader, note, copy), or by hand from /for/#from=&amp;to=&amp;r=&amp;s=&amp;f=&amp;n=&amp;e= with article numbers from articles/ids.json; what the recipient sees; how a site adds for/index.html and for/make.html importing reading-list.js and make.js from the API host. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../../for-publishers/">For publishers and editors</a><a href="../../for-evaluators/">For evaluators</a><a href="../../adopt/">Adopt it</a><a href="../../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

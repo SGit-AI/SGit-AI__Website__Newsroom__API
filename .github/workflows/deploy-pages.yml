@@ -30,6 +30,7 @@ jobs:
           for f in $(git ls-files '*.js' '*.mjs' | grep -v '^releases/'); do node --check "$f"; done
           python3 tools/release.py check
           python3 tools/release.py cut --out /tmp/rb/a >/dev/null; python3 tools/release.py cut --out /tmp/rb/b >/dev/null; diff -r /tmp/rb/a /tmp/rb/b
+          python3 site/build.py --check
   tag:
     runs-on: ubuntu-latest
     timeout-minutes: 5

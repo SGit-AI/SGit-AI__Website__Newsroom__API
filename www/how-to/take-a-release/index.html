@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Take a release, roll one back · api.newsroom.sgit.ai</title>
+<meta name="description" content="For a site that consumes the API: pin one release in one file, generate every URL from it, keep a copy of the manifest, check every page against it, and roll back by changing the line. The newsroom&#x27;s procedure as the worked example.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/how-to/take-a-release/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="Take a release, roll one back"><meta property="og:description" content="For a site that consumes the API: pin one release in one file, generate every URL from it, keep a copy of the manifest, check every page against it, and roll back by changing the line. The newsroom&#x27;s procedure as the worked example."><meta property="og:url" content="https://api.newsroom.sgit.ai/how-to/take-a-release/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Take a release, roll one back", "description": "For a site that consumes the API: pin one release in one file, generate every URL from it, keep a copy of the manifest, check every page against it, and roll back by changing the line. The newsroom's procedure as the worked example.", "url": "https://api.newsroom.sgit.ai/how-to/take-a-release/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/">Docs</a><a href="../../how-to/" class=here>How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../../index.html">Home</a> / <a href="../../how-to/">How-to</a> / Take a release, roll one back</p>
+<p class="eyebrow">How-to</p>
+<h1 id="take-a-release-roll-one-back">Take a release, roll one back</h1>
+<blockquote>One file names the release. Everything else is generated from it, and a gate refuses anything that is not.</blockquote>
+<h2 id="1-pin">1. Pin</h2>
+<p>Write the release in one place your build reads, and copy that release's manifest beside it. The newsroom's:</p>
+<pre class="code" data-lang="json"><button class="copy" type="button" aria-label="Copy">Copy</button><code>{&quot;host&quot;: &quot;https://api.newsroom.sgit.ai&quot;, &quot;release&quot;: &quot;v0.1.0&quot;}</code></pre>
+<pre class="code" data-lang="sh"><button class="copy" type="button" aria-label="Copy">Copy</button><code>curl -s https://api.newsroom.sgit.ai/v0.1.0/manifest.json &gt; admin/build/api-manifest.json</code></pre>
+<h2 id="2-generate-every-url-from-the-pin">2. Generate every URL from the pin</h2>
+<p>Nothing in a page names a reader file by a relative path or by a release typed by hand. The newsroom's builders call <code>api_url(path)</code>; its sync points imported pages at the same URL; <code>python3 admin/build/api.py --repoint</code> rewrites every page in one pass when the pin changes, and <code>--rerecord</code> recomputes the content hashes its import gate keeps.</p>
+<h2 id="3-gate-it">3. Gate it</h2>
+<p>Before a release of your site, check three things on every page: no reader file is loaded by a relative path; every reader file is loaded from the pinned release; every path loaded is in the manifest. The newsroom's <code>validate.js</code> check 14 does this; check 13 holds the frozen meter copies it still serves to the manifest's bytes. The checks are small because the rule is simple.</p>
+<h2 id="4-verify-the-live-host">4. Verify the live host</h2>
+<p>After your deploy, ask this host for the hash of every file you load and compare with the manifest; <code>tools/live_check.py</code> in the repository does it for a release, with retries while Pages propagates. <a href="https://newsroom.sgit.ai/articles/green-does-not-mean-live.html">Green does not mean live</a>.</p>
+<h2 id="5-roll-back">5. Roll back</h2>
+<p>Change the release in the pin to the previous one, copy its manifest, repoint, gate, deploy. A release directory is never edited in place, so the previous release is exactly what it was.</p>
+<h2 id="taking-a-new-release">Taking a new release</h2>
+<p>Read <a href="../../releases/">its notes</a> first: a release says what changed, and lists any file that differs from the newsroom's bytes and why. Then steps 1 to 4. The frozen meter versions are in every release at their paths, so a page pinned to an older component version keeps working.</p>
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> Pinning: write the release in one file, copy its manifest, generate every reader-file URL from the pin, gate every page (no relative path, the pinned release only, paths in the manifest), verify the live host&#x27;s hashes; rollback is the previous release in the pin. The newsroom&#x27;s admin/build/api.json, api-manifest.json, api.py --repoint --rerecord and validate.js checks 13 and 14 are the example. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../../for-publishers/">For publishers and editors</a><a href="../../for-evaluators/">For evaluators</a><a href="../../adopt/">Adopt it</a><a href="../../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

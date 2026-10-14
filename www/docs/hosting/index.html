@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The hosting model · api.newsroom.sgit.ai</title>
+<meta name="description" content="How the reader code is served and consumed: a versioned prefix per release, never edited in place; the CORS header a cross-origin import needs; what stays on the page&#x27;s origin (state, data, addresses); data-root; pinning, the manifest, rollback; CSP.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/docs/hosting/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="The hosting model"><meta property="og:description" content="How the reader code is served and consumed: a versioned prefix per release, never edited in place; the CORS header a cross-origin import needs; what stays on the page&#x27;s origin (state, data, addresses); data-root; pinning, the manifest, rollback; CSP."><meta property="og:url" content="https://api.newsroom.sgit.ai/docs/hosting/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "The hosting model", "description": "How the reader code is served and consumed: a versioned prefix per release, never edited in place; the CORS header a cross-origin import needs; what stays on the page's origin (state, data, addresses); data-root; pinning, the manifest, rollback; CSP.", "url": "https://api.newsroom.sgit.ai/docs/hosting/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/" class=here>Docs</a><a href="../../how-to/">How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../../index.html">Home</a> / <a href="../../docs/">Docs</a> / The hosting model</p>
+<p class="eyebrow">Reference</p>
+<h1 id="the-hosting-model">The hosting model</h1>
+<blockquote>The code lives on one host, in one directory per release, and a release is never changed after it is published. The pages that run it live wherever the newsroom lives. Everything about a reader stays with the page.</blockquote>
+<h2 id="the-address-of-a-file">The address of a file</h2>
+<pre class="code" data-lang="text"><button class="copy" type="button" aria-label="Copy">Copy</button><code>https://api.newsroom.sgit.ai/&lt;release&gt;/&lt;path&gt;
+https://api.newsroom.sgit.ai/v0.1.0/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js
+https://api.newsroom.sgit.ai/v0.1.0/manifest.json</code></pre>
+<p><code>&lt;path&gt;</code> is the path the file had in the newsroom's repository, so the move was a prefix rewrite and nothing else; reshaping the paths is a later phase. The meter's own component versions nest inside the release unchanged. <code>manifest.json</code> lists every path with its bytes and SHA-256, and which files differ from the newsroom's bytes and why. <a href="../../releases.json"><code>releases.json</code></a> lists the releases.</p>
+<h2 id="what-a-cross-origin-host-needs">What a cross-origin host needs</h2>
+<p>GitHub Pages serves every file with <code>access-control-allow-origin: *</code>. That is what an ES module import from another origin needs, and what the component base needs when it fetches a component's <code>.tpl</code> and <code>.css</code> beside its <code>.js</code> through <code>import.meta.url</code>. Classic <code>&lt;script src&gt;</code> tags (the vendored vault library) need nothing. The live check after every deploy fails if the header is missing.</p>
+<h2 id="what-stays-on-the-page-s-origin">What stays on the page's origin</h2>
+<ul><li><b>The reader's state.</b> <code>localStorage</code> and <code>sessionStorage</code> belong to the page's origin, not the script's. <code>sgit.meter.v1</code> stays on the newsroom whichever host serves the meter. This is the property the move depended on, and a test records it.</li><li><b>The site's data.</b> The meter fetches the article feed and the contact file from <code>cfg.root</code> on the page; the reading list fetches <code>articles/ids.json</code> from where the page says. Nothing is fetched from this host but code.</li><li><b>The addresses.</b> The Stripe return page, <code>/for/#…</code>, <code>/persona/&lt;id&gt;/</code>, <code>/.well-known/sgit-subscribe.json</code> are the newsroom's; pages do not move to this host, and could not, because another origin has another origin's storage.</li></ul>
+<h2 id="data-root"><code>data-root</code></h2>
+<p>Three files locate the site's root to link to pages and fetch data: the vault pane, search and ask. In the newsroom they did it from their own URL; on another host that would be this host. They now read <code>&lt;html data-root="…"&gt;</code>, the path from the page to the site root, which every newsroom page carries (<code>""</code> at the root, <code>"../"</code> one level down). A page that imports them needs the attribute. The code they load (the vault library) they still find from their own URL.</p>
+<h2 id="pinning-the-manifest-rollback">Pinning, the manifest, rollback</h2>
+<p>A consuming site writes the release into one file and generates every URL from it. The newsroom's is <code>admin/build/api.json</code>; its <code>admin/build/api.py --repoint</code> rewrites every page, its gate (check 14) refuses a relative, unpinned or unlisted reader-file reference, and check 13 holds the frozen meter copies it still serves to the manifest's bytes. A rollback is the previous release in that file and one run. <a href="../../how-to/take-a-release/">Taking a release</a>.</p>
+<h2 id="content-security-policy">Content-Security-Policy</h2>
+<p>No page sets one yet (finding R10). When one is added, <code>script-src</code> and <code>connect-src</code> include <code>https://api.newsroom.sgit.ai</code>; <code>frame-ancestors</code> cannot be set in a meta tag, so framing protection needs a host that sets headers, which GitHub Pages is not. The order of work in the brief is: load scripts as modules instead of fetched text through <code>eval</code>, then the meta policy, then decide on a layer in front.</p>
+<h2 id="what-a-different-host-changed">What a different host changed</h2>
+<p>Three files could not move unchanged, because they located the site root from their own URL: <code>assets/vault-pane/vault-pane.js</code>, <code>assets/search/search.js</code>, <code>assets/search/ask.js</code>. Each now takes the site root from the page (<code>data-root</code>) and keeps a second root, its own, for the code it loads. The manifest records each with its before-hash and the reason, and <code>tools/release.py</code> refuses any other difference from the newsroom's bytes. <a href="../../review/proof/">The proof</a>.</p>
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> The hosting model of the SGit Newsroom API: files served from https://api.newsroom.sgit.ai/&lt;release&gt;/&lt;path&gt; with access-control-allow-origin *; a release is frozen once published; the reader&#x27;s state and the site&#x27;s data stay on the page&#x27;s origin; pages carry data-root; a consumer pins one release and copies its manifest; a rollback is the previous release; CSP must name the host. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../../for-publishers/">For publishers and editors</a><a href="../../for-evaluators/">For evaluators</a><a href="../../adopt/">Adopt it</a><a href="../../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

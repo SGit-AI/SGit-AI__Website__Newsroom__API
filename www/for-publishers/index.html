@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For publishers, editors and executives · api.newsroom.sgit.ai</title>
+<meta name="description" content="What a reader gets, what the newsroom keeps, what it costs to adopt, what is live and taking money, and what is honestly not there yet. The case for a reading meter and a reader&#x27;s own newsroom, from a site that runs one.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/for-publishers/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="For publishers, editors and executives"><meta property="og:description" content="What a reader gets, what the newsroom keeps, what it costs to adopt, what is live and taking money, and what is honestly not there yet. The case for a reading meter and a reader&#x27;s own newsroom, from a site that runs one."><meta property="og:url" content="https://api.newsroom.sgit.ai/for-publishers/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "For publishers, editors and executives", "description": "What a reader gets, what the newsroom keeps, what it costs to adopt, what is live and taking money, and what is honestly not there yet. The case for a reading meter and a reader's own newsroom, from a site that runs one.", "url": "https://api.newsroom.sgit.ai/for-publishers/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../for-publishers/" class=here>For publishers</a><a href="../for-developers/">For developers</a><a href="../for-evaluators/">For evaluators</a><a href="../docs/">Docs</a><a href="../how-to/">How-to</a><a href="../review/">Review</a><a href="../releases/">Releases</a><a href="../articles/">Articles</a><a href="../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../index.html">Home</a> / For publishers, editors and executives</p>
+<p class="eyebrow">The case</p>
+<h1>For publishers, editors and executives</h1>
+<p class="lead">You know the problem. A paywall turns a reader away at the door; a free site pays nothing back; a subscription asks for a commitment before the first paragraph. This is a third thing, running on a live site since October 2026: a reader walks in with a small credit, a meter charges by how far they read, they pay after, and what they pay is set by what they thought of it. Around it, a newsroom that is theirs: personas, picks, lists they can send in a link, an account that travels with them, and none of it on a server of ours.</p>
+
+<p class="live"><span class="dot" aria-hidden="true"></span><span>Everything on this page is running at <a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a>. Open any article and watch the balance in the top bar; <a href="https://newsroom.sgit.ai/account/">the reading account</a> shows what you spent and why. It is a working instance, not a demo.</span></p>
+
+<h2>What a reader gets</h2>
+<div class="cards">
+<a class="card" href="https://newsroom.sgit.ai/articles/pay-after-you-read.html"><span class="tag">Pay after you read</span><h3>A meter, not a wall</h3><p>£5 of credit to begin. An article costs 5p, a new one 10p, charged by the deepest point reached. Rate it at the foot and the price moves: excellent is double, not useful is free. Declining refunds the page.</p></a>
+<a class="card" href="https://newsroom.sgit.ai/articles/a-link-to-a-persona.html"><span class="tag">Personas</span><h3>Read as who you are today</h3><p>A founder, a journalist, a security lead, a builder, a board member. Each has a starting reading list and picks that follow what they keep and reject. A link can open the site as one.</p></a>
+<a class="card" href="https://newsroom.sgit.ai/articles/a-reading-list-in-a-link.html"><span class="tag">Reading lists</span><h3>Send five articles, not five links</h3><p>Every article has a number that never changes. A reading list is a link with the numbers in it, from you to a named reader, with a note. Nothing is stored anywhere but the link.</p></a>
+<a class="card" href="https://newsroom.sgit.ai/articles/the-vault-is-live.html"><span class="tag">The vault</span><h3>An account that travels, with no sign-in</h3><p>A passkey opens an encrypted vault that carries the reading account between a phone and a laptop. The newsroom never holds a key and cannot read it.</p></a>
+<a class="card" href="https://newsroom.sgit.ai/articles/the-site-is-an-inbox.html"><span class="tag">Notes</span><h3>Write back, one tap</h3><p>A reader marks a page done, wrong, more like this, or writes to the newsroom; the notes travel in their vault and arrive encrypted in a lane the newsroom reads.</p></a>
+<a class="card" href="https://newsroom.sgit.ai/wire/"><span class="tag">The wire</span><h3>Industry news as an inbox</h3><p>Stories agents gather into a vault, read live in the browser, filtered by the reader's lens, with what is new since their last visit.</p></a>
+</div>
+
+<h2>What the newsroom keeps, and what it never holds</h2>
+<div class="cols2">
+<div>
+<h3>Keeps</h3>
+<ul>
+<li><b>The money.</b> A reader tops up through a Stripe Payment Link you own; the return page credits their balance. No card data touches your site.</li>
+<li><b>The formats.</b> Article numbers, persona links, the reading-list grammar, the share envelope: published contracts your readers and their agents can rely on, and that other newsrooms can share.</li>
+<li><b>The relationship.</b> Shares and subscriptions arrive encrypted to a key only you hold, in a write-only lane; notes from the pane arrive the same way, with the page and the reader's words.</li>
+<li><b>The site you have.</b> Static pages, any host. The reader code is a handful of files pinned from this host.</li>
+</ul>
+</div>
+<div>
+<h3>Never holds</h3>
+<ul>
+<li><b>Reader data.</b> The balance, the history, the personas, the lists and the notes live in the reader's browser, and in their own vault if they choose one. There is no reader database because there is no server.</li>
+<li><b>Keys.</b> The vault's keys are derived from the reader's passkey; the newsroom reads a lane with a read key the reader hands over, and nothing else.</li>
+<li><b>A dependency on us.</b> The code is Apache 2.0, every release is a directory of files with a manifest of hashes, and a rollback is one line.</li>
+</ul>
+</div>
+</div>
+
+<h2>What it costs to adopt</h2>
+<ol class="steps">
+<li><h3>A static site</h3><p>Your pages, wherever they are hosted. The meter is a custom element and a JSON config on each page; the balance chip sits in your navigation. <a href="../how-to/add-the-meter/">Ten lines</a>.</p></li>
+<li><h3>Two small data files</h3><p>An article feed (titles, dates, topics, teasers) for the picks, and a numbers file that gives every article a stable number. The newsroom's build writes both; yours can too. <a href="../docs/contracts/">The contracts</a>.</p></li>
+<li><h3>A payment link</h3><p>A Stripe Payment Link for the top-up, returning to your account page. Until it is set, the site says so and no money moves.</p></li>
+<li><h3>A vault for the lane, optional</h3><p>Shares, subscriptions and notes arrive in an encrypted vault on an SG/Send host, drained by a person or an agent with your key. Without it, the meter still runs; the reader just cannot write back.</p></li>
+<li><h3>A pinned release</h3><p>One line names the release you load from this host; a manifest lists every file's hash; a rollback is the previous line. <a href="../how-to/take-a-release/">How</a>.</p></li>
+</ol>
+
+<h2>The numbers from a live site</h2>
+<div class="kpis">
+<div class="kpi"><span class="k">credit to start</span><span class="v">£5.00</span><span class="d">in the reader's browser, no sign-in</span></div>
+<div class="kpi"><span class="k">an article</span><span class="v">5p</span><span class="d">10p when new; by depth; nothing if not useful</span></div>
+<div class="kpi"><span class="k">top-up</span><span class="v">£5</span><span class="d">by card, through a Stripe Payment Link</span></div>
+<div class="kpi"><span class="k">starting personas</span><span class="v">5</span><span class="d">each a reading list and a link</span></div>
+<div class="kpi"><span class="k">reader code</span><span class="v">8,661 lines</span><span class="d">open source, reviewed, tested in three engines</span></div>
+<div class="kpi"><span class="k">servers of ours</span><span class="v">0</span><span class="d">by design; the security model says what that accepts</span></div>
+</div>
+
+<h2>What is honestly not there yet</h2>
+<p>The site that runs this says so on its own <a href="https://newsroom.sgit.ai/shipped/">what runs, what is designed</a> page, and the review here lists it as <a href="../review/">findings</a>. In short: the balance lives in the reader's browser, so a reader can edit their own credit, and the return page credits a payment reference without verifying it; both are accepted and written down in <a href="https://newsroom.sgit.ai/meter/security.html">the security model</a>. No page sets a Content-Security-Policy yet. The vault hosts the live site uses are named <i>dev</i>. Shares from the newsroom are still labelled with the site the code came from. Each is an open issue with a proposed change, and each will be a visible change to a test when it is fixed.</p>
+
+<h2>The thinking behind it</h2>
+<p>None of this was built first and explained after. Each piece is an article on newsroom.sgit.ai, written before it shipped and again when it went live. For an editor or an executive, start with these four:</p>
+<div class="cards">
+<a class="card article" href="https://newsroom.sgit.ai/articles/future-of-news-story-vault-not-paywall.html"><span class="tag">The case</span><h3>The future of news is a story vault, not a paywall</h3><p>Why the unit of news should be a story a reader can hold, not a wall they must cross.</p></a>
+<a class="card article" href="https://newsroom.sgit.ai/thesis/"><span class="tag">The thesis</span><h3>Sell the graph</h3><p>The newsroom's founding idea: the value is in the connections between what is published, and that is what a reader pays for.</p></a>
+<a class="card article" href="https://newsroom.sgit.ai/economics/"><span class="tag">Economics</span><h3>Paying the fact creator</h3><p>What a meter makes possible that a subscription does not: money that follows the reading, down to the person who found the fact.</p></a>
+<a class="card article" href="https://newsroom.sgit.ai/articles/going-live-with-the-reading-meter.html"><span class="tag">Going live</span><h3>Going live with the reading meter</h3><p>The day real money started moving, what was switched on, and the line between what runs and what is designed.</p></a>
+</div>
+<p>More: <a href="../articles/">the articles behind it</a>, in reading order. The design pages on <a href="https://newsroom.sgit.ai/design/">corrections that propagate, provenance as the product, and content rights</a> are the newsroom's own.</p>
+
+<h2>Starting a pilot</h2>
+<p>If you run a newsroom and want to try this on a section of your site, with your own payment link and your own lane, the people behind newsroom.sgit.ai will help you set it up and will learn from what your readers do. Write to <a href="mailto:agent@riskmandate.ai">agent@riskmandate.ai</a>, which an agent reads first and a person answers, or open <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">an issue</a> in the repository, which is where the work happens in any case. Share this page with your team: the <a href="../for-developers/">developer quick start</a> is what they will ask for next, and <a href="../for-evaluators/">the evaluator's page</a> is what your security team will.</p>
+
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> The page for publishers, editors and executives evaluating the SGit Newsroom API: the reader&#x27;s experience (meter, pay after you read, personas, lists, vault), the newsroom&#x27;s position (no server, no reader data held, Stripe for money), the cost of adoption (static files, a pinned release, a payment link, a vault for the lane), what is live, what is designed, and how to start a pilot. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../for-developers/">Quick start</a><a href="../docs/">Reference</a><a href="../how-to/">How-to guides</a><a href="../releases/">Releases</a><a href="../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../for-publishers/">For publishers and editors</a><a href="../for-evaluators/">For evaluators</a><a href="../adopt/">Adopt it</a><a href="../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../review/">The map and the review</a><a href="../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

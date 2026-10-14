@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up the subscribe lane · api.newsroom.sgit.ai</title>
+<meta name="description" content="How shares, subscriptions and notes reach a newsroom without a server: a key pair, a write-only lane in an encrypted vault on an SG/Send host, the contact file at /.well-known/, and reading the lane with the key alone.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/how-to/subscribe-lane/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="Set up the subscribe lane"><meta property="og:description" content="How shares, subscriptions and notes reach a newsroom without a server: a key pair, a write-only lane in an encrypted vault on an SG/Send host, the contact file at /.well-known/, and reading the lane with the key alone."><meta property="og:url" content="https://api.newsroom.sgit.ai/how-to/subscribe-lane/">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Set up the subscribe lane", "description": "How shares, subscriptions and notes reach a newsroom without a server: a key pair, a write-only lane in an encrypted vault on an SG/Send host, the contact file at /.well-known/, and reading the lane with the key alone.", "url": "https://api.newsroom.sgit.ai/how-to/subscribe-lane/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../../releases/" title="The current release">v0.1.0</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/">Docs</a><a href="../../how-to/" class=here>How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
+</div></header>
+<main id="main" class="doc">
+<p class="crumb"><a href="../../index.html">Home</a> / <a href="../../how-to/">How-to</a> / Set up the subscribe lane</p>
+<p class="eyebrow">How-to</p>
+<h1 id="set-up-the-subscribe-lane">Set up the subscribe lane</h1>
+<blockquote>A reader presses Send; their browser encrypts a small message to your public key and appends it to a lane you own. The site never sees it. You read the lane with your key, by hand or with an agent.</blockquote>
+<h2 id="what-you-need">What you need</h2>
+<ol><li><b>A key pair.</b> An RSA key whose public half is published; the private half stays with whoever (or whichever agent) reads the lane. The envelope is RSA-OAEP-SHA256 wrapping an AES-256-GCM key (the sgit hybrid envelope v2).</li><li><b>A vault with an append lane</b> on an SG/Send host, with an append token that lets a browser write and nothing else. The newsroom's lane is on <code>dev.send.sgraph.ai</code> (named <i>dev</i>; finding R5 asks the operator to say whether that is production).</li><li><b>The contact file</b> at <code>/.well-known/sgit-subscribe.json</code>.</li></ol>
+<h2 id="the-contact-file">The contact file</h2>
+<pre class="code" data-lang="json"><button class="copy" type="button" aria-label="Copy">Copy</button><code>{&quot;format&quot;: &quot;sgit-subscribe/v1&quot;,
+ &quot;site&quot;: &quot;your-site.example&quot;,
+ &quot;recipient&quot;: {&quot;address&quot;: &quot;newsroom@your-site.example&quot;, &quot;fingerprint&quot;: &quot;&lt;sha256 of the PEM&gt;&quot;, &quot;encrypt&quot;: &quot;&lt;PEM public key&gt;&quot;},
+ &quot;inbox&quot;: {&quot;vault&quot;: &quot;&lt;vault id&gt;&quot;, &quot;endpoint&quot;: &quot;https://&lt;sg-send host&gt;&quot;, &quot;encrypt_to&quot;: &quot;recipient&quot;,
+           &quot;status&quot;: &quot;live&quot;, &quot;lane&quot;: {&quot;name&quot;: &quot;subscribe&quot;, &quot;append_token&quot;: &quot;&lt;token that can only append&gt;&quot;}}}</code></pre>
+<p>The browser recomputes the fingerprint from the PEM before encrypting, so a swapped key is refused. The newsroom's own file is <a href="https://newsroom.sgit.ai/.well-known/sgit-subscribe.json">here</a>; it is still labelled with the site the code came from (<a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues/4">finding R4</a>), which the move makes possible to fix.</p>
+<h2 id="what-arrives">What arrives</h2>
+<p>A subscription is an <code>.eml</code> with the address and a consent line; a share is the reader's summary and their data as JSON (balance, spent, reads, personas, topics, log; never a payment reference), with headers <code>X-SGit-Form</code>, <code>X-SGit-Reply-To</code>, <code>X-SGit-Name</code>, <code>X-SGit-Subscribe</code>, <code>X-SGit-Page</code>. A note from the vault pane arrives in the reader's own lane, whose read key they hand over, with the page, their words and the phrase they selected.</p>
+<h2 id="reading-the-lane">Reading the lane</h2>
+<p>With <code>sgit</code> and the read key, from the command line or an agent:</p>
+<pre class="code" data-lang="sh"><button class="copy" type="button" aria-label="Copy">Copy</button><code>sgit clone &lt;the lane&#x27;s read key&gt;          # the notes as files, newest first
+NEWSROOM_LANE_KEY=&lt;read key&gt; python3 admin/build/lane.py   # the newsroom&#x27;s digest, by page; the key from the environment, never a file</code></pre>
+<p>A read key cannot write: a push from the clone is refused, and the test proves it. The newsroom refuses to hold a vault key for a reader's lane at all.</p>
+<h2 id="the-pieces-on-this-host">The pieces on this host</h2>
+<p><code>assets/subscribe.js</code> (the form, the fingerprint check, the envelope, the append), the meter's share view in <code>sg-meter.js</code>, and the vault layer for notes. The article <a href="https://newsroom.sgit.ai/articles/the-site-is-an-inbox.html">The site is an inbox</a> is the design of the feedback loop; <a href="https://newsroom.sgit.ai/articles/two-agents-one-vault.html">Two agents, one vault</a> is how the newsroom's agents share what arrives.</p>
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> The lane: publish /.well-known/sgit-subscribe.json (sgit-subscribe/v1: recipient address, key fingerprint, public key; inbox vault, endpoint, encrypt_to, lane name and append token); the browser encrypts an .eml to the key (sgit hybrid envelope v2) and POSTs it to the vault&#x27;s append endpoint; the newsroom reads the lane with sgit and its private key; the fingerprint is recomputed before use. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../../for-publishers/">For publishers and editors</a><a href="../../for-evaluators/">For evaluators</a><a href="../../adopt/">Adopt it</a><a href="../../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
+</div>
+<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+</footer>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>
