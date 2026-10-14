@@ -1,5 +1,5 @@
 {
- "what": "The checkout of the newsroom the tests run against: its pages import the reader code from api.newsroom.sgit.ai, and the harness routes that host to this working tree. CI checks it out at .newsroom/. A commit, not a branch: site v0.13.0 on claude/confident-hopper-ot37nz (its two commits), to become dev's once merged.",
+ "what": "The checkout of the newsroom the tests run against: its pages import the reader code from api.newsroom.sgit.ai, and the harness routes that host to this working tree. CI checks it out at .newsroom/. A commit, not a branch: site v0.13.0, the merge of dev (v0.12.50) into the move, on claude/confident-hopper-ot37nz until it is dev.",
  "repository": "SGit-AI/SGit-AI__Website__Newsroom",
  "ref": "3c22508274d641c97b8aa364f89d9a6224e51733"
 }
