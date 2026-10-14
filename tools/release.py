@@ -8,8 +8,11 @@
 
 What is served is the list in tools/served.json: the files the newsroom's reader runs, at the paths they had there
 (the brief's rule for the move: identical paths under the new host, so the move is a prefix rewrite and the proof
-is a hash). A release is tools/version.json (release, date: both from the file, never from the clock, so a build
-is the same bytes twice). The served URL of a file is https://api.newsroom.sgit.ai/<release>/<path>.
+is a hash). tools/version.json holds two numbers and a date, all from the file, never from the clock, so a build is
+the same bytes twice: "version", the repository's version, bumped by every change that lands on dev (a patch for a small
+one: v0.2.1, v0.2.2; the deploy tags it), and "release", the latest cut of the reader code, releases/<release>/, which
+the consuming sites pin; a change to a served file sets release to the new version and cuts. The served URL of a file
+is https://api.newsroom.sgit.ai/<release>/<path>.
 
 A release directory, once on dev (the default and release branch), is never changed (finding R16: a change is a new version path, always). `check`
 recomputes every hash in every manifest, and fails when the tree differs from the release that tools/version.json
@@ -19,6 +22,7 @@ each file they load is in it, and a release ends by asking the live host for the
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -38,6 +42,28 @@ CHANGED_FROM_NEWSROOM = {
     "assets/search/search.js": "took the site root from its own URL; now from the page's data-root for data and links, and imports the pane's modules from its own root (CODE)",
     "assets/search/ask.js": "took the site root from its own URL; now from the page's data-root for links",
 }
+
+
+def vtuple(v):
+    """'v0.2.1' -> (0, 2, 1); anything else is an error."""
+    m = re.fullmatch(r"v(\d+)\.(\d+)\.(\d+)", v or "")
+    if not m:
+        sys.exit(f"release: {v!r} is not a version of the form vX.Y.Z (tools/version.json)")
+    return tuple(int(x) for x in m.groups())
+
+
+def version_errors():
+    """The rule of tools/version.json: both numbers well formed, the release never ahead of the version."""
+    errors = []
+    try:
+        v, r = vtuple(VERSION.get("version")), vtuple(VERSION.get("release"))
+    except SystemExit as e:
+        return [str(e).replace("release: ", "")]
+    if r > v:
+        errors.append(f"tools/version.json: the release {VERSION['release']} is ahead of the version {VERSION['version']}")
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", VERSION.get("date", "")):
+        errors.append("tools/version.json: date is not YYYY-MM-DD")
+    return errors
 
 
 def sha(data):
@@ -85,7 +111,7 @@ def cut(out):
 
 
 def check():
-    errors = []
+    errors = version_errors()
     for rel in SERVED:
         if not (ROOT / rel).exists():
             errors.append(f"{rel} is in tools/served.json and not in the tree")
@@ -134,7 +160,7 @@ def site(out):
                      "manifest": f"{HOST}/{m['release']}/manifest.json"})
     if not (out / "releases.json").exists():      # the website writes it; without the website, a plain index
         index = {"what": "The releases of the newsroom's reader code served from this host. A consuming site pins one; nothing here is "
-                         "edited after it is published.", "host": HOST, "current": VERSION["release"], "releases": rels}
+                         "edited after it is published.", "host": HOST, "current": VERSION["release"], "version": VERSION["version"], "releases": rels}
         (out / "releases.json").write_text(json.dumps(index, indent=1) + "\n", encoding="utf-8")
     shutil.copyfile(ROOT / "CNAME", out / "CNAME")
     (out / ".nojekyll").write_text("", encoding="utf-8")
@@ -147,6 +173,11 @@ def main():
     ap.add_argument("--out", help="cut: where to write instead of releases/<version>/; site: where to assemble (required)")
     a = ap.parse_args()
     if a.cmd == "cut":
+        if version_errors():
+            sys.exit("release: " + "; ".join(version_errors()))
+        if VERSION["release"] != VERSION["version"] and not a.out:
+            sys.exit(f"release: a release is cut at the repository's version: set release to {VERSION['version']} in tools/version.json "
+                     f"(it says {VERSION['release']}) and cut")
         out = Path(a.out).resolve() if a.out else RELEASES / VERSION["release"]
         if out.exists() and not a.out:
             sys.exit(f"release: {out.relative_to(ROOT)} exists; a release is never edited in place. Bump tools/version.json for a new one")
@@ -161,7 +192,7 @@ def main():
                 print("  ✗ " + e)
             sys.exit(1)
         n = len(list(RELEASES.glob("v*/manifest.json")))
-        print(f"release: OK: {n} release(s) match their manifests; the tree is {VERSION['release']}")
+        print(f"release: OK: {n} release(s) match their manifests; the tree is {VERSION['release']} (repository {VERSION['version']})")
     else:
         if not a.out:
             sys.exit("release: site needs --out DIR")

@@ -25,7 +25,9 @@ manifests, into `www/`, which is committed and which CI checks; the deploy publi
 
 - The served files, at the paths they had in the newsroom: `assets/components/`, `assets/vault-pane/`,
   `assets/search/`, `assets/vendor/sg-vault/`, `assets/vendor/qrcode-generator/`, `assets/subscribe.js`, `assets/newsroom-vault.js`, `assets/door.js`,
-  `for/`, `wire/`, `passkey/`. `tools/served.json` is the list; `tools/version.json` the release and its date.
+  `for/`, `wire/`, `passkey/`. `tools/served.json` is the list; `tools/version.json` the repository's `version` (every
+  change that lands on `dev` is one, in small increments: v0.2.1, v0.2.2; the deploy tags it), the reader-code `release`
+  the consuming sites pin (`releases/<release>/`, cut only when a served file changes), and the date.
 - `releases/<release>/`: each release as published, with `manifest.json` (every path, bytes, SHA-256; which files
   differ from the newsroom's bytes and why). Never edited after it is on `dev`. `python3 tools/release.py cut`
   makes one from the tree; `check` recomputes every hash and fails when the tree is not the release it names;

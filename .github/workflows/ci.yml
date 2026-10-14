@@ -24,6 +24,20 @@ jobs:
           python3 -m py_compile tools/*.py
       - name: The release matches its manifest, and the tree is the release
         run: python3 tools/release.py check
+      - name: The version is bumped against dev (every change that lands there is a version)
+        if: github.ref != 'refs/heads/dev'
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin dev
+          python3 - <<'PY'
+          import json, subprocess, sys
+          t = lambda v: tuple(int(x) for x in v[1:].split("."))
+          here = json.load(open("tools/version.json"))["version"]
+          dev = json.loads(subprocess.check_output(["git", "show", "origin/dev:tools/version.json"])).get("version", "v0.0.0")
+          if t(here) <= t(dev):
+              sys.exit(f"::error::tools/version.json says {here}; dev is at {dev}: bump the version (a patch for a small change)")
+          print(f"{here} is above dev's {dev}")
+          PY
       - name: The build is the same bytes twice
         run: |
           set -euo pipefail

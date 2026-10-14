@@ -18,7 +18,7 @@
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
   <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
-  <a class="ver" href="../../releases/" title="The current release">v0.2.0</a>
+  <a class="ver" href="../../releases/" title="This site is v0.2.1; the reader code it serves is release v0.2.0">v0.2.1</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/">Docs</a><a href="../../how-to/" class=here>How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
 </div></header>
@@ -32,21 +32,24 @@
 <h2 id="1-change-and-test">1. Change, and test</h2>
 <p>Edit under the served paths (<code>assets/</code>, <code>for/</code>, <code>wire/</code>, <code>passkey/</code>); if the file is one of the meter's, it is a new component version at a new path, never an edit of <code>v1.4.0</code>. Run the tests in the three engines against the newsroom checkout (<a href="../run-the-tests/">running the tests</a>).</p>
 <h2 id="2-version-and-cut">2. Version and cut</h2>
-<pre class="code" data-lang="sh"><button class="copy" type="button" aria-label="Copy">Copy</button><code>$EDITOR tools/version.json          # {&quot;release&quot;: &quot;v0.2.0&quot;, &quot;date&quot;: &quot;2026-10-20&quot;}: both from the file, never the clock
-python3 tools/release.py cut        # releases/v0.2.0/&lt;every served file&gt; and manifest.json
-python3 tools/release.py check      # every release matches its manifest; the tree is the release
-python3 site/build.py               # the site: the release appears on /releases/</code></pre>
-<p><code>cut</code> refuses to write over an existing release directory, and refuses a file that differs from the newsroom's bytes unless <code>CHANGED_FROM_NEWSROOM</code> records why. Write the release's note at <code>site/releases/v0.2.0.md</code>.</p>
+<p><code>tools/version.json</code> holds two numbers and a date, all from the file, never the clock:</p>
+<ul><li><b><code>version</code></b>, the repository's version. Every change that lands on <code>dev</code> is a new one, in small increments: a patch for a small change (v0.2.1, v0.2.2, ...), a minor for a new capability. The deploy tags it, and refuses a version that is already a tag or not above the latest. CI on a branch fails when the version is not above <code>dev</code>'s.</li><li><b><code>release</code></b>, the latest cut of the reader code: <code>releases/&lt;release&gt;/</code>, what the consuming sites pin. It changes only when a served file changes; then it is set to the new version and cut.</li></ul>
+<pre class="code" data-lang="sh"><button class="copy" type="button" aria-label="Copy">Copy</button><code>$EDITOR tools/version.json          # {&quot;version&quot;: &quot;v0.2.3&quot;, &quot;release&quot;: &quot;v0.2.3&quot;, &quot;date&quot;: &quot;2026-10-20&quot;} for a change to a served file;
+                                    # {&quot;version&quot;: &quot;v0.2.3&quot;, &quot;release&quot;: &quot;v0.2.0&quot;, ...} for a change to the site, the tests or the tools
+python3 tools/release.py cut        # (served files changed) releases/v0.2.3/&lt;every served file&gt; and manifest.json
+python3 tools/release.py check      # every release matches its manifest; the tree is the release; the two numbers obey their rule
+python3 site/build.py               # the site: the version in the bar, the release on /releases/</code></pre>
+<p><code>cut</code> refuses to write over an existing release directory, refuses a release that is not the repository's version, and refuses a file that differs from the newsroom's bytes unless <code>CHANGED_FROM_NEWSROOM</code> records why. Write a release's note at <code>site/releases/v0.2.3.md</code>.</p>
 <h2 id="3-the-pull-request">3. The pull request</h2>
 <p>CI runs the syntax check, the manifest check, the build twice, the site check and the tests in three engines. A pull request needs one person and one agent reviewer; the agent's review is a required check. The description says what changed, which test fails without it, and why now.</p>
 <h2 id="4-merge-deploy-tag-check">4. Merge, deploy, tag, check</h2>
-<p>A push to <code>dev</code> (the default branch, and the release branch) runs <code>deploy-pages.yml</code>: the checks again, a tag from the version file, the Pages deploy of <code>www/</code> and <code>releases/</code>, and then <code>tools/live_check.py</code>, which asks the live host for every file of the release and compares the hashes, retrying while Pages propagates. The release is live when that job is green, not before.</p>
+<p>A push to <code>dev</code> (the default branch, and the release branch) runs <code>deploy-pages.yml</code>: the checks again, a tag of the version, the Pages deploy of <code>www/</code> and <code>releases/</code>, and then <code>tools/live_check.py</code>, which asks the live host for every file of the release and compares the hashes, retrying while Pages propagates. The release is live when that job is green, not before.</p>
 <h2 id="5-the-consumers">5. The consumers</h2>
 <p>Tell the newsroom (and sgit.ai, once it pins): <a href="../take-a-release/">taking a release</a>. The newsroom's release note names the API release it moved to.</p>
 <h2 id="what-never-happens">What never happens</h2>
 <p>A file under <code>releases/</code> is never edited. A tag is never moved. A release is never cut from a tree that differs from it. A served file is never loaded unversioned.</p>
 <aside class="agent" aria-label="For agents">
- <p><b>For agents.</b> Making a release of the SGit Newsroom API: a change to a served file is a new release (frozen until phase 4; a test that fails without it and a reason in the PR); bump tools/version.json; python3 tools/release.py cut (releases/&lt;v&gt;/ and manifest.json); release.py check; site/build.py; CI; PR reviewed by a person and an agent; merge to main deploys, tags, and runs tools/live_check.py; then the newsroom takes the release. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.2.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.2.0/manifest.json">v0.2.0/manifest.json</a>.</p>
+ <p><b>For agents.</b> Making a release of the SGit Newsroom API: a change to a served file is a new release (frozen until phase 4; a test that fails without it and a reason in the PR); bump the version in tools/version.json (every change that lands on dev is one: v0.2.1, v0.2.2); when a served file changed, set release to it and python3 tools/release.py cut (releases/&lt;v&gt;/ and manifest.json); release.py check; site/build.py; CI; PR reviewed by a person and an agent; merge to main deploys, tags, and runs tools/live_check.py; then the newsroom takes the release. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.2.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.2.0/manifest.json">v0.2.0/manifest.json</a>.</p>
 </aside>
 </main>
 <footer class="foot"><div class="cols">
@@ -55,7 +58,7 @@ python3 site/build.py               # the site: the release appears on /releases
   <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
   <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
 </div>
-<p class="fine">SGit Newsroom API · v0.2.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+<p class="fine">SGit Newsroom API · v0.2.1 · reader code v0.2.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
 </footer>
 <script src="../../assets/site.js" defer></script>
 </body>

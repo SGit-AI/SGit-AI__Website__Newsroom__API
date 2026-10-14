@@ -1,4 +1,6 @@
-# dev, the default branch, is the release branch (the github-pages environment deploys the default branch only): check -> tag -> publish api.newsroom.sgit.ai -> ask the live host for every hash.
+# dev, the default branch, is the release branch (the github-pages environment deploys the default branch only): check -> tag the
+# version -> publish api.newsroom.sgit.ai -> ask the live host for every hash of the reader-code release. Every change that lands
+# here is a version (tools/version.json: v0.2.1, v0.2.2, ...); the tag job refuses one that is already tagged.
 # The site is the releases/ directory (tools/release.py site): one directory per release, never edited after it is
 # published, an index and releases.json. Pages for this repository deploys from GitHub Actions (configure-pages enables it).
 name: deploy-pages
@@ -40,14 +42,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Tag this release, from tools/version.json
+      - name: Tag this version, from tools/version.json (every change that lands here is a new version)
         run: |
           set -euo pipefail
-          TAG=$(python3 -c 'import json;print(json.load(open("tools/version.json"))["release"])')
+          TAG=$(python3 -c 'import json;print(json.load(open("tools/version.json"))["version"])')
           git fetch --tags --quiet
           if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
-            if ! git merge-base --is-ancestor "refs/tags/$TAG" HEAD; then echo "::error::$TAG exists on another history"; exit 1; fi
-            echo "$TAG already tagged"; exit 0
+            if [ "$(git rev-parse "refs/tags/$TAG^{commit}")" = "$(git rev-parse HEAD)" ]; then echo "$TAG already tagged on this commit"; exit 0; fi
+            echo "::error::$TAG is already the tag of $(git rev-parse --short "refs/tags/$TAG^{commit}"); every change that lands on dev bumps tools/version.json (v0.2.1, v0.2.2, ...)"; exit 1
+          fi
+          LATEST=$(git tag --list 'v*' | sort -V | tail -1 || true)
+          if [ -n "$LATEST" ] && [ "$(printf '%s\n%s\n' "$LATEST" "$TAG" | sort -V | tail -1)" != "$TAG" ]; then
+            echo "::error::$TAG is not above the latest tag $LATEST"; exit 1
           fi
           git config user.name 'GitHub Actions'; git config user.email 'actions@github.com'
           git tag "$TAG" HEAD && git push origin "refs/tags/$TAG" && echo "tagged $TAG"

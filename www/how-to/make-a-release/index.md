@@ -2,7 +2,7 @@
 
 > For maintainers: the rules while the files are frozen, the version file, cutting a release directory and its manifest, the checks, the pull request with a person and an agent reviewer, the deploy, the tag and the live check, then the consumers.
 
-*api.newsroom.sgit.ai · v0.2.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/make-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.1 (reader code v0.2.0) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/make-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -20,14 +20,20 @@ Edit under the served paths (`assets/`, `for/`, `wire/`, `passkey/`); if the fil
 
 ## 2. Version and cut
 
+`tools/version.json` holds two numbers and a date, all from the file, never the clock:
+
+- **`version`**, the repository's version. Every change that lands on `dev` is a new one, in small increments: a patch for a small change (v0.2.1, v0.2.2, ...), a minor for a new capability. The deploy tags it, and refuses a version that is already a tag or not above the latest. CI on a branch fails when the version is not above `dev`'s.
+- **`release`**, the latest cut of the reader code: `releases/<release>/`, what the consuming sites pin. It changes only when a served file changes; then it is set to the new version and cut.
+
 ```sh
-$EDITOR tools/version.json          # {"release": "v0.2.0", "date": "2026-10-20"}: both from the file, never the clock
-python3 tools/release.py cut        # releases/v0.2.0/<every served file> and manifest.json
-python3 tools/release.py check      # every release matches its manifest; the tree is the release
-python3 site/build.py               # the site: the release appears on /releases/
+$EDITOR tools/version.json          # {"version": "v0.2.3", "release": "v0.2.3", "date": "2026-10-20"} for a change to a served file;
+                                    # {"version": "v0.2.3", "release": "v0.2.0", ...} for a change to the site, the tests or the tools
+python3 tools/release.py cut        # (served files changed) releases/v0.2.3/<every served file> and manifest.json
+python3 tools/release.py check      # every release matches its manifest; the tree is the release; the two numbers obey their rule
+python3 site/build.py               # the site: the version in the bar, the release on /releases/
 ```
 
-`cut` refuses to write over an existing release directory, and refuses a file that differs from the newsroom's bytes unless `CHANGED_FROM_NEWSROOM` records why. Write the release's note at `site/releases/v0.2.0.md`.
+`cut` refuses to write over an existing release directory, refuses a release that is not the repository's version, and refuses a file that differs from the newsroom's bytes unless `CHANGED_FROM_NEWSROOM` records why. Write a release's note at `site/releases/v0.2.3.md`.
 
 ## 3. The pull request
 
@@ -35,7 +41,7 @@ CI runs the syntax check, the manifest check, the build twice, the site check an
 
 ## 4. Merge, deploy, tag, check
 
-A push to `dev` (the default branch, and the release branch) runs `deploy-pages.yml`: the checks again, a tag from the version file, the Pages deploy of `www/` and `releases/`, and then `tools/live_check.py`, which asks the live host for every file of the release and compares the hashes, retrying while Pages propagates. The release is live when that job is green, not before.
+A push to `dev` (the default branch, and the release branch) runs `deploy-pages.yml`: the checks again, a tag of the version, the Pages deploy of `www/` and `releases/`, and then `tools/live_check.py`, which asks the live host for every file of the release and compares the hashes, retrying while Pages propagates. The release is live when that job is green, not before.
 
 ## 5. The consumers
 

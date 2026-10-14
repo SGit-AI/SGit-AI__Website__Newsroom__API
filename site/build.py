@@ -36,7 +36,8 @@ NEWSROOM = "https://newsroom.sgit.ai"
 GITHUB = "https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API"
 NEWSROOM_GITHUB = "https://github.com/SGit-AI/SGit-AI__Website__Newsroom"
 VERSION = json.loads((ROOT / "tools/version.json").read_text(encoding="utf-8"))
-RELEASE = VERSION["release"]
+RELEASE = VERSION["release"]          # the reader-code release the consuming sites pin (releases/<release>/)
+SITE_VERSION = VERSION["version"]     # the repository's version: every change that lands on dev, tagged by the deploy
 BEFORE = sorted((ROOT / "map/before").glob("v*"))[-1]
 MAP = json.loads((BEFORE / "map.json").read_text(encoding="utf-8"))
 MANIFESTS = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((ROOT / "releases").glob("v*/manifest.json"),
@@ -95,7 +96,7 @@ def page_html(rel, meta, body, *, md_twin):
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
   <a class="brand" href="{up}index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
-  <a class="ver" href="{up}releases/" title="The current release">{esc(RELEASE)}</a>
+  <a class="ver" href="{up}releases/" title="This site is {esc(SITE_VERSION)}; the reader code it serves is release {esc(RELEASE)}">{esc(SITE_VERSION)}</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav">{nav}<a class="gh" href="{GITHUB}">GitHub</a></nav>
 </div></header>
@@ -113,7 +114,7 @@ def page_html(rel, meta, body, *, md_twin):
   <div><h4>The work</h4><a href="{up}review/">The map and the review</a><a href="{up}review/proof/">The proof of the move</a><a href="{GITHUB}/issues">Issues</a><a href="{GITHUB}">Source</a><a href="{up}agents/">For agents</a></div>
   <div><h4>Live</h4><a href="{NEWSROOM}/">newsroom.sgit.ai</a><a href="{NEWSROOM}/meter/">SG Meter, documented</a><a href="{NEWSROOM}/newsroom-api/">The reader API map</a><a href="{up}about/">About, licence, contact</a></div>
 </div>
-<p class="fine">SGit Newsroom API · {esc(RELEASE)} · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="{md_twin}">this page as markdown</a></p>
+<p class="fine">SGit Newsroom API · {esc(SITE_VERSION)} · reader code {esc(RELEASE)} · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="{md_twin}">this page as markdown</a></p>
 </footer>
 <script src="{up}assets/site.js" defer></script>
 </body>
@@ -123,7 +124,7 @@ def page_html(rel, meta, body, *, md_twin):
 
 def page_md(rel, meta, md_body):
     canonical = SITE + "/" + ("" if rel == "index.html" else rel.replace("index.html", ""))
-    return (f"# {meta['title']}\n\n> {meta.get('description', '')}\n\n*{HOST} · {RELEASE} · this file is generated from the same source as "
+    return (f"# {meta['title']}\n\n> {meta.get('description', '')}\n\n*{HOST} · {SITE_VERSION} (reader code {RELEASE}) · this file is generated from the same source as "
             f"<{canonical}>, so the two cannot drift. The site's index for agents: <{SITE}/llms.txt>.*\n\n---\n\n{md_body}\n")
 
 
@@ -442,11 +443,11 @@ def build(out):
     write(out / "review/map/graph.json", json.dumps(map_graph_json(), indent=1, ensure_ascii=False) + "\n")
     rels = [{"release": m["release"], "date": m["date"], "files": m["counts"]["files"], "bytes": m["counts"]["bytes"], "manifest": f"{SITE}/{m['release']}/manifest.json"} for m in MANIFESTS]
     write(out / "releases.json", json.dumps({"what": "The releases of the newsroom's reader code served from this host. A consuming site pins one; nothing here is edited after it is published.",
-                                             "host": SITE, "current": RELEASE, "releases": rels}, indent=1) + "\n")
+                                             "host": SITE, "current": RELEASE, "version": SITE_VERSION, "releases": rels}, indent=1) + "\n")
     # llms.txt, llms-full.txt, sitemap
     lines = [f"# SGit Newsroom API ({HOST})", "", f"> A client-side API for a newsroom: the reading meter, the reader's personas, reading lists in a link, subscribe and the encrypted share, "
              f"the reader's vault, search, the wire reader. Components, formats and contracts the browser runs, with no server and nothing to deploy but files, served at {SITE}/<release>/<path>. "
-             f"Current release: {RELEASE}. Source: {GITHUB}. The live example: {NEWSROOM}/.", "", f"Site version: {RELEASE}", "", "## Pages", ""]
+             f"Current release: {RELEASE}. Source: {GITHUB}. The live example: {NEWSROOM}/.", "", f"Site version: {SITE_VERSION} (reader-code release {RELEASE})", "", "## Pages", ""]
     for rel, title, desc, _ in written:
         url = SITE + "/" + ("" if rel == "index.html" else rel.replace("index.html", ""))
         lines.append(f"- [{title}]({url}): {desc}")
@@ -454,7 +455,7 @@ def build(out):
               f"- [releases.json]({SITE}/releases.json): every release", f"- [review/map/graph.json]({SITE}/review/map/graph.json): the map as a graph",
               f"- [the newsroom's articles/ids.json]({NEWSROOM}/articles/ids.json): the article-number contract", f"- [the newsroom's articles/graphs.json]({NEWSROOM}/articles/graphs.json): the article feed"]
     write(out / "llms.txt", "\n".join(lines) + "\n")
-    full = [f"# SGit Newsroom API: the whole site in one fetch", "", f"Generated with the site at {RELEASE}. Each section is a page; its address is given first.", ""]
+    full = [f"# SGit Newsroom API: the whole site in one fetch", "", f"Generated with the site at {SITE_VERSION} (reader-code release {RELEASE}). Each section is a page; its address is given first.", ""]
     for rel, title, desc, md_body in written:
         url = SITE + "/" + ("" if rel == "index.html" else rel.replace("index.html", ""))
         full += [f"\n\n---\n\n# {title}\n\n<{url}>\n\n> {desc}\n", md_body]
@@ -480,7 +481,7 @@ def strip_tags(fragment):
 def expand(html_text, rel):
     """Small directives a markdown page can use: {{live: text}}, {{code lang\\n...}} handled as fenced code by md; {{cards}} blocks are plain HTML in the page."""
     up = "../" * rel.count("/")
-    html_text = html_text.replace("{{release}}", esc(RELEASE)).replace("{{newsroom}}", NEWSROOM).replace("{{github}}", GITHUB).replace("{{newsroom_github}}", NEWSROOM_GITHUB).replace("{{site}}", SITE).replace("{{up}}", up)
+    html_text = html_text.replace("{{release}}", esc(RELEASE)).replace("{{version}}", esc(SITE_VERSION)).replace("{{newsroom}}", NEWSROOM).replace("{{github}}", GITHUB).replace("{{newsroom_github}}", NEWSROOM_GITHUB).replace("{{site}}", SITE).replace("{{up}}", up)
     html_text = html_text.replace("{{files}}", str(MANIFESTS[-1]["counts"]["files"])).replace("{{bytes}}", f"{MANIFESTS[-1]['counts']['bytes']:,}")
     html_text = html_text.replace("{{reader_lines}}", f"{MAP['counts']['reader_code_lines']:,}").replace("{{tests}}", str(MAP["counts"]["tests"])).replace("{{findings}}", str(MAP["counts"]["findings"]))
     html_text = html_text.replace("{{contracts}}", str(MAP["counts"]["contracts"])).replace("{{controls}}", str(MAP["counts"]["controls"])).replace("{{articles}}", str(len(ARTICLES["articles"])))
@@ -536,7 +537,7 @@ def main():
             print("site: www/ is up to date")
             return
     written = build(OUT)
-    print(f"site: {len(written)} pages written to www/ ({RELEASE})")
+    print(f"site: {len(written)} pages written to www/ ({SITE_VERSION}, reader code {RELEASE})")
 
 
 if __name__ == "__main__":
