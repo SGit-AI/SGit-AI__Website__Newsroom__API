@@ -18,7 +18,7 @@
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
   <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
-  <a class="ver" href="../../releases/" title="The current release">v0.1.0</a>
+  <a class="ver" href="../../releases/" title="The current release">v0.2.0</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/" class=here>Docs</a><a href="../../how-to/">How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
 </div></header>
@@ -38,16 +38,16 @@
 <h2 id="for-a-site-that-adopts-it">For a site that adopts it</h2>
 <p>Publish <code>articles/ids.json</code> with a stable <code>n</code> for every article (the newsroom's <code>admin/build/ids.py</code> assigns numbers once, in publication order, and its gate refuses a change) and import <code>for/reading-list.js</code> and <code>for/make.js</code> from this host on two pages; the newsroom's <code>for/index.html</code> and <code>for/make.html</code> are the worked examples. The parser's limits are in <code>LIMITS</code> at the top of <code>reading-list.js</code>; the tests that hold them are <code>tests/test_lists.mjs</code>.</p>
 <aside class="agent" aria-label="For agents">
- <p><b>For agents.</b> The reading-list link contract: /for/#from=&amp;to=&amp;r=&amp;s=&amp;f=&amp;n=&amp;e=; names up to 40 characters of letters, spaces, hyphens and apostrophes; r and s are article numbers (1 to 50 in all); f persona ids or c:&lt;collection&gt; (up to 10); n up to 240 characters; e an address; malformed fields are dropped and listed; the list opens as a visitor persona; no signature yet. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+ <p><b>For agents.</b> The reading-list link contract: /for/#from=&amp;to=&amp;r=&amp;s=&amp;f=&amp;n=&amp;e=; names up to 40 characters of letters, spaces, hyphens and apostrophes; r and s are article numbers (1 to 50 in all); f persona ids or c:&lt;collection&gt; (up to 10); n up to 240 characters; e an address; malformed fields are dropped and listed; the list opens as a visitor persona; no signature yet. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.2.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.2.0/manifest.json">v0.2.0/manifest.json</a>.</p>
 </aside>
 </main>
 <footer class="foot"><div class="cols">
-  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.2.0/manifest.json">Current manifest</a></div>
   <div><h4>The case</h4><a href="../../for-publishers/">For publishers and editors</a><a href="../../for-evaluators/">For evaluators</a><a href="../../adopt/">Adopt it</a><a href="../../articles/">The articles behind it</a></div>
   <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
   <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
 </div>
-<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+<p class="fine">SGit Newsroom API · v0.2.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
 </footer>
 <script src="../../assets/site.js" defer></script>
 </body>

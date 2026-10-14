@@ -34,7 +34,7 @@ from page import newsroom_page, write, esc  # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 HOST = (ROOT / "CNAME").read_text().strip()
 VERSION = (ROOT / "admin/build/version.txt").read_text().strip()
-METER = "assets/components/sg-meter/v1/v1.4/v1.4.0/"
+METER = "assets/components/sg-meter/v1/v1.4/v1.4.1/"
 DATE = "11 October 2026"
 
 # ----------------------------------------------------------------------------------------------- the files
@@ -51,10 +51,20 @@ FILES = [
     ("for/for.css",                "Styles for the two reading-list pages", "this site"),
     ("assets/subscribe.js",        "The subscribe form: encrypts the address and posts it to the lane", "sgit.ai, verbatim"),
     ("wire/vault-reader.js",       "Reads an sgit vault in the browser with a published read key: ref, commit, tree, blobs, decrypted with Web Crypto; the markdown renderer", "this site, vendored from sgit.ai's vault-docs.js"),
-    ("wire/wire.js",               "The Industry Wire: the edition with its lens, the sources, the documents, drawn from the vault as text", "this site"),
+    ("wire/graphs.js",             "The wires' graphs: a provenance strip per story, stories per day by beat, the threads on a date axis, the entities stories share, a sources tally, a story-by-persona matrix; SVG from the bundle, text nodes only, colours as theme tokens", "this site"),
+    ("admin/build/infographics.py", "One card per story and one hero per edition through dev.tools.sgraph.ai, with a cost ledger per edition and per wire; the key from the environment only, a dry run without it", "this site"),
+    ("wire/wire.js",               "The wires: the edition with its lens, release notes and corrections, a map or a stack when the vault has one, the sources, the documents, drawn from the vault as text; one code for every wire", "this site"),
     ("wire/wire.css",              "Styles for the wire pages", "this site"),
-    ("admin/build/wire-vault.json", "The wire's vault: endpoint, vault id, the public read key (the only key on this site)", "this site"),
-    ("wire/snapshot.json",         "The wire as it was in the vault at the last release: headlines and primary links, the fallback and the agents' index", "this site, generated"),
+    ("wire/subscribe.js",          "Subscribe to one wire alone: the newsletter's envelope and lane (assets/subscribe.js, unedited), with X-SGit-List naming the wire", "this site"),
+    ("admin/build/wire-reach.json", "The organisation routes this site found for each wire's reach page, under the published contact rules: page, date, hash, role addresses", "this site"),
+    ("admin/build/wire-vault.json", "The Industry Wire's vault: endpoint, vault id, the public read key (the only kind of key on this site)", "this site"),
+    ("admin/build/wire-vault.owasp.json", "The OWASP Wire's vault (wire/owasp/): the same contract, its own public read key", "this site"),
+    ("admin/build/wire-vault.aws.json", "The AWS Wire's vault (wire/aws/): the same contract, its own public read key", "this site"),
+    ("admin/build/wire-vault.portugal.json", "The Portugal Wire's vault (wire/portugal/): the same contract, its own public read key; the bundle is bilingual", "this site"),
+    ("wire/snapshot.json",         "The Industry Wire as it was in the vault at the last release: headlines, primary links, corrections, the latest release note; the fallback and the agents' index", "this site, generated"),
+    ("wire/owasp/snapshot.json",   "The OWASP Wire at the last release, the same shape", "this site, generated"),
+    ("wire/aws/snapshot.json",     "The AWS Wire at the last release, the same shape, with the stack's deadlines", "this site, generated"),
+    ("wire/portugal/snapshot.json", "The Portugal Wire at the last release, the same shape, with each headline in Portuguese too", "this site, generated"),
     ("assets/vault-ui-embed.js",   "The study page: embeds the vault browser from dev.vault.sgraph.ai and hands it a read key", "sgit.ai, verbatim"),
     ("assets/shots.js",            "Figures: sets each image's address at runtime", "sgit.ai, verbatim"),
     ("assets/site.js",             "Page behaviour: nav, copy buttons, reveal-on-scroll", "sgit.ai, verbatim"),
@@ -71,6 +81,9 @@ FILES = [
     ("assets/search/search.css", "Styles for the search page", "this site"),
     ("assets/search/ask.js", "Ask: the top passages, numbered, given to Chrome's built-in model or to openrouter.ai with the reader's own key, answered with citations; the key in the tab unless kept", "this site; openrouter.ai, only with the reader's key"),
     ("assets/search/ask.css", "Styles for Ask on the search page", "this site"),
+    ("assets/vault-pane/inbox.js", "The inbox (049): the reader's RSA-OAEP key pair, the link (sgi1.<vault>.<token>.<key>), sgit's hybrid envelope, the append routes (configure, write, list, fetch, mark-processed), the drain, the QR code", "dev.send.sgraph.ai /api/vault/append/*"),
+    ("assets/vault-pane/send.js", "The sending side of the inbox, for a browser with the link and no passkey: its own records as one device file, sealed and appended", "dev.send.sgraph.ai /api/vault/append/write"),
+    ("assets/vendor/qrcode-generator/2.0.4/qrcode.mjs", "QR code generator (Kazuhiko Arase, MIT), vendored unchanged, for the inbox link", "this site"),
     ("assets/search/search-nav.css", "The Search link in the nav, on every page", "this site"),
     ("assets/vault-pane/wire-state.js", "What this browser knows about the wire: stories seen and when, the visit, the lens chosen; and which of the vault's releases to show", "this site"),
     ("assets/vault-pane/pending.js", "What this browser holds that the reader vault does not yet: reads, top-ups, notes and stories seen since the last update", "this site"),
@@ -103,6 +116,8 @@ PAGES = [
     ("persona/security/index.html", "a persona link"), ("persona/builder/index.html", "a persona link"),
     ("persona/board/index.html", "a persona link"), ("for/index.html", "a reading list"), ("for/make.html", "make a reading list"),
     ("wire/index.html", "the Industry Wire's edition"), ("wire/sources.html", "the wire's sources"), ("wire/how.html", "how the wire is read, and its documents"),
+    ("wire/owasp/index.html", "the OWASP Wire's edition, with the projects graph"), ("wire/aws/index.html", "the AWS Wire's edition, with the stack and its deadlines"),
+    ("wire/portugal/index.html", "the Portugal Wire's edition, in English and Portuguese, with the ecosystem map"), ("wire/days.html", "every wire day by day"), ("wire/charter.html", "the charter of the wires"), ("wire/desk-brief.html", "the brief for the desks"), ("wire/reach.html", "who should know, by organisation route"),
     ("vault/index.html", "your vault: the reading account carried between devices, with the pane open"),
     ("meter/index.html", "SG Meter, documented"), ("meter/security.html", "the meter's security model"),
     ("demos/vaults/newsroom-synthetic-users/index.html", "the synthetic-readers study, with the embedded vault"),
@@ -112,13 +127,13 @@ BUILD = [
     ("admin/build/lists.py", "writes the two reading-list pages"),
     ("admin/build/personas.py", "writes the persona pages and persona/links.json"),
     ("admin/build/page.py", "the page template, with the meter block every page this site writes carries"),
-    ("admin/build/sync_newsroom.py", "the import: re-points the meter to v1.4.0, applies the text rules, prints the article number"),
+    ("admin/build/sync_newsroom.py", "the import: re-points the meter to v1.4.1, applies the text rules, prints the article number"),
     ("admin/build/newsroom-meter.json", "the top-up link, applied on import"),
-    ("admin/build/newsroom-text.json", "the eight text rules, applied on import"),
-    ("admin/build/wire.py", "writes the three wire pages and, from a clone, wire/snapshot.json"),
+    ("admin/build/newsroom-text.json", "the ten text rules, applied on import"),
+    ("admin/build/wire.py", "writes the three pages of every wire (wire/, wire/owasp/, wire/aws/) and, from a clone, each wire's snapshot.json"),
     ("admin/build/vault_page.py", "writes the vault page"),
     ("admin/build/lane.py", "the newsroom's end of the feedback loop: clones or pulls a reader's lane with its read key (from the environment, never a file) and prints the notes by page"),
-    ("admin/build/search_index.py", "writes search/docs.json, search/text.json and the search page from the published pages, the article graphs and versions, the wire's snapshot and the notes"),
+    ("admin/build/search_index.py", "writes search/docs.json, search/text.json and the search page from the published pages, the article graphs and versions, the wires' snapshots and the notes"),
     ("admin/build/engineering.py", "renders /engineering/ from admin/engineering/: the board, one page per issue card, one per release, issues.json"),
     ("admin/build/md.py", "the small markdown renderer the engineering pages use; escapes everything first"),
     ("admin/build/chrome.py", "the nav and footer on every page, with the meter's balance and the Vault button and pane on pages that carry the meter"),
@@ -129,12 +144,13 @@ LABS = [("passkey/lab.js", "The passkey lab: WebAuthn with PRF, the door derivat
 TESTS = [("admin/build/test_meter.mjs", "the meter in Chromium"), ("admin/build/test_lists.mjs", "the parser in Node and the list pages in Chromium"),
          ("admin/build/test_review.mjs", "the review's findings, pinned as the behaviour is today"),
          ("admin/build/test_passkey.mjs", "the passkey lab in Chromium, with a virtual authenticator that has PRF, against the mock of the vault API"),
-         ("admin/build/test_wire.mjs", "the wire pages in Chromium, reading the real vault"),
+         ("admin/build/test_wire.mjs", "every wire's pages in Chromium, each reading its real vault"),
          ("admin/build/test_vault.mjs", "real vaults in Node: the vendored library against the mock of the vault API, and the sgit CLI round trip"),
          ("admin/build/test_sync.mjs", "the activity vault's logic in Node, with two devices' states"),
          ("admin/build/test_pane.mjs", "the vault pane in Chromium: the reading account carried between two devices through the mock vault, and a third opened with the recovery code"),
          ("admin/build/test_search.mjs", "search: the index and the ranking in Node, the page in Chromium"),
          ("admin/build/test_ask.mjs", "ask: the passages and the messages in Node; no model, the reader's key (openrouter.ai answered by a route) and the built-in model (faked) in Chromium"),
+         ("admin/build/test_inbox.mjs", "the inbox: the link, the envelope, the refusals in Node; a browser with a passkey and one without, the QR code decoded, the drain and a new link, in Chromium against the mock with the append routes"),
          ("admin/build/test_notes.mjs", "the feedback loop in Chromium: notes on an article and at a wire story, carried by the vault, sent to the lane, read by the sgit CLI and lane.py with the read key alone, brought into a second device"),
          ("admin/build/vault-mock.mjs", "the mock of the vault API the two vault tests run against")]
 
@@ -220,7 +236,7 @@ INPUTS = [
     ("Local storage", "sgit.meter.v1 (the state), sgit.meter.v1.seen (session: the charge per path)", "this browser, written by the meter; also by the reader, who may edit it (accepted)", "_read(), _seen()"),
     ("A file", "Restore from an export…", "whoever made the file; checked for balance:number and log:array only", "restore()"),
     ("Forms", "the share form, the subscribe form, the make page", "the reader; email checked by a loose pattern, names by a strict one", "_send(), subscribe.js, make.js"),
-    ("The wire's vault", "data/bundle.json, data/deliveries.json, docs/*.md, decrypted in the browser", "whoever holds the vault's write key (the wire's agents); drawn as text, links only from http(s) values, markdown rendered by an escaping renderer; the vault's own HTML is not used", "wire/wire.js"),
+    ("The wires' vaults", "data/bundle.json (with wire, map or stack when the vault has them), data/deliveries.json, data/releases.json, docs/*.md, decrypted in the browser; one vault per wire", "whoever holds the vault's write key (the wire's agents); drawn as text, links only from http(s) values, markdown rendered by an escaping renderer; the vault's own HTML is not used", "wire/wire.js"),
     ("Own-origin data", "articles/graphs.json · articles/ids.json · .well-known/sgit-subscribe.json · sg-meter.tpl · sg-meter.css", "this site's build; the contact file's key is checked against its fingerprint", "feed(), openList(), _send()"),
     ("postMessage", "replies from the dev.vault.sgraph.ai frames", "origin-checked; drives a status line only", "vault-ui-embed.js"),
 ]
@@ -255,10 +271,10 @@ CONTRACTS = [
     ("The share", "a text summary then the same data as JSON {v:1, site, at, balance, spent, declined, reads, topups, active, personas, topics, cols, log}, as an .eml with X-SGit-Form, X-SGit-Reply-To, X-SGit-Name, X-SGit-Subscribe, X-SGit-Page", "shareData(), _send()"),
     ("The envelope", "sgit hybrid envelope v2: {v:2, w, i, c} (RSA-OAEP-SHA256 wrapped AES-256-GCM key, iv, ciphertext), base64, then base64 again as the lane payload", "envelope(), subscribe.js encrypt()"),
     ("The contact file", "sgit-subscribe/v1: recipient{address, fingerprint, encrypt}, inbox{vault, endpoint, encrypt_to, status, lane{name, append_token}}; the fingerprint is recomputed from the PEM before use", ".well-known/sgit-subscribe.json"),
-    ("The wire's vault", "vault u9i9jp0l on dev.send.sgraph.ai, read key published; data/bundle.json {beats, stories, sources, personas, brief}, data/deliveries.json, docs/*.md; story fields and status shown as written; everything in the vault is public, for ever", "admin/build/wire-vault.json; wire/how.html; the wire's agents own the content"),
+    ("The wires' vaults", "u9i9jp0l (the Industry Wire), eitf274v (OWASP), v202bla5 (AWS), p6twygul (Portugal) on dev.send.sgraph.ai, read keys published; data/bundle.json {beats, stories, sources, personas, brief; wire, map, stack when present}, data/deliveries.json, data/releases.json (wire-releases/v1, one entry per publish), docs/*.md; story fields, changes and status shown as written; everything in a vault is public, for ever", "admin/build/wire-vault*.json; wire/how.html; each wire's agents own its content"),
     ("Events", "sg:meter.changed · charged · rated · declined · toppedup · reset · restored · persona · shared; sg-meter:error", "sg-meter-core.js _emit(), sg-component.js failed()"),
     ("A component", "static jsUrl, get resourceName(), onReady(); a .tpl and a .css beside the .js; published at an immutable versioned path", "sg-component.js"),
-    ("The import's rules", "the meter path rewrite (v1.3.1 → v1.4.0), the top-up link, eight text rules, the article number line; each stops the import when its anchor moves", "sync_newsroom.py items 9–12"),
+    ("The import's rules", "the meter path rewrite (v1.3.1 → v1.4.1), the top-up link, ten text rules, the article number line, the moved banner cut, the foot of every issue; each stops the import when its anchor moves", "sync_newsroom.py items 9–15"),
 ]
 
 # ----------------------------------------------------------------------------------------------- the review
@@ -388,7 +404,7 @@ def views_on_pages():
     out = {}
     for p in ROOT.rglob("*.html"):
         rel = p.relative_to(ROOT).as_posix()
-        if rel.startswith(("archive/", "summit-archive/", "vault-app/")):
+        if rel.startswith(("archive/", "summit-archive/", "vault-app/", ".claude/")):
             continue
         for v in re.findall(r'<sg-meter view="([a-z-]+)"', p.read_text(encoding="utf-8", errors="replace")):
             out.setdefault(v, set()).add(rel)
@@ -402,7 +418,7 @@ def loader():
     pages = 0
     for p in ROOT.rglob("*.html"):
         rel = p.relative_to(ROOT).as_posix()
-        if rel.startswith(("archive/", "summit-archive/", "vault-app/")):
+        if rel.startswith(("archive/", "summit-archive/", "vault-app/", ".claude/")):
             continue
         if "(0,eval)(t)" in p.read_text(encoding="utf-8", errors="replace"):
             pages += 1

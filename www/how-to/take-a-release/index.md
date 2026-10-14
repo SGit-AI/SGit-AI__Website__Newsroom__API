@@ -2,7 +2,7 @@
 
 > For a site that consumes the API: pin one release in one file, generate every URL from it, keep a copy of the manifest, check every page against it, and roll back by changing the line. The newsroom's procedure as the worked example.
 
-*api.newsroom.sgit.ai · v0.1.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/take-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/take-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

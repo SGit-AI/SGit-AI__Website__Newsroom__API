@@ -2,7 +2,7 @@
 
 > The reading meter, pay-after-you-read, personas, reading lists in a link, the reader's vault: the code a newsroom's reader runs, open source, served from one host, live on newsroom.sgit.ai and taking money.
 
-*api.newsroom.sgit.ai · v0.1.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

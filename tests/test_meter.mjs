@@ -19,7 +19,7 @@ import path from 'path'
 import os from 'os'
 import { execSync } from 'child_process'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 let chromium
 try {
@@ -73,8 +73,8 @@ try {
     await pg.goto(B + `articles/${older.slug}.html`); await wait(1200)
     let s = await state()
     check(s && s.log[0].price === 5 && s.log[0].cost === 0.5, `opening an older article charges a tenth of 5p (${s && s.log[0].cost})`)
-    // the charge follows the scroll; WebKit in CI needed the scroll re-issued, so poll for it (up to 3 s) rather than wait once
-    for (let i = 0; i < 10; i++) { await scrollTo(0.5); await wait(300); s = await state(); if (s.log[0].cost > 0.5) break }
+    await scrollTo(0.5); await wait(900)
+    s = await state()
     check(s.log[0].cost > 0.5 && s.log[0].cost < 5, `half way down costs part of the price (${s.log[0].cost}p)`)
     // images load lazily and lengthen the page, so the end is reached the way a reader reaches it:
     // keep scrolling until the page stops growing

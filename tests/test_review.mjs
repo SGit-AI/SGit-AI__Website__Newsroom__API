@@ -16,7 +16,7 @@ import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 let failed = 0
 const pin = (id, still, what) => { console.log(`${still ? 'ok  ' : 'FAIL'} ${id}: ${what}${still ? '' : ' (the behaviour changed: fix the finding and this check together)'}`); if (!still) failed++ }
@@ -38,7 +38,7 @@ walk(ROOT)
 pin('R10', evalPages > 300 && cspPages === 0, `${evalPages} of ${total} pages run fetched text through eval, and ${cspPages} set a Content-Security-Policy`)
 const wf = fs.readFileSync(path.join(API, '.github/workflows/ci.yml'), 'utf8')
 pin('R11', /test_meter/.test(wf) && /test_lists/.test(wf) && /test_review/.test(wf), 'CI runs the test files, here in the API repository (this one records the fix, not the bug)')
-const core = read('assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js')
+const core = read('assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js')
 pin('R14', !/sessions\s*=\s*this\.state\.sessions\.slice/.test(core) && /this\.state\.sessions\.push\(ref\)/.test(core), 'payment references are kept unbounded and unchecked')
 pin('R15', /\|\| this\.state\.personas\[0\]/.test(core), 'persona(id) falls back to personas[0], not to “me”')
 pin('R17', /h = 0x811c9dc5/.test(read('for/reading-list.js')), 'a reading list\'s persona is keyed by a 32-bit hash')
@@ -115,22 +115,23 @@ try {
     // R3: a malformed session id fails the whole element
     await pg.goto(B + 'account/topped-up.html?session_id=%E0%A4%A'); await wait(1200)
     const r3 = await pg.evaluate(() => { const e = document.querySelector('sg-meter[view=topped-up]'); return { state: e.getAttribute('data-state'), text: e.shadowRoot.textContent } })
-    // the engine's own wording: Chromium "URI malformed", Firefox "malformed URI sequence", WebKit "URI error"
-    pin('R3', r3.state === 'error' && /URI malformed|malformed URI|URI error/i.test(r3.text), `a malformed percent sequence in session_id shows “did not load: …”: ${r3.text.trim().slice(0, 60)}`)
+    pin('R3', r3.state === 'error' && /URI malformed|malformed URI|URI error/i.test(r3.text), `a malformed percent sequence in session_id shows “did not load: …”: ${r3.text.trim().slice(0, 60)}`)   // the engine's own wording
 
     // R2: a restored file with a persona that has no arrays blanks the personas page
     await pg.evaluate(() => localStorage.clear())
-    await pg.goto(B + `articles/${art2}.html`); await wait(1200)      // a charged page, so the state is saved
+    await pg.goto(B + `articles/${art2}.html`)                        // a charged page, so the state is saved
+    // wait for the meter to have saved the state with the read logged, not a fixed time: on a loaded runner 1.2 s was not
+    // always enough (the first run of v0.12.20 in CI), and a state pushed to before it is saved is overwritten by the save
+    await pg.waitForFunction(() => { try { const s = JSON.parse(localStorage.getItem('sgit.meter.v1') || 'null'); return !!s && Array.isArray(s.personas) && Array.isArray(s.log) && s.log.length >= 1 } catch (e) { return false } }, null, { timeout: 20000 }).catch(() => {})
+    await wait(300)
     s = await state(); s.personas.push({ id: 'p-bad', name: 'broken' }); await setState(s)
     await pg.goto(B + 'account/personas.html')
     // wait for the meter to say it is ready (or failed), not a fixed time: on a slow runner 1.5 s was not always enough
     await pg.waitForFunction(() => { const e = document.querySelector('sg-meter[view=personas]'); return e && /^(ready|error)$/.test(e.getAttribute('data-state') || '') }, null, { timeout: 20000 }).catch(() => {})
     await wait(500)
     const r2 = await pg.evaluate(() => { const e = document.querySelector('sg-meter[view=personas]'); return { state: e.getAttribute('data-state'), text: e.shadowRoot.textContent.trim() } })
-    // Chromium's behaviour, as the review recorded it. Firefox renders the page (seen in CI, 14 October): the finding differs
-    // by engine, so the pin holds Chromium to the recorded behaviour and reports what another engine does (issue 2).
-    if (engine === 'chromium') pin('R2', r2.state === 'ready' && r2.text === '', 'a persona without on[] and off[] leaves the personas page blank')
-    else console.log(`note R2 in ${engine}: state ${r2.state}, the personas page ${r2.text === '' ? 'is blank' : 'renders'} with a persona that has no arrays`)
+    if (engine === 'chromium') pin('R2', r2.state === 'ready' && r2.text === '', 'a persona without on[] and off[] leaves the personas page blank')   // Chromium's behaviour; Firefox renders the page (issue 2)
+    else console.log(`note R2 in ${engine}: state ${r2.state}, the personas page ${r2.text === '' ? 'is blank' : 'renders'}`)
 } finally {
     await browser.close()
     server.close()

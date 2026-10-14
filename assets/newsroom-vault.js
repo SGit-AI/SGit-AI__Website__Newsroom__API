@@ -129,7 +129,7 @@ export async function listFiles(vault, folder = '/') { await ensureLoaded(vault,
 
 // ------------------------------------------------------------ the account: door, master, reader
 export const DOOR = { key: 'master-key.json', record: 'door.json' }
-export const MASTER = { reader: 'reader.json', doors: 'doors.json', lane: 'lane.json' }
+export const MASTER = { reader: 'reader.json', doors: 'doors.json', lane: 'lane.json', inbox: 'inbox.json' }
 
 const now = () => new Date().toISOString()
 const doorRecord = (door, record) => ({
@@ -242,4 +242,14 @@ export async function sendToLane(lane, notes, device = '') {
     }
     await publish(lane)
     return paths
+}
+
+// ------------------------------------------------------------ the inbox: an append lane on the reader vault (card 049)
+/** The inbox record from the master (assets/vault-pane/inbox.js makes it); null when the account has none yet. */
+export async function readInbox(master) { const r = await readJson(master, '/' + MASTER.inbox); return r && r.token && r.private ? r : null }
+/** The inbox record into the master, one commit, published. It holds the private key and the enum key: the master only. */
+export async function writeInbox(master, record) {
+    await writeFile(master, '/', MASTER.inbox, JSON.stringify(record, null, 1))
+    await publish(master)
+    return record
 }

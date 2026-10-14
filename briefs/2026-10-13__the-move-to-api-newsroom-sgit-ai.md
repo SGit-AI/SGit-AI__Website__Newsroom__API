@@ -316,6 +316,8 @@ numbering from v0.1.0). Doing the move changed three things in this note, and fo
    sgit.ai's pinning of this release (phase 1's last step) and the deletion of the sync's rule 11 wait on the
    sgit.ai session.
 
+**14 October, the second cut.** By the time the newsroom came to take v0.1.0, its `dev` had moved forty releases past the base of the first cut (v0.12.10 to v0.12.50), and the reader code with it: the meter to v1.4.1, the pane's inbox and send, the wire's graphs and subscribe form, a QR-code vendor. Merging the first cut would have regressed the live reader code, so the move was cut again from v0.12.50 as release v0.2.0 (74 files, the same three host changes), proved again (`map/proof/v0.2.0.json`), and the newsroom's pin commit was redone as a merge on top of `dev`. v0.1.0 stays published. The lesson for the sync between the two repositories: cut the release from the newsroom commit that will pin it, in the same hour.
+
 What the move commit contains, on both sides, is in each repository's README and in the newsroom's release note
 v0.13.0 and card 036. Order of merging: this repository's `main` first (Pages publishes `v0.1.0/`, and the
 `live` job proves every hash), then the newsroom's `dev`, whose pages load from that host.

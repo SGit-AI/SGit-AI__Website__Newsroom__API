@@ -39,7 +39,7 @@ const runAsync = (cmd, args, opts = {}) => new Promise(resolve => {
 })
 import { startMock } from './vault-mock.mjs'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 const VENDOR = path.join(API, 'assets/vendor/sg-vault/v0.2.3')
 let failed = 0

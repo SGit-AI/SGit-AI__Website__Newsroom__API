@@ -2,7 +2,7 @@
 
 > Where a reader's data lives (localStorage on the page's origin), everything that comes in, and every channel by which anything leaves the browser.
 
-*api.newsroom.sgit.ai · v0.1.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/state/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/state/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -31,7 +31,7 @@
 - **Local storage**: sgit.meter.v1 (the state), sgit.meter.v1.seen (session: the charge per path) (this browser, written by the meter; also by the reader, who may edit it (accepted); `_read(), _seen()`)
 - **A file**: Restore from an export… (whoever made the file; checked for balance:number and log:array only; `restore()`)
 - **Forms**: the share form, the subscribe form, the make page (the reader; email checked by a loose pattern, names by a strict one; `_send(), subscribe.js, make.js`)
-- **The wire's vault**: data/bundle.json, data/deliveries.json, docs/*.md, decrypted in the browser (whoever holds the vault's write key (the wire's agents); drawn as text, links only from http(s) values, markdown rendered by an escaping renderer; the vault's own HTML is not used; `wire/wire.js`)
+- **The wires' vaults**: data/bundle.json (with wire, map or stack when the vault has them), data/deliveries.json, data/releases.json, docs/*.md, decrypted in the browser; one vault per wire (whoever holds the vault's write key (the wire's agents); drawn as text, links only from http(s) values, markdown rendered by an escaping renderer; the vault's own HTML is not used; `wire/wire.js`)
 - **Own-origin data**: articles/graphs.json · articles/ids.json · .well-known/sgit-subscribe.json · sg-meter.tpl · sg-meter.css (this site's build; the contact file's key is checked against its fingerprint; `feed(), openList(), _send()`)
 - **postMessage**: replies from the dev.vault.sgraph.ai frames (origin-checked; drives a status line only; `vault-ui-embed.js`)
 

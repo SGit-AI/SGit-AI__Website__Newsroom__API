@@ -9,7 +9,7 @@
  * a merge still holds only its own records. No network, no storage.
  */
 import path from 'path'
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 const S = await import(path.join(API, 'assets/vault-pane/sync.js'))
 let failed = 0

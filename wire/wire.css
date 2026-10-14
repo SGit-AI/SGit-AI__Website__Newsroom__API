@@ -2,14 +2,18 @@
 .wire-status { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: baseline; margin: 0 0 1.2rem; padding: .6rem .9rem; border: 1px solid var(--line); border-radius: 8px; background: var(--panel2); font: .8rem/1.5 var(--mono); color: var(--dim); }
 .wire-status b { color: var(--fg); font-weight: 600; }
 .wire-status .btn { margin-left: auto; }
-.btn { display: inline-block; font: inherit; font-size: .85rem; padding: .4rem .8rem; border: 1px solid var(--line2); border-radius: 8px; background: var(--panel); color: var(--fg); cursor: pointer; text-decoration: none; line-height: 1.2; }
-.btn:hover { border-color: var(--accent); text-decoration: none; }
-.btn.sm { padding: .25rem .55rem; font-size: .78rem; }
-.btn[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+/* `body .btn`, not `.btn`: the themes' override map (assets/themes/themes.css) restates newsroom.css's
+   .btn, which is an accent fill with light ink, and it loads after this file. The wire's button is a
+   panel with the page's ink, so it has to outrank the map by specificity, or it turns white on white
+   (found on the first screenshot of card 036). The same for .chip below. */
+body .btn { display: inline-block; font: inherit; font-size: .85rem; padding: .4rem .8rem; border: 1px solid var(--line2); border-radius: 8px; background: var(--panel); color: var(--fg); cursor: pointer; text-decoration: none; line-height: 1.2; }
+body .btn:hover { border-color: var(--accent); text-decoration: none; }
+body .btn.sm { padding: .25rem .55rem; font-size: .78rem; }
+body .btn[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #fff); font-weight: 600; }
 
 .edition { padding: 1.2rem 1.4rem 1.3rem; border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 12px 12px 0; background: var(--panel); margin: 0 0 1.4rem; }
 .edition .k { margin: 0 0 .25rem; font: 700 .7rem/1.4 var(--sans); letter-spacing: .15em; text-transform: uppercase; color: var(--accent-dk); }
-.edition .note { margin: .4rem 0 .8rem; font: 1.08rem/1.55 var(--serif); color: #1c1d21; }
+.edition .note { margin: .4rem 0 .8rem; font: 1.08rem/1.55 var(--serif); color: var(--fg, #1c1d21); }
 .edition .meta { font-size: .82rem; color: var(--dim); }
 .threads { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: .7rem; margin: .8rem 0 0; }
 .thread { padding: .7rem .9rem; border: 1px solid var(--line); border-radius: 10px; background: var(--panel2); font-size: .86rem; line-height: 1.45; }
@@ -22,12 +26,12 @@
 .lens-note { margin: -.6rem 0 1.2rem; font-size: .85rem; color: var(--dim); }
 .personal { padding: 1rem 1.2rem 1.05rem; border: 1px dashed var(--accent); border-radius: 12px; background: var(--panel); margin: 0 0 1.4rem; }
 .personal .k { margin: 0 0 .4rem; font: 700 .7rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-dk); }
-.personal .note { margin: 0 0 .6rem; font: 1rem/1.55 var(--serif); color: #1c1d21; }
+.personal .note { margin: 0 0 .6rem; font: 1rem/1.55 var(--serif); color: var(--fg, #1c1d21); }
 .personal ol { margin: .3rem 0 .5rem 1.2rem; padding: 0; }
 .personal li { margin: .3rem 0; font-size: .9rem; line-height: 1.5; }
 .personal li .chip { margin: 0 .3rem; }
 
-main.doc .beat { margin: 2rem 0 .7rem; padding-bottom: .3rem; border-bottom: 2px solid #1c1d21; font: 700 .8rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+main.doc .beat { margin: 2rem 0 .7rem; padding-bottom: .3rem; border-bottom: 2px solid var(--fg, #1c1d21); font: 700 .8rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
 main.doc .beat .n { font-weight: 400; color: var(--dim); letter-spacing: 0; text-transform: none; margin-left: .5rem; }
 .stories { display: grid; gap: .9rem; }
 .story { padding: 1rem 1.2rem 1.05rem; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
@@ -38,17 +42,69 @@ main.doc .beat .n { font-weight: 400; color: var(--dim); letter-spacing: 0; text
 .inbox .since b { color: var(--accent-dk); }
 .inbox .releases { padding: .45rem .7rem; border-left: 3px solid var(--accent); background: var(--panel2); border-radius: 0 8px 8px 0; margin: 0 0 .6rem; font-size: .85rem; }
 .inbox .releases.none { color: var(--dim); border-left-color: var(--line2); }
-.inbox .release p { margin: 0 0 .25rem; } .inbox .release .sum { color: #34363c; }
+.inbox .release p { margin: 0 0 .25rem; } .inbox .release .sum { color: var(--text, #34363c); }
 .inbox .release .ids a { font-family: var(--mono); font-size: .8rem; }
 .inbox .filters { display: flex; flex-wrap: wrap; gap: .35rem; margin: .2rem 0 .6rem; }
 .inbox .toast { font-size: .84rem; color: var(--dim); }
-.inbox .pending { margin: 0; font-size: .84rem; color: #5c3d06; background: #fff7e6; border: 1px solid #f1d7a2; border-radius: 8px; padding: .45rem .7rem; }
+.inbox .pending { margin: 0; font-size: .84rem; color: var(--warn-ink, #5c3d06); background: var(--warn-bg, #fff7e6); border: 1px solid var(--warn-line, #f1d7a2); border-radius: 8px; padding: .45rem .7rem; }
 .inbox .pending.ok { color: var(--dim); background: none; border: 0; padding: 0; }
-.inbox .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.inbox .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #fff); font-weight: 600; }
 .inbox .undo, .withheld .undo { font: inherit; font-size: .8rem; border: 0; background: none; color: var(--dim2); cursor: pointer; text-decoration: underline; }
 .empty { padding: 1.2rem; border: 1px dashed var(--line2); border-radius: 10px; color: var(--dim); text-align: center; }
 .flag { display: inline-block; margin-right: .45rem; padding: 0 .45em; border-radius: 999px; font: 700 .68rem/1.6 var(--sans); letter-spacing: .06em; text-transform: uppercase; vertical-align: .15em; }
-.flag.new { background: #f0a020; color: #1c1d21; } .flag.upd { background: #e8eefc; color: #1d4ed8; }
+.flag.new { background: #f0a020; color: #1c1d21; } .flag.upd { background: var(--info-bg, #e8eefc); color: var(--info-ink, #1d4ed8); }
+/* corrections: the desk's note in the edition's header, and each corrected story's own changes, dated, as the vault records them; the info tokens, the colour of Updated */
+.edition .corrections { margin: .2rem 0 .8rem; padding: .45rem .8rem; border-left: 3px solid var(--info-ink, #1d4ed8); border-radius: 0 8px 8px 0; background: var(--info-bg, #eef2fc); font-size: .88rem; line-height: 1.5; }
+.story .changes { list-style: none; margin: .3rem 0 .6rem; padding: .4rem .8rem; border-left: 3px solid var(--info-ink, #1d4ed8); border-radius: 0 8px 8px 0; background: var(--info-bg, #eef2fc); font-size: .84rem; line-height: 1.5; }
+.story .changes li { margin: .15rem 0; }
+.story .changes .at { font: .74rem/1.5 var(--mono); color: var(--info-ink, #1d4ed8); margin-right: .3rem; }
+/* the wires: the strip naming each wire, drawn by wire.py */
+.wires { margin: -.4rem 0 1.2rem; font-size: .86rem; color: var(--dim); }
+.wires a { margin-right: .6rem; } .wires a[aria-current] { font-weight: 700; color: var(--fg); text-decoration: none; }
+/* what a vault adds beyond the edition: a map (entities, the stories that name them) or a stack (services, the items that touched them); the warn tokens for the deadlines */
+.edition .deadlines { margin: .2rem 0 .8rem; padding: .45rem .8rem; border-left: 3px solid var(--warm); border-radius: 0 8px 8px 0; background: var(--warn-bg, #fff7e6); font-size: .88rem; line-height: 1.5; }
+.edition .deadlines ul { margin: .2rem 0 0 1.1rem; padding: 0; } .edition .deadlines li { margin: .15rem 0; }
+.edition .deadlines .dd { font: .78rem/1.5 var(--mono); margin-right: .35rem; } .edition .deadlines .soon { color: var(--danger-ink, #8a0a0a); font-weight: 700; }
+.edition .deadlines .then { color: var(--dim); }
+.extra { margin: 0 0 1.2rem; padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); font-size: .9rem; }
+.extra > summary { cursor: pointer; font-weight: 600; }
+.extra > p { margin: .5rem 0; color: var(--dim); font-size: .86rem; }
+.extra .ent { margin: .4rem 0; padding: .35rem .7rem; border: 1px solid var(--line); border-radius: 8px; background: var(--panel2); }
+.extra .ent > summary { cursor: pointer; } .extra .ent > summary .n { color: var(--dim); font-weight: 400; margin-left: .4rem; font-size: .82rem; }
+.extra dl { display: grid; grid-template-columns: max-content 1fr; gap: .1rem .8rem; margin: .4rem 0; font-size: .84rem; }
+.extra dt { color: var(--dim); } .extra dd { margin: 0; overflow-wrap: anywhere; }
+.extra ul.named { margin: .2rem 0 .3rem 1.1rem; padding: 0; font-size: .86rem; } .extra ul.named li { margin: .15rem 0; }
+.extra .aliases { font-size: .8rem; color: var(--dim); }
+@media (max-width: 640px) { .extra dl { grid-template-columns: 1fr; gap: 0 } .extra dt { margin-top: .3rem; } }
+/* a wire in two languages: the switch under the lens; a quote says which language it is in */
+.lens.langs { margin-top: -.7rem; }
+.story blockquote cite .chip.lang { margin-left: .4rem; }
+/* the verifier's record: the file's words in the header, a row at each story it covers */
+.edition .checks { margin: .2rem 0 .8rem; padding: .45rem .8rem; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; background: var(--tint-solid, #e8f5ef); font-size: .86rem; line-height: 1.5; }
+.edition .checks p { margin: .2rem 0 0; }
+.story .check { font-size: .82rem; color: var(--accent-dk); }
+.srcs td.n { font-family: var(--mono); text-align: right; }
+/* subscribe to one wire */
+.wire-sub { margin: 1.4rem 0; padding: .9rem 1.1rem; border: 1px dashed var(--line2); border-radius: 10px; background: var(--panel); font-size: .9rem; }
+.wire-sub form { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .5rem 0 0; }
+.wire-sub input[type=email] { flex: 1 1 14rem; font: inherit; padding: .45rem .6rem; border: 1px solid var(--line2); border-radius: 8px; background: var(--panel2); color: var(--fg); }
+.wire-sub input[name=website] { position: absolute; left: -9999px; }
+.wire-sub label.consent { flex: 1 1 100%; font-size: .84rem; color: var(--dim); }
+.wire-sub .sub-status { flex: 1 1 100%; font-size: .84rem; } .wire-sub .sub-status.warn { color: var(--warn-ink, #5c3d06); } .wire-sub .sub-done { font-weight: 600; }
+/* who should know: routes by organisation */
+.route { margin: .8rem 0; padding: .6rem .9rem; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.route h3 { margin: 0 0 .3rem; font: 700 1.02rem/1.3 var(--serif); } .route h3 .n { font: .82rem/1.4 var(--sans); color: var(--dim); font-weight: 400; }
+.addrs { margin: .3rem 0 .4rem 1.1rem; padding: 0; font-size: .9rem; } .addrs li { margin: .2rem 0; } .addrs ul { margin: .2rem 0 .2rem 1rem; padding: 0; }
+.also { margin: .2rem 0 .4rem 1.1rem; padding: 0; font-size: .86rem; }
+.srcs-list { columns: 2; column-gap: 2rem; } @media (max-width: 640px) { .srcs-list { columns: 1; } }
+/* day by day */
+.day { margin: 1.4rem 0; }
+.day h2 { margin: 0 0 .4rem; padding-bottom: .25rem; border-bottom: 2px solid var(--fg, #1c1d21); font: 700 1.05rem/1.4 var(--serif); }
+.day h2 .n { font: .82rem/1.4 var(--sans); color: var(--dim); font-weight: 400; }
+.day .releases { margin: .3rem 0 .5rem; padding: .4rem .7rem; border-left: 3px solid var(--accent); background: var(--panel2); border-radius: 0 8px 8px 0; font-size: .86rem; }
+.day .releases p { margin: .15rem 0; } .day .releases .sum { color: var(--text, #34363c); }
+.daylist { margin: .2rem 0 0 1.1rem; padding: 0; font-size: .9rem; } .daylist li { margin: .2rem 0; }
+body .chip.wire { border-color: var(--accent); color: var(--accent-dk); font-weight: 600; }
 .story.new { border-color: #f0c070; }
 .withheld li .held-acts .chip, .withheld li .kept { font-size: .74rem; }
 .withheld li .held-acts .chip { cursor: pointer; }
@@ -57,7 +113,7 @@ main.doc .beat .n { font-weight: 400; color: var(--dim); letter-spacing: 0; text
 .story .decide .k { font: .72rem/1.4 var(--mono); color: var(--dim2); margin-right: .2rem; }
 .story .decide .chip { cursor: pointer; border: 1px solid var(--line2); background: var(--panel); font: inherit; font-size: .78rem; padding: .2rem .6rem; border-radius: 999px; color: var(--fg); }
 .story .decide .chip:hover { border-color: var(--accent); }
-.story .decide .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.story .decide .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #fff); }
 .story .decide .undo { font: inherit; font-size: .76rem; border: 0; background: none; color: var(--dim2); cursor: pointer; text-decoration: underline; }
 .story .decide .kept { font-size: .78rem; color: var(--dim2); }
 .story.decided { padding: .55rem 1.2rem; opacity: .7; }
@@ -65,15 +121,15 @@ main.doc .beat .n { font-weight: 400; color: var(--dim); letter-spacing: 0; text
 .story.decided h3 { font-size: 1rem; margin: 0; }
 .story.decided .decide { margin-top: .3rem; padding-top: .3rem; border-top: 0; }
 .story.lead { border-left: 5px solid var(--accent); border-radius: 0 12px 12px 0; }
-.story h3 { margin: 0 0 .3rem; font: 700 1.18rem/1.3 var(--serif); color: #101114; }
+.story h3 { margin: 0 0 .3rem; font: 700 1.18rem/1.3 var(--serif); color: var(--head, #101114); }
 .story h3 a { color: inherit; text-decoration: none; }
 .story h3 a:hover { color: var(--accent-dk); text-decoration: underline; }
 .story .meta { font: .76rem/1.5 var(--mono); color: var(--dim2); margin: 0 0 .5rem; }
-.story .meta .conf-high { color: #0f6b4f; } .story .meta .conf-low { color: var(--warm); }
+.story .meta .conf-high { color: var(--accent, #0f6b4f); } .story .meta .conf-low { color: var(--warm); }
 .story p { margin: 0 0 .5rem; font-size: .93rem; line-height: 1.55; }
-.story blockquote { margin: .5rem 0 .6rem; padding: .2rem 0 .2rem .9rem; border-left: 3px solid var(--line2); font: italic .98rem/1.5 var(--serif); color: #34363c; }
+.story blockquote { margin: .5rem 0 .6rem; padding: .2rem 0 .2rem .9rem; border-left: 3px solid var(--line2); font: italic .98rem/1.5 var(--serif); color: var(--text, #34363c); }
 .story blockquote cite { display: block; margin-top: .2rem; font: .76rem/1.4 var(--mono); font-style: normal; color: var(--dim2); }
-.story .why { color: #1c1d21; }
+.story .why { color: var(--fg, #1c1d21); }
 .story .why b { font-weight: 600; }
 .story .leads { margin: .4rem 0 .6rem; padding: .5rem .8rem; border-radius: 8px; background: var(--panel2); font-size: .88rem; }
 .story details { margin: .35rem 0 0; font-size: .86rem; }
@@ -81,9 +137,9 @@ main.doc .beat .n { font-weight: 400; color: var(--dim); letter-spacing: 0; text
 .story ul.cov { margin: .4rem 0 .2rem 1.1rem; padding: 0; }
 .story ul.cov li { margin: .15rem 0; }
 .chips { display: flex; flex-wrap: wrap; gap: .3rem; margin: .5rem 0 0; }
-.chip { font: .72rem/1.5 var(--mono); padding: .05rem .5rem; border: 1px solid var(--line2); border-radius: 999px; color: var(--dim); background: var(--panel2); }
-.chip.reach { border-color: var(--accent); color: var(--accent-dk); }
-.chip.ent { background: var(--panel); }
+body .chip { font: .72rem/1.5 var(--mono); padding: .05rem .5rem; border: 1px solid var(--line2); border-radius: 999px; color: var(--dim); background: var(--panel2); }
+body .chip.reach { border-color: var(--accent); color: var(--accent-dk); }
+body .chip.ent { background: var(--panel); }
 .story .status { margin: .5rem 0 0; font: .74rem/1.4 var(--mono); color: var(--warm); }
 .withheld { margin: .9rem 0 0; font-size: .88rem; }
 .withheld summary { cursor: pointer; color: var(--dim); }
@@ -92,17 +148,29 @@ main.doc .beat .n { font-weight: 400; color: var(--dim); letter-spacing: 0; text
 
 .srcs table { font-size: .86rem; }
 .srcs .tier { font: 700 .74rem/1.4 var(--mono); padding: .05rem .45rem; border-radius: 6px; border: 1px solid var(--line2); }
-.srcs .tier.A { background: #e8f5ef; color: #0f6b4f; } .srcs .tier.B { background: #fff7e6; color: #8a5a0a; } .srcs .tier.C { background: var(--panel2); color: var(--dim); }
+.srcs .tier.A { background: var(--tint-solid, #e8f5ef); color: var(--accent, #0f6b4f); } .srcs .tier.B { background: var(--warn-bg, #fff7e6); color: var(--warn-ink, #8a5a0a); } .srcs .tier.C { background: var(--panel2); color: var(--dim); }
 .srcs details { font-size: .8rem; color: var(--dim); }
 
 .docs-nav { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1rem; }
 .doc-body h2, .doc-body h3, .doc-body h4 { font-family: var(--serif); }
 .doc-body pre.md-code { overflow: auto; font-size: .78rem; }
-.doc-body blockquote { border-left: 3px solid var(--line2); margin: .6rem 0; padding: .1rem 0 .1rem .9rem; color: #34363c; }
-.wire-err { padding: .8rem 1rem; border: 1px solid var(--warm); border-radius: 8px; background: #fffaf2; color: #5a3b0a; }
+.doc-body blockquote { border-left: 3px solid var(--line2); margin: .6rem 0; padding: .1rem 0 .1rem .9rem; color: var(--text, #34363c); }
+.wire-err { padding: .8rem 1rem; border: 1px solid var(--warm); border-radius: 8px; background: var(--warn-bg, #fffaf2); color: var(--warn-ink, #5a3b0a); }
 .snapshot ol { padding-left: 1.3rem; }
 .snapshot li { margin: .25rem 0; font-size: .92rem; }
 .mono { font-family: var(--mono); font-size: .84rem; }
 main.doc .agent p, .wire-status, .snapshot { overflow-wrap: anywhere; } /* the read key and the clone command are one unbroken token */
 [hidden] { display: none !important; }
 @media (max-width: 640px) { .wire-status .btn { margin-left: 0; } .story { padding: .85rem .95rem; } }
+/* the graphs (wire/graphs.js): the SVG names every colour through a token in its own fill and stroke attributes, so
+   this file holds only sizes and type. A figure scales to its column (viewBox), which is what keeps the phone free of
+   sideways scroll; the strip keeps its own pixel size, since it sits in a line of text. */
+.graph { margin: .6rem 0; }
+.graph > svg { display: block; width: 100%; max-width: 100%; height: auto; font-family: var(--sans); }
+.graph text.mono { font-family: var(--mono); } .graph text.serif { font-family: var(--serif); }
+.graph figcaption { margin: .3rem 0 0; font-size: .8rem; color: var(--dim); }
+.graph .legend { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem .9rem; margin: .4rem 0 0; padding: 0; font-size: .8rem; color: var(--dim); }
+.graph .legend .sw { display: inline-block; width: .7rem; height: .7rem; border-radius: 2px; margin-right: .35rem; vertical-align: -.05em; }
+.graph-err { font-size: .82rem; }
+.pv-strip { display: inline-block; width: auto; height: 16px; vertical-align: -.2em; margin-right: .2rem; }
+.edition details.graph { margin: .4rem 0 .8rem; font-size: .86rem; } .edition details.graph > summary { cursor: pointer; color: var(--accent-dk); }

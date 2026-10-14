@@ -15,6 +15,11 @@
  *               activity here" adds other devices' records and notes to this browser and reloads.
  *   Keys        every vault of the account with its key, to open any of them on your own; the lane's read key.
  *
+ * The inbox (card 049, assets/vault-pane/inbox.js): in the Vault tab, a link that lets a browser without the passkey
+ * send what it holds into this account, as a URL, as text and as a QR code; what is waiting in the lane, opened with
+ * the private key from the master and shown before it is brought in; and a new link that stops the old one. A browser
+ * that holds a link and no passkey gets Send to my vault in the strip above the tabs (assets/vault-pane/send.js).
+ *
  * Above the tabs, and as a count on the Vault button: what this browser holds that the vault does not yet
  * (assets/vault-pane/pending.js), with Update the vault one press away. Local storage is where everything is kept
  * first; until the reader updates, it exists in this browser alone. Other pages ask for the pane and for an update
@@ -32,11 +37,13 @@
  */
 import * as NV from '../newsroom-vault.js'
 import { doorFrom, prfBytes, recoveryBytes, recoveryCode, PRF_INPUT_TEXT, sha256 } from '../door.js'
-import { extract, consolidate, mergeInto, mergeNotes, mergeWire, accountFile, PATHS, describe } from './sync.js'
+import { extract, consolidate, combine, mergeInto, mergeNotes, mergeWire, accountFile, PATHS, describe } from './sync.js'
 import * as N from './notes.js'
 import * as R from './reading.js'
 import * as W from './wire-state.js'
 import { pending, describePending } from './pending.js'
+import * as I from './inbox.js'
+import * as SND from './send.js'
 
 const ROOT = new URL(document.documentElement.getAttribute('data-root') || '', document.baseURI)   // the page's site root: every page carries data-root; the code is served from api.newsroom.sgit.ai
 const CODE = new URL('../../', import.meta.url)                       // assets/vault-pane/ → where this code is served from
@@ -96,7 +103,7 @@ export function mount() {
     const cfg = meterCfg()
     const deviceId = NV.deviceBranch()
     let label = ''; try { label = localStorage.getItem(LABEL) || '' } catch (e) { /* fine */ }
-    const state = { drawn: false, vaults: null, lane: null, consolidated: null, busy: false, sg: null, tab: 'page', sel: '', lastKept: null }
+    const state = { drawn: false, vaults: null, lane: null, inbox: undefined, waiting: [], consolidated: null, busy: false, sg: null, tab: 'page', sel: '', lastKept: null }
     const tabs = h('div', { class: 'tabs', role: 'tablist' })
     const secs = Object.fromEntries(TABS.map(([id]) => [id, h('section', { id: `vault-sec-${id}`, role: 'tabpanel', hidden: true })]))
     const body = secs.vault
@@ -105,7 +112,8 @@ export function mount() {
     const log = h('ul', { class: 'log', hidden: true })
     const pendingMsg = h('span', { class: 'msg', id: 'vault-pending-msg' }), pendingOut = h('span', { class: 'out', id: 'vault-pending-out' })
     const pendingBtn = h('button', { type: 'button', class: 'btn primary', id: 'vault-update-now', onclick: () => updateNow() }, 'Update the vault')
-    const pendingStrip = h('div', { class: 'pending', id: 'vault-pending', hidden: true }, pendingMsg, h('div', { class: 'acts' }, pendingBtn), pendingOut)
+    const inboxBtn = h('button', { type: 'button', class: 'btn', id: 'vault-inbox-send', hidden: true, onclick: () => sendFromHere() }, 'Send to my vault')
+    const pendingStrip = h('div', { class: 'pending', id: 'vault-pending', hidden: true }, pendingMsg, h('div', { class: 'acts' }, pendingBtn, inboxBtn), pendingOut)
     const pane = h('aside', { id: 'sgit-vault-pane', class: 'vault-pane', 'aria-label': 'Your vault' },
         h('div', { class: 'head' }, h('h2', {}, 'Your vault'), h('button', { type: 'button', class: 'btn close', onclick: () => toggle(false) }, 'Close')),
         h('p', { class: 'dim' }, 'Your notes on what you read, what you have read, and the reading account this browser keeps, carried between your devices through an encrypted vault that opens with your passkey. Local storage stays the place it lives; the vault is updated when you ask.'),
@@ -160,6 +168,7 @@ export function mount() {
             pendingMsg.textContent = `${p.count ? `${p.count} change(s) only in this browser` : 'Only in this browser'}: ${describePending(p)}. ${p.last ? `Last update from here ${p.last.slice(0, 16).replace('T', ' ')}.` : 'This device has never updated the vault.'} Clearing the browser would lose ${p.count ? 'them' : 'it'} until you update.`
             pendingBtn.textContent = enabled ? 'Update the vault' : 'Enable the vault to keep them'
         }
+        inboxBtn.hidden = enabled || !p.any || !SND.remembered()          // a browser that holds a link to the inbox: send without the passkey
         if (pageDrawn) renderSteps()
         return p
     }
@@ -185,6 +194,14 @@ export function mount() {
     window.addEventListener('sgit-vault-update', () => updateNow())
     window.addEventListener(W.EVENT, () => renderPending())
     window.addEventListener(N.EVENT, () => renderPending())
+    window.addEventListener(SND.EVENT, () => renderPending())
+    async function sendFromHere() {
+        const link = SND.remembered(); if (!link) return
+        inboxBtn.disabled = true; pendingOut.textContent = 'Encrypting in this browser, then appending to your vault’s inbox…'
+        try { const r = await SND.sendNow(link, { label }); pendingOut.textContent = `Sent to your vault’s inbox: ${describe(r.file)}. Your vault takes it in the next time you open it with your passkey; it stays here too.` }
+        catch (e) { pendingOut.textContent = `Not sent: ${err(e)}. Nothing was lost.` }
+        finally { inboxBtn.disabled = false; renderPending() }
+    }
     setInterval(() => { if (document.visibilityState !== 'hidden') renderPending() }, 3000)   // the meter writes without an event
 
     async function client(token) { await loadLibrary(); if (!state.sg) state.sg = NV.client({ endpoint: ENDPOINT, token: token || '' }); if (token) state.sg.token = token; return state.sg }
@@ -198,6 +215,7 @@ export function mount() {
         if (token) sg.token = token
         state.vaults = { ...u, token }
         state.lane = null                                                     // not looked for yet
+        state.inbox = undefined; state.waiting = []
         session.set({ ...rec, token })
         setButtons()
         return state.vaults
@@ -379,6 +397,7 @@ export function mount() {
                 L ? row('The lane', h('span', {}, h('span', { class: 'mono' }, L.lane.vaultId), ' ', secret(L.record.lane, 'the key'))) : row('The lane', 'none yet: made the first time you send'),
                 L ? row('Its read key', h('span', {}, h('span', { class: 'mono' }, L.record.read), ' ', copyBtn(L.record.read))) : null),
             h('p', { class: 'dim' }, 'The lane’s read key is the one thing to hand to the newsroom; it reads and cannot write. Everything else stays yours.'),
+            await (async () => { if (state.inbox === undefined) { try { state.inbox = await NV.readInbox(v.master) } catch (e) { state.inbox = null } } return state.inbox ? h('div', { class: 'vaults' }, row('Your inbox', h('span', { class: 'mono', id: 'keys-inbox' }, `a lane on ${state.inbox.vault} · key ${state.inbox.fingerprint}`)), h('p', { class: 'dim' }, 'Its link is in the Vault tab; its private key and enum key stay in the master.')) : null })(),
         )
     }
 
@@ -551,9 +570,11 @@ export function mount() {
                 h('button', { type: 'button', class: 'btn', onclick: () => { session.set(null); state.vaults = null; state.lane = null; setButtons(); if (pageDrawn) renderSteps(); drawLocked(h('p', { class: 'dim' }, 'Forgotten on this device; the vault is unchanged.')) } }, 'Forget on this device')),
             h('div', { id: 'vault-sync-out' }),
             h('h3', {}, 'Across your devices'), across,
+            h('h3', { id: 'vault-inbox-h' }, 'Send from another browser'), h('div', { id: 'vault-inbox' }),
             h('p', { class: 'dim' }, 'The keys of every vault of this account are in the Keys tab; your notes and the lane to the newsroom in This page.'),
         )
         await refreshAcross()
+        await drawInbox()
     }
 
     /** An account made without an access key in its master (the lab's early accounts): write it in, once. */
@@ -569,6 +590,111 @@ export function mount() {
                 session.set({ ...(session.get() || {}), token }); setButtons()
                 await drawUnlocked(h('p', { class: 'ok', id: 'vault-token-added' }, 'The access key is in the master now; every device of yours gets it from there.'))
             } catch (e) { status.replaceWith(h('p', { class: 'warn' }, /401|403|access token/i.test(String(e && e.message)) ? `The vault server refused that key (${err(e)}). Check it and try again.` : err(e))) }
+        })
+    }
+
+    // ------------------------------------------------------------ the inbox: send to my vault from any browser (card 049)
+    const when = at => String(at || '').slice(0, 16).replace('T', ' ')
+    const fileTime = id => { const ms = Number(String(id || '').split('_')[0]); return Number.isFinite(ms) && ms > 0 ? new Date(ms).toISOString() : '' }
+    async function drawInbox(note) {
+        const box = document.getElementById('vault-inbox'); if (!box) return
+        const v = state.vaults
+        if (state.inbox === undefined) { try { state.inbox = await NV.readInbox(v.master) } catch (e) { state.inbox = null } }
+        const rec = state.inbox
+        if (!rec) {
+            put(box, note || null,
+                h('p', { class: 'dim' }, 'A browser that cannot reach your passkey (one an app opens links in, one signed in to nothing, an old iPad) can still send what it holds to this vault, through a lane it can write to and never read. Make the link once, here; open it, paste it or scan it in that browser.'),
+                h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', id: 'vault-inbox-make', disabled: !v.token || !v.reader, onclick: makeInbox }, 'Make a link for another browser')))
+            return
+        }
+        const url = I.linkUrl(rec, ROOT), code = I.linkCode(rec)
+        const qr = h('div', { class: 'inbox-qr', id: 'vault-inbox-qr' })
+        I.qrSvg(url).then(q => { qr.innerHTML = q.svg; qr.dataset.modules = String(q.modules) }).catch(e => { qr.textContent = `The QR code could not be drawn: ${err(e)}` })
+        put(box, note || null,
+            h('div', { id: 'vault-inbox-waiting' }, h('p', { class: 'dim' }, 'Looking in the lane…')),
+            h('div', { class: 'inbox-link' },
+                row('The link', h('span', {}, h('a', { href: url, class: 'mono', id: 'vault-inbox-url', target: '_blank', rel: 'noopener', title: 'the whole link is copied' }, shorten(url.replace(/^https?:\/\//, ''), 44)), ' ', copyBtn(url))),
+                row('As text', h('span', {}, h('span', { class: 'mono', id: 'vault-inbox-code', 'data-code': code }, `${code.slice(0, 30)}… (${code.length} characters)`), ' ', copyBtn(code))),
+                row('Its key', h('span', { class: 'mono', id: 'vault-inbox-fp' }, `${rec.fingerprint}, RSA-OAEP 3072`))),
+            qr,
+            h('p', { class: 'dim' }, 'Open the link in the other browser, paste the text there, or scan the code with its camera. It carries where to write and the key to encrypt to, nothing else: whoever holds it can add to the lane and read nothing. The private key and the key that lists the lane are in your master vault. What arrives is shown here before it is brought in.'),
+            h('div', { class: 'acts' },
+                h('button', { type: 'button', class: 'btn', id: 'vault-inbox-check', onclick: () => checkInbox() }, 'Look in the lane'),
+                h('button', { type: 'button', class: 'btn', id: 'vault-inbox-rotate', onclick: rotateInbox }, 'Make a new link (the old one stops working)')))
+        await checkInbox()
+    }
+    async function checkInbox() {
+        const box = document.getElementById('vault-inbox-waiting'); if (!box || !state.inbox) return
+        put(box, h('p', { class: 'dim' }, 'Looking in the lane…'))
+        try {
+            const items = await I.drain(state.inbox)
+            state.waiting = items
+            if (!items.length) { put(box, h('p', { class: 'dim', id: 'vault-inbox-empty' }, 'Nothing waiting in the lane.')); return }
+            const good = items.filter(x => !x.problems.length), bad = items.filter(x => x.problems.length)
+            put(box,
+                h('p', { class: 'ok', id: 'vault-inbox-count' }, `${items.length} message(s) waiting in the lane: ${good.length} from your other browsers${bad.length ? `, ${bad.length} refused` : ''}.`),
+                h('ul', { class: 'waiting', id: 'vault-inbox-list' }, ...items.map(x => {
+                    if (x.problems.length) return h('li', { class: 'refused', 'data-file': x.file_id }, `Refused, received ${when(x.received || fileTime(x.file_id))}: ${x.problems.join('; ')}.`)
+                    const d = x.msg.file.device, c = I.carried(x.msg.file)
+                    return h('li', { 'data-file': x.file_id, 'data-device': d.id }, h('b', {}, d.label || d.id), d.agent ? ` (${d.agent})` : '', `, sent ${when(x.msg.sent_at)}: ${c.reads} read(s), ${c.notes} note(s), ${c.topups} top-up(s), ${c.seen} wire stories seen.`)
+                })),
+                h('div', { class: 'acts' },
+                    good.length ? h('button', { type: 'button', class: 'btn primary', id: 'vault-inbox-take', onclick: () => takeIn(good) }, good.length === 1 ? 'Bring it in' : 'Bring them in') : null,
+                    h('button', { type: 'button', class: 'btn', id: 'vault-inbox-discard', onclick: () => discard(items) }, items.length === 1 ? 'Discard it' : 'Discard them all')))
+        } catch (e) { put(box, h('p', { class: 'warn' }, `The lane could not be read: ${err(e)}`)) }
+    }
+    const byLane = items => { const m = new Map(); for (const x of items) { if (!m.has(x.inbox)) m.set(x.inbox, []); m.get(x.inbox).push(x.file_id) } return m }
+    /** What other browsers sent, written into the reader vault as their device files, the lane marked, then the usual merge. */
+    async function takeIn(items) {
+        await withBusy('vault-inbox-take', async () => {
+            const box = document.getElementById('vault-inbox-waiting'), v = state.vaults
+            try {
+                try { await v.reader.pull() } catch (e) { /* fine */ }
+                const byDevice = new Map()
+                for (const x of [...items].sort((a, b) => String(a.msg.sent_at).localeCompare(String(b.msg.sent_at)))) { const id = x.msg.file.device.id; byDevice.set(id, combine(byDevice.get(id), x.msg.file)) }
+                for (const [id, file] of byDevice) {
+                    if (id === deviceId) continue                                  // this browser's own records are here already
+                    const prev = await NV.readJson(v.reader, PATHS.device(id)).catch(() => null)
+                    await NV.writeFile(v.reader, PATHS.devicesFolder, `${id}.json`, JSON.stringify(combine(prev, file), null, 1))
+                }
+                await NV.publish(v.reader)
+                for (const [inbox, ids] of byLane(items)) await I.markProcessed(state.inbox, inbox, ids)
+                state.consolidated = null; state.waiting = []
+                await merge()                                                      // reloads, and says what arrived
+            } catch (e) { if (box) box.prepend(h('p', { class: 'warn' }, `Not brought in: ${err(e)}`)) }
+        })
+    }
+    async function discard(items) {
+        await withBusy('vault-inbox-discard', async () => {
+            try { for (const [inbox, ids] of byLane(items)) await I.markProcessed(state.inbox, inbox, ids); await checkInbox() }
+            catch (e) { const box = document.getElementById('vault-inbox-waiting'); if (box) box.prepend(h('p', { class: 'warn' }, `Not discarded: ${err(e)}`)) }
+        })
+    }
+    async function makeInbox() {
+        await withBusy('vault-inbox-make', async () => {
+            const v = state.vaults
+            try {
+                put(document.getElementById('vault-inbox'), h('p', { class: 'dim' }, 'Making a key pair in this browser and opening the lane on your reader vault…'))
+                const rec = await I.newInbox({ vault: v.reader.vaultId, endpoint: ENDPOINT, device: label || deviceId })
+                await I.configure(rec, { writeKey: v.reader.writeKeyHex, accessToken: v.token })
+                await NV.writeInbox(v.master, rec)
+                state.inbox = rec
+                await drawInbox(h('p', { class: 'ok', id: 'vault-inbox-made' }, 'The link is made. Its private key and the key that lists the lane are in your master vault; the link carries neither.'))
+            } catch (e) { state.inbox = undefined; await drawInbox(h('p', { class: 'warn' }, `The link was not made: ${err(e)}`)) }
+        })
+    }
+    async function rotateInbox() {
+        const box = document.getElementById('vault-inbox')
+        if (state.waiting.length) { box.prepend(h('p', { class: 'warn', id: 'vault-inbox-rotate-wait' }, 'Bring in or discard what is waiting first: a new link starts a new lane.')); return }
+        await withBusy('vault-inbox-rotate', async () => {
+            const v = state.vaults
+            try {
+                const rec = I.rotated(state.inbox, label || deviceId)
+                await I.configure(rec, { writeKey: v.reader.writeKeyHex, accessToken: v.token })
+                await NV.writeInbox(v.master, rec)
+                state.inbox = rec
+                await drawInbox(h('p', { class: 'ok', id: 'vault-inbox-rotated' }, 'A new link is made, with the same key. The old one can no longer write to the lane.'))
+            } catch (e) { box.prepend(h('p', { class: 'warn' }, `No new link: ${err(e)}`)) }
         })
     }
 

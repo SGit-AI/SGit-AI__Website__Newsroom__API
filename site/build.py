@@ -247,7 +247,9 @@ def map_graph_json():
     add("site", 0, "newsroom.sgit.ai", kind="site")
     for p in MAP["pages"]:
         add("page:" + p["path"], 1, p["path"], kind="page", what=p.get("what", "")); edges.append(["site", "page:" + p["path"]])
-    meter_js = next(f["path"] for f in MAP["files"] if f["path"].endswith("v1.4.0/sg-meter.js"))
+    # the current meter: the newest sg-meter.js in the map by version (v1.4.1 at v0.12.50), never a hard-coded one
+    meter_js = max((f["path"] for f in MAP["files"] if f["path"].endswith("/sg-meter.js")),
+                   key=lambda s: [int(x) for x in s.split("/")[-2][1:].split(".")])
     for view, count in MAP.get("views_on_pages", {}).items():
         vid = "view:" + view
         add(vid, 2, f"view {view}", kind="view", what=f"the meter's {view} view, on {count} page(s)")

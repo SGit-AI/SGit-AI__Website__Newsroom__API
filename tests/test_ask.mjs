@@ -18,7 +18,7 @@ import path from 'path'
 import crypto from 'crypto'
 import { execSync } from 'child_process'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 needsChromium('ask (the faked built-in model)')
 let failed = 0

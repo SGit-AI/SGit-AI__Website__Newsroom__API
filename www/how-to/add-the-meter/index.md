@@ -2,7 +2,7 @@
 
 > Put the reading meter on your site: the element at the foot of each page, the balance chip in the nav, the JSON config written once by your build, the pinned import, the account pages, and the article feed the picks read.
 
-*api.newsroom.sgit.ai · v0.1.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/add-the-meter/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/add-the-meter/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

@@ -41,8 +41,15 @@ if (!fs.existsSync(path.join(SITE, 'index.html'))) {
 /** Every API file a page asked for, as <release>/<path>; a test can check that the reader code came from the host. */
 export const apiHits = []
 
-/** Route the API host to this working tree, for one browser context. */
+/** Route the API host to this working tree, for one browser context; and a served path asked for on the local site origin
+ *  (a test's in-page import('/assets/newsroom-vault.js')) is answered from this tree too, since the newsroom no longer holds it. */
 export async function routeApi(ctx) {
+    await ctx.route(u => /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\//.test(u.href) && SERVED.has(decodeURIComponent(u.pathname.replace(/^\//, '').split('?')[0])), route => {
+        const rel = decodeURIComponent(new URL(route.request().url()).pathname.replace(/^\//, '').split('?')[0])
+        const f = path.join(API, rel)
+        apiHits.push(`site/${rel}`)
+        return route.fulfill({ status: 200, headers: { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream', ...CORS }, body: fs.readFileSync(f) })
+    })
     await ctx.route(`${API_HOST}/**`, route => {
         const u = new URL(route.request().url())
         const m = /^\/(v\d+\.\d+\.\d+)\/(.+)$/.exec(u.pathname)

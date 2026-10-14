@@ -1,0 +1,18 @@
+/* vault/send.html: sending to the reader's inbox from a browser without the passkey (card 049). */
+.send-box { margin: 0 0 1.6rem; padding: .9rem 1rem; border: 1px solid var(--tint-line, #cfe5da); border-left: 4px solid var(--accent, #0f6b4f); border-radius: 10px; background: var(--tint, #f6fbf8); }
+.send-box .kv { display: grid; grid-template-columns: 11rem 1fr; gap: .2rem .6rem; font-size: .92rem; padding: .3rem 0; border-bottom: 1px solid var(--line, #eceef2); }
+.send-box .kv .k { color: var(--dim, #5a5e68); }
+.send-box .kv .v { min-width: 0; overflow-wrap: anywhere; }
+.send-box .mono { font-family: var(--mono, ui-monospace, monospace); font-size: .84rem; }
+.send-box label { display: block; margin: .7rem 0 .2rem; font-size: .9rem; }
+.send-box input[type=text], .send-box textarea { display: block; width: 100%; box-sizing: border-box; margin-top: .25rem; font: inherit; font-size: .95rem; padding: .45rem .6rem; border: 1px solid var(--line2, #cfd2d8); border-radius: 8px; background: var(--input-bg, #fff); color: var(--fg, #1c1d21); }
+.send-box textarea { font-family: var(--mono, ui-monospace, monospace); font-size: .8rem; }
+.send-box .acts { display: flex; flex-wrap: wrap; gap: .5rem; margin: .8rem 0 .3rem; }
+.send-box .btn { font: inherit; font-size: .95rem; padding: .55rem 1rem; border: 1px solid var(--line2, #cfd2d8); border-radius: 10px; background: var(--panel, #fff); color: var(--fg, #1c1d21); cursor: pointer; }
+.send-box .btn.primary { background: var(--accent, #0f6b4f); border-color: var(--accent, #0f6b4f); color: var(--on-accent, #fff); font-weight: 600; }
+.send-box .btn:disabled { opacity: .5; cursor: default; }
+.send-box .ok { color: var(--accent, #0f6b4f); }
+.send-box .warn { color: var(--warn-ink, #8a5a0a); background: var(--warn-bg, #fff7e6); border: 1px solid var(--warn-line, #f1d7a2); border-radius: 8px; padding: .5rem .7rem; }
+@media (max-width: 520px) { .send-box .kv { grid-template-columns: 1fr; } }
+/* the agent block names an API path with no spaces in it: let it wrap rather than widen the page on a phone */
+.agent p { overflow-wrap: anywhere; }

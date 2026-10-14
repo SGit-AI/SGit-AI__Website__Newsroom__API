@@ -1,6 +1,6 @@
 # SGit Newsroom API: the whole site in one fetch
 
-Generated with the site at v0.1.0. Each section is a page; its address is given first.
+Generated with the site at v0.2.0. Each section is a page; its address is given first.
 
 
 
@@ -155,8 +155,8 @@ Edit anything under `releases/`. Move a tag. Load a reader file unversioned or b
 
 | Version | Files | State |
 |---|---|---|
-| `v1.4/v1.4.0/` (`sg-meter.js`, `sg-meter-core.js`, `sg-meter.css`, `sg-meter.tpl`) | 4 | **the line that continues**: the newsroom's build of v1.3.1 without "Pause the meter" and "Start again", with the landing view for persona links |
-| `v1.3/v1.3.1/`, `v1.3/v1.3.0/`, `v1.2/v1.2.0/`, `v1.1/v1.1.0/`, `v1.0/v1.0.0/` | 20 | frozen: published artefacts, served byte for byte, never edited; a page that pinned one keeps loading the same files |
+| `v1.4/v1.4.1/` (`sg-meter.js`, `sg-meter-core.js`, `sg-meter.css`, `sg-meter.tpl`) | 4 | **the line that continues**: the newsroom's build of v1.3.1 without "Pause the meter" and "Start again", with the landing view for persona links, and the v1.4.1 changes the newsroom made in October |
+| `v1.4/v1.4.0/`, `v1.3/v1.3.1/`, `v1.3/v1.3.0/`, `v1.2/v1.2.0/`, `v1.1/v1.1.0/`, `v1.0/v1.0.0/` | 24 | frozen: published artefacts, served byte for byte, never edited; a page that pinned one keeps loading the same files |
 
 `sg-meter.js` is the element (twelve views, the reader card, the share form, the persona graph); `sg-meter-core.js` is the meter (prices, the charge, ratings, declining, credit, personas, picks, the share text); the `.tpl` and `.css` are fetched beside it.
 
@@ -174,7 +174,7 @@ The subscribe form: reads the contact file, checks the key's fingerprint, encryp
 
 ## The vault layer: `assets/newsroom-vault.js`, `assets/door.js`, `assets/vault-pane/`
 
-`door.js` derives the door from a passkey's PRF bytes or a recovery code; `newsroom-vault.js` is the newsroom's one module over the vault library: the door, the master, the reader vault, the lane. `vault-pane/` is the pane on every page that carries the meter: `vault-pane.js` the UI, `notes.js` the notes as records, `reading.js` what was read, `wire-state.js` the wire's lens and stories seen, `pending.js` what only this browser holds, `sync.js` the sync as pure functions, and its stylesheet.
+`door.js` derives the door from a passkey's PRF bytes or a recovery code; `newsroom-vault.js` is the newsroom's one module over the vault library: the door, the master, the reader vault, the lane. `vault-pane/` is the pane on every page that carries the meter: `vault-pane.js` the UI, `notes.js` the notes as records, `reading.js` what was read, `wire-state.js` the wire's lens and stories seen, `pending.js` what only this browser holds, `sync.js` the sync as pure functions, `inbox.js` and `send.js` (with `send.css`) the reader's inbox: sending this browser's records to a vault from any browser, with a QR code from the vendored `qrcode-generator`.
 
 ## Search and ask: `assets/search/`
 
@@ -182,9 +182,13 @@ The subscribe form: reads the contact file, checks the key's fingerprint, encryp
 
 ## The wire reader: `wire/`
 
-`vault-reader.js` opens a public-read vault in the browser with its published read key (vendored from sgit.ai's vault); `wire.js` draws the edition, the sources and the documents as text, never as markup; `wire.css`.
+`vault-reader.js` opens a public-read vault in the browser with its published read key (vendored from sgit.ai's vault); `wire.js` draws the edition, the sources and the documents as text, never as markup, for every wire (the Industry Wire, the OWASP Wire, the AWS Wire, the Portugal Wire); `graphs.js` draws the edition as graphs; `subscribe.js` is a wire's subscribe form; `wire.css`.
 
-## The vendored vault library: `assets/vendor/sg-vault/`
+## The vendored libraries: `assets/vendor/`
+
+`qrcode-generator/2.0.4/qrcode.mjs`: the QR code the inbox shows, with its README.
+
+### `assets/vendor/sg-vault/`
 
 `v0.2.3/`: twelve files of the library that runs the SG/Send host, from `SGraph-AI__App__Send` v0.2.3, never edited here; `VENDOR.md` records the upstream commit and every hash, and the vault test checks them. `local/sg-vault--create-with-id.js`: one extension pending upstream (create a vault at a chosen id).
 
@@ -1186,10 +1190,10 @@ The brief for the agents that keep this repository and the newsroom: the rules, 
 | The share | a text summary then the same data as JSON {v:1, site, at, balance, spent, declined, reads, topups, active, personas, topics, cols, log}, as an .eml with X-SGit-Form, X-SGit-Reply-To, X-SGit-Name, X-SGit-Subscribe, X-SGit-Page | `shareData(), _send()` |
 | The envelope | sgit hybrid envelope v2: {v:2, w, i, c} (RSA-OAEP-SHA256 wrapped AES-256-GCM key, iv, ciphertext), base64, then base64 again as the lane payload | `envelope(), subscribe.js encrypt()` |
 | The contact file | sgit-subscribe/v1: recipient{address, fingerprint, encrypt}, inbox{vault, endpoint, encrypt_to, status, lane{name, append_token}}; the fingerprint is recomputed from the PEM before use | `.well-known/sgit-subscribe.json` |
-| The wire's vault | vault u9i9jp0l on dev.send.sgraph.ai, read key published; data/bundle.json {beats, stories, sources, personas, brief}, data/deliveries.json, docs/*.md; story fields and status shown as written; everything in the vault is public, for ever | `admin/build/wire-vault.json; wire/how.html; the wire's agents own the content` |
+| The wires' vaults | u9i9jp0l (the Industry Wire), eitf274v (OWASP), v202bla5 (AWS), p6twygul (Portugal) on dev.send.sgraph.ai, read keys published; data/bundle.json {beats, stories, sources, personas, brief; wire, map, stack when present}, data/deliveries.json, data/releases.json (wire-releases/v1, one entry per publish), docs/*.md; story fields, changes and status shown as written; everything in a vault is public, for ever | `admin/build/wire-vault*.json; wire/how.html; each wire's agents own its content` |
 | Events | sg:meter.changed · charged · rated · declined · toppedup · reset · restored · persona · shared; sg-meter:error | `sg-meter-core.js _emit(), sg-component.js failed()` |
 | A component | static jsUrl, get resourceName(), onReady(); a .tpl and a .css beside the .js; published at an immutable versioned path | `sg-component.js` |
-| The import's rules | the meter path rewrite (v1.3.1 → v1.4.0), the top-up link, eight text rules, the article number line; each stops the import when its anchor moves | `sync_newsroom.py items 9–12` |
+| The import's rules | the meter path rewrite (v1.3.1 → v1.4.1), the top-up link, ten text rules, the article number line, the moved banner cut, the foot of every issue; each stops the import when its anchor moves | `sync_newsroom.py items 9–15` |
 
 
 ---
@@ -1225,7 +1229,7 @@ The brief for the agents that keep this repository and the newsroom: the rules, 
 - **Local storage**: sgit.meter.v1 (the state), sgit.meter.v1.seen (session: the charge per path) (this browser, written by the meter; also by the reader, who may edit it (accepted); `_read(), _seen()`)
 - **A file**: Restore from an export… (whoever made the file; checked for balance:number and log:array only; `restore()`)
 - **Forms**: the share form, the subscribe form, the make page (the reader; email checked by a loose pattern, names by a strict one; `_send(), subscribe.js, make.js`)
-- **The wire's vault**: data/bundle.json, data/deliveries.json, docs/*.md, decrypted in the browser (whoever holds the vault's write key (the wire's agents); drawn as text, links only from http(s) values, markdown rendered by an escaping renderer; the vault's own HTML is not used; `wire/wire.js`)
+- **The wires' vaults**: data/bundle.json (with wire, map or stack when the vault has them), data/deliveries.json, data/releases.json, docs/*.md, decrypted in the browser; one vault per wire (whoever holds the vault's write key (the wire's agents); drawn as text, links only from http(s) values, markdown rendered by an escaping renderer; the vault's own HTML is not used; `wire/wire.js`)
 - **Own-origin data**: articles/graphs.json · articles/ids.json · .well-known/sgit-subscribe.json · sg-meter.tpl · sg-meter.css (this site's build; the contact file's key is checked against its fingerprint; `feed(), openList(), _send()`)
 - **postMessage**: replies from the dev.vault.sgraph.ai frames (origin-checked; drives a status line only; `vault-ui-embed.js`)
 
@@ -1285,9 +1289,9 @@ The brief for the agents that keep this repository and the newsroom: the rules, 
 ## Layers
 
 - the site: 1 node(s)
-- the pages: 22 node(s)
+- the pages: 29 node(s)
 - the views: 8 node(s)
-- the files: 49 node(s)
+- the files: 62 node(s)
 - the contracts: 14 node(s)
 - the findings: 18 node(s)
 
@@ -1307,6 +1311,11 @@ The data: <https://api.newsroom.sgit.ai/review/map/graph.json>.
 - files: 60 identical, 3 changed as recorded, 0 unexpected
 - frozen copies: 20 identical
 - pages: 593 of 597 identical once normalised
+## v0.2.0
+
+- files: 71 identical, 3 changed as recorded, 0 unexpected
+- frozen copies: 24 identical
+- pages: 735 of 738 identical once normalised
 
 
 ---
@@ -1317,6 +1326,9 @@ The data: <https://api.newsroom.sgit.ai/review/map/graph.json>.
 
 > Every release of the reader code served from api.newsroom.sgit.ai, its date, its notes, its manifest of paths and hashes, and the files that differ from the newsroom's bytes and why.
 
+## v0.2.0 (2026-10-14)
+
+74 files, 1,154,686 bytes. Manifest: <https://api.newsroom.sgit.ai/v0.2.0/manifest.json>.
 ## v0.1.0 (2026-10-13)
 
 63 files, 890,555 bytes. Manifest: <https://api.newsroom.sgit.ai/v0.1.0/manifest.json>.

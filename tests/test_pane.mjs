@@ -18,7 +18,7 @@ import path from 'path'
 import { execSync } from 'child_process'
 import { startMock } from './vault-mock.mjs'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 needsChromium('the vault pane (a virtual authenticator over CDP)')
 let chromium

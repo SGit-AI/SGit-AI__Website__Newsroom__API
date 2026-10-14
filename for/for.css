@@ -6,11 +6,11 @@
 #rl-docs, main.doc .agent p { overflow-wrap: anywhere; }
 [hidden] { display: none !important; }
 main.doc .rl-title { margin: 0 0 .5rem; font-size: 2rem; line-height: 1.15; }
-.rl-note { margin: .5rem 0 .9rem; padding: .1rem 0 .1rem 1rem; border-left: 3px solid var(--line2); font: italic 1.12rem/1.5 var(--serif); color: #34363c; }
+.rl-note { margin: .5rem 0 .9rem; padding: .1rem 0 .1rem 1rem; border-left: 3px solid var(--line2); font: italic 1.12rem/1.5 var(--serif); color: var(--text, #34363c); }
 .rl-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: .9rem 0 0; align-items: center; }
 .rl-btn { display: inline-block; font: inherit; font-size: .9rem; padding: .5rem .95rem; border: 1px solid var(--line2); border-radius: 8px; background: var(--panel); color: var(--fg); cursor: pointer; text-decoration: none; line-height: 1.2; }
 .rl-btn:hover { border-color: var(--accent); text-decoration: none; }
-.rl-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.rl-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #fff); font-weight: 600; }
 .rl-btn.primary:hover { background: var(--accent-dk); }
 .rl-btn:disabled { opacity: .45; cursor: not-allowed; }
 .rl-btn:focus-visible, .rl-follow:focus-visible, .rl-t:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -24,9 +24,9 @@ main.doc .rl-h { margin: 1.8rem 0 .6rem; font: 700 .72rem/1.4 var(--sans); lette
 .rl-item { display: grid; grid-template-columns: 4.2rem 1fr; gap: .9rem; padding: .95rem 1.1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
 .rl-item.gone { background: var(--panel2); color: var(--dim); }
 .rl-n { font: 600 .78rem/1.6 var(--mono); color: var(--dim); white-space: nowrap; }
-.rl-t { font: 700 1.12rem/1.3 var(--serif); color: #101114; text-decoration: none; }
+.rl-t { font: 700 1.12rem/1.3 var(--serif); color: var(--head, #101114); text-decoration: none; }
 .rl-t:hover { color: var(--accent-dk); text-decoration: underline; }
-.rl-teaser { margin: .25rem 0 0; color: #34363c; font-size: .93rem; line-height: 1.5; }
+.rl-teaser { margin: .25rem 0 0; color: var(--text, #34363c); font-size: .93rem; line-height: 1.5; }
 .rl-meta { margin: .35rem 0 0; font: .78rem/1.4 var(--mono); color: var(--dim2); }
 
 .rl-follows { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .8rem; }
@@ -35,7 +35,7 @@ main.doc .rl-h { margin: 1.8rem 0 .6rem; font: 700 .72rem/1.4 var(--sans); lette
 .rl-follow b { font: 700 1.02rem/1.3 var(--serif); }
 .rl-follow span { color: var(--dim); }
 
-.rl-ignored { margin: 1.4rem 0 0; padding: .6rem .9rem; border: 1px solid var(--warm); border-radius: 8px; background: #fffaf2; font-size: .86rem; color: #5a3b0a; }
+.rl-ignored { margin: 1.4rem 0 0; padding: .6rem .9rem; border: 1px solid var(--warm); border-radius: 8px; background: var(--warn-bg, #fffaf2); font-size: .86rem; color: var(--warn-ink, #5a3b0a); }
 .rl-foot { margin: 1.8rem 0 0; font-size: .82rem; color: var(--dim); }
 .rl-empty, .rl-explain { margin: 0 0 1.6rem; }
 .warn { color: var(--warm); }
@@ -57,7 +57,7 @@ main.doc .mk-card .rl-h { margin-top: 1.1rem; }
 .mk-field { display: grid; gap: .25rem; margin: 0 0 .8rem; }
 .mk-label { font: 600 .8rem/1.3 var(--sans); color: var(--dim); margin: 0 0 .1rem; }
 .mk input[type=text], .mk input[type=email], .mk input[type=search], .mk textarea, .mk select {
-  font: inherit; font-size: .92rem; width: 100%; padding: .5rem .65rem; border: 1px solid var(--line2); border-radius: 8px; background: #fff; color: var(--fg); }
+  font: inherit; font-size: .92rem; width: 100%; padding: .5rem .65rem; border: 1px solid var(--line2); border-radius: 8px; background: var(--input-bg, #fff); color: var(--fg); }
 .mk input[aria-invalid=true], .mk textarea[aria-invalid=true] { border-color: var(--warm); }
 .mk input:focus-visible, .mk textarea:focus-visible, .mk select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .mk-count, .mk-hint { margin: .2rem 0 .4rem; font-size: .78rem; color: var(--dim2); }
@@ -73,7 +73,7 @@ main.doc .mk-card .rl-h { margin-top: 1.1rem; }
 .mk-what b { font-size: .92rem; line-height: 1.3; }
 .mk-btns { display: flex; gap: .3rem; flex-wrap: wrap; justify-content: flex-end; }
 .rl-btn.sm { padding: .32rem .6rem; font-size: .8rem; }
-.rl-btn[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.rl-btn[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #fff); font-weight: 600; }
 
 .mk-order { list-style: none; margin: 0; padding: .3rem; min-height: 2.4rem; display: grid; gap: .4rem; border: 1px dashed transparent; border-radius: 10px; }
 .mk-order.over { border-color: var(--accent); background: var(--panel2); }

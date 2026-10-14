@@ -103,6 +103,30 @@ export function consolidate(files, account) {
 }
 
 /**
+ * Two files of the same device into one (card 049): the file already in the vault and one that browser sent through
+ * the inbox, or two sends. Every record of either is kept, the one that knows more where both have it; the device
+ * header is the newer file's, with the earlier first sync and the larger sync count. Neither file is changed.
+ */
+export function combine(prev, next) {
+    if (!prev) return next
+    if (!next) return prev
+    const [older, newer_] = String((prev.device || {}).last_sync || '') <= String((next.device || {}).last_sync || '') ? [prev, next] : [next, prev]
+    const byId = (a, b, pick) => { const m = new Map(); for (const x of [...(a || []), ...(b || [])]) m.set(x.id, pick(m.get(x.id), x)); return [...m.values()].sort((x, y) => String(y.at).localeCompare(String(x.at))) }
+    const topups = new Map(); for (const t of [...(older.topups || []), ...(newer_.topups || [])]) topups.set(topupKey(t), t)
+    const personas = new Map(); for (const p of [...(older.personas || []), ...(newer_.personas || [])]) personas.set(p.id, { ...(personas.get(p.id) || {}), ...p })
+    const seen = { ...((older.wire && older.wire.seen) || {}) }
+    for (const [id, e] of Object.entries((newer_.wire && newer_.wire.seen) || {})) if (!seen[id] || String(e.at) < String(seen[id].at)) seen[id] = e
+    const d0 = older.device || {}, d1 = newer_.device || {}
+    return {
+        ...newer_,
+        device: { ...d1, first_sync: [d0.first_sync, d1.first_sync].filter(Boolean).sort()[0] || d1.first_sync, syncs: Math.max(d0.syncs || 0, d1.syncs || 0) },
+        created: older.created || newer_.created || null,
+        reads: byId(older.reads, newer_.reads, newer), topups: [...topups.values()].sort((a, b) => String(b.at).localeCompare(String(a.at))),
+        personas: [...personas.values()], notes: byId(older.notes, newer_.notes, newerNote), wire: { seen },
+    }
+}
+
+/**
  * What other devices saw on the wire, into this browser's wire state: stories it has not seen, tagged with the
  * device that saw them first, so they are not new here and the next update from here does not claim them.
  * Returns { store, added }.

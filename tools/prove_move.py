@@ -53,9 +53,24 @@ API_RULES = [
 ]
 
 
+def load_api_rules(after):
+    """The move's own rule lives in the newsroom (admin/build/api.py NORMALISE): the after tree's copy is loaded and used,
+    so the proof reads references exactly as the newsroom's gate does and the two cannot drift."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("newsroom_api", after / "admin/build/api.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.normalise
+
+
+API_NORMALISE = None     # set in main() from the after tree; API_RULES above is the fallback when the tree has no api.py
+
+
 def normalise(text):
     for p, r in CHROME:
         text = p.sub(r, text, count=1)
+    if API_NORMALISE:
+        return API_NORMALISE(text)
     for p, r in API_RULES:
         text = p.sub(r, text)
     return text
@@ -80,6 +95,9 @@ def main():
     ap.add_argument("--out", default=str(ROOT / "map/proof" / f"{VERSION['release']}.json"))
     a = ap.parse_args()
     before, after = Path(a.before).resolve(), Path(a.after).resolve()
+    global API_NORMALISE
+    if (after / "admin/build/api.py").exists():
+        API_NORMALISE = load_api_rules(after)
     manifest = json.loads((ROOT / "releases" / VERSION["release"] / "manifest.json").read_text(encoding="utf-8"))
     changed_ok = {f["path"] for f in manifest["files"] if "changed_from_newsroom" in f}
     report = {"what": __doc__.split("\n")[0], "release": VERSION["release"], "before": str(before), "after": str(after),

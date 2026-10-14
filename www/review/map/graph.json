@@ -1,6 +1,6 @@
 {
  "what": "The map of what a reader runs, as a layered graph (site, pages, views, files, contracts, findings); drawn by assets/site.js on /review/map/.",
- "release": "v0.12.10",
+ "release": "v0.12.50",
  "layers": [
   "the site",
   "the pages",
@@ -143,6 +143,55 @@
    "what": "how the wire is read, and its documents"
   },
   {
+   "id": "page:wire/owasp/index.html",
+   "layer": 1,
+   "label": "wire/owasp/index.html",
+   "kind": "page",
+   "what": "the OWASP Wire's edition, with the projects graph"
+  },
+  {
+   "id": "page:wire/aws/index.html",
+   "layer": 1,
+   "label": "wire/aws/index.html",
+   "kind": "page",
+   "what": "the AWS Wire's edition, with the stack and its deadlines"
+  },
+  {
+   "id": "page:wire/portugal/index.html",
+   "layer": 1,
+   "label": "wire/portugal/index.html",
+   "kind": "page",
+   "what": "the Portugal Wire's edition, in English and Portuguese, with the ecosystem map"
+  },
+  {
+   "id": "page:wire/days.html",
+   "layer": 1,
+   "label": "wire/days.html",
+   "kind": "page",
+   "what": "every wire day by day"
+  },
+  {
+   "id": "page:wire/charter.html",
+   "layer": 1,
+   "label": "wire/charter.html",
+   "kind": "page",
+   "what": "the charter of the wires"
+  },
+  {
+   "id": "page:wire/desk-brief.html",
+   "layer": 1,
+   "label": "wire/desk-brief.html",
+   "kind": "page",
+   "what": "the brief for the desks"
+  },
+  {
+   "id": "page:wire/reach.html",
+   "layer": 1,
+   "label": "wire/reach.html",
+   "kind": "page",
+   "what": "who should know, by organisation route"
+  },
+  {
    "id": "page:vault/index.html",
    "layer": 1,
    "label": "vault/index.html",
@@ -196,7 +245,7 @@
    "layer": 2,
    "label": "view page",
    "kind": "view",
-   "what": "the meter's page view, on 466 page(s)"
+   "what": "the meter's page view, on 606 page(s)"
   },
   {
    "id": "view:personas",
@@ -227,38 +276,38 @@
    "what": "the meter's topup view, on 1 page(s)"
   },
   {
-   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
    "layer": 3,
    "label": "sg-meter.js",
    "kind": "file",
-   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
-   "lines": 815,
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
+   "lines": 817,
    "what": "SG Meter, the element: twelve views, the reader card, the share form, the graph"
   },
   {
-   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "layer": 3,
    "label": "sg-meter-core.js",
    "kind": "file",
-   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
-   "lines": 511,
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
+   "lines": 513,
    "what": "SG Meter, the meter: prices, the charge, ratings, declining, credit, personas, picks, the share text"
   },
   {
-   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
+   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.css",
    "layer": 3,
    "label": "sg-meter.css",
    "kind": "file",
-   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
-   "lines": 188,
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.css",
+   "lines": 192,
    "what": "SG Meter styles, adopted into the shadow root"
   },
   {
-   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "id": "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.tpl",
    "layer": 3,
    "label": "sg-meter.tpl",
    "kind": "file",
-   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.tpl",
    "lines": 1,
    "what": "SG Meter markup (one div)"
   },
@@ -317,13 +366,31 @@
    "what": "Reads an sgit vault in the browser with a published read key: ref, commit, tree, blobs, decrypted with Web Crypto; the markdown renderer"
   },
   {
+   "id": "file:wire/graphs.js",
+   "layer": 3,
+   "label": "graphs.js",
+   "kind": "file",
+   "path": "wire/graphs.js",
+   "lines": 356,
+   "what": "The wires' graphs: a provenance strip per story, stories per day by beat, the threads on a date axis, the entities stories share, a sources tally, a story-by-persona matrix; SVG from the bundle, text nodes only, colours as theme tokens"
+  },
+  {
+   "id": "file:admin/build/infographics.py",
+   "layer": 3,
+   "label": "infographics.py",
+   "kind": "file",
+   "path": "admin/build/infographics.py",
+   "lines": 617,
+   "what": "One card per story and one hero per edition through dev.tools.sgraph.ai, with a cost ledger per edition and per wire; the key from the environment only, a dry run without it"
+  },
+  {
    "id": "file:wire/wire.js",
    "layer": 3,
    "label": "wire.js",
    "kind": "file",
    "path": "wire/wire.js",
-   "lines": 322,
-   "what": "The Industry Wire: the edition with its lens, the sources, the documents, drawn from the vault as text"
+   "lines": 519,
+   "what": "The wires: the edition with its lens, release notes and corrections, a map or a stack when the vault has one, the sources, the documents, drawn from the vault as text; one code for every wire"
   },
   {
    "id": "file:wire/wire.css",
@@ -331,8 +398,26 @@
    "label": "wire.css",
    "kind": "file",
    "path": "wire/wire.css",
-   "lines": 108,
+   "lines": 176,
    "what": "Styles for the wire pages"
+  },
+  {
+   "id": "file:wire/subscribe.js",
+   "layer": 3,
+   "label": "subscribe.js",
+   "kind": "file",
+   "path": "wire/subscribe.js",
+   "lines": 103,
+   "what": "Subscribe to one wire alone: the newsletter's envelope and lane (assets/subscribe.js, unedited), with X-SGit-List naming the wire"
+  },
+  {
+   "id": "file:admin/build/wire-reach.json",
+   "layer": 3,
+   "label": "wire-reach.json",
+   "kind": "file",
+   "path": "admin/build/wire-reach.json",
+   "lines": 109,
+   "what": "The organisation routes this site found for each wire's reach page, under the published contact rules: page, date, hash, role addresses"
   },
   {
    "id": "file:admin/build/wire-vault.json",
@@ -341,7 +426,34 @@
    "kind": "file",
    "path": "admin/build/wire-vault.json",
    "lines": 14,
-   "what": "The wire's vault: endpoint, vault id, the public read key (the only key on this site)"
+   "what": "The Industry Wire's vault: endpoint, vault id, the public read key (the only kind of key on this site)"
+  },
+  {
+   "id": "file:admin/build/wire-vault.owasp.json",
+   "layer": 3,
+   "label": "wire-vault.owasp.json",
+   "kind": "file",
+   "path": "admin/build/wire-vault.owasp.json",
+   "lines": 17,
+   "what": "The OWASP Wire's vault (wire/owasp/): the same contract, its own public read key"
+  },
+  {
+   "id": "file:admin/build/wire-vault.aws.json",
+   "layer": 3,
+   "label": "wire-vault.aws.json",
+   "kind": "file",
+   "path": "admin/build/wire-vault.aws.json",
+   "lines": 17,
+   "what": "The AWS Wire's vault (wire/aws/): the same contract, its own public read key"
+  },
+  {
+   "id": "file:admin/build/wire-vault.portugal.json",
+   "layer": 3,
+   "label": "wire-vault.portugal.json",
+   "kind": "file",
+   "path": "admin/build/wire-vault.portugal.json",
+   "lines": 17,
+   "what": "The Portugal Wire's vault (wire/portugal/): the same contract, its own public read key; the bundle is bilingual"
   },
   {
    "id": "file:wire/snapshot.json",
@@ -349,8 +461,35 @@
    "label": "snapshot.json",
    "kind": "file",
    "path": "wire/snapshot.json",
-   "lines": 412,
-   "what": "The wire as it was in the vault at the last release: headlines and primary links, the fallback and the agents' index"
+   "lines": 717,
+   "what": "The Industry Wire as it was in the vault at the last release: headlines, primary links, corrections, the latest release note; the fallback and the agents' index"
+  },
+  {
+   "id": "file:wire/owasp/snapshot.json",
+   "layer": 3,
+   "label": "snapshot.json",
+   "kind": "file",
+   "path": "wire/owasp/snapshot.json",
+   "lines": 284,
+   "what": "The OWASP Wire at the last release, the same shape"
+  },
+  {
+   "id": "file:wire/aws/snapshot.json",
+   "layer": 3,
+   "label": "snapshot.json",
+   "kind": "file",
+   "path": "wire/aws/snapshot.json",
+   "lines": 936,
+   "what": "The AWS Wire at the last release, the same shape, with the stack's deadlines"
+  },
+  {
+   "id": "file:wire/portugal/snapshot.json",
+   "layer": 3,
+   "label": "snapshot.json",
+   "kind": "file",
+   "path": "wire/portugal/snapshot.json",
+   "lines": 507,
+   "what": "The Portugal Wire at the last release, the same shape, with each headline in Portuguese too"
   },
   {
    "id": "file:assets/vault-ui-embed.js",
@@ -403,7 +542,7 @@
    "label": "ids.json",
    "kind": "file",
    "path": "articles/ids.json",
-   "lines": 1517,
+   "lines": 1849,
    "what": "A number for every article: the contract reading lists are built on"
   },
   {
@@ -421,7 +560,7 @@
    "label": "graphs.json",
    "kind": "file",
    "path": "articles/graphs.json",
-   "lines": 25208,
+   "lines": 31261,
    "what": "The feed the picks and the graph read: every article with topics, tags and citations"
   },
   {
@@ -430,7 +569,7 @@
    "label": "newsroom-vault.js",
    "kind": "file",
    "path": "assets/newsroom-vault.js",
-   "lines": 245,
+   "lines": 255,
    "what": "The newsroom's vault module: create, open, read, write and publish through the vendored library; the door, master and reader vaults; unlock; add a door"
   },
   {
@@ -448,7 +587,7 @@
    "label": "vault-pane.js",
    "kind": "file",
    "path": "assets/vault-pane/vault-pane.js",
-   "lines": 658,
+   "lines": 784,
    "what": "The vault pane on every page with the meter, in three tabs: this page (the notes, send to the newsroom, the lane's read key), the vault (enable with the passkey, create or join, update the vault, the table across devices, bring their activity here), the keys (every vault of the account)"
   },
   {
@@ -497,6 +636,33 @@
    "what": "Styles for Ask on the search page"
   },
   {
+   "id": "file:assets/vault-pane/inbox.js",
+   "layer": 3,
+   "label": "inbox.js",
+   "kind": "file",
+   "path": "assets/vault-pane/inbox.js",
+   "lines": 227,
+   "what": "The inbox (049): the reader's RSA-OAEP key pair, the link (sgi1.<vault>.<token>.<key>), sgit's hybrid envelope, the append routes (configure, write, list, fetch, mark-processed), the drain, the QR code"
+  },
+  {
+   "id": "file:assets/vault-pane/send.js",
+   "layer": 3,
+   "label": "send.js",
+   "kind": "file",
+   "path": "assets/vault-pane/send.js",
+   "lines": 104,
+   "what": "The sending side of the inbox, for a browser with the link and no passkey: its own records as one device file, sealed and appended"
+  },
+  {
+   "id": "file:assets/vendor/qrcode-generator/2.0.4/qrcode.mjs",
+   "layer": 3,
+   "label": "qrcode.mjs",
+   "kind": "file",
+   "path": "assets/vendor/qrcode-generator/2.0.4/qrcode.mjs",
+   "lines": 2237,
+   "what": "QR code generator (Kazuhiko Arase, MIT), vendored unchanged, for the inbox link"
+  },
+  {
    "id": "file:assets/search/search-nav.css",
    "layer": 3,
    "label": "search-nav.css",
@@ -511,7 +677,7 @@
    "label": "wire-state.js",
    "kind": "file",
    "path": "assets/vault-pane/wire-state.js",
-   "lines": 66,
+   "lines": 78,
    "what": "What this browser knows about the wire: stories seen and when, the visit, the lens chosen; and which of the vault's releases to show"
   },
   {
@@ -538,7 +704,7 @@
    "label": "sync.js",
    "kind": "file",
    "path": "assets/vault-pane/sync.js",
-   "lines": 175,
+   "lines": 199,
    "what": "The activity vault's logic as pure functions: a device's file (reads, top-ups, personas, notes), the consolidated view, totals recomputed, merging into local state"
   },
   {
@@ -547,7 +713,7 @@
    "label": "vault-pane.css",
    "kind": "file",
    "path": "assets/vault-pane/vault-pane.css",
-   "lines": 103,
+   "lines": 110,
    "what": "Styles for the pane, its tabs, the chips and the notes, and the page shift"
   },
   {
@@ -748,12 +914,12 @@
    "owner": ".well-known/sgit-subscribe.json"
   },
   {
-   "id": "contract:The wire's vault",
+   "id": "contract:The wires' vaults",
    "layer": 4,
-   "label": "The wire's vault",
+   "label": "The wires' vaults",
    "kind": "contract",
-   "shape": "vault u9i9jp0l on dev.send.sgraph.ai, read key published; data/bundle.json {beats, stories, sources, personas, brief}, data/deliveries.json, docs/*.md; story fields and status shown as written; everything in the vault is public, for ever",
-   "owner": "admin/build/wire-vault.json; wire/how.html; the wire's agents own the content"
+   "shape": "u9i9jp0l (the Industry Wire), eitf274v (OWASP), v202bla5 (AWS), p6twygul (Portugal) on dev.send.sgraph.ai, read keys published; data/bundle.json {beats, stories, sources, personas, brief; wire, map, stack when present}, data/deliveries.json, data/releases.json (wire-releases/v1, one entry per publish), docs/*.md; story fields, changes and status shown as written; everything in a vault is public, for ever",
+   "owner": "admin/build/wire-vault*.json; wire/how.html; each wire's agents own its content"
   },
   {
    "id": "contract:Events",
@@ -776,8 +942,8 @@
    "layer": 4,
    "label": "The import's rules",
    "kind": "contract",
-   "shape": "the meter path rewrite (v1.3.1 → v1.4.0), the top-up link, eight text rules, the article number line; each stops the import when its anchor moves",
-   "owner": "sync_newsroom.py items 9–12"
+   "shape": "the meter path rewrite (v1.3.1 → v1.4.1), the top-up link, ten text rules, the article number line, the moved banner cut, the foot of every issue; each stops the import when its anchor moves",
+   "owner": "sync_newsroom.py items 9–15"
   },
   {
    "id": "finding:R1",
@@ -1017,6 +1183,34 @@
   ],
   [
    "site",
+   "page:wire/owasp/index.html"
+  ],
+  [
+   "site",
+   "page:wire/aws/index.html"
+  ],
+  [
+   "site",
+   "page:wire/portugal/index.html"
+  ],
+  [
+   "site",
+   "page:wire/days.html"
+  ],
+  [
+   "site",
+   "page:wire/charter.html"
+  ],
+  [
+   "site",
+   "page:wire/desk-brief.html"
+  ],
+  [
+   "site",
+   "page:wire/reach.html"
+  ],
+  [
+   "site",
    "page:vault/index.html"
   ],
   [
@@ -1033,7 +1227,7 @@
   ],
   [
    "view:account",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/index.html",
@@ -1061,7 +1255,7 @@
   ],
   [
    "view:landing",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/personas.html",
@@ -1093,7 +1287,7 @@
   ],
   [
    "view:newsroom",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/newsroom.html",
@@ -1105,7 +1299,7 @@
   ],
   [
    "view:page",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/index.html",
@@ -1180,6 +1374,34 @@
    "view:page"
   ],
   [
+   "page:wire/owasp/index.html",
+   "view:page"
+  ],
+  [
+   "page:wire/aws/index.html",
+   "view:page"
+  ],
+  [
+   "page:wire/portugal/index.html",
+   "view:page"
+  ],
+  [
+   "page:wire/days.html",
+   "view:page"
+  ],
+  [
+   "page:wire/charter.html",
+   "view:page"
+  ],
+  [
+   "page:wire/desk-brief.html",
+   "view:page"
+  ],
+  [
+   "page:wire/reach.html",
+   "view:page"
+  ],
+  [
    "page:vault/index.html",
    "view:page"
   ],
@@ -1197,7 +1419,7 @@
   ],
   [
    "view:personas",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/personas.html",
@@ -1205,7 +1427,7 @@
   ],
   [
    "view:share",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/share.html",
@@ -1213,7 +1435,7 @@
   ],
   [
    "view:topped-up",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/topped-up.html",
@@ -1221,26 +1443,26 @@
   ],
   [
    "view:topup",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/top-up.html",
    "view:topup"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
    "contract:The meter config"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "contract:The meter config"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.css",
    "contract:The meter config"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.tpl",
    "contract:The meter config"
   ],
   [
@@ -1272,11 +1494,23 @@
    "contract:Article numbers"
   ],
   [
+   "file:assets/vault-pane/send.js",
+   "contract:The share"
+  ],
+  [
    "file:assets/subscribe.js",
    "contract:The envelope"
   ],
   [
+   "file:wire/subscribe.js",
+   "contract:The envelope"
+  ],
+  [
    "file:assets/subscribe.js",
+   "contract:The contact file"
+  ],
+  [
+   "file:wire/subscribe.js",
    "contract:The contact file"
   ],
   [
@@ -1285,30 +1519,42 @@
   ],
   [
    "file:wire/wire.js",
-   "contract:The wire's vault"
+   "contract:The wires' vaults"
   ],
   [
    "file:wire/wire.css",
-   "contract:The wire's vault"
+   "contract:The wires' vaults"
   ],
   [
    "file:admin/build/wire-vault.json",
-   "contract:The wire's vault"
+   "contract:The wires' vaults"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "file:admin/build/wire-vault.owasp.json",
+   "contract:The wires' vaults"
+  ],
+  [
+   "file:admin/build/wire-vault.aws.json",
+   "contract:The wires' vaults"
+  ],
+  [
+   "file:admin/build/wire-vault.portugal.json",
+   "contract:The wires' vaults"
+  ],
+  [
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
    "contract:Events"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "contract:Events"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.css",
    "contract:Events"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.tpl",
    "contract:Events"
   ],
   [
@@ -1324,23 +1570,27 @@
    "contract:The import's rules"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "finding:R1"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
    "finding:R2"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "finding:R2"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
    "finding:R3"
   ],
   [
    "file:assets/subscribe.js",
+   "finding:R4"
+  ],
+  [
+   "file:wire/subscribe.js",
    "finding:R4"
   ],
   [
@@ -1349,6 +1599,10 @@
   ],
   [
    "file:assets/subscribe.js",
+   "finding:R5"
+  ],
+  [
+   "file:wire/subscribe.js",
    "finding:R5"
   ],
   [
@@ -1360,27 +1614,27 @@
    "finding:R5"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "finding:R6"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "finding:R7"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "finding:R8"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
    "finding:R13"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "finding:R14"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
    "finding:R15"
   ],
   [
@@ -1388,184 +1642,240 @@
    "finding:R17"
   ],
   [
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
    "finding:R18"
   ],
   [
    "page:account/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:account/newsroom.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/newsroom.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:account/personas.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/personas.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:account/share.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/share.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:account/top-up.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/top-up.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:account/topped-up.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:account/topped-up.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:subscribe/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:subscribe/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:persona/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:persona/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:persona/founder/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:persona/founder/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:persona/journalist/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:persona/journalist/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:persona/security/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:persona/security/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:persona/builder/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:persona/builder/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:persona/board/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:persona/board/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:for/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:for/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:for/make.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:for/make.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:wire/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:wire/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:wire/sources.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:wire/sources.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:wire/how.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:wire/how.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
+  ],
+  [
+   "page:wire/owasp/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
+  ],
+  [
+   "page:wire/owasp/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
+  ],
+  [
+   "page:wire/aws/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
+  ],
+  [
+   "page:wire/aws/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
+  ],
+  [
+   "page:wire/portugal/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
+  ],
+  [
+   "page:wire/portugal/index.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
+  ],
+  [
+   "page:wire/days.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
+  ],
+  [
+   "page:wire/days.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
+  ],
+  [
+   "page:wire/charter.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
+  ],
+  [
+   "page:wire/charter.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
+  ],
+  [
+   "page:wire/desk-brief.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
+  ],
+  [
+   "page:wire/desk-brief.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
+  ],
+  [
+   "page:wire/reach.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
+  ],
+  [
+   "page:wire/reach.html",
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:vault/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:vault/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:meter/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:meter/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:meter/security.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:meter/security.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ],
   [
    "page:demos/vaults/newsroom-synthetic-users/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js"
   ],
   [
    "page:demos/vaults/newsroom-synthetic-users/index.html",
-   "file:assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js"
+   "file:assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js"
   ]
  ]
 }

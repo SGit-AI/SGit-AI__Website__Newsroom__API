@@ -21,7 +21,7 @@ import path from 'path'
 import { execSync, spawn, spawnSync } from 'child_process'
 import { startMock } from './vault-mock.mjs'
 
-import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium } from './harness.mjs'
+import { API, SITE, API_HOSTNAME, apiUrl, isApi, routeApi, launch, needsChromium, engine, CLIPBOARD, canReadClipboard, clipboard } from './harness.mjs'
 const ROOT = SITE
 needsChromium('the notes loop (a virtual authenticator over CDP)')
 let chromium
@@ -194,14 +194,14 @@ try {
     check(/2.*Update the vault.*\(last 20/.test((await pg.evaluate(() => [...document.querySelectorAll('#vault-steps li')].map(li => li.className + ' ' + li.textContent).join(' | ')))) && (await pg.evaluate(() => (document.querySelector('#vault-steps li.next .n') || {}).textContent)) === '3', 'steps 1 and 2 are ticked, step 3 is next')
 
     // ---- the lab's early accounts: no access key in the master (003, 002)
-    await pg.evaluate(async (nvUrl) => {
-        const NV = await import(nvUrl)                      // the module is served from the API host (routed to this tree)
+    await pg.evaluate(async () => {
+        const NV = await import('/assets/newsroom-vault.js')
         const rec = JSON.parse(sessionStorage.getItem('sgit.vault.session'))
         const sg = NV.client({ endpoint: 'https://dev.send.sgraph.ai', token: rec.token })
         const u = await NV.unlock({ sgSend: sg, door: rec.door, cloneBranch: 'nr-test-strip' })
         await NV.writeFile(u.master, '/.vault', 'access-token.json', JSON.stringify({ token: '' })); await NV.publish(u.master)
         sessionStorage.setItem('sgit.vault.session', JSON.stringify({ ...rec, token: '' }))
-    }, apiUrl('assets/newsroom-vault.js'))
+    })
     await pg.reload(); await pg.waitForSelector('#sgit-vault-pane', { timeout: 20000 }); await until('Across your devices|could not be opened', 90000)
     check(await pg.evaluate(() => document.documentElement.classList.contains('vault-open') && !!document.getElementById('vault-notoken') && document.getElementById('vault-sync').disabled), 'an account whose master holds no access key: the pane says so, offers to add it, and Update is off')
     await pg.click('#vault-tab-page'); await wait(200); await pg.click('#vault-send'); await wait(500)

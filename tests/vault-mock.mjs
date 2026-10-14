@@ -17,6 +17,13 @@
  *   GET    /api/vault/presigned/...                400, as a server without S3 answers
  *   DELETE /api/vault/delete/{vid}/{path}          token + write key
  *   GET    /api/vault/public-info/{vid}            404 until the vault has a file (the lab's address check)
+ *   POST   /api/vault/append/{op}/{vid}            the append lanes, as https://sgit.ai/api/append-lanes.html documents
+ *                                                   them (card 049): configure (access token + the vault's write key;
+ *                                                   replaces the anchors), write (the append token in the body, no
+ *                                                   headers, a blind {"ok": true}), list, fetch and mark-processed
+ *                                                   (x-sgraph-vault-enum-key); a bad key or an unknown token is a 404
+ *                                                   with an HTML page, a bad token pattern a 400; files are named
+ *                                                   {epoch_ms:013d}_{24 hex}.enc and fetched while pending only
  *
  * CORS as measured on the real server: any origin, the two sgraph headers allowed, X-API-Key not allowed
  * (a preflight that asks for it is refused), so a browser client that sends X-API-Key fails here too.
@@ -34,14 +41,16 @@ import crypto from 'crypto'
 const sha256 = s => crypto.createHash('sha256').update(s).digest('hex')
 const json = (res, status, obj, extra = {}) => { res.writeHead(status, { 'content-type': 'application/json', ...CORS, ...extra }); res.end(JSON.stringify(obj)) }
 const CORS = { 'access-control-allow-origin': '*', 'access-control-expose-headers': '*' }
-const ALLOWED_HEADERS = ['content-type', 'x-sgraph-access-token', 'x-sgraph-vault-write-key']
+const ALLOWED_HEADERS = ['content-type', 'x-sgraph-access-token', 'x-sgraph-vault-write-key', 'x-sgraph-vault-enum-key']
 
 export async function startMock(opts = {}) {
     const token = opts.token || ('mock-' + crypto.randomBytes(12).toString('hex'))
     const store = new Map()            // "vid/path" -> Buffer
     const owners = new Map()           // vid -> sha256(write key hex)
     const log = []                     // "METHOD /path -> status"
-    const stats = { reads: 0, writes: 0, batches: 0, conflicts: 0 }
+    const stats = { reads: 0, writes: 0, batches: 0, conflicts: 0, appends: 0 }
+    const appendCfg = new Map()        // vid -> { anchors: Set(sha256 of token), enumHash }
+    const lanes = new Map()            // `${vid}/${token}` -> { pending: Map(file_id -> {payload, received}), processed: Map }
 
     const body = req => new Promise((resolve, reject) => { const c = []; req.on('data', d => c.push(d)); req.on('end', () => resolve(Buffer.concat(c))); req.on('error', reject) })
     const authorised = (req, vid, forWrite) => {
@@ -71,6 +80,7 @@ export async function startMock(opts = {}) {
             const verb = parts[2], vid = parts[3]
             const rest = parts.slice(4).map(p => decodeURIComponent(p)).join('/')
             const path = decodeURIComponent(rest)                      // the CLI encodes "/" as %2F inside one segment
+            if (verb === 'append' && m === 'POST') return await append(parts[3], parts[4])
             if (!/^[a-z0-9]{4,24}$/.test(vid || '')) return done(400, { detail: 'bad vault id' })
 
             if (verb === 'read' && m === 'GET') {
@@ -135,13 +145,59 @@ export async function startMock(opts = {}) {
         } catch (e) {
             return done(500, { detail: String(e && e.message || e) })
         }
+
+        async function append(op, avid) {
+            const notFound = () => { log.push(`${m} ${u.pathname} -> 404`); res.writeHead(404, { 'content-type': 'text/html', ...CORS }); res.end('<!doctype html><title>Not Found</title><h1>Not Found</h1>') }
+            if (!/^[a-z0-9]{4,24}$/.test(avid || '')) return done(400, { detail: 'bad vault id' })
+            let b
+            try { b = JSON.parse((await body(req)).toString('utf8') || '{}') } catch (e) { return done(400, { detail: 'bad json' }) }
+            const cfg = appendCfg.get(avid)
+            const lane = t => { const k = `${avid}/${t}`; if (!lanes.has(k)) lanes.set(k, { pending: new Map(), processed: new Map() }); return lanes.get(k) }
+            if (op === 'configure') {
+                if (req.headers['x-sgraph-access-token'] !== token) return done(401, { detail: 'access token required' })
+                if (!owners.has(avid) || owners.get(avid) !== sha256(String(req.headers['x-sgraph-vault-write-key'] || ''))) return notFound()
+                if (!Array.isArray(b.append_anchors) || typeof b.enum_key_hash !== 'string') return done(400, { detail: 'append_anchors and enum_key_hash are required' })
+                appendCfg.set(avid, { anchors: new Set(b.append_anchors), enumHash: b.enum_key_hash })
+                return done(200, { vault_id: avid, status: 'configured' })
+            }
+            if (op === 'write') {
+                if (typeof b.append_token !== 'string' || typeof b.payload !== 'string') return done(400, { detail: 'append_token and payload are required' })
+                if (!/^[0-9a-f]{16,128}$/.test(b.append_token)) return done(400, { detail: 'append_token: hex only' })
+                if (!cfg || !cfg.anchors.has(sha256(b.append_token))) return notFound()
+                if (b.payload.length > 5 * 1024 * 1024) return done(413, { detail: 'payload too large' })
+                const l = lane(b.append_token)
+                if (l.pending.size >= 1000) return done(507, { detail: 'lane full' })
+                const id = `${String(Date.now()).padStart(13, '0')}_${crypto.randomBytes(12).toString('hex')}.enc`
+                l.pending.set(id, { payload: b.payload, received: new Date().toISOString() }); stats.appends++
+                return done(200, { ok: true })
+            }
+            if (!['list', 'fetch', 'mark-processed'].includes(op)) return notFound()
+            const ek = req.headers['x-sgraph-vault-enum-key']
+            if (!cfg || !ek || sha256(String(ek)) !== cfg.enumHash) return notFound()
+            if (op === 'list') {
+                const all = []
+                for (const [k, l] of lanes) if (k.startsWith(avid + '/')) for (const [fid, f] of l.pending) all.push({ inbox: k.slice(avid.length + 1), file_id: fid, received: f.received, ...(b.include_content ? { content: f.payload } : {}) })
+                all.sort((x, y) => x.file_id.localeCompare(y.file_id))
+                const after = b.after_file_id ? all.filter(x => x.file_id > b.after_file_id) : all
+                const size = Math.min(Number(b.limit) || 50, 200)
+                return done(200, { entries: after.slice(0, size), truncated: after.length > size })
+            }
+            if (typeof b.inbox !== 'string' || !Array.isArray(b.file_ids)) return done(400, { detail: 'inbox and file_ids are required' })
+            if (b.file_ids.length > 100) return done(400, { detail: 'at most 100 file ids' })
+            const l = lanes.get(`${avid}/${b.inbox}`) || { pending: new Map(), processed: new Map() }
+            if (op === 'fetch') return done(200, { files: b.file_ids.filter(id => l.pending.has(id)).map(id => ({ file_id: id, size: l.pending.get(id).payload.length, content: l.pending.get(id).payload })) })
+            const moved = [], missing = []
+            for (const id of b.file_ids) { if (l.pending.has(id)) { l.processed.set(id, l.pending.get(id)); l.pending.delete(id); moved.push(id) } else missing.push(id) }
+            return done(200, { moved, missing })
+        }
     }
 
     const server = http.createServer(handler)
     await new Promise(r => server.listen(0, '127.0.0.1', r))
     const port = server.address().port
     return {
-        token, store, owners, log, stats, port, server, handler,
+        token, store, owners, log, stats, port, server, handler, appendCfg, lanes,
+        pending: vid => [...lanes].filter(([k]) => k.startsWith(vid + '/')).reduce((n, [, l]) => n + l.pending.size, 0),
         base: `http://127.0.0.1:${port}`,
         baseLocalhost: `http://localhost:${port}`,
         vaults: () => [...new Set([...store.keys()].map(k => k.split('/')[0]))],

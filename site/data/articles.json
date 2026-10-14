@@ -1,7 +1,652 @@
 {
  "what": "The newsroom's article feed (articles/graphs.json) with each article's number (articles/ids.json), copied by site/build.py --refresh-articles so this site can link and curate them. Refresh it with the newsroom.",
- "newsroom_release": "v0.7.86",
+ "newsroom_release": "v0.7.87",
  "articles": [
+  {
+   "slug": "sgit-actions-side-by-side",
+   "n": 122,
+   "title": "sgit in GitHub Actions, side by side: a showcase repository and site that runs four ways of moving a vault between jobs on every run, measured, with a budget for its LLM steps",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/sgit-actions-side-by-side.html",
+   "markdown": "https://newsroom.sgit.ai/articles/sgit-actions-side-by-side.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/sgit-actions-side-by-side.webp",
+   "teaser": "A showcase repository that runs four ways of moving a vault between GitHub Actions jobs side by side, measured, with a budget for its LLM steps.",
+   "topics": [
+    "vaults-and-method",
+    "site-and-engineering"
+   ],
+   "tags": [
+    "sgit",
+    "github-actions",
+    "ci",
+    "vaults",
+    "artefacts",
+    "append-lanes",
+    "performance",
+    "llm",
+    "token-budget",
+    "brief",
+    "article"
+   ]
+  },
+  {
+   "slug": "agent-workflows-on-ephemeral-vaults",
+   "n": 121,
+   "title": "Agent workflows on ephemeral vaults: seven architectures from one agent to a swarm, a repository of recipes that gates sgit's releases, and what a hundred writers did to an append lane",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/agent-workflows-on-ephemeral-vaults.html",
+   "markdown": "https://newsroom.sgit.ai/articles/agent-workflows-on-ephemeral-vaults.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/agent-workflows-on-ephemeral-vaults.webp",
+   "teaser": "Seven architectures for agents on ephemeral vaults, a recipe repository that gates sgit's releases, and a hundred writers measured on an append lane.",
+   "topics": [
+    "vaults-and-method",
+    "agents-and-policy"
+   ],
+   "tags": [
+    "sgit",
+    "agents",
+    "multi-agent",
+    "ephemeral-vaults",
+    "append-lanes",
+    "vault-apps",
+    "architecture",
+    "ci",
+    "templates",
+    "brief",
+    "article"
+   ]
+  },
+  {
+   "slug": "hooks-are-kernel-code",
+   "n": 120,
+   "title": "Hooks are kernel code: a maturity model, the first ten hooks mapped, and a brief for a hooks site and feed where you pay for state, never to run",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/hooks-are-kernel-code.html",
+   "markdown": "https://newsroom.sgit.ai/articles/hooks-are-kernel-code.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/hooks-are-kernel-code.webp",
+   "teaser": "Hooks are small code with kernel reach: a maturity model, the first ten hooks mapped, and a brief for a hooks site where you pay for state, never to run.",
+   "topics": [
+    "agents-and-policy",
+    "site-and-engineering"
+   ],
+   "tags": [
+    "hooks",
+    "agents",
+    "kernel",
+    "maturity-model",
+    "code-review",
+    "fractal-semantic-graphs",
+    "blast-radius",
+    "lethal-trifecta",
+    "billing",
+    "agent-behaviour-policy",
+    "brief",
+    "article"
+   ]
+  },
+  {
+   "slug": "chainguard-mapped",
+   "n": 119,
+   "title": "Chainguard, mapped: what it builds, what it publishes, how far up the stack its context goes, and where an open behaviour policy and an encrypted vault could plug in",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/chainguard-mapped.html",
+   "markdown": "https://newsroom.sgit.ai/articles/chainguard-mapped.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/chainguard-mapped.webp",
+   "teaser": "Chainguard mapped from OS to agents, its public feeds counted, and the context layer above the package where an open policy and a vault fit.",
+   "topics": [
+    "startups-and-strategy",
+    "agents-and-policy"
+   ],
+   "tags": [
+    "chainguard",
+    "supply-chain",
+    "containers",
+    "vulnerabilities",
+    "vex",
+    "osv",
+    "context",
+    "agent-behaviour-policy",
+    "sgit",
+    "open-source",
+    "agents",
+    "article"
+   ]
+  },
+  {
+   "slug": "the-wire-as-a-graph",
+   "n": 118,
+   "title": "The wire as a graph: start from what the reader sees, give every story and every name a long-lived ID, link every phrase of a short narrative, and a brief for the desks",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/the-wire-as-a-graph.html",
+   "markdown": "https://newsroom.sgit.ai/articles/the-wire-as-a-graph.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/the-wire-as-a-graph.webp",
+   "teaser": "Design the wire from what the reader sees: every name a link with a long-lived ID, every sentence a claim, stories of stories, folders by gravity.",
+   "topics": [
+    "news-and-evidence",
+    "graphs-and-knowledge"
+   ],
+   "tags": [
+    "wire",
+    "newsroom",
+    "fractal-semantic-graphs",
+    "ontology",
+    "ids",
+    "evidence",
+    "provenance",
+    "vaults",
+    "sgit",
+    "multi-model",
+    "brief",
+    "article"
+   ]
+  },
+  {
+   "slug": "system-prompts-as-behaviour-policies",
+   "n": 117,
+   "title": "System prompts as behaviour policies: Claude's published prompt and a leaked ChatGPT one, mapped into rows, a taxonomy of rules, and a JSON file a harness could enforce",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/system-prompts-as-behaviour-policies.html",
+   "markdown": "https://newsroom.sgit.ai/articles/system-prompts-as-behaviour-policies.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/system-prompts-as-behaviour-policies.webp",
+   "teaser": "Claude's published system prompt as 82 policy rows in eight kinds: 36 could be held by the harness, 21 partly by classifiers, 25 stay with the model.",
+   "topics": [
+    "agents-and-policy"
+   ],
+   "tags": [
+    "system-prompts",
+    "agent-behaviour-policy",
+    "claude",
+    "chatgpt",
+    "ontology",
+    "taxonomy",
+    "policy-as-code",
+    "json",
+    "guardrails",
+    "article"
+   ]
+  },
+  {
+   "slug": "the-agents-write-too",
+   "n": 116,
+   "title": "The agents write too: lessons, debriefs and a page for every agent on the newsroom, and a brief for the conductor that will keep it",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/the-agents-write-too.html",
+   "markdown": "https://newsroom.sgit.ai/articles/the-agents-write-too.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/the-agents-write-too.webp",
+   "teaser": "The newsroom's agents get their own bylines: lessons every agent loads, debriefs as source material, a page for every agent, and a conductor.",
+   "topics": [
+    "agents-and-policy",
+    "site-and-engineering"
+   ],
+   "tags": [
+    "agents",
+    "newsroom",
+    "memory",
+    "lessons-learned",
+    "debriefs",
+    "authorship",
+    "multi-agent",
+    "conductor",
+    "provenance",
+    "brief",
+    "article"
+   ]
+  },
+  {
+   "slug": "are-hooks-the-sweet-spot",
+   "n": 115,
+   "title": "Are hooks the sweet spot? Moving an agent's rules from hope into hooks, rule by rule, until enforcement moves off the machine",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/are-hooks-the-sweet-spot.html",
+   "markdown": "https://newsroom.sgit.ai/articles/are-hooks-the-sweet-spot.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/are-hooks-the-sweet-spot.webp",
+   "teaser": "One agent's eleven rules, moved from the prompt into hooks and tested: four fully, two mostly, three partly, two not at all, and a gap in the leak scan.",
+   "topics": [
+    "agents-and-policy",
+    "site-and-engineering"
+   ],
+   "tags": [
+    "hooks",
+    "agents",
+    "agent-behaviour-policy",
+    "enforcement",
+    "policy-as-code",
+    "claude-code",
+    "guardrails",
+    "owasp",
+    "security",
+    "article"
+   ]
+  },
+  {
+   "slug": "agent-hooks-october-2026",
+   "n": 114,
+   "title": "Agent hooks in October 2026: a technical debrief on what each platform lets you see, stop and change, where hooks run, and where they fail",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/agent-hooks-october-2026.html",
+   "markdown": "https://newsroom.sgit.ai/articles/agent-hooks-october-2026.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/agent-hooks-october-2026.webp",
+   "teaser": "A debrief on agent hooks across ten platforms: what each can see, stop and change, where they run, and the failure modes every vendor admits.",
+   "topics": [
+    "agents-and-policy",
+    "site-and-engineering"
+   ],
+   "tags": [
+    "hooks",
+    "agents",
+    "claude-code",
+    "codex",
+    "gemini-cli",
+    "copilot",
+    "cursor",
+    "guardrails",
+    "security",
+    "enforcement",
+    "owasp",
+    "article"
+   ]
+  },
+  {
+   "slug": "knowledge-that-maintains-itself",
+   "n": 113,
+   "title": "Knowledge that maintains itself: semantic graphs for an organisation's policies and internal knowledge, briefing people and agents from the graph, and vaults to carry the brief",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/knowledge-that-maintains-itself.html",
+   "markdown": "https://newsroom.sgit.ai/articles/knowledge-that-maintains-itself.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/knowledge-that-maintains-itself.webp",
+   "teaser": "Fractal semantic graphs for policies and internal knowledge: brief people and agents from the graph, maintain it in a loop, carry the brief in a vault.",
+   "topics": [
+    "graphs-and-knowledge",
+    "vaults-and-method"
+   ],
+   "tags": [
+    "knowledge-management",
+    "fractal-semantic-graphs",
+    "ontologies",
+    "taxonomies",
+    "briefing",
+    "agents",
+    "tokens",
+    "vectors",
+    "sgit",
+    "vaults",
+    "policies",
+    "article"
+   ]
+  },
+  {
+   "slug": "the-minimum-code-below",
+   "n": 112,
+   "title": "The minimum code below: container security from the top down, from the user story to the immutable line, measured on one real tool",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/the-minimum-code-below.html",
+   "markdown": "https://newsroom.sgit.ai/articles/the-minimum-code-below.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/the-minimum-code-below.webp",
+   "teaser": "Container security from the top down: at every layer, keep only the code the layer above needs. Measured on one real tool, with its limits.",
+   "topics": [
+    "site-and-engineering",
+    "graphs-and-knowledge"
+   ],
+   "tags": [
+    "containers",
+    "supply-chain",
+    "attack-surface",
+    "minimisation",
+    "chainguard",
+    "fractal-semantic-graphs",
+    "code-coverage",
+    "high-assurance",
+    "python",
+    "article"
+   ]
+  },
+  {
+   "slug": "a-policy-for-every-skill",
+   "n": 111,
+   "title": "A policy for every skill: Sean Turner's natural-language control for agent skills, the behaviour policy behind it, and using models to need them less",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/a-policy-for-every-skill.html",
+   "markdown": "https://newsroom.sgit.ai/articles/a-policy-for-every-skill.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/a-policy-for-every-skill.webp",
+   "teaser": "Sean Turner's natural-language control for agent skills, read as a behaviour policy, and why the description, not the code, stays canonical.",
+   "topics": [
+    "agents-and-policy",
+    "graphs-and-knowledge"
+   ],
+   "tags": [
+    "agent-skills",
+    "agent-behaviour-policy",
+    "natural-language-policy",
+    "ci",
+    "policy-as-code",
+    "supply-chain",
+    "prompt-injection",
+    "fractal-semantic-graphs",
+    "governance",
+    "article"
+   ]
+  },
+  {
+   "slug": "policy-as-code-needs-a-policy-first",
+   "n": 110,
+   "title": "Policy as code needs a policy first: what an agent behaviour policy adds, and how to reverse engineer one from the code, the spreadsheet or the paper you already have",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/policy-as-code-needs-a-policy-first.html",
+   "markdown": "https://newsroom.sgit.ai/articles/policy-as-code-needs-a-policy-first.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/policy-as-code-needs-a-policy-first.webp",
+   "teaser": "Policy as code answers one question. An agent behaviour policy holds the rest, and can be generated into code or reverse engineered from it.",
+   "topics": [
+    "agents-and-policy",
+    "graphs-and-knowledge"
+   ],
+   "tags": [
+    "policy-as-code",
+    "agent-behaviour-policy",
+    "open-policy-agent",
+    "rego",
+    "fractal-semantic-graphs",
+    "governance",
+    "enforcement",
+    "reverse-engineering",
+    "agents",
+    "article"
+   ]
+  },
+  {
+   "slug": "sgit-in-a-ci-pipeline",
+   "n": 109,
+   "title": "sgit in a CI pipeline: encrypted, versioned data in and out of GitHub Actions, between its jobs, through write-only lanes, and a key for every job",
+   "date": "2026-10-14",
+   "url": "https://newsroom.sgit.ai/articles/sgit-in-a-ci-pipeline.html",
+   "markdown": "https://newsroom.sgit.ai/articles/sgit-in-a-ci-pipeline.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/sgit-in-a-ci-pipeline.webp",
+   "teaser": "Encrypted, versioned vaults as the way data gets into, out of and between CI jobs, with a key per job and a sidecar when there is no server.",
+   "topics": [
+    "vaults-and-method",
+    "site-and-engineering"
+   ],
+   "tags": [
+    "sgit",
+    "ci",
+    "github-actions",
+    "pipelines",
+    "vaults",
+    "append-lanes",
+    "pki",
+    "secrets",
+    "scoped-clone",
+    "supply-chain",
+    "artifacts",
+    "article"
+   ]
+  },
+  {
+   "slug": "attacks-rewritten-as-mandates",
+   "n": 108,
+   "title": "Attacks rewritten as mandates: 28 supply-chain incidents, the column each one was missing, and why the next maintainer is an agent",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/attacks-rewritten-as-mandates.html",
+   "markdown": "https://newsroom.sgit.ai/articles/attacks-rewritten-as-mandates.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/attacks-rewritten-as-mandates.webp",
+   "teaser": "28 supply-chain attacks read as reach beyond mandate: what a hardened registry stops, what only a written mandate can, and why agents change it.",
+   "topics": [
+    "agents-and-policy",
+    "vaults-and-method"
+   ],
+   "tags": [
+    "supply-chain",
+    "agents",
+    "agent-behaviour-policy",
+    "reach",
+    "mandate",
+    "open-source",
+    "registries",
+    "skills",
+    "sgit",
+    "riskmandate",
+    "chainguard",
+    "article"
+   ]
+  },
+  {
+   "slug": "four-frameworks-one-agent",
+   "n": 107,
+   "title": "Four frameworks, one agent: iason's comparison of the OECD classification, the NIST AI RMF, Japan's guidelines and the EU AI Act, read against what runs here, with the evidence and the graphs",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/four-frameworks-one-agent.html",
+   "markdown": "https://newsroom.sgit.ai/articles/four-frameworks-one-agent.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/four-frameworks-one-agent.webp",
+   "teaser": "iason's comparison of four AI risk frameworks, mapped to the behaviour policy, the footprint and the graphs that run here, with the status of each row.",
+   "topics": [
+    "agents-and-policy",
+    "graphs-and-knowledge"
+   ],
+   "tags": [
+    "ai-risk-management",
+    "frameworks",
+    "nist-ai-rmf",
+    "oecd",
+    "eu-ai-act",
+    "japan-ai-guidelines",
+    "agent-behaviour-policy",
+    "footprint",
+    "risk-acceptance",
+    "graphs",
+    "governance",
+    "article"
+   ]
+  },
+  {
+   "slug": "every-link-points-back",
+   "n": 106,
+   "title": "Every link points back: 566 links between 105 articles, 15 that point forward, and why an article should know what came next and what corrected it",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/every-link-points-back.html",
+   "markdown": "https://newsroom.sgit.ai/articles/every-link-points-back.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/every-link-points-back.webp",
+   "teaser": "551 of 566 links between articles point back in time. Why older articles should say what came next and what corrected them.",
+   "topics": [
+    "site-and-engineering",
+    "graphs-and-knowledge"
+   ],
+   "tags": [
+    "links",
+    "graphs",
+    "corrections",
+    "versions",
+    "navigation",
+    "newsroom",
+    "analysis",
+    "reading",
+    "article"
+   ]
+  },
+  {
+   "slug": "sixteen-notes-i-did-not-want-to-lose",
+   "n": 105,
+   "title": "Sixteen notes I did not want to lose: a request to send from any browser to my vault, why identity is still this hard, and how two more wires became a product line",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/sixteen-notes-i-did-not-want-to-lose.html",
+   "markdown": "https://newsroom.sgit.ai/articles/sixteen-notes-i-did-not-want-to-lose.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/sixteen-notes-i-did-not-want-to-lose.webp",
+   "teaser": "Sixteen notes stuck in a browser with no passkey led to a request: let any browser send to my vault, by link, text or QR code.",
+   "topics": [
+    "vaults-and-method",
+    "site-and-engineering"
+   ],
+   "tags": [
+    "vaults",
+    "append-lanes",
+    "qr-codes",
+    "passkeys",
+    "identity",
+    "usability",
+    "gmail",
+    "agents",
+    "wire",
+    "product",
+    "brief",
+    "article"
+   ]
+  },
+  {
+   "slug": "how-cheap-is-it-to-undo",
+   "n": 104,
+   "title": "The human in the loop is a spectrum: how cheap it is to undo decides where a person belongs, and why the newsroom ships on its own while my email still waits for me",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/how-cheap-is-it-to-undo.html",
+   "markdown": "https://newsroom.sgit.ai/articles/how-cheap-is-it-to-undo.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/how-cheap-is-it-to-undo.webp",
+   "teaser": "How much to let an agent ship on its own depends on how cheap it is to undo and how mature the controls are, and both of those move.",
+   "topics": [
+    "agents-and-policy",
+    "site-and-engineering"
+   ],
+   "tags": [
+    "reversibility",
+    "two-way-doors",
+    "trust",
+    "side-effects",
+    "human-in-the-loop",
+    "agents",
+    "release",
+    "maturity",
+    "wardley-maps",
+    "newsroom",
+    "article"
+   ]
+  },
+  {
+   "slug": "the-human-in-the-loop",
+   "n": 103,
+   "title": "The human in the loop, safety net or bottleneck: both, until you decide which outputs need a person and give that person the why",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/the-human-in-the-loop.html",
+   "markdown": "https://newsroom.sgit.ai/articles/the-human-in-the-loop.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/the-human-in-the-loop.webp",
+   "teaser": "Checking every output is a bottleneck and a weak safety net; put the person where it cannot be undone, and let controls do the rest.",
+   "topics": [
+    "agents-and-policy"
+   ],
+   "tags": [
+    "human-in-the-loop",
+    "agents",
+    "agency",
+    "approval-fatigue",
+    "agent-behaviour-policy",
+    "blast-radius",
+    "production",
+    "trust",
+    "governance",
+    "roundtable",
+    "article"
+   ]
+  },
+  {
+   "slug": "a-policy-beside-the-prompt",
+   "n": 102,
+   "title": "A policy beside the prompt: a proposal that every agent takes a behaviour policy as an input, with enforcement and liability attached, and why aviation and payments say the vendors should want it",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/a-policy-beside-the-prompt.html",
+   "markdown": "https://newsroom.sgit.ai/articles/a-policy-beside-the-prompt.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/a-policy-beside-the-prompt.webp",
+   "teaser": "A proposal: every agent takes a behaviour policy beside its prompt, which the vendor accepts and answers for, as aviation and payments learned to.",
+   "topics": [
+    "agents-and-policy",
+    "startups-and-strategy"
+   ],
+   "tags": [
+    "agents",
+    "agent-behaviour-policy",
+    "standards",
+    "liability",
+    "prompt-injection",
+    "trust",
+    "aviation",
+    "payments",
+    "riskmandate",
+    "proposal",
+    "article"
+   ]
+  },
+  {
+   "slug": "the-policy-draws-the-liability-line",
+   "n": 101,
+   "title": "The policy draws the liability line: an answer to Ralf Thomas on agent accountability, and why every agent in a loop should take a behaviour policy beside its prompt",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/the-policy-draws-the-liability-line.html",
+   "markdown": "https://newsroom.sgit.ai/articles/the-policy-draws-the-liability-line.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/the-policy-draws-the-liability-line.webp",
+   "teaser": "An answer to Ralf Thomas: the shell game works because nothing is written down, and a behaviour policy's explicit prohibitions move the liability line.",
+   "topics": [
+    "agents-and-policy"
+   ],
+   "tags": [
+    "agents",
+    "accountability",
+    "liability",
+    "agent-behaviour-policy",
+    "riskmandate",
+    "product-liability",
+    "shared-responsibility",
+    "prompt-injection",
+    "governance",
+    "response",
+    "article"
+   ]
+  },
+  {
+   "slug": "dark-mode-and-four-more",
+   "n": 100,
+   "title": "Dark mode, and four more: five themes for the newsroom, chosen once and kept in your browser",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/dark-mode-and-four-more.html",
+   "markdown": "https://newsroom.sgit.ai/articles/dark-mode-and-four-more.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/dark-mode-and-four-more.webp",
+   "teaser": "Five themes behind one pill in the bar, kept in the reader's browser, built as a layer over a stylesheet this site cannot edit, with colour as a token and a test.",
+   "topics": [
+    "site-and-engineering"
+   ],
+   "tags": [
+    "themes",
+    "dark-mode",
+    "design-system",
+    "css",
+    "tokens",
+    "accessibility",
+    "newsroom",
+    "site-engineering",
+    "agents",
+    "article"
+   ]
+  },
+  {
+   "slug": "the-vault-crosses-chrome-profiles",
+   "n": 99,
+   "title": "The vault crosses Chrome profiles: state and memory between browser sessions, found by using it rather than by building it",
+   "date": "2026-10-13",
+   "url": "https://newsroom.sgit.ai/articles/the-vault-crosses-chrome-profiles.html",
+   "markdown": "https://newsroom.sgit.ai/articles/the-vault-crosses-chrome-profiles.md",
+   "card": "https://newsroom.sgit.ai/articles/cards/the-vault-crosses-chrome-profiles.webp",
+   "teaser": "The reader's vault carries the newsroom between Chrome profiles as it does between devices, a way to share state across browser sessions nobody built.",
+   "topics": [
+    "vaults-and-method",
+    "graphs-and-knowledge"
+   ],
+   "tags": [
+    "vaults",
+    "chrome-profiles",
+    "browser",
+    "state",
+    "memory",
+    "passkeys",
+    "newsroom",
+    "local-first",
+    "feedback-loop",
+    "agents",
+    "article"
+   ]
+  },
   {
    "slug": "stop-the-bleeding-then-ask-for-it-back",
    "n": 98,

@@ -18,7 +18,7 @@
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
   <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
-  <a class="ver" href="../../releases/" title="The current release">v0.1.0</a>
+  <a class="ver" href="../../releases/" title="The current release">v0.2.0</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/">Docs</a><a href="../../how-to/" class=here>How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">GitHub</a></nav>
 </div></header>
@@ -46,7 +46,7 @@
 <p>Leave <code>topup.link</code> empty until your Stripe Payment Link exists: the top-up page then says that no money moves. The newsroom's gate refuses a test-mode link on a live page.</p>
 <h2 id="4-the-import">4. The import</h2>
 <pre class="code" data-lang="html"><button class="copy" type="button" aria-label="Copy">Copy</button><code>&lt;script&gt;
-import(&#x27;https://api.newsroom.sgit.ai/v0.1.0/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js&#x27;)
+import(&#x27;https://api.newsroom.sgit.ai/v0.2.0/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js&#x27;)
  .catch(function (e) { console.error(&#x27;[sg-meter] component failed to load:&#x27;, e); });
 &lt;/script&gt;</code></pre>
 <p>Pinned to a release and a component version; neither is ever edited in place. Generate the URL from one place in your build (<a href="../take-a-release/">taking a release</a>).</p>
@@ -59,16 +59,16 @@ import(&#x27;https://api.newsroom.sgit.ai/v0.1.0/assets/components/sg-meter/v1/v
 <h2 id="what-to-read-before-going-live">What to read before going live</h2>
 <p><a href="https://newsroom.sgit.ai/articles/going-live-with-the-reading-meter.html">Going live with the reading meter</a> for what was switched on and in what order, <a href="https://newsroom.sgit.ai/articles/who-will-game-the-reading-meter.html">Who will game the reading meter</a> for the threat model, and <a href="https://newsroom.sgit.ai/meter/security.html">the security model</a> for the gaps the design accepts.</p>
 <aside class="agent" aria-label="For agents">
- <p><b>For agents.</b> Step-by-step: add &lt;sg-meter view=&quot;page&quot; kind=&quot;…&quot;&gt; at the foot of content, &lt;sg-meter view=&quot;balance&quot;&gt; in the nav, the sg-meter-config JSON block (prices in pence, start credit, links, picks feed, share contact), import sg-meter.js from https://api.newsroom.sgit.ai/&lt;release&gt;/…; add the account pages by copying the newsroom&#x27;s; publish articles/graphs.json; set the Stripe link last. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.1.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.1.0/manifest.json">v0.1.0/manifest.json</a>.</p>
+ <p><b>For agents.</b> Step-by-step: add &lt;sg-meter view=&quot;page&quot; kind=&quot;…&quot;&gt; at the foot of content, &lt;sg-meter view=&quot;balance&quot;&gt; in the nav, the sg-meter-config JSON block (prices in pence, start credit, links, picks feed, share contact), import sg-meter.js from https://api.newsroom.sgit.ai/&lt;release&gt;/…; add the account pages by copying the newsroom&#x27;s; publish articles/graphs.json; set the Stripe link last. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.2.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.2.0/manifest.json">v0.2.0/manifest.json</a>.</p>
 </aside>
 </main>
 <footer class="foot"><div class="cols">
-  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.1.0/manifest.json">Current manifest</a></div>
+  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../v0.2.0/manifest.json">Current manifest</a></div>
   <div><h4>The case</h4><a href="../../for-publishers/">For publishers and editors</a><a href="../../for-evaluators/">For evaluators</a><a href="../../adopt/">Adopt it</a><a href="../../articles/">The articles behind it</a></div>
   <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
   <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
 </div>
-<p class="fine">SGit Newsroom API · v0.1.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+<p class="fine">SGit Newsroom API · v0.2.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
 </footer>
 <script src="../../assets/site.js" defer></script>
 </body>

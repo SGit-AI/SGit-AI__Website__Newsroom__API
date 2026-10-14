@@ -24,7 +24,7 @@ manifests, into `www/`, which is committed and which CI checks; the deploy publi
 ## The layout
 
 - The served files, at the paths they had in the newsroom: `assets/components/`, `assets/vault-pane/`,
-  `assets/search/`, `assets/vendor/sg-vault/`, `assets/subscribe.js`, `assets/newsroom-vault.js`, `assets/door.js`,
+  `assets/search/`, `assets/vendor/sg-vault/`, `assets/vendor/qrcode-generator/`, `assets/subscribe.js`, `assets/newsroom-vault.js`, `assets/door.js`,
   `for/`, `wire/`, `passkey/`. `tools/served.json` is the list; `tools/version.json` the release and its date.
 - `releases/<release>/`: each release as published, with `manifest.json` (every path, bytes, SHA-256; which files
   differ from the newsroom's bytes and why). Never edited after it is on `main`. `python3 tools/release.py cut`
@@ -34,8 +34,8 @@ manifests, into `www/`, which is committed and which CI checks; the deploy publi
   `.newsroom/`; CI checks out the ref in `tests/newsroom.json`) and route `https://api.newsroom.sgit.ai/v*/`
   to this tree (`tests/harness.mjs`), so the pages are the real pages and the code is the code under test.
   `BROWSER=chromium|webkit|firefox`. `node tests/test_meter.mjs` and so on.
-- `map/before/v0.12.10/`: the newsroom's map of everything a reader runs, and every file's raw hash, at the
-  commit before the move. `map/proof/<release>.json`: the move's proof, written by `tools/prove_move.py`.
+- `map/before/<newsroom release>/`: the newsroom's map of everything a reader runs, and every file's raw hash, at the
+  commit before each cut (`v0.12.10` for v0.1.0, `v0.12.50` for v0.2.0). `map/proof/<release>.json`: the move's proof, written by `tools/prove_move.py`.
 - `tools/api_map.py`: the map generator, moved from the newsroom; not yet re-pointed at this tree and a
   newsroom checkout (phase 0 maintenance, to run nightly here).
 - `briefs/`: the plan. `2026-10-13__the-move-to-api-newsroom-sgit-ai.md` is the brief refreshed at newsroom
@@ -46,12 +46,12 @@ manifests, into `www/`, which is committed and which CI checks; the deploy publi
 
 ## The move, in one paragraph
 
-Release v0.1.0 is phase 1 of the brief. 63 files left the newsroom at newsroom v0.13.0, unchanged apart from
+Releases v0.1.0 (from the newsroom at v0.12.10) and v0.2.0 (from v0.12.50, the one the newsroom pins at its v0.13.0) are phase 1 of the brief. 74 files left the newsroom, unchanged apart from
 three that a host of their own forced to change, each by the lines that took the site root from the script's own
 address and now take it from the page (`vault-pane.js`, `search.js`, `ask.js`; recorded file by file in the
-manifest). The newsroom loads them from `https://api.newsroom.sgit.ai/v0.1.0/`, pinned in its
+manifest). The newsroom loads them from `https://api.newsroom.sgit.ai/v0.2.0/`, pinned in its
 `admin/build/api.json`; its gate checks every reference and the frozen meter copies it keeps. The proof that the
-live site serves the same bytes is `map/proof/v0.1.0.json`. The 18 findings of the review are issues 1 to 18.
+live site serves the same bytes is `map/proof/v0.2.0.json` (and `v0.1.0.json` for the first cut). The 18 findings of the review are issues 1 to 18.
 Until phase 4 is finished, the served files are frozen: a change is a new release, with a test that fails without
 it, and a reason in the pull request.
 

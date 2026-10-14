@@ -28,7 +28,8 @@ HOST = "https://api.newsroom.sgit.ai"
 SERVED = json.loads((ROOT / "tools/served.json").read_text(encoding="utf-8"))
 VERSION = json.loads((ROOT / "tools/version.json").read_text(encoding="utf-8"))
 RELEASES = ROOT / "releases"
-BEFORE = json.loads((ROOT / "map/before/v0.12.10/hashes.json").read_text(encoding="utf-8"))
+# the "before" of the latest cut: the newest map/before/<newsroom release>/hashes.json by version
+BEFORE = json.loads(max((ROOT / "map/before").glob("v*/hashes.json"), key=lambda p: [int(x) for x in p.parent.name[1:].split(".")]).read_text(encoding="utf-8"))
 BEFORE_SHA = {f["path"]: f["sha256_raw"] for f in BEFORE["files"]}
 
 # The files the host forced to change, and why. Everything else is the newsroom's bytes, unchanged.

@@ -58,9 +58,9 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-1.56.1-${{ matrix.engine }}-${{ runner.os }}
-      - name: Install Playwright's ${{ matrix.engine }}
+      - name: Install Playwright's ${{ matrix.engine }} (and jsqr, which the inbox test decodes its QR code with)
         run: |
-          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npm install --no-save --no-audit --no-fund playwright@1.56.1 jsqr@1.4.0
           npx playwright install --with-deps ${{ matrix.engine }}
       - name: Install sgit-ai 0.21.0, for the vault test's CLI round trip and the notes test's lane
         if: matrix.engine == 'chromium'
@@ -72,10 +72,10 @@ jobs:
         run: |
           set -euo pipefail
           if [ "$BROWSER" = chromium ]; then
-            TESTS="test_meter test_lists test_review test_passkey test_wire test_vault test_sync test_pane test_notes test_search test_ask"
+            TESTS="test_meter test_lists test_review test_passkey test_wire test_graphs test_vault test_sync test_pane test_notes test_inbox test_search test_ask"
           else
-            # the virtual authenticator (passkey, pane, notes) and the faked built-in model (ask) drive CDP: Chromium only
-            TESTS="test_meter test_lists test_review test_wire test_sync test_search"
+            # the virtual authenticator (passkey, pane, notes, inbox) and the faked built-in model (ask) drive CDP: Chromium only
+            TESTS="test_meter test_lists test_review test_wire test_graphs test_sync test_search"
           fi
           for t in $TESTS; do
             echo "== $t ($BROWSER)"

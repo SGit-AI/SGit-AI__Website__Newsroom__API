@@ -2,7 +2,7 @@
 
 > The served files by group, what each is for, where it came from, and which are frozen: SG Meter and its versions, the component base, the reading lists, subscribe, the vault layer and the pane, search and ask, the wire reader, the vendored vault library, the passkey lab.
 
-*api.newsroom.sgit.ai · v0.1.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/components/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.0 · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/components/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -14,8 +14,8 @@
 
 | Version | Files | State |
 |---|---|---|
-| `v1.4/v1.4.0/` (`sg-meter.js`, `sg-meter-core.js`, `sg-meter.css`, `sg-meter.tpl`) | 4 | **the line that continues**: the newsroom's build of v1.3.1 without "Pause the meter" and "Start again", with the landing view for persona links |
-| `v1.3/v1.3.1/`, `v1.3/v1.3.0/`, `v1.2/v1.2.0/`, `v1.1/v1.1.0/`, `v1.0/v1.0.0/` | 20 | frozen: published artefacts, served byte for byte, never edited; a page that pinned one keeps loading the same files |
+| `v1.4/v1.4.1/` (`sg-meter.js`, `sg-meter-core.js`, `sg-meter.css`, `sg-meter.tpl`) | 4 | **the line that continues**: the newsroom's build of v1.3.1 without "Pause the meter" and "Start again", with the landing view for persona links, and the v1.4.1 changes the newsroom made in October |
+| `v1.4/v1.4.0/`, `v1.3/v1.3.1/`, `v1.3/v1.3.0/`, `v1.2/v1.2.0/`, `v1.1/v1.1.0/`, `v1.0/v1.0.0/` | 24 | frozen: published artefacts, served byte for byte, never edited; a page that pinned one keeps loading the same files |
 
 `sg-meter.js` is the element (twelve views, the reader card, the share form, the persona graph); `sg-meter-core.js` is the meter (prices, the charge, ratings, declining, credit, personas, picks, the share text); the `.tpl` and `.css` are fetched beside it.
 
@@ -33,7 +33,7 @@ The subscribe form: reads the contact file, checks the key's fingerprint, encryp
 
 ## The vault layer: `assets/newsroom-vault.js`, `assets/door.js`, `assets/vault-pane/`
 
-`door.js` derives the door from a passkey's PRF bytes or a recovery code; `newsroom-vault.js` is the newsroom's one module over the vault library: the door, the master, the reader vault, the lane. `vault-pane/` is the pane on every page that carries the meter: `vault-pane.js` the UI, `notes.js` the notes as records, `reading.js` what was read, `wire-state.js` the wire's lens and stories seen, `pending.js` what only this browser holds, `sync.js` the sync as pure functions, and its stylesheet.
+`door.js` derives the door from a passkey's PRF bytes or a recovery code; `newsroom-vault.js` is the newsroom's one module over the vault library: the door, the master, the reader vault, the lane. `vault-pane/` is the pane on every page that carries the meter: `vault-pane.js` the UI, `notes.js` the notes as records, `reading.js` what was read, `wire-state.js` the wire's lens and stories seen, `pending.js` what only this browser holds, `sync.js` the sync as pure functions, `inbox.js` and `send.js` (with `send.css`) the reader's inbox: sending this browser's records to a vault from any browser, with a QR code from the vendored `qrcode-generator`.
 
 ## Search and ask: `assets/search/`
 
@@ -41,9 +41,13 @@ The subscribe form: reads the contact file, checks the key's fingerprint, encryp
 
 ## The wire reader: `wire/`
 
-`vault-reader.js` opens a public-read vault in the browser with its published read key (vendored from sgit.ai's vault); `wire.js` draws the edition, the sources and the documents as text, never as markup; `wire.css`.
+`vault-reader.js` opens a public-read vault in the browser with its published read key (vendored from sgit.ai's vault); `wire.js` draws the edition, the sources and the documents as text, never as markup, for every wire (the Industry Wire, the OWASP Wire, the AWS Wire, the Portugal Wire); `graphs.js` draws the edition as graphs; `subscribe.js` is a wire's subscribe form; `wire.css`.
 
-## The vendored vault library: `assets/vendor/sg-vault/`
+## The vendored libraries: `assets/vendor/`
+
+`qrcode-generator/2.0.4/qrcode.mjs`: the QR code the inbox shows, with its README.
+
+### `assets/vendor/sg-vault/`
 
 `v0.2.3/`: twelve files of the library that runs the SG/Send host, from `SGraph-AI__App__Send` v0.2.3, never edited here; `VENDOR.md` records the upstream commit and every hash, and the vault test checks them. `local/sg-vault--create-with-id.js`: one extension pending upstream (create a vault at a chosen id).
 

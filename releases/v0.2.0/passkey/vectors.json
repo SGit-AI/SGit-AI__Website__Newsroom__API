@@ -1,0 +1,19 @@
+{
+ "what": "Test vectors for the passkey lab (passkey/index.html): a fake PRF output and everything derived from it, computed in Python with sgit's own Vault__Crypto. The page computes the same in WebCrypto and compares.",
+ "sgit_version": "0.21.0",
+ "pbkdf2_iterations": 600000,
+ "rp": "newsroom.sgit.ai",
+ "input_text": "newsroom.sgit.ai/door/v1/test-vector-1",
+ "prf_hex": "3db9c5ab5757e5b579d4d91619c50789e1e60fd0367de86fcc4f444825af6664",
+ "seed": "f09cbe5a090998c96fb8fb14fcb80e2d16ad22a2cbe67369cc11ceb8360cc911",
+ "passphrase": "9e4089399c4f9c05f10e76269d04eb81cf8c1d72a428b2f1557d09aef406076a",
+ "vault_id": "tem5tsyl",
+ "read_key": "5a4b5bdc67a4a81485f93b1455e11df77cb304b7b73c278c376565418802dc9d",
+ "write_key": "00c87e216e76e814aa1b5e642d75c9745e048dd90ad20c6b4a7aeff579697604",
+ "ref_file_id": "ref-pid-muw-0af297cfa67e",
+ "branch_index_file_id": "idx-pid-muw-d08141859087",
+ "door_record_plaintext": "{\"kind\":\"door\",\"v\":1,\"opens\":\"master\",\"master\":\"a test vector, not a key\",\"made\":\"2026-10-11T00:00:00Z\",\"by\":\"the test vector\"}",
+ "door_record_ct_hex": "42b3832630b4edbebd40da954c20985ea6383e6e98df8134fe54b056f270f0d56ec209fbd3e3d73523556413842fe85dafc71f5f34755517966cda89c82857da1c864ba5f87b9b5129ead91ee65706da822476480aa6d0b834b8c0d93bc017f2bec8dcfcdf78c6595437990d79ea1c4e88df09b28cc4acf21dcaa8a7623de497d033be951fa1831324e68f00fc8546f5632f5c450a9c8bbb9283ae",
+ "door_record_object_id": "obj-cas-imm-19ec39c35667",
+ "note": "The deterministic ciphertext uses sgit's encrypt_deterministic (iv = HMAC-SHA256(key, plaintext)[:12]), so it can be compared byte for byte; a real door record is encrypted with a random iv."
+}
