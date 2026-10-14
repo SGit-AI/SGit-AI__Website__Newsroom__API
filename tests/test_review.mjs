@@ -115,7 +115,8 @@ try {
     // R3: a malformed session id fails the whole element
     await pg.goto(B + 'account/topped-up.html?session_id=%E0%A4%A'); await wait(1200)
     const r3 = await pg.evaluate(() => { const e = document.querySelector('sg-meter[view=topped-up]'); return { state: e.getAttribute('data-state'), text: e.shadowRoot.textContent } })
-    pin('R3', r3.state === 'error' && /URI malformed/.test(r3.text), 'a malformed percent sequence in session_id shows “did not load: URI malformed”')
+    // the engine's own wording: Chromium "URI malformed", Firefox "malformed URI sequence", WebKit "URI error"
+    pin('R3', r3.state === 'error' && /URI malformed|malformed URI|URI error/i.test(r3.text), `a malformed percent sequence in session_id shows “did not load: …”: ${r3.text.trim().slice(0, 60)}`)
 
     // R2: a restored file with a persona that has no arrays blanks the personas page
     await pg.evaluate(() => localStorage.clear())
