@@ -2,6 +2,12 @@
  "what": "Every version of this repository that landed on dev, newest first: what changed, in a line. tools/version.json names the current one; the deploy tags it. The reader-code releases (what the consuming sites pin) are the entries with a release of their own.",
  "versions": [
   {
+   "version": "v0.2.6",
+   "date": "2026-10-15",
+   "release": "v0.2.5",
+   "line": "The deploy tags every version in the history that has none (each commit's subject carries its version), so several versions landing in one push each get their tag."
+  },
+  {
    "version": "v0.2.5",
    "date": "2026-10-15",
    "release": "v0.2.5",

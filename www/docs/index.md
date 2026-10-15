@@ -2,7 +2,7 @@
 
 > The reference for the SGit Newsroom API: the contracts, the reader's state and every input and output, the components and what each file is, the hosting model, pinning and the manifest, the reading-list link grammar, events.
 
-*api.newsroom.sgit.ai · v0.2.5 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.6 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

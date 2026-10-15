@@ -2,7 +2,7 @@
 
 > The newsroom.sgit.ai articles that designed, built and reviewed this API, curated for publishers, for the reader's own newsroom, and for the engineering.
 
-*api.newsroom.sgit.ai · v0.2.5 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/articles/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.6 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/articles/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
