@@ -124,8 +124,12 @@ try {
     // always enough (the first run of v0.12.20 in CI), and a state pushed to before it is saved is overwritten by the save
     await pg.waitForFunction(() => { try { const s = JSON.parse(localStorage.getItem('sgit.meter.v1') || 'null'); return !!s && Array.isArray(s.personas) && Array.isArray(s.log) && s.log.length >= 1 } catch (e) { return false } }, null, { timeout: 20000 }).catch(() => {})
     await wait(300)
-    s = await state(); s.personas.push({ id: 'p-bad', name: 'broken' }); await setState(s)
+    // the broken persona goes into the saved state on the personas page itself, which is then reloaded: pushed on the article
+    // page, the meter's next save there could overwrite it before the navigation (CI runs 21 and 22 saw the page render)
     await pg.goto(B + 'account/personas.html')
+    await pg.waitForFunction(() => { const e = document.querySelector('sg-meter[view=personas]'); return e && /^(ready|error)$/.test(e.getAttribute('data-state') || '') }, null, { timeout: 20000 }).catch(() => {})
+    s = await state(); s.personas.push({ id: 'p-bad', name: 'broken' }); await setState(s)
+    await pg.reload()
     // wait for the meter to say it is ready (or failed), not a fixed time: on a slow runner 1.5 s was not always enough
     await pg.waitForFunction(() => { const e = document.querySelector('sg-meter[view=personas]'); return e && /^(ready|error)$/.test(e.getAttribute('data-state') || '') }, null, { timeout: 20000 }).catch(() => {})
     await wait(500)

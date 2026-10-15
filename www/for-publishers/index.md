@@ -2,7 +2,7 @@
 
 > What a reader gets, what the newsroom keeps, what it costs to adopt, what is live and taking money, and what is honestly not there yet. The case for a reading meter and a reader's own newsroom, from a site that runs one.
 
-*api.newsroom.sgit.ai · v0.2.13 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/for-publishers/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.14 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/for-publishers/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

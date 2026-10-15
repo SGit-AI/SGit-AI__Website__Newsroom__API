@@ -2,7 +2,7 @@
 
 > The map of the reader code as a layered graph: the site, the pages, the views, the files, the contracts and the findings anchored to them.
 
-*api.newsroom.sgit.ai · v0.2.13 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/review/map/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.14 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/review/map/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
