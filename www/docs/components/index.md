@@ -2,7 +2,7 @@
 
 > The served files by group, what each is for, where it came from, and which are frozen: SG Meter and its versions, the component base, the reading lists, subscribe, the vault layer and the pane, search and ask, the wire reader, the vendored vault library, the passkey lab.
 
-*api.newsroom.sgit.ai · v0.2.6 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/components/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.7 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/components/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

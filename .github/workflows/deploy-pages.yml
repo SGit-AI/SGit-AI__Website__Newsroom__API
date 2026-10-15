@@ -63,7 +63,7 @@ jobs:
           # a tag on a commit whose workflow files differ from this one's; those are reported, not fatal.
           LOG=$(git log --format='%H;%s' HEAD)
           while IFS=';' read -r h s; do
-            v=$(printf '%s' "$s" | grep -oE '^v[0-9]+\.[0-9]+\.[0-9]+(?=:)' -P || true)
+            v=$(printf '%s' "$s" | grep -oP '^v\d+\.\d+\.\d+(?=:)' || true)
             if [ -n "$v" ] && ! git rev-parse -q --verify "refs/tags/$v" >/dev/null; then
               git tag "$v" "$h"
               if git push origin "refs/tags/$v" >/dev/null 2>&1; then echo "backfilled $v -> ${h:0:9}"; else echo "::warning::could not push the backfill tag $v (${h:0:9})"; fi
