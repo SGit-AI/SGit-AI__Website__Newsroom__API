@@ -2,7 +2,7 @@
 
 > Send someone a set of articles as one link, by hand from the grammar or with the make page; what they see when they open it; how a site adds the two pages.
 
-*api.newsroom.sgit.ai · v0.2.7 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/reading-list-link/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.8 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/reading-list-link/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

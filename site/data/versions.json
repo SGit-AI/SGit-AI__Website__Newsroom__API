@@ -2,6 +2,12 @@
  "what": "Every version of this repository that landed on dev, newest first: what changed, in a line. tools/version.json names the current one; the deploy tags it. The reader-code releases (what the consuming sites pin) are the entries with a release of their own.",
  "versions": [
   {
+   "version": "v0.2.8",
+   "date": "2026-10-15",
+   "release": "v0.2.5",
+   "line": "A link-preview card for every page (og:image 1200x630 and the Twitter card), drawn by site/og.py in Newsprint's colours and committed; the gate fails a page without one."
+  },
+  {
    "version": "v0.2.7",
    "date": "2026-10-15",
    "release": "v0.2.5",

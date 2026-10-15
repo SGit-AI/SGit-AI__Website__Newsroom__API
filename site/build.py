@@ -75,6 +75,7 @@ def page_html(rel, meta, body, *, md_twin):
     crumbs = [tuple(c.split("|", 1)) if isinstance(c, str) else tuple(c) for c in meta.get("crumbs", [])]
     trail = "".join(f'<a href="{up}{h}">{esc(t)}</a> / ' for t, h in crumbs)
     wide = " wide" if meta.get("wide") else ""
+    og_slug = "home" if rel == "index.html" else rel.replace("/index.html", "").replace("/", "-")   # as site/og.py names the cards
     return f"""<!doctype html>
 <html lang="en" data-root="{up}">
 <head>
@@ -86,6 +87,8 @@ def page_html(rel, meta, body, *, md_twin):
 <link rel="alternate" type="text/markdown" href="{md_twin}" title="This page as markdown">
 <meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
 <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{SITE}/og/{og_slug}.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{esc(title)}, on api.newsroom.sgit.ai">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{SITE}/og/{og_slug}.jpg">
 <meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="{up}assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{up}assets/site.css">
@@ -427,6 +430,7 @@ def build(out):
     # the data the review and the proof pages link to is published with them: map/before/<newsroom release>/ and map/proof/
     for d in ("map/before", "map/proof"):
         shutil.copytree(ROOT / d, out / d)
+    shutil.copytree(ROOT / "site/og", out / "og")      # the link-preview cards, drawn by site/og.py and committed
     written = []     # (rel, title, description, md_text)
 
     def emit(rel, meta, body_html, md_body):

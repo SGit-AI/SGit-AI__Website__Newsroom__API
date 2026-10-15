@@ -124,6 +124,11 @@ def main():
         twins = p.links.get("alternate") or []
         if not twins:
             errors.append(f"{rel}: no markdown twin declared")
+        og = p.meta.get("og:image", "")
+        if not og.startswith(HOST + "/og/") or not (WWW / og[len(HOST) + 1:]).exists():
+            errors.append(f"{rel}: og:image {og!r} is not a card under www/og/ (python3 site/og.py draws one)")
+        if p.meta.get("og:image:width") != "1200" or p.meta.get("og:image:height") != "630" or p.meta.get("twitter:card") != "summary_large_image":
+            errors.append(f"{rel}: the card's size or the Twitter card type is not declared")
         # 2. the references
         for ref in p.refs:
             r = resolve(rel, ref)

@@ -34,7 +34,7 @@ python3 site/build.py               # the site: the version in the bar, the rele
 python3 site/check.py               # the site's gate: references, canonical, chrome, sitemap, llms, no key shapes
 ```
 
-Add the version's line to `site/data/versions.json` (newest first); the build refuses a version without one, and `/versions/` shows them all.
+Add the version's line to `site/data/versions.json` (newest first); the build refuses a version without one, and `/versions/` shows them all. A new page needs its link-preview card: `python3 site/og.py` draws one into `site/og/` for every page that has none (commit it; the gate fails a page without one).
 
 `cut` refuses to write over an existing release directory, refuses a release that is not the repository's version, and refuses a file that differs from the newsroom's bytes unless `CHANGED_FROM_NEWSROOM` records why. Write a release's note at `site/releases/v0.2.3.md`.
 

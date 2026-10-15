@@ -2,10 +2,11 @@
 
 > Every version of this repository that landed on dev, newest first, with the reader-code release each one serves and what changed, in a line.
 
-*api.newsroom.sgit.ai · v0.2.7 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/versions/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.8 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/versions/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
+- **v0.2.8** (2026-10-15, reader code v0.2.5): A link-preview card for every page (og:image 1200x630 and the Twitter card), drawn by site/og.py in Newsprint's colours and committed; the gate fails a page without one.
 - **v0.2.7** (2026-10-15, reader code v0.2.5): The backfill's grep named two matchers at once and would have matched nothing; one matcher.
 - **v0.2.6** (2026-10-15, reader code v0.2.5): The deploy tags every version in the history that has none (each commit's subject carries its version), so several versions landing in one push each get their tag.
 - **v0.2.5** (2026-10-15, reader code v0.2.5): Reader-code release: wire/wire.css wraps a story's long words (a URL as plain text in the lead story's corrections overflowed a phone; test_wire caught it). The first change to a served file since the move, recorded in the manifest with its reason.

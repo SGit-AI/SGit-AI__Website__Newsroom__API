@@ -2,7 +2,7 @@
 
 > What this site and repository are, who is responsible, the licence, how to reach the people behind it, and the disclosure about how it is written.
 
-*api.newsroom.sgit.ai · v0.2.7 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/about/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.8 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/about/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
