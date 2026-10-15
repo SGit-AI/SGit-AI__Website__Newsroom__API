@@ -85,6 +85,7 @@ def page_html(rel, meta, body, *, md_twin):
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{canonical}">
 <link rel="alternate" type="text/markdown" href="{md_twin}" title="This page as markdown">
+<link rel="alternate" type="application/rss+xml" href="{SITE}/feed.xml" title="Versions and releases">
 <meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
 <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE}/og/{og_slug}.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{esc(title)}, on api.newsroom.sgit.ai">
@@ -399,6 +400,26 @@ def versions_page():
     return "\n".join(parts), md
 
 
+def feed_xml():
+    """RSS 2.0: one item per version (site/data/versions.json), newest first; a version that cut a release says so. The newsroom
+    has a feed of its articles; a site that pins a release follows this one for the next."""
+    def rfc822(d):
+        import datetime
+        return datetime.datetime.strptime(d, "%Y-%m-%d").strftime("%a, %d %b %Y 00:00:00 +0000")
+    items = []
+    for v in VERSIONS["versions"]:
+        cut = v["release"] == v["version"]
+        title = f"{v['version']}: reader-code release" if cut else f"{v['version']}"
+        link = f"{SITE}/releases/#{v['release']}" if cut else f"{SITE}/versions/#{v['version']}"
+        items.append(f"<item><title>{esc(title)}</title><link>{link}</link><guid isPermaLink=\"false\">{SITE}/versions/{esc(v['version'])}</guid>"
+                     f"<pubDate>{rfc822(v['date'])}</pubDate><description>{esc(v['line'])}</description></item>")
+    return (f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>'
+            f'<title>SGit Newsroom API: versions and releases</title><link>{SITE}/versions/</link>'
+            f'<atom:link href="{SITE}/feed.xml" rel="self" type="application/rss+xml"/>'
+            f'<description>Every version of the reader code\'s repository that landed, and the releases a site pins. {SITE}</description>'
+            f'<language>en</language><lastBuildDate>{rfc822(VERSION["date"])}</lastBuildDate>' + "".join(items) + "</channel></rss>\n")
+
+
 def articles_page():
     parts = ["<h1>The articles behind it</h1>\n<p class=\"lead\">Everything here was designed in public first, as an article on <a href=\"https://newsroom.sgit.ai/\">newsroom.sgit.ai</a>, "
              "then built, then written about again when it went live. Read them in this order and you have the case, the design and the engineering; each is numbered, so a "
@@ -488,7 +509,7 @@ def build(out):
         url = SITE + "/" + ("" if rel == "index.html" else rel.replace("index.html", ""))
         lines.append(f"- [{title}]({url}): {desc}")
     lines += ["", "## Data", "", f"- [{RELEASE}/manifest.json]({SITE}/{RELEASE}/manifest.json): every served path with its bytes and SHA-256",
-              f"- [releases.json]({SITE}/releases.json): every release", f"- [review/map/graph.json]({SITE}/review/map/graph.json): the map as a graph",
+              f"- [releases.json]({SITE}/releases.json): every release", f"- [feed.xml]({SITE}/feed.xml): versions and releases, as RSS", f"- [review/map/graph.json]({SITE}/review/map/graph.json): the map as a graph",
               f"- [the newsroom's articles/ids.json]({NEWSROOM}/articles/ids.json): the article-number contract", f"- [the newsroom's articles/graphs.json]({NEWSROOM}/articles/graphs.json): the article feed"]
     write(out / "llms.txt", "\n".join(lines) + "\n")
     full = [f"# SGit Newsroom API: the whole site in one fetch", "", f"Generated with the site at {SITE_VERSION} (reader-code release {RELEASE}). Each section is a page; its address is given first.", ""]
@@ -500,6 +521,7 @@ def build(out):
     urls = "".join(f"<url><loc>{SITE}/{'' if rel == 'index.html' else rel.replace('index.html', '')}</loc><lastmod>{today}</lastmod></url>" for rel, *_ in written)
     write(out / "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     write(out / "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
+    write(out / "feed.xml", feed_xml())
     write(out / ".nojekyll", "")
     return written
 
