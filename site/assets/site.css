@@ -52,6 +52,10 @@ img{max-width:100%}
 .nav a:hover{background:var(--panel2)}
 .nav a.here{background:var(--tint-solid);color:var(--accent-dk)}
 .tools a.gh{color:var(--dim);text-decoration:none;font-size:.8rem;padding:.28rem .45rem;border-radius:7px;white-space:nowrap}
+.tools a.search-btn{font-size:.8rem;padding:.3rem .7rem;border:1px solid var(--line2);border-radius:999px;color:var(--fg);background:var(--panel);text-decoration:none;white-space:nowrap;line-height:1.2}
+.tools a.search-btn:hover{border-color:var(--accent)}
+.tools a.search-btn::before{content:"\2315";margin-right:.3em;display:inline-block;transform:scaleX(-1)}
+@media (max-width:520px){.tools a.search-btn{font-size:0;padding:.3rem .55rem}.tools a.search-btn::before{font-size:.9rem;margin:0}}
 .tools a.gh .lbl{margin-left:.3em}
 @media (max-width:1400px){.tools a.gh .lbl{display:none}}
 .tools a.gh:hover{background:var(--panel2)}

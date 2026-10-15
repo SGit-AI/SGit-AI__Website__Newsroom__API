@@ -2,10 +2,11 @@
 
 > Every version of this repository that landed on dev, newest first, with the reader-code release each one serves and what changed, in a line.
 
-*api.newsroom.sgit.ai · v0.2.10 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/versions/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.11 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/versions/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
+- **v0.2.11** (2026-10-15, reader code v0.2.5): Search: the site searches itself with the API's own search and ask components, loaded from this host's release, over an index the build writes (search/docs.json, text.json) in the contract's format; a Search button in the bar; headings in HTML pages get ids.
 - **v0.2.10** (2026-10-15, reader code v0.2.5): feed.xml: versions and releases as RSS, linked from every page's head and from llms.txt; the gate checks it is well formed and current.
 - **v0.2.9** (2026-10-15, reader code v0.2.5): The footer takes the newsroom's shape: who makes this and under whose responsibility, the network line, the participant disclosure, the version line with the reader-code release; the gate checks each.
 - **v0.2.8** (2026-10-15, reader code v0.2.5): A link-preview card for every page (og:image 1200x630 and the Twitter card), drawn by site/og.py in Newsprint's colours and committed; the gate fails a page without one.

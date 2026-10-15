@@ -21,7 +21,7 @@
 import http from 'http'
 import fs from 'fs'
 import path from 'path'
-import { API, TYPES, launch, engine } from './harness.mjs'
+import { API, TYPES, launch, engine, routeApi } from './harness.mjs'
 
 const WWW = path.join(API, 'www')
 let failed = 0
@@ -121,6 +121,19 @@ try {
         const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'dark' })
         const pg = await ctx.newPage(); await pg.goto(B + 'index.html')
         check((await pg.getAttribute('html', 'data-theme')) === 'night', 'a system set to dark, with nothing stored, gets Night')
+        await ctx.close()
+    }
+    /* ---- 5. search: the site searches itself with the API's own component, loaded from this host's release ---- */
+    {
+        const ctx = await routeApi(await browser.newContext({ viewport: { width: 1280, height: 900 } }))
+        const pg = await ctx.newPage(); const errors = []
+        pg.on('pageerror', e => errors.push(e.message))
+        await pg.goto(B + 'search/index.html?q=manifest')
+        await pg.waitForFunction(() => document.querySelectorAll('#search-results li').length > 0, null, { timeout: 20000 }).catch(() => {})
+        const n = await pg.evaluate(() => document.querySelectorAll('#search-results li').length)
+        check(n > 0, `search: "manifest" finds ${n} page(s), ranked in the browser by assets/search/search.js from the release`)
+        check(await pg.evaluate(() => [...document.querySelectorAll('#search-results li a')].some(a => /releases|docs/.test(a.getAttribute('href') || ''))), 'search: a result links to the releases or the docs')
+        check(errors.length === 0, `search: no page errors${errors.length ? ': ' + errors.join(' | ') : ''}`)
         await ctx.close()
     }
     /* ---- 4. the bar ---- */

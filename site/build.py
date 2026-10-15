@@ -16,6 +16,7 @@ has a .md twin, an agent block, a canonical URL and its place in llms.txt and si
 import argparse
 import html as htmlmod
 import json
+from html.parser import HTMLParser
 import re
 import shutil
 import sys
@@ -105,7 +106,7 @@ def page_html(rel, meta, body, *, md_twin):
   <a class="ver" href="{up}versions/" title="This site is {esc(SITE_VERSION)}; the reader code it serves is release {esc(RELEASE)}. Every version, in a line">{esc(SITE_VERSION)}</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav">{nav}</nav>
-  <div class="tools"><div class="theme-pick"></div><a class="gh" href="{GITHUB}" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
+  <div class="tools"><a class="search-btn" href="{up}search/" title="Search this site, in your browser">Search</a><div class="theme-pick"></div><a class="gh" href="{GITHUB}" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
 </div></header>
 <main id="main" class="doc{wide}">
 <p class="crumb"><a href="{up}index.html">Home</a> / {trail}{esc(title) if not meta.get("no_crumb_title") else ""}</p>
@@ -400,6 +401,63 @@ def versions_page():
     return "\n".join(parts), md
 
 
+class _Text(HTMLParser):
+    """The text of a page body: the headings with their ids, and the paragraphs under each (skipping the agent block, code and tables' noise)."""
+    BLOCK = {"p", "li", "blockquote", "dd", "dt", "td", "figcaption"}
+
+    def __init__(self):
+        super().__init__()
+        self.headings, self.chunks, self.anchor, self.cur, self.skip, self.depth = [], [], "", [], 0, 0
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if tag in ("aside", "script", "style", "pre", "nav", "svg") or "agent" in (a.get("class") or ""):
+            self.skip += 1
+        if self.skip:
+            return
+        if tag in ("h2", "h3") and a.get("id"):
+            self.anchor = a["id"]; self.cur = []; self.depth = 1
+        elif tag in self.BLOCK:
+            self.cur = []; self.depth = 1
+
+    def handle_endtag(self, tag):
+        if tag in ("aside", "script", "style", "pre", "nav", "svg"):
+            self.skip = max(0, self.skip - 1); return
+        if self.skip:
+            return
+        if tag in ("h2", "h3") and self.depth:
+            t = " ".join("".join(self.cur).split())
+            if t:
+                self.headings.append([self.anchor, t])
+            self.cur, self.depth = [], 0
+        elif tag in self.BLOCK and self.depth:
+            t = " ".join("".join(self.cur).split())
+            if len(t) > 30:
+                self.chunks.append([self.anchor, t[:900]])
+            self.cur, self.depth = [], 0
+
+    def handle_data(self, data):
+        if self.depth and not self.skip:
+            self.cur.append(data)
+
+
+def search_index(written_bodies):
+    """search/docs.json and search/text.json in the format assets/search/search.js reads (the contract the newsroom's index also follows)."""
+    docs, chunks = [], []
+    for i, (rel, title, desc, body) in enumerate(written_bodies):
+        if rel.startswith("search/"):
+            continue
+        t = _Text(); t.feed(body)
+        kind = "engineering" if rel.startswith(("review/", "releases/", "versions/", "agents/")) else "page"
+        u = "" if rel == "index.html" else rel.replace("index.html", "")
+        docs.append({"u": u or "index.html", "t": title, "k": kind, "x": desc, "h": t.headings, "i": len(docs)})
+        for anchor, text in t.chunks:
+            chunks.append([docs[-1]["i"], anchor, text])
+    what = "The search index of api.newsroom.sgit.ai, built by site/build.py from the pages it writes; ranked in the browser by this API's own search component."
+    return ({"v": 1, "site": HOST, "release": RELEASE, "version": SITE_VERSION, "docs": docs, "chunks": len(chunks), "what": what},
+            {"v": 1, "release": RELEASE, "version": SITE_VERSION, "chunks": chunks})
+
+
 def feed_xml():
     """RSS 2.0: one item per version (site/data/versions.json), newest first; a version that cut a release says so. The newsroom
     has a feed of its articles; a site that pins a release follows this one for the next."""
@@ -509,7 +567,8 @@ def build(out):
         url = SITE + "/" + ("" if rel == "index.html" else rel.replace("index.html", ""))
         lines.append(f"- [{title}]({url}): {desc}")
     lines += ["", "## Data", "", f"- [{RELEASE}/manifest.json]({SITE}/{RELEASE}/manifest.json): every served path with its bytes and SHA-256",
-              f"- [releases.json]({SITE}/releases.json): every release", f"- [feed.xml]({SITE}/feed.xml): versions and releases, as RSS", f"- [review/map/graph.json]({SITE}/review/map/graph.json): the map as a graph",
+              f"- [releases.json]({SITE}/releases.json): every release", f"- [feed.xml]({SITE}/feed.xml): versions and releases, as RSS",
+              f"- [search/docs.json]({SITE}/search/docs.json) and [search/text.json]({SITE}/search/text.json): the search index, one entry per page and the text in paragraphs", f"- [review/map/graph.json]({SITE}/review/map/graph.json): the map as a graph",
               f"- [the newsroom's articles/ids.json]({NEWSROOM}/articles/ids.json): the article-number contract", f"- [the newsroom's articles/graphs.json]({NEWSROOM}/articles/graphs.json): the article feed"]
     write(out / "llms.txt", "\n".join(lines) + "\n")
     full = [f"# SGit Newsroom API: the whole site in one fetch", "", f"Generated with the site at {SITE_VERSION} (reader-code release {RELEASE}). Each section is a page; its address is given first.", ""]
@@ -522,6 +581,9 @@ def build(out):
     write(out / "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     write(out / "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
     write(out / "feed.xml", feed_xml())
+    docs_json, text_json = search_index([(rel, title, desc, (out / rel).read_text(encoding="utf-8")) for rel, title, desc, _ in written])
+    write(out / "search/docs.json", json.dumps(docs_json, ensure_ascii=False) + "\n")
+    write(out / "search/text.json", json.dumps(text_json, ensure_ascii=False) + "\n")
     write(out / ".nojekyll", "")
     return written
 
@@ -536,9 +598,26 @@ def strip_tags(fragment):
     return re.sub(r"\n{3,}", "\n\n", s).strip()
 
 
+def heading_ids(html_text):
+    """An h2 or h3 without an id gets one from its text (as md.py gives markdown headings), so search can link to the section."""
+    seen = set()
+    def put(m):
+        tag, attrs, inner = m.group(1), m.group(2), m.group(3)
+        if "id=" in attrs:
+            return m.group(0)
+        base = re.sub(r"[^a-z0-9]+", "-", strip_tags(inner).lower()).strip("-") or "section"
+        i, n = base, 2
+        while i in seen:
+            i, n = f"{base}-{n}", n + 1
+        seen.add(i)
+        return f"<{tag} id=\"{i}\"{attrs}>{inner}</{tag}>"
+    return re.sub(r"<(h[23])([^>]*)>(.*?)</\1>", put, html_text, flags=re.S)
+
+
 def expand(html_text, rel):
     """Small directives a markdown page can use: {{live: text}}, {{code lang\\n...}} handled as fenced code by md; {{cards}} blocks are plain HTML in the page."""
     up = "../" * rel.count("/")
+    html_text = heading_ids(html_text)
     html_text = html_text.replace("{{release}}", esc(RELEASE)).replace("{{version}}", esc(SITE_VERSION)).replace("{{newsroom}}", NEWSROOM).replace("{{github}}", GITHUB).replace("{{newsroom_github}}", NEWSROOM_GITHUB).replace("{{site}}", SITE).replace("{{up}}", up)
     html_text = html_text.replace("{{files}}", str(MANIFESTS[-1]["counts"]["files"])).replace("{{bytes}}", f"{MANIFESTS[-1]['counts']['bytes']:,}")
     html_text = html_text.replace("{{reader_lines}}", f"{MAP['counts']['reader_code_lines']:,}").replace("{{tests}}", str(MAP["counts"]["tests"])).replace("{{findings}}", str(MAP["counts"]["findings"]))

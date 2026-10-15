@@ -2,7 +2,7 @@
 
 > The architecture, the trust boundaries, what leaves the browser, the review's findings as public issues, the release manifest, the proof of the move, the pipeline, and how to verify every claim yourself.
 
-*api.newsroom.sgit.ai · v0.2.10 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/for-evaluators/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.11 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/for-evaluators/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

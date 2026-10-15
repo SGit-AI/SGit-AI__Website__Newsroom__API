@@ -2,7 +2,7 @@
 
 > How shares, subscriptions and notes reach a newsroom without a server: a key pair, a write-only lane in an encrypted vault on an SG/Send host, the contact file at /.well-known/, and reading the lane with the key alone.
 
-*api.newsroom.sgit.ai · v0.2.10 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/subscribe-lane/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.11 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/subscribe-lane/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

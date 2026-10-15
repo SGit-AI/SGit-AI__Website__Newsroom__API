@@ -23,10 +23,10 @@
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
   <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
-  <a class="ver" href="../versions/" title="This site is v0.2.10; the reader code it serves is release v0.2.5. Every version, in a line">v0.2.10</a>
+  <a class="ver" href="../versions/" title="This site is v0.2.11; the reader code it serves is release v0.2.5. Every version, in a line">v0.2.11</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav"><a href="../for-publishers/">For publishers</a><a href="../for-developers/" class=here>For developers</a><a href="../for-evaluators/">For evaluators</a><a href="../docs/">Docs</a><a href="../how-to/">How-to</a><a href="../review/">Review</a><a href="../releases/">Releases</a><a href="../articles/">Articles</a><a href="../agents/">Agents</a></nav>
-  <div class="tools"><div class="theme-pick"></div><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
+  <div class="tools"><a class="search-btn" href="../search/" title="Search this site, in your browser">Search</a><div class="theme-pick"></div><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
 </div></header>
 <main id="main" class="doc">
 <p class="crumb"><a href="../index.html">Home</a> / For developers</p>
@@ -34,7 +34,7 @@
 <h1>For developers</h1>
 <p class="lead">A client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files. Every file is served from this host at a versioned path that is never edited after it is published, and every release has a manifest of hashes. You pin a release; a rollback is one line.</p>
 
-<h2>1. Put the meter on a page</h2>
+<h2 id="1-put-the-meter-on-a-page">1. Put the meter on a page</h2>
 <p>Three pieces in the page: the element where the charge happens, the config, and the import. The element's <code>kind</code> is the price class; the config is the same on every page of a site, so write it once in your build.</p>
 <pre class="code" data-lang="html"><button class="copy" type="button" aria-label="Copy">Copy</button><code>&lt;!-- the balance chip, in your nav --&gt;
 &lt;sg-meter class="meter-nav" view="balance"&gt;&lt;/sg-meter&gt;
@@ -63,7 +63,7 @@ import('https://api.newsroom.sgit.ai/v0.2.5/assets/components/sg-meter/v1/v1.4/v
 <p>Prices are in pence (or the smallest unit of <code>symbol</code>). <code>start</code> is the opening credit. The paths in <code>links</code>, <code>picks</code> and <code>share.contact</code> are from your site's root, and the meter resolves them against the page, never against this host. Every key has a default, so a config can be short; the full shape is <a href="../docs/contracts/">the meter config contract</a>.</p>
 <p class="note">Only <code>sg-meter.js</code> is imported; it brings its core, its template and its stylesheet from the same versioned directory on this host. A published path is never changed: a fix is a new version path, so a page that works today keeps loading the same bytes.</p>
 
-<h2>2. The element's views</h2>
+<h2 id="2-the-element-s-views">2. The element's views</h2>
 <p>One element, twelve views, each a page or a part of one. <code>view="page"</code> charges and shows the reader card; the rest are the account.</p>
 <div class="tablewrap"><table><thead><tr><th>View</th><th>Where it goes</th><th>What it does</th></tr></thead><tbody>
 <tr><td><code>balance</code></td><td>the navigation, on every page</td><td>the balance chip; marks a negative balance; opens the account</td></tr>
@@ -77,7 +77,7 @@ import('https://api.newsroom.sgit.ai/v0.2.5/assets/components/sg-meter/v1/v1.4/v
 </tbody></table></div>
 <p>The newsroom's own account pages are the reference implementation: <a href="https://newsroom.sgit.ai/account/">account</a>, <a href="https://newsroom.sgit.ai/account/newsroom.html">newsroom</a>, <a href="https://newsroom.sgit.ai/account/personas.html">personas</a>, <a href="https://newsroom.sgit.ai/account/share.html">share</a>, <a href="https://newsroom.sgit.ai/account/top-up.html">top-up</a>. Copy their bodies; the element does the work.</p>
 
-<h2>3. The data your site publishes</h2>
+<h2 id="3-the-data-your-site-publishes">3. The data your site publishes</h2>
 <div class="tablewrap"><table><thead><tr><th>File</th><th>For</th><th>Shape</th></tr></thead><tbody>
 <tr><td><code>articles/graphs.json</code></td><td>picks, the persona graph, the reading list's titles</td><td><code>{"articles": [{"slug", "title", "date", "url", "teaser", "topics": [], "tags": []}, …]}</code>; the newsroom's is <a href="https://newsroom.sgit.ai/articles/graphs.json">here</a></td></tr>
 <tr><td><code>articles/ids.json</code></td><td>reading lists in a link</td><td><code>{"next": N, "articles": [{"n", "slug", "title", "date", "url", …}]}</code>: <code>n</code> and <code>slug</code> are the contract, assigned once, never changed or reused</td></tr>
@@ -85,7 +85,7 @@ import('https://api.newsroom.sgit.ai/v0.2.5/assets/components/sg-meter/v1/v1.4/v
 <tr><td><code>persona/links.json</code></td><td>whoever writes the persona links</td><td>one entry per preset, with its page; generated from the config</td></tr>
 </tbody></table></div>
 
-<h2>4. The reader's own newsroom: lists, personas, the vault, search</h2>
+<h2 id="4-the-reader-s-own-newsroom-lists-personas-the-vault-search">4. The reader's own newsroom: lists, personas, the vault, search</h2>
 <p>These are pages of your own that import the code from this host. Each needs <code>&lt;html data-root="../"&gt;</code> (the path from the page to your site's root), which is how the pane and search find your pages and data from another origin.</p>
 <pre class="code" data-lang="html"><button class="copy" type="button" aria-label="Copy">Copy</button><code>&lt;!-- a reading list page at /for/: opens the list in the address --&gt;
 &lt;link rel="stylesheet" href="https://api.newsroom.sgit.ai/v0.2.5/for/for.css"&gt;
@@ -102,10 +102,10 @@ openList({ core: 'https://api.newsroom.sgit.ai/v0.2.5/assets/components/sg-meter
 &lt;script type="module" src="https://api.newsroom.sgit.ai/v0.2.5/assets/vault-pane/vault-pane.js"&gt;&lt;/script&gt;</code></pre>
 <p>The make page (<code>for/make.js</code>), the persona pages, the search page (<code>assets/search/search.js</code>, <code>ask.js</code>) and the wire (<code>wire/wire.js</code>) follow the same pattern; the newsroom's pages are the worked examples, and <a href="../how-to/">the how-to guides</a> walk through each.</p>
 
-<h2>5. The hosting model, and what a different host changes</h2>
+<h2 id="5-the-hosting-model-and-what-a-different-host-changes">5. The hosting model, and what a different host changes</h2>
 <p>GitHub Pages serves every file here with <code>access-control-allow-origin: *</code>, which is what a cross-origin module import and the component's sibling fetches need. Storage belongs to the page's origin, so a reader's state stays on your site whichever host serves the script. The meter fetches your feed and your contact file from the page's origin; nothing is fetched from this host but code. If you add a Content-Security-Policy, <code>script-src</code> and <code>connect-src</code> name <code>https://api.newsroom.sgit.ai</code>. <a href="../docs/hosting/">The hosting model</a>.</p>
 
-<h2>6. Pin a release, verify it, roll it back</h2>
+<h2 id="6-pin-a-release-verify-it-roll-it-back">6. Pin a release, verify it, roll it back</h2>
 <pre class="code" data-lang="sh"><button class="copy" type="button" aria-label="Copy">Copy</button><code># the current release and its manifest
 curl -s https://api.newsroom.sgit.ai/releases.json
 curl -s https://api.newsroom.sgit.ai/v0.2.5/manifest.json | head -40
@@ -114,7 +114,7 @@ curl -s https://api.newsroom.sgit.ai/v0.2.5/manifest.json | head -40
 curl -s https://api.newsroom.sgit.ai/v0.2.5/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js | sha256sum</code></pre>
 <p>Write the release into one place in your build and generate every URL from it; the newsroom does this with <code>admin/build/api.json</code> and checks every page against the manifest in its gate. <a href="../how-to/take-a-release/">Taking a release and rolling back</a>.</p>
 
-<h2>7. Run the tests against your pages</h2>
+<h2 id="7-run-the-tests-against-your-pages">7. Run the tests against your pages</h2>
 <p>The tests that cover the meter, the lists, the pane, search and the wire are in the repository, and they run against any site that imports this code: they serve your pages locally and route this host to the working tree, in Chromium, WebKit or Firefox.</p>
 <pre class="code" data-lang="sh"><button class="copy" type="button" aria-label="Copy">Copy</button><code>git clone https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API
 cd SGit-AI__Website__Newsroom__API && npm install --no-save playwright@1.56.1 && npx playwright install chromium
@@ -122,7 +122,7 @@ NEWSROOM=/path/to/your/site node tests/test_meter.mjs
 BROWSER=firefox NEWSROOM=/path/to/your/site node tests/test_lists.mjs</code></pre>
 <p><a href="../how-to/run-the-tests/">Running the tests</a>, including what each file covers and which need Chromium.</p>
 
-<h2>Where everything is</h2>
+<h2 id="where-everything-is">Where everything is</h2>
 <ul>
 <li><a href="../docs/">Reference</a>: contracts, state, inputs and outputs, components, hosting.</li>
 <li><a href="../how-to/">How-to guides</a>, one task each.</li>
@@ -141,7 +141,7 @@ BROWSER=firefox NEWSROOM=/path/to/your/site node tests/test_lists.mjs</code></pr
     <p>The SGit Newsroom's reader, as an API: the components, formats and contracts the browser runs on <a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a>, with no server and nothing to deploy but files, published here as releases a site pins. Made by the newsroom's agents under the editorial and engineering responsibility of Dinis Cruz; the method, the review and the tests are public so that anyone can run a newsroom like it. Part of the <a href="https://sgit.ai"><b>sgit.ai</b></a> network. The code is Apache 2.0; these pages CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>&#8593; sgit.ai</b></a> &middot; <a href="https://newsroom.sgit.ai/">&#8593; newsroom.sgit.ai</a> &middot; <a href="https://pt.newsroom.sgit.ai">&#8593; pt.newsroom.sgit.ai</a> &middot; <a href="https://graphs.sgit.ai">&#8593; graphs.sgit.ai</a> &middot; <a href="https://pki.sgit.ai">&#8593; pki.sgit.ai</a> &middot; <a href="https://nhi.sgit.ai">&#8593; nhi.sgit.ai</a> &middot; <a href="https://docs.diniscruz.ai">&#8593; docs.diniscruz.ai</a> &mdash; the prior art</p>
     <p class="partnote">&#9888; Participant disclosure: published by the sgit project, which is building the stack this site argues for. <a href="https://newsroom.sgit.ai/about/participant.html">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../versions/">v0.2.10</a> &middot; reader code <a href="../releases/#v0.2.5">v0.2.5</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">engineering</a> &middot; <a href="index.md">this page as markdown</a></p>
+    <p class="verline">site <a href="../versions/">v0.2.11</a> &middot; reader code <a href="../releases/#v0.2.5">v0.2.5</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">engineering</a> &middot; <a href="index.md">this page as markdown</a></p>
   </div>
   <div><h4>The API</h4><a href="../for-developers/">Quick start</a><a href="../docs/">Reference</a><a href="../how-to/">How-to guides</a><a href="../releases/">Releases</a><a href="../versions/">Versions</a><a href="../v0.2.5/manifest.json">Current manifest</a></div>
   <div><h4>The case</h4><a href="../for-publishers/">For publishers and editors</a><a href="../for-evaluators/">For evaluators</a><a href="../adopt/">Adopt it</a><a href="../articles/">The articles behind it</a></div>

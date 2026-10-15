@@ -11,7 +11,7 @@ The newsroom's admin/build/validate.js is the model (its checks 2 to 7 and 5b, f
      the host (https://api.newsroom.sgit.ai/...) resolves to a file in www/ or, under /vX.Y.Z/, to a file of that release
   3. <div> and </div> balance on every page
   4. sitemap.xml lists every page and nothing that is not a page; llms.txt names every page's address; llms-full.txt carries
-     every page's title; robots.txt points at the sitemap; feed.xml is well formed and its newest item is this version
+     every page's title; robots.txt points at the sitemap; feed.xml is well formed and its newest item is this version; search/docs.json and text.json index every page
   5. releases.json names the reader-code release and the site's version as tools/version.json does
   6. the key-leak tripwire: nothing shaped like a vault key, a Stripe secret or a cloud key anywhere in www/
 """
@@ -176,6 +176,13 @@ def main():
             errors.append(f"feed.xml: the newest item is not {VERSION['version']}")
     except (OSError, ET.ParseError) as e:
         errors.append(f"feed.xml: {e}")
+    # 4c. the search index: one entry per page but the search page itself, in the component's format
+    try:
+        dj = json.loads((WWW / "search/docs.json").read_text(encoding="utf-8")); tj = json.loads((WWW / "search/text.json").read_text(encoding="utf-8"))
+        if dj.get("v") != 1 or len(dj.get("docs", [])) != len(pages) - 1 or dj.get("chunks") != len(tj.get("chunks", [])) or dj.get("release") != VERSION["release"]:
+            errors.append(f"search/docs.json: {len(dj.get('docs', []))} docs for {len(pages) - 1} pages, {dj.get('chunks')} chunks declared against {len(tj.get('chunks', []))}, release {dj.get('release')}")
+    except (OSError, ValueError) as e:
+        errors.append(f"search index: {e}")
     # 5. releases.json
     try:
         rj = json.loads((WWW / "releases.json").read_text(encoding="utf-8"))

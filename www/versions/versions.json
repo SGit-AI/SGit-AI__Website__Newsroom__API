@@ -2,6 +2,12 @@
  "what": "Every version of this repository that landed on dev, newest first: what changed, in a line. tools/version.json names the current one; the deploy tags it. The reader-code releases (what the consuming sites pin) are the entries with a release of their own.",
  "versions": [
   {
+   "version": "v0.2.11",
+   "date": "2026-10-15",
+   "release": "v0.2.5",
+   "line": "Search: the site searches itself with the API's own search and ask components, loaded from this host's release, over an index the build writes (search/docs.json, text.json) in the contract's format; a Search button in the bar; headings in HTML pages get ids."
+  },
+  {
    "version": "v0.2.10",
    "date": "2026-10-15",
    "release": "v0.2.5",

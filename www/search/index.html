@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search · api.newsroom.sgit.ai</title>
+<meta name="description" content="Every page of this site, searched in your browser with the same component newsroom.sgit.ai uses, loaded from this host&#x27;s own release; and asked, with Chrome&#x27;s built-in model or your own OpenRouter key, answered from the passages found.">
+<link rel="canonical" href="https://api.newsroom.sgit.ai/search/">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="alternate" type="application/rss+xml" href="https://api.newsroom.sgit.ai/feed.xml" title="Versions and releases">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SGit Newsroom API">
+<meta property="og:title" content="Search"><meta property="og:description" content="Every page of this site, searched in your browser with the same component newsroom.sgit.ai uses, loaded from this host&#x27;s own release; and asked, with Chrome&#x27;s built-in model or your own OpenRouter key, answered from the passages found."><meta property="og:url" content="https://api.newsroom.sgit.ai/search/">
+<meta property="og:image" content="https://api.newsroom.sgit.ai/og/search.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Search, on api.newsroom.sgit.ai">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://api.newsroom.sgit.ai/og/search.jpg">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/themes.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Search", "description": "Every page of this site, searched in your browser with the same component newsroom.sgit.ai uses, loaded from this host's own release; and asked, with Chrome's built-in model or your own OpenRouter key, answered from the passages found.", "url": "https://api.newsroom.sgit.ai/search/", "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": "https://api.newsroom.sgit.ai/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"}</script>
+</head>
+<body>
+<script src="../assets/themes.js"></script>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top"><div class="row">
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="ver" href="../versions/" title="This site is v0.2.11; the reader code it serves is release v0.2.5. Every version, in a line">v0.2.11</a>
+  <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav id="nav" class="nav"><a href="../for-publishers/">For publishers</a><a href="../for-developers/">For developers</a><a href="../for-evaluators/">For evaluators</a><a href="../docs/">Docs</a><a href="../how-to/">How-to</a><a href="../review/">Review</a><a href="../releases/">Releases</a><a href="../articles/">Articles</a><a href="../agents/">Agents</a></nav>
+  <div class="tools"><a class="search-btn" href="../search/" title="Search this site, in your browser">Search</a><div class="theme-pick"></div><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
+</div></header>
+<main id="main" class="doc wide">
+<p class="crumb"><a href="../index.html">Home</a> / Search</p>
+<p class="eyebrow">Search · in your browser</p>
+<link rel="stylesheet" href="https://api.newsroom.sgit.ai/v0.2.5/assets/search/search.css"><link rel="stylesheet" href="https://api.newsroom.sgit.ai/v0.2.5/assets/search/ask.css">
+<h1>Search</h1>
+<p class="lead">Every page of this site, searched in your browser; and asked, with Chrome’s built-in model or your own OpenRouter key, answered from the passages found. The component is this API’s own, loaded from this host’s release <code>v0.2.5</code>: the site eats what it serves.</p>
+<div id="search-mount" class="search">
+<form class="search-box" role="search" action="index.html" method="get">
+  <label for="search-q" class="sr">Search this site</label>
+  <input id="search-q" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search the docs, the how-tos, the review: words, or &quot;a phrase&quot;">
+  <button type="submit" class="btn primary">Search</button>
+</form>
+<div class="search-filters" id="search-filters" role="group" aria-label="Show"></div>
+<p class="search-status dim" id="search-status">Loading the index&hellip;</p>
+<ol class="search-results" id="search-results"></ol>
+</div>
+<noscript><p>Search runs in your browser, which needs a script. The index is <a href="docs.json">docs.json</a> and <a href="text.json">text.json</a>; every page also has a <code>.md</code> twin, and <a href="../llms.txt">llms.txt</a> maps the site.</p></noscript>
+<script type="module">
+import { mountSearch } from 'https://api.newsroom.sgit.ai/v0.2.5/assets/search/search.js';
+import { mountAsk } from 'https://api.newsroom.sgit.ai/v0.2.5/assets/search/ask.js';
+const el = document.getElementById('search-mount');
+mountSearch(el); mountAsk(el);
+</script>
+<h2 id="how">How it works</h2>
+<p>There is no search server. When this site is built, <code>site/build.py</code> reads every page it writes and produces two files: <a href="docs.json">docs.json</a>, one entry per page with its title, teaser and headings, and <a href="text.json">text.json</a>, the text in paragraphs with the section each is in. This page fetches them like any other file and ranks them here, in your browser, with <code>assets/search/search.js</code> from the release this host serves (BM25 over the fields and the paragraphs; a title counts for more than a word in the text). Quotes find an exact phrase. Searching sends nothing anywhere.</p>
+<p><i>Ask</i> searches the question the same way, takes the best paragraph of each of the top pages, numbers them and gives them to a model with one instruction: answer only from them, cite them by number, and say so when they do not hold the answer. Chrome’s built-in model runs on your machine; your own OpenRouter key is sent to openrouter.ai only. The format of the two files is <a href="../docs/contracts/">a contract of this API</a>; the newsroom’s own index is built the same way.</p>
+
+<aside class="agent" aria-label="For agents">
+ <p><b>For agents.</b> Search on api.newsroom.sgit.ai runs in the browser with the API&#x27;s own search component (assets/search/search.js of the pinned release) over an index this site builds at release time: /search/docs.json (one entry per page: u address, t title, k kind, x teaser, h headings with anchors, i index) and /search/text.json (chunks of [doc index, anchor, text]). Fetch the two files and rank them yourself, or read /llms.txt and the .md twins. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.2.5/&lt;path&gt;</code>; its manifest: <a href="../v0.2.5/manifest.json">v0.2.5/manifest.json</a>.</p>
+</aside>
+</main>
+<footer class="foot"><div class="cols">
+  <div class="about">
+    <div class="brandline">api<span>.newsroom.sgit.ai</span></div>
+    <p>The SGit Newsroom's reader, as an API: the components, formats and contracts the browser runs on <a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a>, with no server and nothing to deploy but files, published here as releases a site pins. Made by the newsroom's agents under the editorial and engineering responsibility of Dinis Cruz; the method, the review and the tests are public so that anyone can run a newsroom like it. Part of the <a href="https://sgit.ai"><b>sgit.ai</b></a> network. The code is Apache 2.0; these pages CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>&#8593; sgit.ai</b></a> &middot; <a href="https://newsroom.sgit.ai/">&#8593; newsroom.sgit.ai</a> &middot; <a href="https://pt.newsroom.sgit.ai">&#8593; pt.newsroom.sgit.ai</a> &middot; <a href="https://graphs.sgit.ai">&#8593; graphs.sgit.ai</a> &middot; <a href="https://pki.sgit.ai">&#8593; pki.sgit.ai</a> &middot; <a href="https://nhi.sgit.ai">&#8593; nhi.sgit.ai</a> &middot; <a href="https://docs.diniscruz.ai">&#8593; docs.diniscruz.ai</a> &mdash; the prior art</p>
+    <p class="partnote">&#9888; Participant disclosure: published by the sgit project, which is building the stack this site argues for. <a href="https://newsroom.sgit.ai/about/participant.html">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../versions/">v0.2.11</a> &middot; reader code <a href="../releases/#v0.2.5">v0.2.5</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">engineering</a> &middot; <a href="index.md">this page as markdown</a></p>
+  </div>
+  <div><h4>The API</h4><a href="../for-developers/">Quick start</a><a href="../docs/">Reference</a><a href="../how-to/">How-to guides</a><a href="../releases/">Releases</a><a href="../versions/">Versions</a><a href="../v0.2.5/manifest.json">Current manifest</a></div>
+  <div><h4>The case</h4><a href="../for-publishers/">For publishers and editors</a><a href="../for-evaluators/">For evaluators</a><a href="../adopt/">Adopt it</a><a href="../articles/">The articles behind it</a></div>
+  <div><h4>The work</h4><a href="../review/">The map and the review</a><a href="../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../agents/">For agents</a></div>
+  <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../about/">About, licence, contact</a></div>
+</div>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
