@@ -118,7 +118,8 @@ def main():
             errors.append(f"{rel}: og:url {p.meta.get('og:url')!r} is not the canonical")
         if "__data-root" not in p.classes:
             errors.append(f"{rel}: <html> has no data-root")
-        for cls, what in (("brand", "the brand in the bar"), ("ver", "the version chip"), ("theme-pick", "the theme picker"), ("fine", "the footer's fine line"), ("agent", "the block for agents"), ("skip", "the skip link")):
+        for cls, what in (("brand", "the brand in the bar"), ("ver", "the version chip"), ("theme-pick", "the theme picker"), ("brandline", "the footer's brand line"),
+                          ("netline", "the footer's network line"), ("partnote", "the participant disclosure"), ("verline", "the footer's version line"), ("agent", "the block for agents"), ("skip", "the skip link")):
             if cls not in p.classes:
                 errors.append(f"{rel}: the chrome is missing {what} (class {cls})")
         twins = p.links.get("alternate") or []

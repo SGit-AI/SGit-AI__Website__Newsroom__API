@@ -1,6 +1,6 @@
 # SGit Newsroom API: the whole site in one fetch
 
-Generated with the site at v0.2.8 (reader-code release v0.2.5). Each section is a page; its address is given first.
+Generated with the site at v0.2.9 (reader-code release v0.2.5). Each section is a page; its address is given first.
 
 
 
@@ -1339,6 +1339,7 @@ The data: <https://api.newsroom.sgit.ai/review/map/graph.json>.
 
 > Every version of this repository that landed on dev, newest first, with the reader-code release each one serves and what changed, in a line.
 
+- **v0.2.9** (2026-10-15, reader code v0.2.5): The footer takes the newsroom's shape: who makes this and under whose responsibility, the network line, the participant disclosure, the version line with the reader-code release; the gate checks each.
 - **v0.2.8** (2026-10-15, reader code v0.2.5): A link-preview card for every page (og:image 1200x630 and the Twitter card), drawn by site/og.py in Newsprint's colours and committed; the gate fails a page without one.
 - **v0.2.7** (2026-10-15, reader code v0.2.5): The backfill's grep named two matchers at once and would have matched nothing; one matcher.
 - **v0.2.6** (2026-10-15, reader code v0.2.5): The deploy tags every version in the history that has none (each commit's subject carries its version), so several versions landing in one push each get their tag.

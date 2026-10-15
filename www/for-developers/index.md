@@ -2,7 +2,7 @@
 
 > Add the reading meter to a page with a pinned, versioned import and a JSON config; the custom element's views; the data your site publishes; the hosting model and CORS; the tests you can run against your own pages.
 
-*api.newsroom.sgit.ai · v0.2.8 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/for-developers/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.9 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/for-developers/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

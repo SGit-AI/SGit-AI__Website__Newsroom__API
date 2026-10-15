@@ -176,10 +176,24 @@ summary{cursor:pointer;color:var(--accent-dk);font-weight:600}
 
 /* footer */
 .foot{border-top:1px solid var(--line);margin-top:2rem;padding:2rem 1rem 2.5rem;background:var(--panel2)}
-.foot .cols{max-width:var(--wide);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem}
+/* the footer: the newsroom's shape (its chrome.py): who makes this and under whose responsibility, the network line, the
+   participant disclosure, the version line; then the link columns */
+.foot .cols{max-width:var(--wide);margin:0 auto;display:grid;grid-template-columns:minmax(260px,1.7fr) repeat(4,minmax(150px,1fr));gap:1.4rem}
 .foot .cols a{display:block;color:var(--fg);text-decoration:none;font-size:.9rem;padding:.12rem 0}
 .foot .cols a:hover{color:var(--accent-dk);text-decoration:underline}
-.fine{max-width:var(--wide);margin:1.6rem auto 0;font-size:.8rem;color:var(--dim)}
+.foot .about p{font-size:.86rem;color:var(--text);line-height:1.55;margin:0 0 .7rem}
+.foot .about p a{display:inline;padding:0;font-size:inherit;color:var(--accent-dk);text-decoration:underline}
+.foot .brandline{font-family:var(--mono);font-weight:700;color:var(--head);margin-bottom:.5rem}
+.foot .brandline span{color:var(--accent)}
+.foot .netline{color:var(--dim);font-size:.78rem;line-height:1.8}
+.foot .netline a{text-decoration:none}
+.foot .netline a b{font-weight:800}
+.foot .partnote{color:var(--warm);font-size:.82rem}
+.foot .partnote a{color:var(--warm)}
+.foot .verline{font-family:var(--mono);font-size:.72rem;color:var(--dim2);margin-top:.6rem}
+@media (max-width:1080px){.foot .cols{grid-template-columns:1fr 1fr 1fr}.foot .about{grid-column:1 / -1}}
+@media (max-width:700px){.foot .cols{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.foot .cols{grid-template-columns:1fr}}
 
 /* print: paper (themes.css prints every theme as Newsprint); the bar's controls, the menu and the footer's link columns go */
 @media print{

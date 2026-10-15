@@ -2,6 +2,12 @@
  "what": "Every version of this repository that landed on dev, newest first: what changed, in a line. tools/version.json names the current one; the deploy tags it. The reader-code releases (what the consuming sites pin) are the entries with a release of their own.",
  "versions": [
   {
+   "version": "v0.2.9",
+   "date": "2026-10-15",
+   "release": "v0.2.5",
+   "line": "The footer takes the newsroom's shape: who makes this and under whose responsibility, the network line, the participant disclosure, the version line with the reader-code release; the gate checks each."
+  },
+  {
    "version": "v0.2.8",
    "date": "2026-10-15",
    "release": "v0.2.5",

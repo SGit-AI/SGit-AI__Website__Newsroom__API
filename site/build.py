@@ -115,12 +115,18 @@ def page_html(rel, meta, body, *, md_twin):
 </aside>
 </main>
 <footer class="foot"><div class="cols">
+  <div class="about">
+    <div class="brandline">api<span>.newsroom.sgit.ai</span></div>
+    <p>The SGit Newsroom's reader, as an API: the components, formats and contracts the browser runs on <a href="{NEWSROOM}/">newsroom.sgit.ai</a>, with no server and nothing to deploy but files, published here as releases a site pins. Made by the newsroom's agents under the editorial and engineering responsibility of Dinis Cruz; the method, the review and the tests are public so that anyone can run a newsroom like it. Part of the <a href="https://sgit.ai"><b>sgit.ai</b></a> network. The code is Apache 2.0; these pages CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>&#8593; sgit.ai</b></a> &middot; <a href="{NEWSROOM}/">&#8593; newsroom.sgit.ai</a> &middot; <a href="https://pt.newsroom.sgit.ai">&#8593; pt.newsroom.sgit.ai</a> &middot; <a href="https://graphs.sgit.ai">&#8593; graphs.sgit.ai</a> &middot; <a href="https://pki.sgit.ai">&#8593; pki.sgit.ai</a> &middot; <a href="https://nhi.sgit.ai">&#8593; nhi.sgit.ai</a> &middot; <a href="https://docs.diniscruz.ai">&#8593; docs.diniscruz.ai</a> &mdash; the prior art</p>
+    <p class="partnote">&#9888; Participant disclosure: published by the sgit project, which is building the stack this site argues for. <a href="{NEWSROOM}/about/participant.html">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="{up}versions/">{esc(SITE_VERSION)}</a> &middot; reader code <a href="{up}releases/#{esc(RELEASE)}">{esc(RELEASE)}</a> &middot; <a href="{GITHUB}">engineering</a> &middot; <a href="{md_twin}">this page as markdown</a></p>
+  </div>
   <div><h4>The API</h4><a href="{up}for-developers/">Quick start</a><a href="{up}docs/">Reference</a><a href="{up}how-to/">How-to guides</a><a href="{up}releases/">Releases</a><a href="{up}versions/">Versions</a><a href="{up}{RELEASE}/manifest.json">Current manifest</a></div>
   <div><h4>The case</h4><a href="{up}for-publishers/">For publishers and editors</a><a href="{up}for-evaluators/">For evaluators</a><a href="{up}adopt/">Adopt it</a><a href="{up}articles/">The articles behind it</a></div>
   <div><h4>The work</h4><a href="{up}review/">The map and the review</a><a href="{up}review/proof/">The proof of the move</a><a href="{GITHUB}/issues">Issues</a><a href="{GITHUB}">Source</a><a href="{up}agents/">For agents</a></div>
   <div><h4>Live</h4><a href="{NEWSROOM}/">newsroom.sgit.ai</a><a href="{NEWSROOM}/meter/">SG Meter, documented</a><a href="{NEWSROOM}/newsroom-api/">The reader API map</a><a href="{up}about/">About, licence, contact</a></div>
 </div>
-<p class="fine">SGit Newsroom API · {esc(SITE_VERSION)} · reader code {esc(RELEASE)} · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="{md_twin}">this page as markdown</a></p>
 </footer>
 <script src="{up}assets/site.js" defer></script>
 </body>
