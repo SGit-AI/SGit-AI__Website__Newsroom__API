@@ -2,7 +2,7 @@
  "what": "The releases of the newsroom's reader code served from this host. A consuming site pins one; nothing here is edited after it is published.",
  "host": "https://api.newsroom.sgit.ai",
  "current": "v0.2.5",
- "version": "v0.2.12",
+ "version": "v0.2.13",
  "releases": [
   {
    "release": "v0.1.0",

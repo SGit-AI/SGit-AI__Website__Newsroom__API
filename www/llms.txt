@@ -2,7 +2,7 @@
 
 > A client-side API for a newsroom: the reading meter, the reader's personas, reading lists in a link, subscribe and the encrypted share, the reader's vault, search, the wire reader. Components, formats and contracts the browser runs, with no server and nothing to deploy but files, served at https://api.newsroom.sgit.ai/<release>/<path>. Current release: v0.2.5. Source: https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API. The live example: https://newsroom.sgit.ai/.
 
-Site version: v0.2.12 (reader-code release v0.2.5)
+Site version: v0.2.13 (reader-code release v0.2.5)
 
 ## Pages
 

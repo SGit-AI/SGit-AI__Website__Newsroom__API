@@ -107,7 +107,9 @@ def page_html(rel, meta, body, *, md_twin):
 <link rel="icon" href="{up}assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{up}assets/site.css">
 <link rel="stylesheet" href="{up}assets/themes.css">
-<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "WebPage", "name": title, "description": description, "url": canonical,
+<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "WebPage", "name": title, "description": description, "url": canonical, "image": f"{SITE}/og/{og_slug}.jpg", "inLanguage": "en",
+                                                  "author": {"@type": "Person", "name": "Dinis Cruz", "url": "https://docs.diniscruz.ai"}, "publisher": {"@type": "Organization", "name": "sgit.ai", "url": "https://sgit.ai"},
+                                                  "about": {"@type": "SoftwareApplication", "name": "SGit Newsroom API", "applicationCategory": "DeveloperApplication", "url": SITE + "/"},
                                                   "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": SITE + "/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"})}</script>
 </head>
 <body>

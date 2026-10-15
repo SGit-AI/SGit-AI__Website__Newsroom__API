@@ -28,6 +28,10 @@ resolves, canonical and chrome on every page, the sitemap and the llms files agr
 `site/data/versions.json` is the line per version that `/versions/` shows; a version without its line does not build.
 `site/og.py` draws the link-preview card of every page into `site/og/` (committed, not built: a font renders differently from one
 machine to the next, and the build must be the same bytes twice).
+What the site has, as newsroom.sgit.ai has it: the five themes and the picker, the bar in eight groups with a dropdown each, the
+search over its own pages with the API's own component loaded from this host's release (`/search/`, over `search/docs.json`
+and `text.json` in the contract's format), a link-preview card per page, the footer with the disclosure and the network line,
+`/versions/` and `feed.xml`, `llms.txt` and `llms-full.txt`, a markdown twin of every page, print and reduced-motion rules.
 
 ## The layout
 

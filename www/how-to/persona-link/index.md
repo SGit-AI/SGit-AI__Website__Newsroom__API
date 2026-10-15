@@ -2,7 +2,7 @@
 
 > Persona links, persona pages and links.json: how a link opens the site as a founder, a journalist, a security lead, a builder or a board member, what a visitor persona is, and how a site defines its presets.
 
-*api.newsroom.sgit.ai · v0.2.12 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/persona-link/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.13 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/persona-link/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

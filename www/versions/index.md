@@ -2,10 +2,11 @@
 
 > Every version of this repository that landed on dev, newest first, with the reader-code release each one serves and what changed, in a line.
 
-*api.newsroom.sgit.ai · v0.2.12 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/versions/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.13 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/versions/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
+- **v0.2.13** (2026-10-15, reader code v0.2.5): Every page's JSON-LD names its author, its publisher, its card and what it is about, as the newsroom's articles do; the README says what the site has.
 - **v0.2.12** (2026-10-15, reader code v0.2.5): The bar has the newsroom's shape: eight groups with their pages under them, a dropdown on hover and on focus with no script, the group and the page marked; one list behind Menu on a phone.
 - **v0.2.11** (2026-10-15, reader code v0.2.5): Search: the site searches itself with the API's own search and ask components, loaded from this host's release, over an index the build writes (search/docs.json, text.json) in the contract's format; a Search button in the bar; headings in HTML pages get ids.
 - **v0.2.10** (2026-10-15, reader code v0.2.5): feed.xml: versions and releases as RSS, linked from every page's head and from llms.txt; the gate checks it is well formed and current.

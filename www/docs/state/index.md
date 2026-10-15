@@ -2,7 +2,7 @@
 
 > Where a reader's data lives (localStorage on the page's origin), everything that comes in, and every channel by which anything leaves the browser.
 
-*api.newsroom.sgit.ai · v0.2.12 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/state/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.13 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/state/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

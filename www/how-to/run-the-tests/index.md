@@ -2,7 +2,7 @@
 
 > The eleven test files, what each covers, how the harness serves a newsroom checkout and routes this host to the working tree, the three engines, which tests need Chromium, and how to run them against your own pages.
 
-*api.newsroom.sgit.ai · v0.2.12 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/run-the-tests/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.13 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/run-the-tests/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
