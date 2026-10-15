@@ -2,7 +2,7 @@
 
 > How the reader code is served and consumed: a versioned prefix per release, never edited in place; the CORS header a cross-origin import needs; what stays on the page's origin (state, data, addresses); data-root; pinning, the manifest, rollback; CSP.
 
-*api.newsroom.sgit.ai · v0.2.11 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/hosting/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.12 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/hosting/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 

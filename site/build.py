@@ -49,16 +49,18 @@ ISSUES = {f"R{i}": i for i in range(1, 19)}      # finding Rn is issue n in this
 
 esc = lambda s: htmlmod.escape(str(s), quote=True)  # noqa: E731
 
+# The bar: groups with their pages under them, as the newsroom's bar has (chrome.py there); a group is "here" by the path's prefix.
 NAV = [
-    ("For publishers", "for-publishers/"),
-    ("For developers", "for-developers/"),
-    ("For evaluators", "for-evaluators/"),
-    ("Docs", "docs/"),
-    ("How-to", "how-to/"),
-    ("Review", "review/"),
-    ("Releases", "releases/"),
-    ("Articles", "articles/"),
-    ("Agents", "agents/"),
+    ("Start", "for-developers/", [("For publishers and editors", "for-publishers/"), ("For developers", "for-developers/"), ("For evaluators", "for-evaluators/"), ("Adopt it", "adopt/")]),
+    ("Docs", "docs/", [("The reference", "docs/"), ("The contracts", "docs/contracts/"), ("State, inputs and outputs", "docs/state/"), ("The components", "docs/components/"),
+                       ("Hosting and CORS", "docs/hosting/"), ("The reading-list link", "docs/reading-list-link/")]),
+    ("How-to", "how-to/", [("All the guides", "how-to/"), ("Add the meter", "how-to/add-the-meter/"), ("A persona link", "how-to/persona-link/"), ("A reading-list link", "how-to/reading-list-link/"),
+                           ("The subscribe lane", "how-to/subscribe-lane/"), ("Run the tests", "how-to/run-the-tests/"), ("Take a release", "how-to/take-a-release/"), ("Make a release", "how-to/make-a-release/")]),
+    ("Review", "review/", [("The map, and the review", "review/"), ("The map as a graph", "review/map/"), ("The proof of the move", "review/proof/"), ("The findings, as issues", "https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues")]),
+    ("Releases", "releases/", [("Releases", "releases/"), ("Versions", "versions/"), ("The feed", "feed.xml"), ("releases.json", "releases.json")]),
+    ("Articles", "articles/", []),
+    ("Agents", "agents/", []),
+    ("About", "about/", []),
 ]
 
 
@@ -71,7 +73,17 @@ def page_html(rel, meta, body, *, md_twin):
     section = meta.get("section", "")
     eyebrow = meta.get("eyebrow", "")
     agent = meta.get("agent", description)
-    nav = "".join(f'<a href="{up}{href}"{" class=here" if section == label else ""}>{esc(label)}</a>' for label, href in NAV)
+    def nav_html():
+        out = []
+        for label, href, subs in NAV:
+            here = rel.startswith(href) or (label == "Start" and rel.split("/")[0] in ("for-publishers", "for-evaluators", "adopt"))
+            if subs:
+                links = "".join(f'<a class="sl{" here" if rel.replace("index.html", "") == h else ""}" href="{h if h.startswith("http") else up + h}">{esc(t)}</a>' for t, h in subs)
+                out.append(f'<div class="ni ni-has{" here" if here else ""}"><a class="nl" href="{up}{href}">{esc(label)}<span class="caret" aria-hidden="true"> &#9662;</span></a><div class="sub">{links}</div></div>')
+            else:
+                out.append(f'<div class="ni{" here" if here else ""}"><a class="nl" href="{up}{href}">{esc(label)}</a></div>')
+        return "".join(out)
+    nav = nav_html()
     # crumbs: pairs (label, path from the root); in front matter written as [Label|path/, …]
     crumbs = [tuple(c.split("|", 1)) if isinstance(c, str) else tuple(c) for c in meta.get("crumbs", [])]
     trail = "".join(f'<a href="{up}{h}">{esc(t)}</a> / ' for t, h in crumbs)

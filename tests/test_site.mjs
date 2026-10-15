@@ -123,6 +123,19 @@ try {
         check((await pg.getAttribute('html', 'data-theme')) === 'night', 'a system set to dark, with nothing stored, gets Night')
         await ctx.close()
     }
+    /* ---- the groups: a dropdown opens on hover and on focus, and names its pages ---- */
+    {
+        const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+        const pg = await ctx.newPage(); await pg.goto(B + 'docs/contracts/index.html')
+        check(await pg.evaluate(() => document.querySelector('#nav .ni.here > .nl').textContent.trim().startsWith('Docs') && document.querySelector('#nav .sub a.here').textContent === 'The contracts'), 'the bar marks the group and the page the reader is on')
+        check(await pg.evaluate(() => getComputedStyle(document.querySelector('#nav .ni-has .sub')).display === 'none'), 'a group\'s pages are hidden until asked')
+        await pg.hover('#nav .ni-has:nth-child(2) > .nl')
+        check(await pg.evaluate(() => getComputedStyle(document.querySelector('#nav .ni-has:nth-child(2) .sub')).display === 'block' && document.querySelectorAll('#nav .ni-has:nth-child(2) .sub a').length >= 5), 'hovering a group opens its pages')
+        await pg.mouse.move(0, 600)
+        await pg.focus('#nav .ni-has:nth-child(3) > .nl')
+        check(await pg.evaluate(() => getComputedStyle(document.querySelector('#nav .ni-has:nth-child(3) .sub')).display === 'block'), 'focusing a group opens its pages (the keyboard reaches them)')
+        await ctx.close()
+    }
     /* ---- 5. search: the site searches itself with the API's own component, loaded from this host's release ---- */
     {
         const ctx = await routeApi(await browser.newContext({ viewport: { width: 1280, height: 900 } }))
@@ -149,8 +162,8 @@ try {
         check(!m.overflow, `at ${w}: nothing wider than the viewport`)
         if (w === 768) {
             await pg.click('.menu')
-            const n = await pg.evaluate(() => getComputedStyle(document.getElementById('nav')).display === 'flex' ? document.querySelectorAll('#nav a').length : 0)
-            check(n >= 9, `at ${w}: Menu opens the sections (${n})`)
+            const n = await pg.evaluate(() => getComputedStyle(document.getElementById('nav')).display === 'flex' ? document.querySelectorAll('#nav .ni').length : 0)
+            check(n === 8, `at ${w}: Menu opens the eight groups (${n})`)
         }
         await ctx.close()
     }

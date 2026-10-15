@@ -2,7 +2,7 @@
 
 > Three ways in: put the meter on your own pages today; run a newsroom like newsroom.sgit.ai; pilot it with the people who built it. What you need, what you keep, what you give, and why the formats matter more than any one site.
 
-*api.newsroom.sgit.ai · v0.2.11 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/adopt/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.12 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/adopt/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
