@@ -1,11 +1,47 @@
 {
  "what": "Every version of this repository that landed on dev, newest first: what changed, in a line. tools/version.json names the current one; the deploy tags it. The reader-code releases (what the consuming sites pin) are the entries with a release of their own.",
  "versions": [
-  {"version": "v0.2.4", "date": "2026-10-14", "release": "v0.2.0", "line": "The website's gate (site/check.py): every reference resolves, canonical and chrome on every page, the sitemap and llms files agree with the tree, a key-leak tripwire. The map and the proof data are published on the host. This versions page."},
-  {"version": "v0.2.3", "date": "2026-10-14", "release": "v0.2.0", "line": "test_review pins R2 as the personas page being unusable in either form (blank, or the element failed), as CI run 13 saw."},
-  {"version": "v0.2.2", "date": "2026-10-14", "release": "v0.2.0", "line": "The website wears the newsroom's five themes: its token file and bootstrap, unchanged; the picker in the bar; one row from 1280 up; print and reduced motion; tests/test_site.mjs as the gate."},
-  {"version": "v0.2.1", "date": "2026-10-14", "release": "v0.2.0", "line": "Every change that lands on dev is a version: tools/version.json holds the repository's version beside the reader-code release; the deploy tags the version and refuses a missed bump."},
-  {"version": "v0.2.0", "date": "2026-10-14", "release": "v0.2.0", "line": "The second cut of the reader code, from the newsroom at v0.12.50 (74 files; SG Meter v1.4.1, the inbox, the graphs, the QR library); the release the newsroom pins at its v0.13.0. The tests re-adapted, test_graphs and test_inbox added."},
-  {"version": "v0.1.0", "date": "2026-10-13", "release": "v0.1.0", "line": "The first cut of the reader code, from the newsroom at v0.12.10 (63 files), the pipeline, the proof of the move, and the website for publishers, developers, evaluators and agents."}
+  {
+   "version": "v0.2.5",
+   "date": "2026-10-15",
+   "release": "v0.2.5",
+   "line": "Reader-code release: wire/wire.css wraps a story's long words (a URL as plain text in the lead story's corrections overflowed a phone; test_wire caught it). The first change to a served file since the move, recorded in the manifest with its reason."
+  },
+  {
+   "version": "v0.2.4",
+   "date": "2026-10-14",
+   "release": "v0.2.0",
+   "line": "The website's gate (site/check.py): every reference resolves, canonical and chrome on every page, the sitemap and llms files agree with the tree, a key-leak tripwire. The map and the proof data are published on the host. This versions page."
+  },
+  {
+   "version": "v0.2.3",
+   "date": "2026-10-14",
+   "release": "v0.2.0",
+   "line": "test_review pins R2 as the personas page being unusable in either form (blank, or the element failed), as CI run 13 saw."
+  },
+  {
+   "version": "v0.2.2",
+   "date": "2026-10-14",
+   "release": "v0.2.0",
+   "line": "The website wears the newsroom's five themes: its token file and bootstrap, unchanged; the picker in the bar; one row from 1280 up; print and reduced motion; tests/test_site.mjs as the gate."
+  },
+  {
+   "version": "v0.2.1",
+   "date": "2026-10-14",
+   "release": "v0.2.0",
+   "line": "Every change that lands on dev is a version: tools/version.json holds the repository's version beside the reader-code release; the deploy tags the version and refuses a missed bump."
+  },
+  {
+   "version": "v0.2.0",
+   "date": "2026-10-14",
+   "release": "v0.2.0",
+   "line": "The second cut of the reader code, from the newsroom at v0.12.50 (74 files; SG Meter v1.4.1, the inbox, the graphs, the QR library); the release the newsroom pins at its v0.13.0. The tests re-adapted, test_graphs and test_inbox added."
+  },
+  {
+   "version": "v0.1.0",
+   "date": "2026-10-13",
+   "release": "v0.1.0",
+   "line": "The first cut of the reader code, from the newsroom at v0.12.10 (63 files), the pipeline, the proof of the move, and the website for publishers, developers, evaluators and agents."
+  }
  ]
 }

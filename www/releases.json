@@ -1,8 +1,8 @@
 {
  "what": "The releases of the newsroom's reader code served from this host. A consuming site pins one; nothing here is edited after it is published.",
  "host": "https://api.newsroom.sgit.ai",
- "current": "v0.2.0",
- "version": "v0.2.4",
+ "current": "v0.2.5",
+ "version": "v0.2.5",
  "releases": [
   {
    "release": "v0.1.0",
@@ -17,6 +17,13 @@
    "files": 74,
    "bytes": 1154686,
    "manifest": "https://api.newsroom.sgit.ai/v0.2.0/manifest.json"
+  },
+  {
+   "release": "v0.2.5",
+   "date": "2026-10-15",
+   "files": 74,
+   "bytes": 1154711,
+   "manifest": "https://api.newsroom.sgit.ai/v0.2.5/manifest.json"
   }
  ]
 }

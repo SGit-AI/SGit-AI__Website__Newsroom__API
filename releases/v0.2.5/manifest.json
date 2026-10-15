@@ -1,0 +1,403 @@
+{
+ "what": "A release of the newsroom's reader code, served at https://api.newsroom.sgit.ai/v0.2.5/<path>. Scripts, styles, templates and JSON the browser runs on newsroom.sgit.ai (and sgit.ai), at the paths they had in the newsroom repository; the same bytes, apart from the files listed with changed_from_newsroom, which the move to a host of their own forced.",
+ "release": "v0.2.5",
+ "date": "2026-10-15",
+ "host": "https://api.newsroom.sgit.ai",
+ "newsroom_before": {
+  "release": "v0.12.50",
+  "commit": "e52fe3b1"
+ },
+ "counts": {
+  "files": 74,
+  "bytes": 1154711,
+  "changed_from_newsroom": 4
+ },
+ "files": [
+  {
+   "path": "assets/components/base/v1/v1.0/v1.0.0/sg-component.js",
+   "bytes": 4333,
+   "sha256": "e566a78ad98fbd184058eed2a6b435c2c386066a0743de5efdbd0ef99348e677"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.0/v1.0.0/sg-meter-core.js",
+   "bytes": 10905,
+   "sha256": "e7440dc3820a0180f80aa4f1722b7f3ede1dc760f31227ca32ea40283400a987"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.0/v1.0.0/sg-meter.css",
+   "bytes": 5093,
+   "sha256": "b0aef1442f4f4edbb836173070777d5b8e84528fa0980a8b73f30423a9aa1d0c"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.0/v1.0.0/sg-meter.js",
+   "bytes": 18553,
+   "sha256": "9ea95731fc2c15d53abffc00402682b5924bf0d017cac252a1626892c30b6787"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.0/v1.0.0/sg-meter.tpl",
+   "bytes": 56,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.1/v1.1.0/sg-meter-core.js",
+   "bytes": 18031,
+   "sha256": "867db221b46ad540cea28b596e07272e2d4667195dac19daa8fd3bafa22946b6"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.1/v1.1.0/sg-meter.css",
+   "bytes": 10319,
+   "sha256": "051165ca8ec4c737737caee1c612f8f49f13b7af3e804b8f0bee3b1b8131d865"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.1/v1.1.0/sg-meter.js",
+   "bytes": 35329,
+   "sha256": "eb880df24888a900ef5de10c71e425e98525e604a6f91c01285ae44499252891"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.1/v1.1.0/sg-meter.tpl",
+   "bytes": 56,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.2/v1.2.0/sg-meter-core.js",
+   "bytes": 21676,
+   "sha256": "541d9873f8bf52699e03fa66922ea42cc98b20c258f3bd790e172cf89a2575b8"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.2/v1.2.0/sg-meter.css",
+   "bytes": 11440,
+   "sha256": "9cca4711996312e1fd8426d42897b75437277c5210bd956f2a8306ad508c2437"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.2/v1.2.0/sg-meter.js",
+   "bytes": 46036,
+   "sha256": "38303a50cbdeb142217fb369e41cd6ebb1e0e9f49fa7aab2c10b34267bebb106"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.2/v1.2.0/sg-meter.tpl",
+   "bytes": 56,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.0/sg-meter-core.js",
+   "bytes": 24882,
+   "sha256": "34b32beef6b6f781a8bc07b14f1d677c148c1d632be0a2de60eff2ee2382f568"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.0/sg-meter.css",
+   "bytes": 15093,
+   "sha256": "b56618dbfeee38047efba9d66289ebea40b496e9771abf50a215ceb4f2368297"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.0/sg-meter.js",
+   "bytes": 49252,
+   "sha256": "f26b2fec6f409f34bf91a341cda9acd424478f7dd0a790a4070c3d753b2eb350"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.0/sg-meter.tpl",
+   "bytes": 56,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.1/sg-meter-core.js",
+   "bytes": 24882,
+   "sha256": "61c636b881ca7664afe9dda5fd13295f17691928e22664d8480efe55ad4f3d73"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.1/sg-meter.css",
+   "bytes": 15160,
+   "sha256": "192b7813a223f2e457381e9e97feea8921fb961a18c17eeede7284337f684859"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.1/sg-meter.js",
+   "bytes": 49597,
+   "sha256": "1f3b6f1bbc36cd66e1b2d3a49087a5b37e993a89933adfda648f1c997257bd38"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.3/v1.3.1/sg-meter.tpl",
+   "bytes": 56,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js",
+   "bytes": 26424,
+   "sha256": "6a74b1183c766d5aee8a6fdbfd9bfc7885a7c873945cde6ee2061f300d2c2eaf"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.css",
+   "bytes": 16069,
+   "sha256": "98a86404668135893759d018db3f457a6de25698a50c988b00a65fbc88071fa5"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js",
+   "bytes": 55465,
+   "sha256": "82f8c09842290336b208df78936059c69ce3db456e610c785e00cd78065cf55c"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.tpl",
+   "bytes": 56,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js",
+   "bytes": 26602,
+   "sha256": "9986294b0fbc5a62b56f515eff22867ef59e75e0c63dc048dfda3fdd6dd0e5ba"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.css",
+   "bytes": 16491,
+   "sha256": "3f464b7d1df4e15ff45809fb155388df357809d79d87609ff0d44514b4438786"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js",
+   "bytes": 55643,
+   "sha256": "ba46eeca15d5d9b24feb71381c14a0b92bb5d8326492c310824cf8723c431abb"
+  },
+  {
+   "path": "assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.tpl",
+   "bytes": 56,
+   "sha256": "104c7c1ded976408ba7d827f1c00ad53fd0718997aacebb2081bbd8772efb6a3"
+  },
+  {
+   "path": "assets/door.js",
+   "bytes": 8954,
+   "sha256": "740779876d19acebd24e493da9616d132a968f8885c013880f383c15d6ef4dff"
+  },
+  {
+   "path": "assets/newsroom-vault.js",
+   "bytes": 16265,
+   "sha256": "29003efa52c408b9d26e58ce86ecc897fda2439f739e803df7b9399a4520705e"
+  },
+  {
+   "path": "assets/search/ask.css",
+   "bytes": 2885,
+   "sha256": "9f8cd3cb95d659e87d4e249947a1fe92f4309cc2192c3b0f428b35440de34549"
+  },
+  {
+   "path": "assets/search/ask.js",
+   "bytes": 14434,
+   "sha256": "68d68bb1b7a3df4c41d1f37f22e86d30531b0e5c17637760a2a54c0aff0018e9",
+   "changed_from_newsroom": {
+    "sha256_before": "ec50bb11017fe7fbbb513315e948020aaa005d14e2554cac15cf13ffedd62079",
+    "why": "took the site root from its own URL; now from the page's data-root for links"
+   }
+  },
+  {
+   "path": "assets/search/search-nav.css",
+   "bytes": 666,
+   "sha256": "c750cab906e8d1592e3bd3fece94ff33945c833a7a78d3a7d9c7313d7dbe636f"
+  },
+  {
+   "path": "assets/search/search.css",
+   "bytes": 3112,
+   "sha256": "1fcdffcfa53fc8d3f75a92009fce6cb12553d97f110087ca0784653190a12355"
+  },
+  {
+   "path": "assets/search/search.js",
+   "bytes": 20112,
+   "sha256": "3968954e3cc5f286be7c72d9e7bcb3c143069ef1465b4787ba7db388cde8ca19",
+   "changed_from_newsroom": {
+    "sha256_before": "a1602529e616f0be0f7688c6b7836a88c3a8e186d760088adf2517afa7632678",
+    "why": "took the site root from its own URL; now from the page's data-root for data and links, and imports the pane's modules from its own root (CODE)"
+   }
+  },
+  {
+   "path": "assets/subscribe.js",
+   "bytes": 7440,
+   "sha256": "fe2eec58c28f15e53fc57520bccb75e38276607821d8572b0fdfd1e0417c1c58"
+  },
+  {
+   "path": "assets/vault-pane/inbox.js",
+   "bytes": 15367,
+   "sha256": "0d31b92a8827d26a0ddd7e8f076315d6db4b48dfe719f28dafec100eb6bed59b"
+  },
+  {
+   "path": "assets/vault-pane/notes.js",
+   "bytes": 8318,
+   "sha256": "21f583f801906d8b3b9bad289a31919e88be02344f4156afd5f04831c83e9198"
+  },
+  {
+   "path": "assets/vault-pane/pending.js",
+   "bytes": 2795,
+   "sha256": "4d4c30ec10e0ebe138ad337527a2605c908bba1f2767b3f8c1ef0fe39066469a"
+  },
+  {
+   "path": "assets/vault-pane/reading.js",
+   "bytes": 2194,
+   "sha256": "e8f2b778f2b2eec00aecdc1c532c488e0ebd0c36e08caf353b557b0e00845b79"
+  },
+  {
+   "path": "assets/vault-pane/send.css",
+   "bytes": 2103,
+   "sha256": "60608bb4a17808ad9f6e39206c93602d837c2d2f69179b516d62e8bd983d78fc"
+  },
+  {
+   "path": "assets/vault-pane/send.js",
+   "bytes": 8078,
+   "sha256": "ca0512a3474140277f57e70a696d597c0c3ed11c5f61d5228ca2ef4be302aecb"
+  },
+  {
+   "path": "assets/vault-pane/sync.js",
+   "bytes": 13017,
+   "sha256": "0a56700e5b9db9f567fb843366fbaad9ff950202abbe1804d4dcf04b8824a193"
+  },
+  {
+   "path": "assets/vault-pane/vault-pane.css",
+   "bytes": 12039,
+   "sha256": "f25e2596761414c4495e3b2fc380d3cb055f86f33a8d6cdd17c3d34d8928f5b9"
+  },
+  {
+   "path": "assets/vault-pane/vault-pane.js",
+   "bytes": 66405,
+   "sha256": "a73c16bab3347a9709b8f045c2e7dc12208121305f727b56548fe3af475677ac",
+   "changed_from_newsroom": {
+    "sha256_before": "7176fa08921a26cfded65f5a8b3b20410c910b26b4e182e73edcee5991d88ef3",
+    "why": "took the site root from its own URL (import.meta.url); now from the page's data-root, and loads the vault library from its own root (CODE)"
+   }
+  },
+  {
+   "path": "assets/vault-pane/wire-state.js",
+   "bytes": 5432,
+   "sha256": "36e1d5bbbd300c622fadf48748d4485e1b7818f666733c90c9d5f9153dcaea35"
+  },
+  {
+   "path": "assets/vendor/qrcode-generator/2.0.4/README.md",
+   "bytes": 514,
+   "sha256": "cb41228b45c5afdcd7c323bf74ca959f22836cf697371f87070f53e009d8ae59"
+  },
+  {
+   "path": "assets/vendor/qrcode-generator/2.0.4/qrcode.mjs",
+   "bytes": 51907,
+   "sha256": "ea91d7118a5395289170da848b7c6758b996163bfbccf312591ab65a4911b7c0"
+  },
+  {
+   "path": "assets/vendor/sg-vault/local/sg-vault--create-with-id.js",
+   "bytes": 5127,
+   "sha256": "b668c4ab0062a3b385882fa593f7213f50f667c777d0614b5ba8abcb5721372e"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/VENDOR.md",
+   "bytes": 3283,
+   "sha256": "72b1b247062e1cd0b9502fb689c5e5d90bc79c27d9696af2047f1a2fccf7e9af"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-send/sg-send-crypto.js",
+   "bytes": 4927,
+   "sha256": "2c4af16bbaf4f43e7eb0f8298a9cd8338429f99c7bec20c5d7f4da96c88e39ce"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-send/sg-send.js",
+   "bytes": 12989,
+   "sha256": "9bc98e580f5fc1adbf8e2d273181e6afa3bd9a3813ea8a1bf24ddd07e1b8b41e"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--branches.js",
+   "bytes": 2178,
+   "sha256": "bc1eec8bbc2326a73ec1809ed588d26f3fe7511bf24b52e47440c3d90526f3d1"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--file-ops.js",
+   "bytes": 7212,
+   "sha256": "f114db89754638b5e4ade1dc3f5d4753ac672a4323c286e8c8ed0412760e6861"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--folder-ops.js",
+   "bytes": 5680,
+   "sha256": "10fea1377422c5368aead040500c28135fafcb918427901a74483e23e1b36d7f"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--history.js",
+   "bytes": 4142,
+   "sha256": "265b215e27216ad25e8fa7c83b47c8307b7990a0a3fb88254ee2149d2835dd2d"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault--sync.js",
+   "bytes": 20598,
+   "sha256": "b9f521e7b70ca66f6d1197378337f954deea4ed3468535ec3064149c7cf1fcc6"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-commit.js",
+   "bytes": 6645,
+   "sha256": "e686de3756eaeed185708a6ba96194429afb3067f145108e7580d876598dd9ce"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-crypto.js",
+   "bytes": 14862,
+   "sha256": "f8d31359204a9e333d27444ea2a37c1bb11bbc790d0cf4cfa95fe9f9282d6e66"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-object-store.js",
+   "bytes": 14057,
+   "sha256": "a45d7ad0f9dbd91677785c3128a8322d4209cb35ab5d815551dcbf1eceed9c9e"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault-ref-manager.js",
+   "bytes": 8368,
+   "sha256": "5b8ea87ace83d59e8954511d9932bd3968020c57070375194c7427a083fb729f"
+  },
+  {
+   "path": "assets/vendor/sg-vault/v0.2.3/sg-vault/sg-vault.js",
+   "bytes": 28054,
+   "sha256": "0108884f9b8d539e4c9457190326d64adc5a92c808803f0dab14b9e772b3ad26"
+  },
+  {
+   "path": "for/for.css",
+   "bytes": 8123,
+   "sha256": "6ad9b2f9c39e99748a089d55670a1233983ff08cc5d02e53a9034adb9735a17d"
+  },
+  {
+   "path": "for/make.js",
+   "bytes": 16205,
+   "sha256": "ec9abc1f40b5f5640103f4e7ab4280a8622d9d5aa683bc82079609ccea413783"
+  },
+  {
+   "path": "for/reading-list.js",
+   "bytes": 20117,
+   "sha256": "5f8fa1378b99c24cdba945cd0bb965a56f03a04ce069a3ab56b3ec340881b1ee"
+  },
+  {
+   "path": "passkey/lab.css",
+   "bytes": 2799,
+   "sha256": "ca352ad9cdc8631d01005bfd94b88b92a646c030a3324d249f77285e48a0b491"
+  },
+  {
+   "path": "passkey/lab.js",
+   "bytes": 29527,
+   "sha256": "08c47eae0b95943e10e919fc770ddd2c0c30b2fd7652a5199fb8b7961f92560a"
+  },
+  {
+   "path": "passkey/vectors.json",
+   "bytes": 1663,
+   "sha256": "d50a3642c131bbaa8b9858438138fc1dc78ae3249e9bab89c1b7541f95a447b8"
+  },
+  {
+   "path": "wire/graphs.js",
+   "bytes": 32479,
+   "sha256": "22f48fcb1185389f8c477b382f422b42e7916bc2f1920598049f490cca3490e1"
+  },
+  {
+   "path": "wire/subscribe.js",
+   "bytes": 6862,
+   "sha256": "e08913d389ede55fb0787cba7752920c28b43735ff767795e11ac43224c5a12b"
+  },
+  {
+   "path": "wire/vault-reader.js",
+   "bytes": 11113,
+   "sha256": "332509b6be44538d7aab0305669673fa6907591ff621dee1b2605849c89afbfb"
+  },
+  {
+   "path": "wire/wire.css",
+   "bytes": 17269,
+   "sha256": "8623b237054957816163d7ebcdb2f8e0269c0fee5961d37268db12cd4d422568",
+   "changed_from_newsroom": {
+    "sha256_before": "f61bc914b5303dced5b03e16a81c7bca33e534bd88eb5a049718e1a7b094d3d7",
+    "why": "a story's text may carry a URL as one word (the vault's corrections and verifier's notes do); .story wraps anywhere, so no story is wider than a phone"
+   }
+  },
+  {
+   "path": "wire/wire.js",
+   "bytes": 50728,
+   "sha256": "372f85ab8ffd75beb8eaec31aa64884dcaff8286b961a353cc7cf0bfdd3dc1c7"
+  }
+ ]
+}

@@ -34,7 +34,7 @@ body .btn[aria-pressed=true] { background: var(--accent); border-color: var(--ac
 main.doc .beat { margin: 2rem 0 .7rem; padding-bottom: .3rem; border-bottom: 2px solid var(--fg, #1c1d21); font: 700 .8rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
 main.doc .beat .n { font-weight: 400; color: var(--dim); letter-spacing: 0; text-transform: none; margin-left: .5rem; }
 .stories { display: grid; gap: .9rem; }
-.story { padding: 1rem 1.2rem 1.05rem; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.story { padding: 1rem 1.2rem 1.05rem; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); overflow-wrap: anywhere; }
 .story.unfetched { border-style: dashed; }
 /* the inbox bar: what is new since the last visit, the vault's release note, the filters, what is only in this browser */
 .inbox { margin: 0 0 1.4rem; padding: .9rem 1.1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); font-size: .9rem; }

@@ -41,6 +41,10 @@ CHANGED_FROM_NEWSROOM = {
     "assets/vault-pane/vault-pane.js": "took the site root from its own URL (import.meta.url); now from the page's data-root, and loads the vault library from its own root (CODE)",
     "assets/search/search.js": "took the site root from its own URL; now from the page's data-root for data and links, and imports the pane's modules from its own root (CODE)",
     "assets/search/ask.js": "took the site root from its own URL; now from the page's data-root for links",
+    # v0.2.5: the first change to a served file after the move, with the test that failed without it (test_wire: no sideways
+    # scroll at 390px) and the reason: the vault's lead story of 15 October carried a URL as plain text in its corrections
+    # and its verifier's note, 643px of one word on a 390px screen
+    "wire/wire.css": "a story's text may carry a URL as one word (the vault's corrections and verifier's notes do); .story wraps anywhere, so no story is wider than a phone",
 }
 
 

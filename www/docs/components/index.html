@@ -20,7 +20,7 @@
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
   <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
-  <a class="ver" href="../../versions/" title="This site is v0.2.4; the reader code it serves is release v0.2.0. Every version, in a line">v0.2.4</a>
+  <a class="ver" href="../../versions/" title="This site is v0.2.5; the reader code it serves is release v0.2.5. Every version, in a line">v0.2.5</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav"><a href="../../for-publishers/">For publishers</a><a href="../../for-developers/">For developers</a><a href="../../for-evaluators/">For evaluators</a><a href="../../docs/" class=here>Docs</a><a href="../../how-to/">How-to</a><a href="../../review/">Review</a><a href="../../releases/">Releases</a><a href="../../articles/">Articles</a><a href="../../agents/">Agents</a></nav>
   <div class="tools"><div class="theme-pick"></div><a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
@@ -29,7 +29,7 @@
 <p class="crumb"><a href="../../index.html">Home</a> / <a href="../../docs/">Docs</a> / The components</p>
 <p class="eyebrow">Reference</p>
 <h1 id="the-components">The components</h1>
-<blockquote>74 files in the current release, 1,154,686 bytes, listed path by path in <a href="../../v0.2.0/manifest.json">the manifest</a>. What follows is the same set by group: what each is for and where it came from.</blockquote>
+<blockquote>74 files in the current release, 1,154,711 bytes, listed path by path in <a href="../../v0.2.5/manifest.json">the manifest</a>. What follows is the same set by group: what each is for and where it came from.</blockquote>
 <h2 id="sg-meter-assets-components-sg-meter-v1">SG Meter: <code>assets/components/sg-meter/v1/</code></h2>
 <div class="tablewrap"><table><thead><tr><th>Version</th><th>Files</th><th>State</th></tr></thead><tbody><tr><td><code>v1.4/v1.4.1/</code> (<code>sg-meter.js</code>, <code>sg-meter-core.js</code>, <code>sg-meter.css</code>, <code>sg-meter.tpl</code>)</td><td>4</td><td><b>the line that continues</b>: the newsroom's build of v1.3.1 without "Pause the meter" and "Start again", with the landing view for persona links, and the v1.4.1 changes the newsroom made in October</td></tr><tr><td><code>v1.4/v1.4.0/</code>, <code>v1.3/v1.3.1/</code>, <code>v1.3/v1.3.0/</code>, <code>v1.2/v1.2.0/</code>, <code>v1.1/v1.1.0/</code>, <code>v1.0/v1.0.0/</code></td><td>24</td><td>frozen: published artefacts, served byte for byte, never edited; a page that pinned one keeps loading the same files</td></tr></tbody></table></div>
 <p><code>sg-meter.js</code> is the element (twelve views, the reader card, the share form, the persona graph); <code>sg-meter-core.js</code> is the meter (prices, the charge, ratings, declining, credit, personas, picks, the share text); the <code>.tpl</code> and <code>.css</code> are fetched beside it.</p>
@@ -54,16 +54,16 @@
 <h2 id="what-is-not-here-on-purpose">What is not here, on purpose</h2>
 <p>The pages (the newsroom's), the content data (<code>articles/graphs.json</code>, <code>articles/ids.json</code>, <code>persona/links.json</code>, <code>search/*.json</code>, <code>wire/snapshot.json</code>), the contact file at <code>/.well-known/</code>, and the site's chrome (<code>site.js</code>, <code>shots.js</code>, <code>nav.js</code>). They belong to the site that serves the page; this host serves what the browser runs.</p>
 <aside class="agent" aria-label="For agents">
- <p><b>For agents.</b> The files the SGit Newsroom API serves, by group, with purpose and provenance: 63 files in release v0.1.0 (tools/served.json); the meter v1.4.0 plus frozen v1.0.0 to v1.3.1; the component base; for/ (reading lists); assets/subscribe.js; the vault layer (newsroom-vault.js, door.js, vault-pane/); assets/search/; wire/; assets/vendor/sg-vault (SGraph-AI__App__Send v0.2.3, unedited); passkey/ lab files. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.2.0/&lt;path&gt;</code>; its manifest: <a href="../../v0.2.0/manifest.json">v0.2.0/manifest.json</a>.</p>
+ <p><b>For agents.</b> The files the SGit Newsroom API serves, by group, with purpose and provenance: 63 files in release v0.1.0 (tools/served.json); the meter v1.4.0 plus frozen v1.0.0 to v1.3.1; the component base; for/ (reading lists); assets/subscribe.js; the vault layer (newsroom-vault.js, door.js, vault-pane/); assets/search/; wire/; assets/vendor/sg-vault (SGraph-AI__App__Send v0.2.3, unedited); passkey/ lab files. This page as markdown: <a href="index.md">index.md</a>. The site's index: <a href="../../llms.txt">llms.txt</a>; the whole site in one fetch: <a href="../../llms-full.txt">llms-full.txt</a>. The reader code this site describes is served at <code>https://api.newsroom.sgit.ai/v0.2.5/&lt;path&gt;</code>; its manifest: <a href="../../v0.2.5/manifest.json">v0.2.5/manifest.json</a>.</p>
 </aside>
 </main>
 <footer class="foot"><div class="cols">
-  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../versions/">Versions</a><a href="../../v0.2.0/manifest.json">Current manifest</a></div>
+  <div><h4>The API</h4><a href="../../for-developers/">Quick start</a><a href="../../docs/">Reference</a><a href="../../how-to/">How-to guides</a><a href="../../releases/">Releases</a><a href="../../versions/">Versions</a><a href="../../v0.2.5/manifest.json">Current manifest</a></div>
   <div><h4>The case</h4><a href="../../for-publishers/">For publishers and editors</a><a href="../../for-evaluators/">For evaluators</a><a href="../../adopt/">Adopt it</a><a href="../../articles/">The articles behind it</a></div>
   <div><h4>The work</h4><a href="../../review/">The map and the review</a><a href="../../review/proof/">The proof of the move</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API/issues">Issues</a><a href="https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API">Source</a><a href="../../agents/">For agents</a></div>
   <div><h4>Live</h4><a href="https://newsroom.sgit.ai/">newsroom.sgit.ai</a><a href="https://newsroom.sgit.ai/meter/">SG Meter, documented</a><a href="https://newsroom.sgit.ai/newsroom-api/">The reader API map</a><a href="../../about/">About, licence, contact</a></div>
 </div>
-<p class="fine">SGit Newsroom API · v0.2.4 · reader code v0.2.0 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
+<p class="fine">SGit Newsroom API · v0.2.5 · reader code v0.2.5 · Apache 2.0 · a client-side API: components, formats and contracts the browser runs, with no server and nothing to deploy but files · <a href="index.md">this page as markdown</a></p>
 </footer>
 <script src="../../assets/site.js" defer></script>
 </body>
