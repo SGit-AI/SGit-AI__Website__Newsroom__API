@@ -2,7 +2,7 @@
 
 > For maintainers: the rules while the files are frozen, the version file, cutting a release directory and its manifest, the checks, the pull request with a person and an agent reviewer, the deploy, the tag and the live check, then the consumers.
 
-*api.newsroom.sgit.ai · v0.2.14 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/make-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.15 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/make-a-release/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -16,7 +16,7 @@ Until phase 4 of [the brief](https://newsroom.sgit.ai/articles/explorer-to-villa
 
 ## 1. Change, and test
 
-Edit under the served paths (`assets/`, `for/`, `wire/`, `passkey/`); if the file is one of the meter's, it is a new component version at a new path, never an edit of `v1.4.0`. Run the tests in the three engines against the newsroom checkout ([running the tests](../run-the-tests/)).
+Edit under the served paths (`assets/`, `for/`, `wire/`, `passkey/`); if the file is one of the meter's, it is a new component version at a new path, never an edit of `v1.4.1`. Run the tests in the three engines against the newsroom checkout ([running the tests](../run-the-tests/)).
 
 ## 2. Version and cut
 

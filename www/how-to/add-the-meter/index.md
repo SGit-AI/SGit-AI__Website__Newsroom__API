@@ -2,7 +2,7 @@
 
 > Put the reading meter on your site: the element at the foot of each page, the balance chip in the nav, the JSON config written once by your build, the pinned import, the account pages, and the article feed the picks read.
 
-*api.newsroom.sgit.ai · v0.2.14 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/add-the-meter/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.15 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/how-to/add-the-meter/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -48,7 +48,7 @@ Leave `topup.link` empty until your Stripe Payment Link exists: the top-up page 
 
 ```html
 <script>
-import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js')
+import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js')
  .catch(function (e) { console.error('[sg-meter] component failed to load:', e); });
 </script>
 ```

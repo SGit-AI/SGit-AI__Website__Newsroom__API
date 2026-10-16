@@ -14,7 +14,7 @@ agent: The hosting model of the SGit Newsroom API: files served from https://api
 
 ```
 https://api.newsroom.sgit.ai/<release>/<path>
-https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js
+https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js
 https://api.newsroom.sgit.ai/{{release}}/manifest.json
 ```
 

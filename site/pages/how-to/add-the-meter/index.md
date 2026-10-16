@@ -48,7 +48,7 @@ Leave `topup.link` empty until your Stripe Payment Link exists: the top-up page 
 
 ```html
 <script>
-import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js')
+import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js')
  .catch(function (e) { console.error('[sg-meter] component failed to load:', e); });
 </script>
 ```

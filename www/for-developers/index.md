@@ -2,7 +2,7 @@
 
 > Add the reading meter to a page with a pinned, versioned import and a JSON config; the custom element's views; the data your site publishes; the hosting model and CORS; the tests you can run against your own pages.
 
-*api.newsroom.sgit.ai · v0.2.14 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/for-developers/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.15 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/for-developers/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -35,7 +35,7 @@ Three pieces in the page: the element where the charge happens, the config, and 
  "personas": {"presets": []}}
 </script>
 <script>
-import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js')
+import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js')
  .catch(function (e) { console.error('[sg-meter] component failed to load:', e); });
 </script>
 Prices are in pence (or the smallest unit of symbol). start is the opening credit. The paths in links, picks and share.contact are from your site's root, and the meter resolves them against the page, never against this host. Every key has a default, so a config can be short; the full shape is [the meter config contract](../docs/contracts/).
@@ -87,7 +87,7 @@ These are pages of your own that import the code from this host. Each needs <htm
 <div id="rl-mount"></div>
 <script type="module">
 import { openList } from 'https://api.newsroom.sgit.ai/{{release}}/for/reading-list.js';
-openList({ core: 'https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js',
+openList({ core: 'https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js',
            ids: '../articles/ids.json', root: '../', mount: document.getElementById('rl-mount') });
 </script>
 
@@ -108,7 +108,7 @@ curl -s https://api.newsroom.sgit.ai/releases.json
 curl -s https://api.newsroom.sgit.ai/{{release}}/manifest.json | head -40
 
 # check one file against the manifest
-curl -s https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js | sha256sum
+curl -s https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js | sha256sum
 Write the release into one place in your build and generate every URL from it; the newsroom does this with admin/build/api.json and checks every page against the manifest in its gate. [Taking a release and rolling back](../how-to/take-a-release/).
 
 ## 7. Run the tests against your pages

@@ -26,4 +26,4 @@ The meter emits DOM events on `document` that a page or another component can li
 
 ## Versions
 
-The meter's own line is `v1.4.0`, served at `assets/components/sg-meter/v1/v1.4/v1.4.0/`; `v1.0.0` to `v1.3.1` are frozen and still served, so a page that pinned one keeps working. The API's releases (`{{release}}` today) wrap all of it under a versioned prefix. [Releases](../releases/).
+The meter's own line is `v1.4.1`, served at `assets/components/sg-meter/v1/v1.4/v1.4.1/`; `v1.0.0` to `v1.4.0` are frozen and still served, so a page that pinned one keeps working. The API's releases (`{{release}}` today) wrap all of it under a versioned prefix. [Releases](../releases/).

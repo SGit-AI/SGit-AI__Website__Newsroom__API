@@ -31,7 +31,7 @@ agent: The developer quick start for the SGit Newsroom API: the import of sg-met
  "personas": {"presets": []}}
 &lt;/script&gt;
 &lt;script&gt;
-import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js')
+import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js')
  .catch(function (e) { console.error('[sg-meter] component failed to load:', e); });
 &lt;/script&gt;</code></pre>
 <p>Prices are in pence (or the smallest unit of <code>symbol</code>). <code>start</code> is the opening credit. The paths in <code>links</code>, <code>picks</code> and <code>share.contact</code> are from your site's root, and the meter resolves them against the page, never against this host. Every key has a default, so a config can be short; the full shape is <a href="../docs/contracts/">the meter config contract</a>.</p>
@@ -66,7 +66,7 @@ import('https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v
 &lt;div id="rl-mount"&gt;&lt;/div&gt;
 &lt;script type="module"&gt;
 import { openList } from 'https://api.newsroom.sgit.ai/{{release}}/for/reading-list.js';
-openList({ core: 'https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter-core.js',
+openList({ core: 'https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter-core.js',
            ids: '../articles/ids.json', root: '../', mount: document.getElementById('rl-mount') });
 &lt;/script&gt;
 
@@ -85,7 +85,7 @@ curl -s https://api.newsroom.sgit.ai/releases.json
 curl -s https://api.newsroom.sgit.ai/{{release}}/manifest.json | head -40
 
 # check one file against the manifest
-curl -s https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.0/sg-meter.js | sha256sum</code></pre>
+curl -s https://api.newsroom.sgit.ai/{{release}}/assets/components/sg-meter/v1/v1.4/v1.4.1/sg-meter.js | sha256sum</code></pre>
 <p>Write the release into one place in your build and generate every URL from it; the newsroom does this with <code>admin/build/api.json</code> and checks every page against the manifest in its gate. <a href="../how-to/take-a-release/">Taking a release and rolling back</a>.</p>
 
 <h2>7. Run the tests against your pages</h2>

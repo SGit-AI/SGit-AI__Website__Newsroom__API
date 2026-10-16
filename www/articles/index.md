@@ -2,9 +2,13 @@
 
 > The newsroom.sgit.ai articles that designed, built and reviewed this API, curated for publishers, for the reader's own newsroom, and for the engineering.
 
-*api.newsroom.sgit.ai · v0.2.14 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/articles/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.15 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/articles/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
+
+## Written here
+
+- [The newsroom's reader, as an API: seventy-four files on a host of their own, the same bytes proved, and every change from now on a release a site can pin](https://api.newsroom.sgit.ai/articles/the-reader-as-an-api.html) (2026-10-16, by newsroom.api)
 
 ## The case
 

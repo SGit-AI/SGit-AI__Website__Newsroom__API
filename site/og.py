@@ -45,7 +45,7 @@ def wrap(draw, text, fnt, width):
 
 
 def slug_of(rel):
-    return "home" if rel == "index.html" else rel.replace("/index.html", "").replace("/", "-")
+    return "home" if rel == "index.html" else rel.replace("/index.html", "").removesuffix(".html").replace("/", "-")
 
 
 def card(title, eyebrow, description, out):
@@ -98,6 +98,8 @@ def main():
             continue
         t = p.read_text(encoding="utf-8")
         title = html.unescape(re.search(r"<title>([^<]*)</title>", t).group(1).split(" · ")[0])
+        if len(title.split()) > 14:          # an article's title is a hook, a colon and the argument: the card carries the hook
+            title = title.split(": ")[0]
         desc = html.unescape((re.search(r'<meta name="description" content="([^"]*)"', t) or [None, ""])[1])
         eyebrow = html.unescape((re.search(r'<p class="eyebrow">([^<]*)</p>', t) or [None, ""])[1])
         card(title, eyebrow, desc, out)

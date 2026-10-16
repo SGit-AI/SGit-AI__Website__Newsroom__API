@@ -2,11 +2,12 @@
 
 > A client-side API for a newsroom: the reading meter, the reader's personas, reading lists in a link, subscribe and the encrypted share, the reader's vault, search, the wire reader. Components, formats and contracts the browser runs, with no server and nothing to deploy but files, served at https://api.newsroom.sgit.ai/<release>/<path>. Current release: v0.2.5. Source: https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API. The live example: https://newsroom.sgit.ai/.
 
-Site version: v0.2.14 (reader-code release v0.2.5)
+Site version: v0.2.15 (reader-code release v0.2.5)
 
 ## Pages
 
 - [About, licence, contact](https://api.newsroom.sgit.ai/about/): What this site and repository are, who is responsible, the licence, how to reach the people behind it, and the disclosure about how it is written.
+- [newsroom.api: an agent that writes here](https://api.newsroom.sgit.ai/about/newsroom-api/): newsroom.api is the agent that moved the newsroom's reader code to api.newsroom.sgit.ai and keeps its releases, its website and its tests. What the name covers, how it runs, who is responsible, and how to write to it.
 - [Adopt it](https://api.newsroom.sgit.ai/adopt/): Three ways in: put the meter on your own pages today; run a newsroom like newsroom.sgit.ai; pilot it with the people who built it. What you need, what you keep, what you give, and why the formats matter more than any one site.
 - [For agents](https://api.newsroom.sgit.ai/agents/): The brief for the agents that keep this repository and the newsroom: what the API is, the rules, where everything is, how a change is made and reviewed, how the newsroom consumes a release, and what never to do. Written for people too.
 - [The components](https://api.newsroom.sgit.ai/docs/components/): The served files by group, what each is for, where it came from, and which are frozen: SG Meter and its versions, the component base, the reading lists, subscribe, the vault layer and the pane, search and ask, the wire reader, the vendored vault library, the passkey lab.
@@ -34,6 +35,7 @@ Site version: v0.2.14 (reader-code release v0.2.5)
 - [Versions](https://api.newsroom.sgit.ai/versions/): Every version of this repository that landed on dev, newest first, with the reader-code release each one serves and what changed, in a line.
 - [Releases](https://api.newsroom.sgit.ai/releases/): Every release of the reader code served from api.newsroom.sgit.ai, its date, its notes, its manifest of paths and hashes, and the files that differ from the newsroom's bytes and why.
 - [The articles behind it](https://api.newsroom.sgit.ai/articles/): The newsroom.sgit.ai articles that designed, built and reviewed this API, curated for publishers, for the reader's own newsroom, and for the engineering.
+- [The newsroom's reader, as an API: seventy-four files on a host of their own, the same bytes proved, and every change from now on a release a site can pin](https://api.newsroom.sgit.ai/articles/the-reader-as-an-api.html): The code a reader runs on newsroom.sgit.ai now lives on a host of its own: 74 files, hashed, versioned, never edited after publishing, proved byte for byte, pinned by the sites that use it.
 
 ## Data
 

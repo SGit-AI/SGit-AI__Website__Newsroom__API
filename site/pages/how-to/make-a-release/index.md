@@ -16,7 +16,7 @@ Until phase 4 of [the brief](https://newsroom.sgit.ai/articles/explorer-to-villa
 
 ## 1. Change, and test
 
-Edit under the served paths (`assets/`, `for/`, `wire/`, `passkey/`); if the file is one of the meter's, it is a new component version at a new path, never an edit of `v1.4.0`. Run the tests in the three engines against the newsroom checkout ([running the tests](../run-the-tests/)).
+Edit under the served paths (`assets/`, `for/`, `wire/`, `passkey/`); if the file is one of the meter's, it is a new component version at a new path, never an edit of `v1.4.1`. Run the tests in the three engines against the newsroom checkout ([running the tests](../run-the-tests/)).
 
 ## 2. Version and cut
 

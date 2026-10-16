@@ -30,6 +30,7 @@ from md import front_matter, render  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ROOT / "site/pages"
 DATA = ROOT / "site/data"
+CONTENT = ROOT / "site/content/articles"   # articles written here, in the newsroom's article format (its admin/content/articles/README.md)
 OUT = ROOT / "www"
 HOST = "api.newsroom.sgit.ai"
 SITE = f"https://{HOST}"
@@ -88,7 +89,7 @@ def page_html(rel, meta, body, *, md_twin):
     crumbs = [tuple(c.split("|", 1)) if isinstance(c, str) else tuple(c) for c in meta.get("crumbs", [])]
     trail = "".join(f'<a href="{up}{h}">{esc(t)}</a> / ' for t, h in crumbs)
     wide = " wide" if meta.get("wide") else ""
-    og_slug = "home" if rel == "index.html" else rel.replace("/index.html", "").replace("/", "-")   # as site/og.py names the cards
+    og_slug = "home" if rel == "index.html" else rel.replace("/index.html", "").removesuffix(".html").replace("/", "-")   # as site/og.py names the cards
     return f"""<!doctype html>
 <html lang="en" data-root="{up}">
 <head>
@@ -107,8 +108,10 @@ def page_html(rel, meta, body, *, md_twin):
 <link rel="icon" href="{up}assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{up}assets/site.css">
 <link rel="stylesheet" href="{up}assets/themes.css">
-<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "WebPage", "name": title, "description": description, "url": canonical, "image": f"{SITE}/og/{og_slug}.jpg", "inLanguage": "en",
-                                                  "author": {"@type": "Person", "name": "Dinis Cruz", "url": "https://docs.diniscruz.ai"}, "publisher": {"@type": "Organization", "name": "sgit.ai", "url": "https://sgit.ai"},
+<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": meta.get("ld_type", "WebPage"), "name": title, "description": description, "url": canonical, "image": f"{SITE}/og/{og_slug}.jpg", "inLanguage": "en",
+                                                  **({"headline": title, "datePublished": meta["date"]} if meta.get("ld_type") == "Article" else {}),
+                                                  "author": meta.get("ld_author") or {"@type": "Person", "name": "Dinis Cruz", "url": "https://docs.diniscruz.ai"},
+                                                  "editor": {"@type": "Person", "name": "Dinis Cruz", "url": "https://docs.diniscruz.ai"}, "publisher": {"@type": "Organization", "name": "sgit.ai", "url": "https://sgit.ai"},
                                                   "about": {"@type": "SoftwareApplication", "name": "SGit Newsroom API", "applicationCategory": "DeveloperApplication", "url": SITE + "/"},
                                                   "isPartOf": {"@type": "WebSite", "name": "SGit Newsroom API", "url": SITE + "/"}, "license": "https://www.apache.org/licenses/LICENSE-2.0"})}</script>
 </head>
@@ -116,14 +119,14 @@ def page_html(rel, meta, body, *, md_twin):
 <script src="{up}assets/themes.js"></script>
 <a class="skip" href="#main">Skip to the content</a>
 <header class="top"><div class="row">
-  <a class="brand" href="{up}index.html"><span class="mark" aria-hidden="true"></span>api<span>.newsroom.sgit.ai</span></a>
+  <a class="brand" href="{up}index.html"><span class="mark" aria-hidden="true"></span><span class="name">api<span class="host">.newsroom.sgit.ai</span></span></a>
   <a class="ver" href="{up}versions/" title="This site is {esc(SITE_VERSION)}; the reader code it serves is release {esc(RELEASE)}. Every version, in a line">{esc(SITE_VERSION)}</a>
   <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav">{nav}</nav>
   <div class="tools"><a class="search-btn" href="{up}search/" title="Search this site, in your browser">Search</a><div class="theme-pick"></div><a class="gh" href="{GITHUB}" title="The source, on GitHub">★<span class="lbl">GitHub</span></a></div>
 </div></header>
 <main id="main" class="doc{wide}">
-<p class="crumb"><a href="{up}index.html">Home</a> / {trail}{esc(title) if not meta.get("no_crumb_title") else ""}</p>
+<p class="crumb"><a href="{up}index.html">Home</a> / {trail}{esc(meta.get("crumb_title", title)) if not meta.get("no_crumb_title") else ""}</p>
 {f'<p class="eyebrow">{esc(eyebrow)}</p>' if eyebrow else ''}
 {body}
 <aside class="agent" aria-label="For agents">
@@ -462,7 +465,8 @@ def search_index(written_bodies):
         if rel.startswith("search/"):
             continue
         t = _Text(); t.feed(body)
-        kind = "engineering" if rel.startswith(("review/", "releases/", "versions/", "agents/")) else "page"
+        kind = ("engineering" if rel.startswith(("review/", "releases/", "versions/", "agents/"))
+                else "article" if rel.startswith("articles/") and rel != "articles/index.html" else "page")
         u = "" if rel == "index.html" else rel.replace("index.html", "")
         docs.append({"u": u or "index.html", "t": title, "k": kind, "x": desc, "h": t.headings, "i": len(docs)})
         for anchor, text in t.chunks:
@@ -479,6 +483,9 @@ def feed_xml():
         import datetime
         return datetime.datetime.strptime(d, "%Y-%m-%d").strftime("%a, %d %b %Y 00:00:00 +0000")
     items = []
+    for m, _ in WRITTEN:
+        items.append(f"<item><title>{esc(m['title'])}</title><link>{SITE}/articles/{m['slug']}.html</link><guid isPermaLink=\"true\">{SITE}/articles/{m['slug']}.html</guid>"
+                     f"<pubDate>{rfc822(m['date'])}</pubDate><description>{esc(m['graph'].get('teaser') or m['summary'])}</description></item>")
     for v in VERSIONS["versions"]:
         cut = v["release"] == v["version"]
         title = f"{v['version']}: reader-code release" if cut else f"{v['version']}"
@@ -492,11 +499,69 @@ def feed_xml():
             f'<language>en</language><lastBuildDate>{rfc822(VERSION["date"])}</lastBuildDate>' + "".join(items) + "</channel></rss>\n")
 
 
+def written_articles():
+    """The articles written here: site/content/articles/<slug>.md in the newsroom's article format (front matter, !shot figures,
+    {#anchor} headings), with graphs/<slug>.json beside them. Newest first."""
+    out = []
+    for p in sorted(CONTENT.glob("*.md")):
+        if p.name == "README.md":
+            continue
+        meta, body = front_matter(p.read_text(encoding="utf-8"))
+        meta["slug"] = p.stem
+        g = CONTENT / "graphs" / f"{p.stem}.json"
+        meta["graph"] = json.loads(g.read_text(encoding="utf-8")) if g.exists() else {}
+        out.append((meta, body))
+    return sorted(out, key=lambda x: x[0].get("date", ""), reverse=True)
+
+
+WRITTEN = written_articles()
+
+
+def render_article(meta, body):
+    """One article: the header (crumb, eyebrow, title, byline, abstract), then the body with its figures. Returns (html, markdown)."""
+    from PIL import Image
+    html_parts, md_parts, chunk = [], [], []
+
+    def flush():
+        if chunk:
+            h = render("\n".join(chunk))
+            h = re.sub(r'<h(\d) id="[^"]*">(.*?) \{#([a-z0-9-]+)\}</h\1>', r'<h\1 id="\3">\2</h\1>', h)
+            html_parts.append(h)
+            md_parts.append("\n".join(chunk))
+            chunk.clear()
+    for line in body.splitlines():
+        m = re.match(r"^!shot\s+([\w.-]+)\s*\|\s*images/\s*\|\s*(.*?)\s*\|\s*(\w+)\s*$", line)
+        if not m:
+            chunk.append(line); continue
+        flush()
+        f, cap, kind = m.groups()
+        w, h = Image.open(CONTENT / "images" / f).size
+        html_parts.append(f'<figure class="shot" data-kind="{esc(kind)}"><a href="images/{esc(f)}"><img src="images/{esc(f)}" alt="{esc(cap)}" width="{w}" height="{h}" loading="lazy"></a>'
+                          f'<figcaption>{esc(cap)}</figcaption></figure>')
+        md_parts.append(f"![{cap}](images/{f})\n\n*{cap}*")
+    flush()
+    author = f'<a href="{esc(meta["author_url"])}">{esc(meta["author"])}</a>'
+    head = (f'<h1>{esc(meta["title"])}</h1>\n'
+            f'<p class="byline">By {author} · {esc(meta["date"])} · published with <a href="../versions/#{esc(meta["version"])}">{esc(meta["version"])}</a> · '
+            f'<a href="{esc(meta.get("license", ""))}">CC BY 4.0</a> · the editorial responsibility is the owner\'s, Dinis Cruz</p>\n'
+            f'<p class="abstract">{esc(meta["summary"])}</p>\n')
+    body_html = expand("\n".join(html_parts), f"articles/{meta['slug']}.html")
+    md = (f"By {meta['author']} <{meta['author_url']}>, {meta['date']}, published with {meta['version']}.\n\n> {meta['summary']}\n\n" + "\n\n".join(md_parts))
+    return head + '<div class="article">' + body_html + "</div>", md
+
+
 def articles_page():
     parts = ["<h1>The articles behind it</h1>\n<p class=\"lead\">Everything here was designed in public first, as an article on <a href=\"https://newsroom.sgit.ai/\">newsroom.sgit.ai</a>, "
              "then built, then written about again when it went live. Read them in this order and you have the case, the design and the engineering; each is numbered, so a "
              "<a href=\"https://newsroom.sgit.ai/for/\">reading list in a link</a> can carry a set of them to a colleague.</p>\n"]
     md = []
+    if WRITTEN:
+        cards = "".join(f'<a class="card article written" href="{esc(m["slug"])}.html"><span class="tag">{esc(m["date"])} · by {esc(m["author"])}</span>'
+                        f'<h3>{esc(m["title"].split(": ")[0])}</h3><p>{esc(m["graph"].get("teaser") or m["title"])}</p></a>' for m, _ in WRITTEN)
+        parts.append(f"<h2>Written here</h2>\n<p>Articles about this API, written on this site in the newsroom's format and voice by the agent that did the work.</p>\n<div class=\"cards\">{cards}</div>\n")
+        md.append("## Written here\n")
+        md += [f"- [{m['title']}]({SITE}/articles/{m['slug']}.html) ({m['date']}, by {m['author']})" for m, _ in WRITTEN]
+        md.append("")
     for group, items in CURATED:
         cards = []
         md.append(f"## {group}\n")
@@ -530,6 +595,8 @@ def build(out):
     for d in ("map/before", "map/proof"):
         shutil.copytree(ROOT / d, out / d)
     shutil.copytree(ROOT / "site/og", out / "og")      # the link-preview cards, drawn by site/og.py and committed
+    if (CONTENT / "images").exists():
+        shutil.copytree(CONTENT / "images", out / "articles/images")   # the figures of the articles written here
     written = []     # (rel, title, description, md_text)
 
     def emit(rel, meta, body_html, md_body):
@@ -566,6 +633,19 @@ def build(out):
     ]:
         body_html, md_body = fn()
         emit(rel, meta, body_html, md_body)
+
+    # the articles written here (site/content/articles/), each with its graph published beside it
+    for m, body in WRITTEN:
+        rel = f"articles/{m['slug']}.html"
+        html_body, md_body = render_article(m, body)
+        when = __import__("datetime").date.fromisoformat(m["date"]).strftime("%-d %B %Y")
+        emit(rel, {"title": m["title"], "description": m["graph"].get("teaser") or m["summary"][:300], "section": "Articles", "crumbs": [("Articles", "articles/")],
+                   "crumb_title": m["title"].split(": ")[0], "eyebrow": f"Article · {when} · by {m['author']}", "date": m["date"], "ld_type": "Article",
+                   "ld_author": {"@type": "Organization", "name": f"{m['author']}, an agent of the SGit Newsroom", "url": m["author_url"]},
+                   "agent": f"An article on api.newsroom.sgit.ai by {m['author']}, the agent that did the work, in the newsroom's article format: {m['graph'].get('core_idea', m['summary'])} "
+                            f"Its graph: {SITE}/articles/graphs/{m['slug']}.json."}, html_body, md_body)
+        if m["graph"]:
+            write(out / "articles/graphs" / f"{m['slug']}.json", json.dumps(m["graph"], indent=1, ensure_ascii=False) + "\n")
 
     # machine-readable
     write(out / "review/map/graph.json", json.dumps(map_graph_json(), indent=1, ensure_ascii=False) + "\n")

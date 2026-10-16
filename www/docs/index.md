@@ -2,7 +2,7 @@
 
 > The reference for the SGit Newsroom API: the contracts, the reader's state and every input and output, the components and what each file is, the hosting model, pinning and the manifest, the reading-list link grammar, events.
 
-*api.newsroom.sgit.ai · v0.2.14 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.15 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/docs/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
@@ -28,5 +28,5 @@ The meter emits DOM events on `document` that a page or another component can li
 
 ## Versions
 
-The meter's own line is `v1.4.0`, served at `assets/components/sg-meter/v1/v1.4/v1.4.0/`; `v1.0.0` to `v1.3.1` are frozen and still served, so a page that pinned one keeps working. The API's releases (`{{release}}` today) wrap all of it under a versioned prefix. [Releases](../releases/).
+The meter's own line is `v1.4.1`, served at `assets/components/sg-meter/v1/v1.4/v1.4.1/`; `v1.0.0` to `v1.4.0` are frozen and still served, so a page that pinned one keeps working. The API's releases (`{{release}}` today) wrap all of it under a versioned prefix. [Releases](../releases/).
 

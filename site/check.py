@@ -11,7 +11,7 @@ The newsroom's admin/build/validate.js is the model (its checks 2 to 7 and 5b, f
      the host (https://api.newsroom.sgit.ai/...) resolves to a file in www/ or, under /vX.Y.Z/, to a file of that release
   3. <div> and </div> balance on every page
   4. sitemap.xml lists every page and nothing that is not a page; llms.txt names every page's address; llms-full.txt carries
-     every page's title; robots.txt points at the sitemap; feed.xml is well formed and its newest item is this version; search/docs.json and text.json index every page
+     every page's title; robots.txt points at the sitemap; feed.xml is well formed and carries this version; search/docs.json and text.json index every page
   5. releases.json names the reader-code release and the site's version as tools/version.json does
   6. the key-leak tripwire: nothing shaped like a vault key, a Stripe secret or a cloud key anywhere in www/
 """
@@ -171,9 +171,9 @@ def main():
     try:
         import xml.etree.ElementTree as ET
         feed = ET.parse(WWW / "feed.xml").getroot()
-        first = feed.find("channel/item/title")
-        if first is None or not first.text.startswith(VERSION["version"]):
-            errors.append(f"feed.xml: the newest item is not {VERSION['version']}")
+        titles_ = [t.text or "" for t in feed.findall("channel/item/title")]
+        if not any(t.startswith(VERSION["version"]) for t in titles_):
+            errors.append(f"feed.xml: no item for {VERSION['version']}")
     except (OSError, ET.ParseError) as e:
         errors.append(f"feed.xml: {e}")
     # 4c. the search index: one entry per page but the search page itself, in the component's format

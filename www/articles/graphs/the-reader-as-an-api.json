@@ -1,0 +1,192 @@
+{
+ "slug": "the-reader-as-an-api",
+ "teaser": "The code a reader runs on newsroom.sgit.ai now lives on a host of its own: 74 files, hashed, versioned, never edited after publishing, proved byte for byte, pinned by the sites that use it.",
+ "topics": [
+  "site-and-engineering",
+  "vaults-and-method"
+ ],
+ "core_idea": "Moving the reader code of newsroom.sgit.ai to api.newsroom.sgit.ai at identical paths under a versioned prefix turns it into a client-side API with releases a site pins: the move is a prefix rewrite whose proof is a hash, the reader's data stays on the page's origin, and every change from now on is a new release with a test, a manifest and a live check, as the first fix showed on the second day.",
+ "nodes": [
+  {
+   "id": "what",
+   "label": "A client-side API",
+   "kind": "concept",
+   "summary": "Components, formats and contracts the browser runs: 74 files, 1.15 MB, no server, a manifest of SHA-256 hashes."
+  },
+  {
+   "id": "brief",
+   "label": "Go slow to go fast",
+   "kind": "artefact",
+   "summary": "The owner's brief: map, move without changing a byte, refactor with every test passing, review adversarially."
+  },
+  {
+   "id": "rule",
+   "label": "Identical paths, versioned prefix",
+   "kind": "method",
+   "summary": "A file keeps its path under /<release>/, so moving a page is a prefix rewrite and checking it is a comparison of hashes."
+  },
+  {
+   "id": "pin",
+   "label": "A site pins a release",
+   "kind": "method",
+   "summary": "The newsroom names one release in api.json, copies its manifest, and its gate fails on a reference that is unpinned, unlisted or relative."
+  },
+  {
+   "id": "origin",
+   "label": "Data stays on the page's origin",
+   "kind": "claim",
+   "summary": "Code loaded from another host runs on the page's origin, so the reader's balance, personas and keys stay in the newsroom's storage."
+  },
+  {
+   "id": "three",
+   "label": "Three files the host forced",
+   "kind": "example",
+   "summary": "vault-pane.js, search.js and ask.js found the site root from their own address; they now read the page's data-root, each change recorded."
+  },
+  {
+   "id": "proof",
+   "label": "The proof by hash",
+   "kind": "artefact",
+   "summary": "71 of 74 files identical, 24 of 24 frozen copies, 735 of 738 pages the same once normalised; the rest are the release's own pages."
+  },
+  {
+   "id": "second-cut",
+   "label": "The second cut",
+   "kind": "example",
+   "summary": "The newsroom moved forty releases while the first cut waited, so the move was cut again from v0.12.50 as v0.2.0."
+  },
+  {
+   "id": "pipeline",
+   "label": "A change is a new release",
+   "kind": "method",
+   "summary": "Test, version, cut, recompute every hash, three engines, deploy, tag, and ask the live host for every hash."
+  },
+  {
+   "id": "fix",
+   "label": "The first fix: v0.2.5",
+   "kind": "example",
+   "summary": "A URL in the wire's lead story made the page 596 pixels wide on a 390 pixel phone; one declaration, a new release, its reason in the manifest."
+  },
+  {
+   "id": "site",
+   "label": "A website with the newsroom's features",
+   "kind": "artefact",
+   "summary": "Thirty pages for publishers, developers, evaluators and agents, five themes, search on the API's own component, a feed and a versions page."
+  },
+  {
+   "id": "tests",
+   "label": "764 checks in fifteen tests",
+   "kind": "artefact",
+   "summary": "The reader's tests run against the newsroom's real pages with the host routed to this tree, in three engines on every commit."
+  },
+  {
+   "id": "next",
+   "label": "The switch, in phases",
+   "kind": "question",
+   "summary": "newsroom.sgit.ai still serves its own copy; the next cut folds in its new work, then the pages switch a group at a time."
+  }
+ ],
+ "edges": [
+  {
+   "from": "brief",
+   "to": "rule",
+   "rel": "produces"
+  },
+  {
+   "from": "rule",
+   "to": "what",
+   "rel": "produces"
+  },
+  {
+   "from": "what",
+   "to": "pin",
+   "rel": "leads-to"
+  },
+  {
+   "from": "pin",
+   "to": "origin",
+   "rel": "depends-on"
+  },
+  {
+   "from": "three",
+   "to": "rule",
+   "rel": "example-of"
+  },
+  {
+   "from": "rule",
+   "to": "proof",
+   "rel": "leads-to"
+  },
+  {
+   "from": "second-cut",
+   "to": "proof",
+   "rel": "example-of"
+  },
+  {
+   "from": "proof",
+   "to": "pipeline",
+   "rel": "leads-to"
+  },
+  {
+   "from": "fix",
+   "to": "pipeline",
+   "rel": "example-of"
+  },
+  {
+   "from": "tests",
+   "to": "fix",
+   "rel": "produces"
+  },
+  {
+   "from": "site",
+   "to": "what",
+   "rel": "extends"
+  },
+  {
+   "from": "pipeline",
+   "to": "next",
+   "rel": "leads-to"
+  },
+  {
+   "from": "second-cut",
+   "to": "next",
+   "rel": "compared-with"
+  }
+ ],
+ "links": {
+  "articles": [
+   "explorer-to-villager-newsroom",
+   "a-meter-in-the-browser",
+   "pay-after-you-read",
+   "a-reading-list-in-a-link",
+   "the-passkey-opens-the-vault",
+   "no-server-by-design",
+   "green-does-not-mean-live",
+   "dark-mode-and-four-more",
+   "brief-the-agent-too"
+  ],
+  "pages": [
+   "https://api.newsroom.sgit.ai/",
+   "https://api.newsroom.sgit.ai/review/",
+   "https://api.newsroom.sgit.ai/review/map/",
+   "https://api.newsroom.sgit.ai/releases/",
+   "https://api.newsroom.sgit.ai/versions/",
+   "https://api.newsroom.sgit.ai/docs/contracts/",
+   "https://api.newsroom.sgit.ai/docs/components/",
+   "https://api.newsroom.sgit.ai/for-evaluators/"
+  ],
+  "sites": [
+   "https://github.com/SGit-AI/SGit-AI__Website__Newsroom__API"
+  ]
+ },
+ "quotes": [
+  {
+   "text": "The rule of the move was identical paths under a versioned prefix.",
+   "why": "The one decision that made the move checkable: a prefix rewrite whose proof is a hash."
+  },
+  {
+   "text": "That is the whole point of the move, working on its second day.",
+   "why": "The first fix under the rule: a failing test, one declaration, a new release with its reason on record."
+  }
+ ]
+}

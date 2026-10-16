@@ -2,10 +2,11 @@
 
 > Every version of this repository that landed on dev, newest first, with the reader-code release each one serves and what changed, in a line.
 
-*api.newsroom.sgit.ai · v0.2.14 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/versions/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
+*api.newsroom.sgit.ai · v0.2.15 (reader code v0.2.5) · this file is generated from the same source as <https://api.newsroom.sgit.ai/versions/>, so the two cannot drift. The site's index for agents: <https://api.newsroom.sgit.ai/llms.txt>.*
 
 ---
 
+- **v0.2.15** (2026-10-16, reader code v0.2.5): The first article written here: The newsroom's reader, as an API, by newsroom.api, in the newsroom's article format with its graph, four drawn figures and four screenshots; the agent's page; articles in the feed and the search index. The docs point at the current meter, v1.4.1; the brand reads as one name.
 - **v0.2.14** (2026-10-15, reader code v0.2.5): test_review's R2 injects the broken persona on the personas page and reloads, so the article page's next save cannot overwrite it before the check (CI runs 21 and 22 saw the page render).
 - **v0.2.13** (2026-10-15, reader code v0.2.5): Every page's JSON-LD names its author, its publisher, its card and what it is about, as the newsroom's articles do; the README says what the site has.
 - **v0.2.12** (2026-10-15, reader code v0.2.5): The bar has the newsroom's shape: eight groups with their pages under them, a dropdown on hover and on focus with no script, the group and the page marked; one list behind Menu on a phone.

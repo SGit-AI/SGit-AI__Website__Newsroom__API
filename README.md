@@ -26,6 +26,10 @@ held to the newsroom's bar by `tests/test_site.mjs`: every token in every theme,
 from 1280 up. `site/check.py` is its gate before publishing, the newsroom's validate.js for these pages: every reference
 resolves, canonical and chrome on every page, the sitemap and the llms files agree with the tree, no key shapes.
 `site/data/versions.json` is the line per version that `/versions/` shows; a version without its line does not build.
+Articles written here live in `site/content/articles/<slug>.md`, in the newsroom's article format (its
+`admin/content/articles/README.md`: front matter, `!shot` figures, anchored sections, a graph in `graphs/<slug>.json`,
+figures in `images/`), so one can be imported into the newsroom unchanged; the build renders each at `/articles/<slug>.html`
+with its markdown twin and graph, and lists it on `/articles/`, in the feed and in search.
 `site/og.py` draws the link-preview card of every page into `site/og/` (committed, not built: a font renders differently from one
 machine to the next, and the build must be the same bytes twice).
 What the site has, as newsroom.sgit.ai has it: the five themes and the picker, the bar in eight groups with a dropdown each, the
