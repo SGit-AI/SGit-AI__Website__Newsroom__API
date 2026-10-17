@@ -517,9 +517,25 @@ def written_articles():
 WRITTEN = written_articles()
 
 
+def webp_size(path):
+    """A WebP's width and height from its header, so the build needs no image library (CI has none): the lossy (VP8),
+    lossless (VP8L) and extended (VP8X) forms."""
+    b = Path(path).read_bytes()[:40]
+    if b[:4] != b"RIFF" or b[8:12] != b"WEBP":
+        sys.exit(f"site: {path} is not a WebP; the article figures are WebP (the newsroom's guide)")
+    kind = b[12:16]
+    if kind == b"VP8 ":
+        return int.from_bytes(b[26:28], "little") & 0x3FFF, int.from_bytes(b[28:30], "little") & 0x3FFF
+    if kind == b"VP8L":
+        v = int.from_bytes(b[21:25], "little")
+        return (v & 0x3FFF) + 1, ((v >> 14) & 0x3FFF) + 1
+    if kind == b"VP8X":
+        return int.from_bytes(b[24:27], "little") + 1, int.from_bytes(b[27:30], "little") + 1
+    sys.exit(f"site: {path}: a WebP chunk this build does not read ({kind!r})")
+
+
 def render_article(meta, body):
     """One article: the header (crumb, eyebrow, title, byline, abstract), then the body with its figures. Returns (html, markdown)."""
-    from PIL import Image
     html_parts, md_parts, chunk = [], [], []
 
     def flush():
@@ -535,7 +551,7 @@ def render_article(meta, body):
             chunk.append(line); continue
         flush()
         f, cap, kind = m.groups()
-        w, h = Image.open(CONTENT / "images" / f).size
+        w, h = webp_size(CONTENT / "images" / f)
         html_parts.append(f'<figure class="shot" data-kind="{esc(kind)}"><a href="images/{esc(f)}"><img src="images/{esc(f)}" alt="{esc(cap)}" width="{w}" height="{h}" loading="lazy"></a>'
                           f'<figcaption>{esc(cap)}</figcaption></figure>')
         md_parts.append(f"![{cap}](images/{f})\n\n*{cap}*")
