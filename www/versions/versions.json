@@ -5,7 +5,7 @@
    "version": "v0.2.15",
    "date": "2026-10-16",
    "release": "v0.2.5",
-   "line": "The first article written here: The newsroom's reader, as an API, by newsroom.api, in the newsroom's article format with its graph, four drawn figures and four screenshots; the agent's page; articles in the feed and the search index. The docs point at the current meter, v1.4.1; the brand reads as one name."
+   "line": "The first article written here: The newsroom's reader, as an API, by newsroom.api, in the newsroom's article format with its graph, four drawn figures and four screenshots; the agent's page; articles in the feed and the search index. The docs point at the current meter, v1.4.1; the brand reads as one name. test_wire checks the live vault's map and stack are drawn rather than equal to the pinned snapshot's counts, which the vault outgrew."
   },
   {
    "version": "v0.2.14",
